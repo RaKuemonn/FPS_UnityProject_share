@@ -1,0 +1,128 @@
+{
+    "name": "XboxControllerBind",
+    "maps": [
+        {
+            "name": "Player",
+            "id": "d62d6180-1288-465b-8d9d-f816417f271e",
+            "actions": [
+                {
+                    "name": "MoveR",
+                    "type": "Value",
+                    "id": "2afff638-03b5-4f8a-b1bd-a0ab0ff41a76",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "MoveL",
+                    "type": "Value",
+                    "id": "0d8c3342-f975-4bb6-bdb1-65ce2c41e821",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "XboxA",
+                    "type": "Button",
+                    "id": "751ada3a-58f9-488c-824a-288fec92f769",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "XboxB",
+                    "type": "Button",
+                    "id": "8a144e9c-7a94-44b6-83a3-a8c61d2c6cf5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "XboxX",
+                    "type": "Button",
+                    "id": "27697e11-0482-4b78-b354-97386c90a16c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "XboxY",
+                    "type": "Button",
+                    "id": "1e059559-6df9-4459-bfdb-54a7d088c395",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "a47053c5-ece3-4de1-a17b-bc81dc3557d3",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveL",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c67db0a3-365a-4187-bde1-f84395950c3e",
+                    "path": "<XInputController>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "XboxA",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1ac97196-9bd0-4b9c-abe4-c8a5c478eef6",
+                    "path": "<XInputController>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "XboxB",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "11549a1d-decd-4b4b-89a7-54609f24e2cd",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveR",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "be7139ad-1dff-4f16-b06e-59c539d42ecc",
+                    "path": "<XInputController>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "XboxX",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d08c0cec-3244-4cd4-bb66-85f0adab24dc",
+                    "path": "<XInputController>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "XboxY",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

@@ -1,0 +1,34 @@
+{
+    "name": "title_inputActions",
+    "maps": [
+        {
+            "name": "Control",
+            "id": "bf92af2f-1610-4a10-ba42-5a5a16e6e543",
+            "actions": [
+                {
+                    "name": "Select",
+                    "type": "Button",
+                    "id": "15ef530f-19d0-42db-8f61-0ce903bb2e3d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "479ef973-9722-45c0-97d4-83a8cd7a9470",
+                    "path": "<Keyboard>/anyKey",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
