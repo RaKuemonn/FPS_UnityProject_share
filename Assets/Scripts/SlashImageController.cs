@@ -44,4 +44,11 @@ public class SlashImageController : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
+    public Ray SlashRay()
+    {
+        var rect = GetComponent<RectTransform>();
+        return Camera.main.ScreenPointToRay(rect.anchorMax);
+    }
+
 }

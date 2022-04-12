@@ -171,7 +171,7 @@ public class CursorController : MonoBehaviour
 
     }
 
-    private Ray CursolRay()
+    public Ray CursolRay()
     {
         return Camera.main.ScreenPointToRay(rect.position);
     }
@@ -195,7 +195,7 @@ public class CursorController : MonoBehaviour
         return true;
     }
 
-    public void SetTimer()
+    public void SetChainTimer()
     {
         chain_kill_timer = 0.5f;
     }
