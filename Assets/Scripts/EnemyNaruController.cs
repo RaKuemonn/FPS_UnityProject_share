@@ -14,6 +14,8 @@ public class EnemyNaruController : MonoBehaviour
     private float attackTimerMax = 3.0f;
     private float idleRange = 9.0f;
 
+    public int hp;
+
     private bool attackFlag = false;
 
     // Start is called before the first frame update
@@ -28,6 +30,11 @@ public class EnemyNaruController : MonoBehaviour
         IdleUodate();
 
         AttackUpdate();
+
+        if (hp < 1)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void AttackUpdate()
