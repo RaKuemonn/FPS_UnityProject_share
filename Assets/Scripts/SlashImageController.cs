@@ -48,7 +48,18 @@ public class SlashImageController : MonoBehaviour
     public Ray SlashRay()
     {
         var rect = GetComponent<RectTransform>();
-        return Camera.main.ScreenPointToRay(rect.anchorMax);
+
+        var width = collider_.size.x;
+        var vector = new Vector2(width, 0f);
+        {
+            var euler = rect.eulerAngles;
+            vector = Quaternion.Euler(euler) * vector;
+        }
+
+        var position = rect.anchoredPosition + vector;
+
+
+        return Camera.main.ScreenPointToRay(position);
     }
 
 }

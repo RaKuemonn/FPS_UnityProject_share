@@ -132,17 +132,19 @@ public class EnemyCollide : MonoBehaviour
 
             Vector3 normal;
             {
-                var slash_ray = collider.gameObject.GetComponent<SlashImageController>().SlashRay();
+                var slash_ray = collider.
+                    gameObject.GetComponent<SlashImageController>().
+                    SlashRay();
                 var cursol_ray = cursor.CursolRay();
 
 
                 const float distance = 5.0f;
                 var origin_position = mainCamera.transform.position;
-                var cursol_far = origin_position + cursol_ray.GetPoint(distance);
-                var slash_far = origin_position + slash_ray.GetPoint(distance);
+                var cursol_far = cursol_ray.GetPoint(distance);
+                var slash_far = slash_ray.GetPoint(distance);
 
-                var a = slash_far       - cursol_far;
-                var b = origin_position - cursol_far;
+                var a = slash_far  - origin_position;
+                var b = cursol_far - origin_position;
 
                 normal = Vector3.Cross(a, b).normalized;
             }
