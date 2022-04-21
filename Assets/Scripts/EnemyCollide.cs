@@ -135,6 +135,9 @@ public class EnemyCollide : MonoBehaviour
                 var slash_ray = collider.
                     gameObject.GetComponent<SlashImageController>().
                     SlashRay();
+
+                Debug.DrawRay(slash_ray.origin, slash_ray.direction);
+
                 var cursol_ray = cursor.CursolRay();
 
 
