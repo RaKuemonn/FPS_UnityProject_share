@@ -1125,6 +1125,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Naruse
       objectReference: {fileID: 0}
+    - target: {fileID: 5756941756258205353, guid: d85653e6425623844a502fce096c2d0f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6566100467794079055, guid: d85653e6425623844a502fce096c2d0f, type: 3}
       propertyPath: hp
       value: 1
