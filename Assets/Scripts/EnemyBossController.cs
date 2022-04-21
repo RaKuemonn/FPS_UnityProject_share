@@ -16,13 +16,13 @@ public class EnemyBossController : MonoBehaviour
     void Update()
     {
         angle += Mathf.PI * Time.deltaTime;
-        //angle = //Mathf.Repeat(angle, 360);
+        angle = Mathf.Repeat(angle, 360);
         angle = Mathf.Sin(angle);
 
 
 
 
-        transform.position = new Vector3(transform.position.x, transform.position.y + angle, transform.position.z);
+        transform.position = new Vector3(transform.position.x, transform.position.y + angle * Time.deltaTime, transform.position.z);
         
     }
 }
