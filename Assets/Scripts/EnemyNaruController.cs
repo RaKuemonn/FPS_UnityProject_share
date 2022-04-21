@@ -6,13 +6,17 @@ public class EnemyNaruController : MonoBehaviour
 {
     public float moveSpeed;
     public float attackRange;
-
+    public float flyIdelSpeed = 0.1f;
+    public float angle = 0;
 
     private GameObject player;
 
+    [SerializeField]
+    private GameObject idleSpace;
+
     private float attackTimer = 0.0f;
     private float attackTimerMax = 3.0f;
-    private float idleRange = 9.0f;
+    private float idleRange = 12.0f;
 
     public int hp;
 
@@ -22,6 +26,7 @@ public class EnemyNaruController : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        //idleSpace = GameObject.FindGameObjectWithTag("IdleSpace");
     }
 
     // Update is called once per frame
@@ -60,6 +65,14 @@ public class EnemyNaruController : MonoBehaviour
         var distance = Vector3.Distance(PlayerPosition(), transform.position);
         if (idleRange < distance)
         {
+            //angle += Time.deltaTime;
+            //angle = Mathf.Repeat(angle, 360);
+            //angle = Mathf.Sin(angle);
+            //
+            //Vector3 pos = transform.position;
+            //pos.y += flyIdelSpeed * Time.deltaTime;
+            //transform.Translate(transform.position.x, pos.y, transform.position.z);
+
             attackTimer -= Time.deltaTime;
             if (attackTimer < 0) attackFlag = true;
         }
@@ -80,10 +93,10 @@ public class EnemyNaruController : MonoBehaviour
     {
         if (player == null) return;
 
-        var to_player_vec = PlayerPosition() - transform.position;
+        var to_player_vec = idleSpace.transform.position - transform.position;
 
         var to_player_dir = -to_player_vec.normalized;
-        transform.Translate(to_player_dir * moveSpeed * Time.deltaTime);
+        transform.Translate(to_player_dir * -moveSpeed * Time.deltaTime);
     }
 
     private Vector3 PlayerPosition()
