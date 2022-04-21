@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Playground.unity
     guid: 707acc8dffb72b144bb1ffbe1c965f3d
+  - enabled: 1
+    path: Assets/Scenes/scene_boss.unity
+    guid: 241749406bdaea941809414f98ac2052
   - enabled: 0
     path: Assets/Scenes/scene_game.unity
     guid: a5ab982b80e8dc84f93f882a809cea9c
