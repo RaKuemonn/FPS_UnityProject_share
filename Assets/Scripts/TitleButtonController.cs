@@ -19,9 +19,18 @@ public class TitleButtonController : MonoBehaviour
     }
 
     //ボタンを押した時の処理
-    public void Click()
+    public void StartButton()
     {
         SceneManager.LoadScene("Playground");
+    }
+
+    public void ExitButton()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;//ゲームプレイ終了
+#else
+    Application.Quit();//ゲームプレイ終了
+#endif
     }
 
 
