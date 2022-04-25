@@ -10,7 +10,6 @@ public class EnemyBossController : MonoBehaviour
     private float flySpeed = 2.0f;
 
     // ボスの開始位置
-    [SerializeField]
     private Vector3 startPosition;
 
     // 殴りに来るときの移動スピード
@@ -40,6 +39,11 @@ public class EnemyBossController : MonoBehaviour
     // 突撃してきた後の動けない時間
     private float attackEndTimer = 0;
     private float attackEndTimerMax = 5;
+
+    // 元の位置に戻る
+    private float totalTime = 2.0f;
+    private float backTimer = 0.0f;
+    private Vector3 backStartPosition;
 
     // bossの周り
     private struct Directions
@@ -86,7 +90,7 @@ public class EnemyBossController : MonoBehaviour
             // 殴ってきたときに少し待機時間がある
             case State.AssaultAttackAnim: ConditionAssaultAttackAnimUpdate(); break;
             // 自分のもとの位置に戻る
-            case State.BossComeBack: break;
+            case State.BossComeBack: ConditionBossComeBackUpdate();  break;
         }
         Debug.Log(state);
       
@@ -104,9 +108,11 @@ public class EnemyBossController : MonoBehaviour
         // 時間が経過したら鎌を投げる
         if (idleTimer < 0)
         {
-            int test = Random.Range(0, 1);
-            if(test == 0) ConditionSickleAttackState();
-            if (test == 1) ConditionSickleAttackBerserkerState();
+            ConditionSickleAttackBerserkerState();
+            //int test = Random.Range(0, 3);
+            //if(test == 0) ConditionSickleAttackState();
+            //if (test == 1) ConditionSickleAttackBerserkerState();
+            //if (test == 2) ConditionAssaultAttackState();
         }
 
         if (angle > Mathf.PI) flySpeed = -flySpeed;
@@ -181,6 +187,7 @@ public class EnemyBossController : MonoBehaviour
     private void ConditionAssaultAttackState()
     {
         state = State.AssaultAttack;
+        startPosition = transform.position;
     }
     private void ConditionAssaultAttackUpdate()
     {
@@ -188,7 +195,7 @@ public class EnemyBossController : MonoBehaviour
         var dir = player.transform.position - transform.position;
         float lengthSq = dir.x * dir.x + dir.y * dir.y + dir.z * dir.z;
 
-        if (attackRange * attackRange < lengthSq)
+        if (attackRange * attackRange > lengthSq)
         {
             ConditionAssaultAttackAnimState();
             return;
@@ -225,10 +232,20 @@ public class EnemyBossController : MonoBehaviour
     private void ConditionBossComeBackState()
     {
         state = State.BossComeBack;
+        backTimer = 0.0f;
+        backStartPosition = transform.position;
     }
     private void ConditionBossComeBackUpdate()
     {
         // 帰る目的地の向き
-        var dir = startPosition - transform.position;
+        var pos = Easing.SineInOut(backTimer / 1.0f, totalTime, backStartPosition, startPosition);
+
+        transform.position = new Vector3(pos.x, pos.y, pos.z);
+
+        var vec = startPosition - pos;
+        float length = Mathf.Sqrt(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z);
+        if (length < 0.01f) ConditionIdleState();
+
+        backTimer += Time.deltaTime;
     }
 }
