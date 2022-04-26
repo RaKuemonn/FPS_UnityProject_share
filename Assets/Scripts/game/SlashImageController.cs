@@ -11,6 +11,8 @@ public class SlashImageController : MonoBehaviour
 
     private Image image;
 
+    [SerializeField] private RectTransform child_rect_transform;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,11 +23,7 @@ public class SlashImageController : MonoBehaviour
 
         //collider_ = GetComponent<BoxCollider2D>();
     }
-
-    void Awake()
-    {
-        
-    }
+    
 
     // Update is called once per frame
     void Update()
@@ -33,6 +31,9 @@ public class SlashImageController : MonoBehaviour
       
         if (image == null) return;
 
+        var ray = Camera.main.ScreenPointToRay(child_rect_transform.anchoredPosition);
+        Debug.DrawRay(ray.origin, ray.direction);
+        
         var color   = image.color;
         if (color.a > 0.1f)
         {
@@ -47,14 +48,14 @@ public class SlashImageController : MonoBehaviour
 
     public Ray SlashRay()
     {
-        var rect = GetComponent<RectTransform>();
+        //var rect = GetComponent<RectTransform>();
 
-        Vector2 vector = Quaternion.Euler(0f,0f, rect.eulerAngles.z) * new Vector3(collider_.size.x, 0f);
+        //Vector3 vector = Quaternion.Euler(0f,0f, rect.eulerAngles.z) * new Vector3(collider_.size.x, 0f, 0f);
 
-        var position = rect.anchoredPosition + vector;
+        //var position = rect.anchoredPosition + new Vector2(vector.x, vector.y);
 
 
-        return Camera.main.ScreenPointToRay(position);
+        return Camera.main.ScreenPointToRay(child_rect_transform.anchoredPosition);
     }
 
 }
