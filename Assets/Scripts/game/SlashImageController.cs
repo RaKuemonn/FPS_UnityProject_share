@@ -54,8 +54,7 @@ public class SlashImageController : MonoBehaviour
 
         //var position = rect.anchoredPosition + new Vector2(vector.x, vector.y);
 
-
-        return Camera.main.ScreenPointToRay(child_rect_transform.anchoredPosition);
+        return Camera.main.ScreenPointToRay(child_rect_transform.position);
     }
 
 }
