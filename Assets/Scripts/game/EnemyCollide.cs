@@ -158,19 +158,27 @@ public class EnemyCollide : MonoBehaviour
                     normal                                          // 平面の法線
                     );
 
+            // TODO : 斬った時にはねるようにしたい
+            //var vector = result.original_anitiNormalside.transform.position - result.copy_normalside.transform.position;
+            //var impulse_copy = vector.normalized;
+            var impulse_copy = new Vector3(1f, 0f, 0f);
+
             // 斬ったオブジェクトの事後処理、削除予約
-            ObjectCutted(result.copy_normalside, false);
-            ObjectCutted(result.original_anitiNormalside, true);
+            ObjectCutted(result.copy_normalside, false, impulse_copy);
+            ObjectCutted(result.original_anitiNormalside, true, impulse_copy * -1.0f);
         }
         
     }
 
-    private void ObjectCutted(GameObject object_, bool is_)
+    private void ObjectCutted(GameObject object_, bool is_, Vector3 impulse_direction_)
     {
         if (object_ == null) return;
 
+        var impulse_ = impulse_direction_ * 2.0f;
+        impulse_.y += 0.1f;                          // 跳ねさせる
+        object_.GetComponent<EnemyController>().SetCutPerformance(is_, impulse_);
+        
         const float const_destroy_time = 0.5f;
-        object_.GetComponent<EnemyController>().SetCutPerformance(is_);
         Destroy(object_, const_destroy_time);
 
     }

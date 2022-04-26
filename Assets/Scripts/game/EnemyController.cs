@@ -34,15 +34,14 @@ public class EnemyController : MonoBehaviour
         CollidePlayer();
     }
 
-    public void SetCutPerformance(bool is_original_)
+    public void SetCutPerformance(bool is_original_, Vector3 impulse_)
     {
         var rigid = transform.gameObject.AddComponent<Rigidbody>();
         is_cutted = true;
         is_create_collide = false;
         is_original = is_original_;
-
-        float x = !is_original_ ? 1f : 0f;
-        rigid.AddForce(new Vector3(x, 0.1f, 0.0f), ForceMode.Impulse);
+        
+        rigid.AddForce(impulse_, ForceMode.Impulse);
     }
 
     private void UpdatePosition()
