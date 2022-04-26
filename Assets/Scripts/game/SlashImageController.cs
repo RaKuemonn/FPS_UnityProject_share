@@ -49,12 +49,7 @@ public class SlashImageController : MonoBehaviour
     {
         var rect = GetComponent<RectTransform>();
 
-        var width = collider_.size.x;
-        var vector = new Vector2(width, 0f);
-        {
-            var euler = rect.eulerAngles;
-            vector = Quaternion.Euler(euler) * vector;
-        }
+        Vector2 vector = Quaternion.Euler(0f,0f, rect.eulerAngles.z) * new Vector3(collider_.size.x, 0f);
 
         var position = rect.anchoredPosition + vector;
 

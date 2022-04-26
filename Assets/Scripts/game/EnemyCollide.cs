@@ -171,7 +171,7 @@ public class EnemyCollide : MonoBehaviour
         if (object_ == null) return;
 
         const float const_destroy_time = 0.5f;
-        object_.GetComponent<Enemy_copyController>().SetCutPerformance(is_);
+        object_.GetComponent<EnemyController>().SetCutPerformance(is_);
         Destroy(object_, const_destroy_time);
 
     }

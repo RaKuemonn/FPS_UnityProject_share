@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy_copyController : MonoBehaviour
+public class EnemyController : MonoBehaviour
 {
     public float move_speed;                // 移動スピード (公開しているので、Inspectorで変更可能)
 
@@ -15,13 +15,13 @@ public class Enemy_copyController : MonoBehaviour
     private bool is_cutted = false;         // 斬られているのか。 斬られていたら通常更新はしない。
 
     private bool is_original = true;        // 斬られたときにあたらしく生成された方か、元のものか判断するよう
-    
+
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        
+
         CreateCollideOnCanvas();
     }
 
@@ -42,7 +42,7 @@ public class Enemy_copyController : MonoBehaviour
         is_original = is_original_;
 
         float x = !is_original_ ? 1f : 0f;
-        rigid.AddForce(new Vector3(x, 0.1f,0.0f) ,ForceMode.Impulse);
+        rigid.AddForce(new Vector3(x, 0.1f, 0.0f), ForceMode.Impulse);
     }
 
     private void UpdatePosition()
@@ -84,7 +84,7 @@ public class Enemy_copyController : MonoBehaviour
         }
 
     }
-    
+
     private void CreateCollideOnCanvas()
     {
         // 斬られたときに生成されたオブジェクトでなければ（SetCutPerformance()で、変更されていなければ）
@@ -108,7 +108,7 @@ public class Enemy_copyController : MonoBehaviour
         // 再生成
         float random_x = Random.Range(-2f, 2f);
 
-        GameObject e = Instantiate((GameObject)Resources.Load("Enemy_copy"));
+        GameObject e = Instantiate((GameObject)Resources.Load("Enemy_test"));
         e.transform.SetPositionAndRotation(
             GameObject.FindGameObjectWithTag("Player").transform.position + new Vector3(random_x, 1f, 5f),
             Quaternion.identity);
@@ -121,5 +121,4 @@ public class Enemy_copyController : MonoBehaviour
         isQuitting = true;
 
     }
-
 }

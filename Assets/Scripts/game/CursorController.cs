@@ -8,10 +8,7 @@ public class CursorController : MonoBehaviour
 {
     [SerializeField]
     private float cursor_speed = Screen.width;
-
-
-    [SerializeField]
-    private Text text_;
+    
 
     private RectTransform rect;
 
@@ -42,6 +39,7 @@ public class CursorController : MonoBehaviour
 
         clip    = GetComponent<AudioSource>().clip;
         now_clip_played = false;
+        chain_kill_timer = 0.0f;
     }
 
     // Update is called once per frame
@@ -49,9 +47,7 @@ public class CursorController : MonoBehaviour
     {
 
         chain_kill_timer += -Time.deltaTime;
-
-        text_.text = string.Format("{0:0}", chain_kill_timer);
-
+        
         CursorControl();
 
         SlashControl();
