@@ -21,7 +21,7 @@ public class TitleButtonController : MonoBehaviour
     //ƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚½‚Ìˆ—
     public void StartButton()
     {
-        SceneManager.LoadScene("scene_game");
+        SceneManager.LoadScene("scene_tutorial");
         //SceneManager.LoadScene("Playground");
     }
 
