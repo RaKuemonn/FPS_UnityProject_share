@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/scene_result.unity
     guid: 249e45af01df16c4abb550c06ae6b655
+  - enabled: 1
+    path: Assets/Scenes/scene_loading.unity
+    guid: 9329ff6dc5eece9459b7df6dc5dff3a9
   - enabled: 0
     path: Assets/Scenes/Playground.unity
     guid: 707acc8dffb72b144bb1ffbe1c965f3d

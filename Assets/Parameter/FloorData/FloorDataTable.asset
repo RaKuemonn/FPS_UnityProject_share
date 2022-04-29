@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b324ea01563d29438920b1ed803b9f4, type: 3}
+  m_Name: FloorDataTable
+  m_EditorClassIdentifier: 
+  FloorPrefab: {fileID: 3747946527924465562, guid: 70382942a8258214fa488fed22fa70de, type: 3}
+  FloorDatas:
+  - id: 0
+    lock_floor_move_state: 0
+    move_speed_state: 0
+  - id: 1
+    lock_floor_move_state: 1
+    move_speed_state: 1
+  - id: 2
+    lock_floor_move_state: 1
+    move_speed_state: 2
+  - id: 3
+    lock_floor_move_state: 1
+    move_speed_state: 3
+  - id: 4
+    lock_floor_move_state: 0
+    move_speed_state: 0
+  - id: 5
+    lock_floor_move_state: 1
+    move_speed_state: 1
+  - id: 6
+    lock_floor_move_state: 1
+    move_speed_state: 2
+  - id: 7
+    lock_floor_move_state: 1
+    move_speed_state: 2
+  - id: 8
+    lock_floor_move_state: 1
+    move_speed_state: 2
+  - id: 9
+    lock_floor_move_state: 1
+    move_speed_state: 2
