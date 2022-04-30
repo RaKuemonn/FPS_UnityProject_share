@@ -159,9 +159,7 @@ public class EnemyCollide : MonoBehaviour
                     );
 
             // TODO : 斬った時にはねるようにしたい
-            //var vector = result.original_anitiNormalside.transform.position - result.copy_normalside.transform.position;
-            //var impulse_copy = vector.normalized;
-            var impulse_copy = new Vector3(1f, 0f, 0f);
+            var impulse_copy = normal;
 
             // 斬ったオブジェクトの事後処理、削除予約
             ObjectCutted(result.copy_normalside, false, impulse_copy);
