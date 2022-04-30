@@ -22,13 +22,13 @@ MonoBehaviour:
   - id: 2
     move_speed_state: 2
   - id: 3
-    move_speed_state: 3
-  - id: 4
-    move_speed_state: 0
-  - id: 5
-    move_speed_state: 1
-  - id: 6
     move_speed_state: 2
+  - id: 4
+    move_speed_state: 3
+  - id: 5
+    move_speed_state: 0
+  - id: 6
+    move_speed_state: 1
   - id: 7
     move_speed_state: 2
   - id: 8
