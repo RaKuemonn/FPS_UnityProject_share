@@ -9,6 +9,7 @@ TagManager:
   - Cursor
   - Enemy
   - EnemyCollide
+  - Weapon
   layers:
   - Default
   - TransparentFX

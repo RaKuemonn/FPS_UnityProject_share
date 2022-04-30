@@ -9,4 +9,10 @@ public class Easing
         max -= min;
         return -max / 2 * (Mathf.Cos(t * Mathf.PI / totaltime) - 1) + min;
     }
+
+    public static Vector2 SineInOutV2(float t, float totaltime, Vector2 min, Vector2 max)
+    {
+        max -= min;
+        return -max / 2 * (Mathf.Cos(t * Mathf.PI / totaltime) - 1) + min;
+    }
 }

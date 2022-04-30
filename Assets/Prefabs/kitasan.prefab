@@ -96,9 +96,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47f1f98c2961de243aa4664ce2b0f820, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponReflect: 1
+  moveSpeed: 0
   idleTimerMax: 10
-  player: {fileID: 0}
+  player: {fileID: 7790357534801836031, guid: 4065b0a3a50481b408a227796b93b138, type: 3}
   sickle: {fileID: 4014675016919056578, guid: fd94d3d2303066740b611853e5d32842, type: 3}
+  sickleThrowing: {fileID: 7448830665279495077, guid: ae87ab3314dbb4645a28e901b096663d, type: 3}
 --- !u!1 &113238461035896578
 GameObject:
   m_ObjectHideFlags: 0
