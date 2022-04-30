@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b324ea01563d29438920b1ed803b9f4, type: 3}
-  m_Name: FloorDataTable
+  m_Name: TutorialFloorDataTable
   m_EditorClassIdentifier: 
   FloorPrefab: {fileID: 3747946527924465562, guid: 70382942a8258214fa488fed22fa70de, type: 3}
   floor_distance: 10
