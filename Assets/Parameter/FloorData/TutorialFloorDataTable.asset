@@ -17,21 +17,31 @@ MonoBehaviour:
   FloorDatas:
   - id: 0
     move_speed_state: 0
-  - id: 1
+    FloorConditionExpr: {fileID: 0}
+  - id: 0
     move_speed_state: 1
-  - id: 2
+    FloorConditionExpr: {fileID: 0}
+  - id: 0
     move_speed_state: 2
-  - id: 3
+    FloorConditionExpr: {fileID: 0}
+  - id: 0
     move_speed_state: 2
-  - id: 4
+    FloorConditionExpr: {fileID: 0}
+  - id: 0
     move_speed_state: 3
-  - id: 5
+    FloorConditionExpr: {fileID: 0}
+  - id: 0
     move_speed_state: 0
-  - id: 6
+    FloorConditionExpr: {fileID: 0}
+  - id: 0
     move_speed_state: 1
-  - id: 7
+    FloorConditionExpr: {fileID: 0}
+  - id: 0
     move_speed_state: 2
-  - id: 8
+    FloorConditionExpr: {fileID: 0}
+  - id: 0
     move_speed_state: 2
-  - id: 9
+    FloorConditionExpr: {fileID: 0}
+  - id: 0
     move_speed_state: 2
+    FloorConditionExpr: {fileID: 0}
