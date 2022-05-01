@@ -26,6 +26,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/scene_naruse.unity
     guid: fc8599587e1ea334991cde47eca88773
+  - enabled: 1
+    path: Assets/Scenes/scene_nisio.unity
+    guid: 4bdaf6f41a50cbd4c8283f7b75ab4652
   - enabled: 0
     path: Assets/Scenes/Playground.unity
     guid: 707acc8dffb72b144bb1ffbe1c965f3d
