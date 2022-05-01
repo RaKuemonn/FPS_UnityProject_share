@@ -35,7 +35,11 @@ public class FloorInfo : MonoBehaviour
             {
                 case FloorInfoMoveSpeed.Stop:
                     // ğŒ(‘ØİŠÔ‚ª‘Ò‹@ŠÔ‚ğ’´‚¦‚Ä‚¢‚é)‚ª®‚Á‚Ä‚¢‚ê‚Î
-                    component.speed_rate = (timer < idle_seconds)
+                    var boolean = new BooleanClass();
+                    FloorData.FloorConditionExpr?.Invoke(boolean);
+
+                    component.speed_rate = boolean.Boolean
+                    //component.speed_rate = (timer < idle_seconds)
                         ? zero_rate
                         : Mathf.Lerp(component.speed_rate, max_rate, Time.deltaTime);
                     break;

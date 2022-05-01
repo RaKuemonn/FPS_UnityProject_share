@@ -17,31 +17,51 @@ MonoBehaviour:
   FloorDatas:
   - id: 0
     move_speed_state: 0
-    FloorConditionExpr: {fileID: 0}
+    FloorConditionExpr:
+      m_PersistentCalls:
+        m_Calls: []
   - id: 0
     move_speed_state: 1
-    FloorConditionExpr: {fileID: 0}
+    FloorConditionExpr:
+      m_PersistentCalls:
+        m_Calls: []
   - id: 0
     move_speed_state: 2
-    FloorConditionExpr: {fileID: 0}
+    FloorConditionExpr:
+      m_PersistentCalls:
+        m_Calls: []
   - id: 0
     move_speed_state: 2
-    FloorConditionExpr: {fileID: 0}
+    FloorConditionExpr:
+      m_PersistentCalls:
+        m_Calls: []
   - id: 0
     move_speed_state: 3
-    FloorConditionExpr: {fileID: 0}
+    FloorConditionExpr:
+      m_PersistentCalls:
+        m_Calls: []
   - id: 0
     move_speed_state: 0
-    FloorConditionExpr: {fileID: 0}
+    FloorConditionExpr:
+      m_PersistentCalls:
+        m_Calls: []
   - id: 0
     move_speed_state: 1
-    FloorConditionExpr: {fileID: 0}
+    FloorConditionExpr:
+      m_PersistentCalls:
+        m_Calls: []
   - id: 0
     move_speed_state: 2
-    FloorConditionExpr: {fileID: 0}
+    FloorConditionExpr:
+      m_PersistentCalls:
+        m_Calls: []
   - id: 0
     move_speed_state: 2
-    FloorConditionExpr: {fileID: 0}
+    FloorConditionExpr:
+      m_PersistentCalls:
+        m_Calls: []
   - id: 0
     move_speed_state: 2
-    FloorConditionExpr: {fileID: 0}
+    FloorConditionExpr:
+      m_PersistentCalls:
+        m_Calls: []
