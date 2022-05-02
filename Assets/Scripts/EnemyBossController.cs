@@ -143,7 +143,7 @@ public class EnemyBossController : MonoBehaviour
         // ŽžŠÔ‚ªŒo‰ß‚µ‚½‚çŠ™‚ð“Š‚°‚é
         if (idleTimer < 0)
         {
-            ConditionAssaultAttackState();
+            ConditionSickleAttackState();
             //int test = Random.Range(0, 3);
             //if(test == 0) ConditionSickleAttackState();
             //if (test == 1) ConditionSickleAttackBerserkerState();
@@ -170,6 +170,7 @@ public class EnemyBossController : MonoBehaviour
 
         GameObject sl = Instantiate(sickleThrowing);
         sl.transform.position = this.transform.TransformPoint(child.transform.localPosition);
+        sl.transform.position =child.transform.position;
 
         weaponReflect = false;
     }
