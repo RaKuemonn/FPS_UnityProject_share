@@ -14,6 +14,11 @@ public class FloorInfo : MonoBehaviour
         timer = 0f;
     }
 
+    void OnDestroy()
+    {
+        FloorData.StopFloorConditionExpr.RemoveAllListeners();
+    }
+
     void OnTriggerStay(Collider collider)
     {
         var player = collider.transform.gameObject;
@@ -36,7 +41,7 @@ public class FloorInfo : MonoBehaviour
                 case FloorInfoMoveSpeed.Stop:
                     // ğŒ(‘ØİŠÔ‚ª‘Ò‹@ŠÔ‚ğ’´‚¦‚Ä‚¢‚é)‚ª®‚Á‚Ä‚¢‚ê‚Î
                     var boolean = new BooleanClass();
-                    FloorData.FloorConditionExpr?.Invoke(boolean);
+                    FloorData.StopFloorConditionExpr?.Invoke(boolean);
 
                     component.speed_rate = boolean.Boolean
                     //component.speed_rate = (timer < idle_seconds)
@@ -60,5 +65,5 @@ public class FloorInfo : MonoBehaviour
 
 
     }
-
+    
 }

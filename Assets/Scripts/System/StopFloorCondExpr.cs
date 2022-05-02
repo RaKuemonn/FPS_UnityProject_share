@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [Serializable] public class OnCompleteFloorCondExprEvent : UnityEvent<BooleanClass> { }
+[Serializable] public class OnFloorEnterEvent : UnityEvent { }
 
 //public class StopFloorConditionExpr : MonoBehaviour
 //{
@@ -23,4 +24,30 @@ using UnityEngine.Events;
 public class BooleanClass
 {
     public bool Boolean = false;
+}
+
+[Serializable]
+public abstract class BaseCondExpr : MonoBehaviour
+{
+    public abstract void OnCompleteCondExpr(BooleanClass booleanClass);
+}
+
+[Serializable]
+public class CondExprTimer : BaseCondExpr
+{
+    [SerializeField, Range(0f, 100f)] public float idle_seconds = 3f;
+    public float timer;
+
+    public void Start()
+    {
+        timer = 0f;
+    }
+
+    public override void OnCompleteCondExpr(BooleanClass booleanClass)
+    {
+        timer += Time.deltaTime;
+
+        booleanClass.Boolean = (timer > idle_seconds);
+    }
+    
 }

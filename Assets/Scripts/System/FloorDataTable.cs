@@ -8,7 +8,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Fps_UnityProject_share/FloorDataTable", fileName = "FloorDataTable")]
 public class FloorDataTable : ScriptableObject
 {
-    [SerializeField] public GameObject FloorPrefab;
+    public GameObject FloorPrefab;
     [SerializeField,Range(5f,10f)] public float floor_distance;
     public FloorData[] FloorDatas;
 }
@@ -16,11 +16,10 @@ public class FloorDataTable : ScriptableObject
 [Serializable]
 public class FloorData  // 10m*10mマスの床が持つデータ
 {
-    public int id = 0;                              // 床の識別子 (手動割り振り)
+    public int id = 0;                              // 床の識別子 (要素順で自動設定)
     public FloorInfoMoveSpeed move_speed_state = FloorInfoMoveSpeed.Stop; // 床が持っている速度状態 (この状態をプレイヤーが当たり判定を用いて受け取ることで、プレイヤーの速度を制御させている)
-    //public Func<bool> FloorConditionExpr;   // Stop床から走り出す条件式
-    //public StopFloorConditionExpr FloorConditionExpr;   // Stop床から走り出す条件式
-    public OnCompleteFloorCondExprEvent FloorConditionExpr;   // Stop床から走り出す条件式
+    public string CondExprName;                 // 追加する条件コンポーネントのクラス名
+    public OnCompleteFloorCondExprEvent StopFloorConditionExpr; // Stop床から走り出す条件式
 }
 public enum FloorInfoMoveSpeed
 {
@@ -33,43 +32,11 @@ public enum FloorInfoMoveSpeed
 [CustomPropertyDrawer(typeof(FloorData))]
 public class FloorDatDrawer : PropertyDrawer
 {
-    //private FloorData _target;
-
-    private class PropertyData
-    {
-        public SerializedProperty firstProperty;
-        public SerializedProperty secondProperty;
-        public SerializedProperty thirdProperty;
-    }
-
-    //private SerializedProperty _property_0;
-    //private SerializedProperty _property_1;
-    //private SerializedProperty _property_2;
-
-    private Dictionary<string, PropertyData> _propertyDataPerPropertyPath = new Dictionary<string, PropertyData>();
-    private PropertyData _property;
-
-    private void Init(SerializedProperty property)
-    {
-        if (_propertyDataPerPropertyPath.TryGetValue(property.propertyPath, out _property))
-        {
-            return;
-
-        }
-        _property = new PropertyData();
-        _property.firstProperty = property.FindPropertyRelative(nameof(FloorData.id));
-        _property.secondProperty = property.FindPropertyRelative(nameof(FloorData.move_speed_state));
-        _property.thirdProperty = property.FindPropertyRelative(nameof(FloorData.FloorConditionExpr));
-        _propertyDataPerPropertyPath.Add(property.propertyPath, _property);
-    }
-
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
 
 
         {
-            Init(property);
-
             var fieldRect = position;
             fieldRect.height = EditorGUIUtility.singleLineHeight;
             using (new EditorGUI.PropertyScope(fieldRect, label, property))
@@ -88,40 +55,51 @@ public class FloorDatDrawer : PropertyDrawer
                         // 最初の要素を描画
                         property.NextVisible(true);
                         var depth = property.depth;
-                        EditorGUI.PropertyField(fieldRect, _property.firstProperty, true);
-                        fieldRect.y += EditorGUI.GetPropertyHeight(property, true);
-                        fieldRect.y += EditorGUIUtility.standardVerticalSpacing;
+                        //EditorGUI.PropertyField(fieldRect, _property.firstProperty, true);
+                        //fieldRect.y += EditorGUI.GetPropertyHeight(property, true);
+                        //fieldRect.y += EditorGUIUtility.standardVerticalSpacing;
 
-                        // 2つ目の要素を描画
+                        // 2つめ
                         property.NextVisible(false);
-                        if (property.depth != depth) // depthが最初の要素と同じもののみ処理
+                        // depthが最初の要素と同じもののみ処理
+                        if (property.depth == depth)
                         {
-                            return;
+                            EditorGUI.PropertyField(fieldRect, property, true);
+                            fieldRect.y += EditorGUI.GetPropertyHeight(property, true);
+                            fieldRect.y += EditorGUIUtility.standardVerticalSpacing;
                         }
-                        EditorGUI.PropertyField(fieldRect, _property.secondProperty, true);
-                        fieldRect.y += EditorGUI.GetPropertyHeight(property, true);
-                        fieldRect.y += EditorGUIUtility.standardVerticalSpacing;
 
-
-                        // _property.secondProperty(move_speed_state)が、FloorInfoMoveSpeed.Stopの場合のみ
-                        if (_property.secondProperty.enumValueIndex != (int)FloorInfoMoveSpeed.Stop)
+                        //var _enumproperty = property.FindPropertyRelative(nameof(FloorData.move_speed_state));
+                        // secondProperty(move_speed_state)が、FloorInfoMoveSpeed.Stopの場合のみ
+                        if (property.enumValueIndex == (int)FloorInfoMoveSpeed.Stop)
                         {
-                            return;
+                            var i = 2; // (0,1,2,3)
+                            // それ以降の要素を描画
+                            while (property.NextVisible(false))
+                            {
+                                // forthProperty は break
+                                //if (i >= 3) { break; }
+
+                                i++;
+
+                                // depthが最初の要素と同じもののみ処理
+                                if (property.depth != depth)
+                                {
+                                    break;
+                                }
+                                EditorGUI.PropertyField(fieldRect, property, true);
+                                fieldRect.y += EditorGUI.GetPropertyHeight(property, true);
+                                fieldRect.y += EditorGUIUtility.standardVerticalSpacing;
+                            }
                         }
-                        // 3つ目の要素を描画
-                        property.NextVisible(false);
-                        if (property.depth != depth) // depthが最初の要素と同じもののみ処理
-                        {
-                            return;
-                        } 
-                        EditorGUI.PropertyField(fieldRect, _property.thirdProperty, true);
-                        fieldRect.y += EditorGUI.GetPropertyHeight(property, true);
-                        fieldRect.y += EditorGUIUtility.standardVerticalSpacing;
+
+                        
                     }
                 }
             }
 
         }
+
         //PropertyDrawerUtility.DrawDefaultGUI(position, property, label);
 
         //Init(property);
@@ -167,59 +145,8 @@ public class FloorDatDrawer : PropertyDrawer
 
     public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
     {
-        //Init(property);
-
-        //return EditorGUIUtility.singleLineHeight;
         return PropertyDrawerUtility.GetDefaultPropertyHeight(property, label);
     }
-
-#if FALSE
-    private float LineHeight { get { return EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing; } }
-
-
-    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
-    {
-        Init(property);
-        var fieldRect = position;
-        // インデントされた位置のRectが欲しければこっちを使う
-        var indentedFieldRect = EditorGUI.IndentedRect(fieldRect);
-        fieldRect.height = LineHeight;
-
-
-        // Prefab化した後プロパティに変更を加えた際に太字にしたりする機能を加えるためPropertyScopeを使う
-        using (new EditorGUI.PropertyScope(fieldRect, label, property))
-        {
-            // プロパティ名を表示して折り畳み状態を得る
-            property.isExpanded = EditorGUI.Foldout(new Rect(fieldRect), property.isExpanded, label);
-            if (property.isExpanded)
-            {
-
-                using (new EditorGUI.IndentLevelScope())
-                {
-                    // Nameを描画
-                    fieldRect.y += LineHeight;
-                    EditorGUI.PropertyField(new Rect(fieldRect), _property.firstProperty);
-
-                    // Typeを描画
-                    fieldRect.y += LineHeight;
-                    EditorGUI.PropertyField(new Rect(fieldRect), _property.secondProperty);
-
-                    // Ageを描画
-                    fieldRect.y += LineHeight;
-                    EditorGUI.PropertyField(new Rect(fieldRect), _property.thirdProperty);
-                }
-            }
-        }
-
-    }
-
-    public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
-    {
-        Init(property);
-        // (EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing) x 行数 で描画領域の高さを求める
-        return LineHeight * (property.isExpanded ? 4 : 1);
-    }
-#endif
     
 }
 
