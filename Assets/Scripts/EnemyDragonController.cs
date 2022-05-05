@@ -21,14 +21,21 @@ public class EnemyDragonController : MonoBehaviour
     // 集合
     private bool m_assemblyFlag = false;
 
+    // 目的地
+    private Vector3 m_targetPosition;
+    private Vector3 m_territoryOrigin;
+    private float m_range = 5.0f;
+
+
     private enum StateDra
     {
-        Wander, // プレイヤーがくるまで徘徊
+        Wander,        // プレイヤーがくるまで徘徊
         BattlePreparation, // 戦闘位置に移動
-        Idle, // 待機
+        Idle,               // 待機
         AttackStart, // 攻撃開始
         Attack,          // 攻撃中
-        AttackEnd    // 攻撃終了
+        AttackEnd,   // 攻撃終了
+        Death,           // 死亡
     };
     private StateDra state = StateDra.Idle;
 
@@ -62,6 +69,8 @@ public class EnemyDragonController : MonoBehaviour
     private void ConditionWanderState()
     {
         state = StateDra.Wander;
+
+        SetRandamTargetPosition();
 
         m_idleTimer = 0.0f;
     }
@@ -98,9 +107,24 @@ public class EnemyDragonController : MonoBehaviour
 
     private void ConditionIdleUpdate()
     {
+        // 集合がかかったら集まる
+        if (m_assemblyFlag)
+        {
+            ConditionBattlePreparationState();
+            m_assemblyFlag = false;
+            return;
+        }
+
         // 攻撃していいときだけ
         if (m_battleFlag)
+        {
             if (m_idleTimer > m_idleTimeMax) ConditionAttackStartState();
+        }
+        else
+        {
+            if (m_idleTimer > m_idleTimeMax) ConditionWanderState();
+        }
+
 
         m_idleTimer += Time.deltaTime;
     }
@@ -167,5 +191,15 @@ public class EnemyDragonController : MonoBehaviour
         transform.position = Easing.SineInOut(m_easingTimer, 1.5f, m_endPosition, m_startPosition);
 
         m_easingTimer += Time.deltaTime;
+    }
+
+    // ターゲット位置をランダム設定
+    private void SetRandamTargetPosition()
+    {
+        float theta = Random.Range(0f, Mathf.PI * 2) - Mathf.PI;
+        float range = Random.Range(0f, m_range);
+        m_targetPosition.x = m_territoryOrigin.x + Mathf.Sin(theta) * range;
+        m_targetPosition.y = m_territoryOrigin.y;
+        m_territoryOrigin.z = m_territoryOrigin.z * Mathf.Cos(theta) * range;
     }
 }
