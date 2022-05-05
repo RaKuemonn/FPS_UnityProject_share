@@ -31,13 +31,40 @@ public class CreateFloor : MonoBehaviour
                 floorInfo.FloorData = datas[i];
                 floorInfo.FloorData.id = i;     // idは要素順で設定される
 
+                var material = floor.GetComponent<Renderer>().material;
+                if (material)
+                {
+                    switch (datas[i].move_speed_state)
+                    {
+                        case FloorInfoMoveSpeed.Stop:
+                            material.color = new Color(255f, 0f, 0f, 1f);   // 赤
+                            break;
+
+
+                        case FloorInfoMoveSpeed.SpeedUp:
+                            material.color = new Color(0f, 0f, 255f, 1f);   // 蒼
+                            break;
+
+
+                        case FloorInfoMoveSpeed.Run:
+                            material.color = new Color(0f, 255f, 0f, 1f);   // 緑
+                            break;
+
+
+                        case FloorInfoMoveSpeed.SpeedDown:
+                            material.color = new Color(120f, 0f, 120f, 1f);// 紫
+                            break;
+                    }
+                }
+                
+
                 // 追加するコンポーネントの名前がしていされていれば
                 if (datas[i].CondExprName.Length > 0)
                 {
                     // Floorにコンポーネント(BaseComdExprを継承したものに限る)を追加して
                     var component = (BaseCondExpr)floor.AddComponent(Type.GetType(datas[i].CondExprName));
                     // FloorのUnityEventとしてコンポーネントの関数を追加する。
-                    floorInfo.FloorData.StopFloorConditionExpr.AddListener(component.OnCompleteCondExpr);
+                    floorInfo.FloorData.CompleteFloorConditionExpr.AddListener(component.OnCompleteCondExpr);
                 }
 
             }

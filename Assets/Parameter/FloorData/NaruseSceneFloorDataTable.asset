@@ -16,22 +16,62 @@ MonoBehaviour:
   floor_distance: 10
   FloorDatas:
   - id: 0
-    move_speed_state: 2
+    move_speed_state: 0
+    CondExprName: CondExprTimer
+    CompleteFloorConditionExpr:
+      m_PersistentCalls:
+        m_Calls: []
   - id: 1
-    move_speed_state: 2
+    move_speed_state: 1
+    CondExprName: 
+    CompleteFloorConditionExpr:
+      m_PersistentCalls:
+        m_Calls: []
   - id: 2
     move_speed_state: 2
+    CondExprName: 
+    CompleteFloorConditionExpr:
+      m_PersistentCalls:
+        m_Calls: []
   - id: 3
-    move_speed_state: 3
-  - id: 4
-    move_speed_state: 0
-  - id: 5
-    move_speed_state: 1
-  - id: 6
     move_speed_state: 2
+    CondExprName: 
+    CompleteFloorConditionExpr:
+      m_PersistentCalls:
+        m_Calls: []
+  - id: 4
+    move_speed_state: 3
+    CondExprName: 
+    CompleteFloorConditionExpr:
+      m_PersistentCalls:
+        m_Calls: []
+  - id: 5
+    move_speed_state: 0
+    CondExprName: CondExprTimer
+    CompleteFloorConditionExpr:
+      m_PersistentCalls:
+        m_Calls: []
+  - id: 6
+    move_speed_state: 1
+    CondExprName: 
+    CompleteFloorConditionExpr:
+      m_PersistentCalls:
+        m_Calls: []
   - id: 7
     move_speed_state: 3
+    CondExprName: 
+    CompleteFloorConditionExpr:
+      m_PersistentCalls:
+        m_Calls: []
   - id: 0
     move_speed_state: 0
+    CondExprName: CondExprTimer
+    CompleteFloorConditionExpr:
+      m_PersistentCalls:
+        m_Calls: []
   - id: 0
     move_speed_state: 1
+    CondExprName: 
+    CompleteFloorConditionExpr:
+      m_PersistentCalls:
+        m_Calls: []
