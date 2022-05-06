@@ -11,7 +11,8 @@
                     "id": "2afff638-03b5-4f8a-b1bd-a0ab0ff41a76",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "MoveL",
@@ -19,7 +20,8 @@
                     "id": "0d8c3342-f975-4bb6-bdb1-65ce2c41e821",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "XboxA",
@@ -27,7 +29,8 @@
                     "id": "751ada3a-58f9-488c-824a-288fec92f769",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "XboxB",
@@ -35,7 +38,8 @@
                     "id": "8a144e9c-7a94-44b6-83a3-a8c61d2c6cf5",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "XboxX",
@@ -43,7 +47,8 @@
                     "id": "27697e11-0482-4b78-b354-97386c90a16c",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "XboxY",
@@ -51,7 +56,8 @@
                     "id": "1e059559-6df9-4459-bfdb-54a7d088c395",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
