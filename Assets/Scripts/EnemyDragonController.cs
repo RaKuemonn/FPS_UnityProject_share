@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class EnemyDragonController : MonoBehaviour
 {
+    // 移動スピード
+    public float m_moveSpeed;
+
     [SerializeField]
     private float m_idleTimeMax;
     private float m_idleTimer = 0.0f;
@@ -77,9 +80,23 @@ public class EnemyDragonController : MonoBehaviour
 
     private void ConditionWanderUpdate()
     {
-        if (m_idleTimer > m_idleTimeMax) ConditionAttackStartState();
+        // 集合がかかったら集まる
+        if (m_assemblyFlag)
+        {
+            ConditionBattlePreparationState();
+            m_assemblyFlag = false;
+            return;
+        }
 
-        m_idleTimer += Time.deltaTime;
+        var dir = m_targetPosition - transform.position;
+        dir *= m_moveSpeed * Time.deltaTime;
+        transform.position = new Vector3(dir.x + transform.position.x, transform.position.y, transform.position.z + dir.z);
+
+        dir = m_targetPosition - transform.position;
+
+        // 目的地に着いたら待機
+        var lengthSq = dir.x * dir.x + dir.y * dir.y + dir.z * dir.z;
+        if (lengthSq < 0.5f * 0.5f) ConditionIdleState();
     }
 
     // 待機位置に移動
@@ -92,9 +109,7 @@ public class EnemyDragonController : MonoBehaviour
 
     private void ConditionBattlePreparationUpdate()
     {
-        if (m_idleTimer > m_idleTimeMax) ConditionAttackStartState();
-
-        m_idleTimer += Time.deltaTime;
+        
     }
 
     // 待機
