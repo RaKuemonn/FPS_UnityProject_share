@@ -896,7 +896,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1094642720366193037, guid: 10040cced41af324c9f334994ba4c8c1, type: 3}
       propertyPath: m_widthSize
-      value: 10
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1094642720366193040, guid: 10040cced41af324c9f334994ba4c8c1, type: 3}
       propertyPath: m_Name
