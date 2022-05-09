@@ -4,7 +4,7 @@ using System.Numerics;
 using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
 
-public class EnemyCollide : MonoBehaviour
+public class SikleCollide : MonoBehaviour
 {
     private GameObject targetObject;    // この当たり判定オブジェクトの影響先
 
@@ -110,9 +110,9 @@ public class EnemyCollide : MonoBehaviour
         // 持っているmaterialの色が赤ではなく緑になっていたら
         if (targetObject.GetComponent<Renderer>().material.color.r > 0f) return;
 
-        if (collider.gameObject.tag != "Slash") return;
-        collider.gameObject.GetComponent<BoxCollider2D>().enabled = false;
-
+        var slash = collider.gameObject;
+        if (slash.tag != "Slash") return;
+        slash.GetComponent<BoxCollider2D>().enabled = false;
 
         Debug.Log("slash hit");
 
@@ -120,54 +120,30 @@ public class EnemyCollide : MonoBehaviour
 
         // 無敵時間の設定
         damage_timer = 1.0f;
-
-        // カーソルの
+        // カーソルのゲームオブジェクトからコンポーネントを取得する。
         var cursor = GameObject.FindGameObjectWithTag("Cursor")
             .GetComponent<CursorController>();
-
         cursor.SetChainTimer();
-        
 
-        // 切断する処理   TODO : EnemyControllerコンポーネント内に記述を移すのもあり。
-        if(true/* 条件式を記述　例:体力が0以下ならとか */)
+        // カウンターの可否判別
         {
+            // TODO 1: slash(画像)の角度(angle)を取得して、単位ベクトル(Vector2)を作る。              ( float slash_angle = slash.RadianAngle2D(); )
+            // TODO 2: 鎌の指定コマンド(Vector2)とslashのベクトル(Vector2)の角度を算出する。   ( float resutl_angle = Vector2.Angle(ベクトル1, ベクトル2); )
+            // TODO 3: 角度が一定以内なら、カウンター成功にする。
+            
 
-            Vector3 normal;
-            {
-                var slash_ray =
-                    collider.gameObject.
-                        GetComponent<SlashImageController>().
-                        SlashRay();
-                
-                var cursol_ray = cursor.CursolRay();
+            //UnityEngine.Quaternion.Euler();
+            // Le bao chan
 
 
-                const float distance = 5.0f;
-                var origin_position = mainCamera.transform.position;
-                var cursol_far = cursol_ray.GetPoint(distance);
-                var slash_far = slash_ray.GetPoint(distance);
-
-                var a = slash_far  - origin_position;
-                var b = cursol_far - origin_position;
-
-                normal = Vector3.Cross(a, b).normalized;
-            }
-
-            var result =
-                MeshCut.CutMesh(
-                    targetObject,                                   // 斬るオブジェクト
-                    mainCamera.transform.position,    // 平面上の位置
-                    normal                                          // 平面の法線
-                    );
-
-            // TODO : 斬った時にはねるようにしたい
-            var impulse_copy = normal;
-
-            // 斬ったオブジェクトの事後処理、削除予約
-            ObjectCutted(result.copy_normalside, false, impulse_copy);
-            ObjectCutted(result.original_anitiNormalside, true, impulse_copy * -1.0f);
         }
-        
+
+
+
+        // TODO:切断する処理の追加(一旦削除してある)
+        const float const_destroy_time = 0.5f;
+        Destroy(targetObject, const_destroy_time);
+
     }
 
     private void ObjectCutted(GameObject object_, bool is_, Vector3 impulse_direction_)

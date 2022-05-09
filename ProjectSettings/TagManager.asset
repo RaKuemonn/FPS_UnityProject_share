@@ -10,6 +10,7 @@ TagManager:
   - Enemy
   - EnemyCollide
   - Weapon
+  - Dragon
   layers:
   - Default
   - TransparentFX

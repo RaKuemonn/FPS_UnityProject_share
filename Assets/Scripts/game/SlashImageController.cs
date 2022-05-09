@@ -48,4 +48,9 @@ public class SlashImageController : MonoBehaviour
         return Camera.main.ScreenPointToRay(child_rect_transform.position);
     }
 
+    public float RadianAngle2D()
+    {
+        return 0.0f;
+    }
+
 }

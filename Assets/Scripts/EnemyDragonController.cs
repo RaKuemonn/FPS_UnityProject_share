@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyDragonController : MonoBehaviour
+public class EnemyDragonController : BaseEnemy
 {
     // 移動スピード
     public float m_moveSpeed;
@@ -18,16 +18,6 @@ public class EnemyDragonController : MonoBehaviour
 
     private Vector3 m_startPosition;
     private Vector3 m_endPosition;
-
-    // 戦闘開始
-    private bool m_battleFlag = false;
-    // 集合
-    private bool m_assemblyFlag = false;
-
-    // 目的地
-    private Vector3 m_targetPosition;
-    private Vector3 m_territoryOrigin;
-    private float m_range = 5.0f;
 
 
     private enum StateDra
@@ -45,7 +35,8 @@ public class EnemyDragonController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        m_territoryOrigin = transform.position;
+        Debug.Log(m_territoryOrigin);
     }
 
     // Update is called once per frame
@@ -65,7 +56,11 @@ public class EnemyDragonController : MonoBehaviour
             case StateDra.Attack: ConditionAttackUpdate(); break;
             // 攻撃終了
             case StateDra.AttackEnd: ConditionAttackEndUpdate(); break;
+            // 死亡
+            case StateDra.Death: ConditionDeathUpdate(); break;
         };
+
+        Debug.Log(state);
     }
 
     // 徘徊
@@ -74,6 +69,7 @@ public class EnemyDragonController : MonoBehaviour
         state = StateDra.Wander;
 
         SetRandamTargetPosition();
+        Debug.Log(m_targetPosition);
 
         m_idleTimer = 0.0f;
     }
@@ -96,20 +92,31 @@ public class EnemyDragonController : MonoBehaviour
 
         // 目的地に着いたら待機
         var lengthSq = dir.x * dir.x + dir.y * dir.y + dir.z * dir.z;
-        if (lengthSq < 0.5f * 0.5f) ConditionIdleState();
+        if (lengthSq < 0.2f * 0.2f) ConditionIdleState();
     }
 
     // 待機位置に移動
     private void ConditionBattlePreparationState()
     {
         state = StateDra.BattlePreparation;
-
-        m_idleTimer = 0.0f;
     }
 
     private void ConditionBattlePreparationUpdate()
     {
-        
+        var dir = m_locationPosition - transform.position;
+        dir.Normalize();
+        dir *= m_moveSpeed * Time.deltaTime;
+        transform.position = new Vector3(dir.x + transform.position.x, transform.position.y, transform.position.z + dir.z);
+
+        dir = m_locationPosition - transform.position;
+
+        // 目的地に着いたら待機
+        var lengthSq = dir.x * dir.x + dir.y * dir.y + dir.z * dir.z;
+        if (lengthSq < 0.1f * 0.1f)
+        {
+            ConditionIdleState();
+            m_battleFlag = true;
+        }
     }
 
     // 待機
@@ -208,13 +215,14 @@ public class EnemyDragonController : MonoBehaviour
         m_easingTimer += Time.deltaTime;
     }
 
-    // ターゲット位置をランダム設定
-    private void SetRandamTargetPosition()
+
+    // 死亡
+    private void ConditionDeathState()
     {
-        float theta = Random.Range(0f, Mathf.PI * 2) - Mathf.PI;
-        float range = Random.Range(0f, m_range);
-        m_targetPosition.x = m_territoryOrigin.x + Mathf.Sin(theta) * range;
-        m_targetPosition.y = m_territoryOrigin.y;
-        m_territoryOrigin.z = m_territoryOrigin.z * Mathf.Cos(theta) * range;
+        state = StateDra.Death;
+    }
+
+    private void ConditionDeathUpdate()
+    {
     }
 }
