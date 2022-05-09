@@ -50,7 +50,7 @@ public class SlashImageController : MonoBehaviour
 
     public float RadianAngle2D()
     {
-        return 0.0f;
+        return image.rectTransform.eulerAngles.z;
     }
 
 }
