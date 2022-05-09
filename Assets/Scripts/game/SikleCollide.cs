@@ -18,6 +18,7 @@ public class SikleCollide : MonoBehaviour
     
     private GameObject player;          // プレイヤーの位置参照用 (距離を計算するため)
 
+
     // Start is called before the first frame update
     void Start()
     {
