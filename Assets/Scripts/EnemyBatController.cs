@@ -41,7 +41,25 @@ public class EnemyBatController : BaseEnemy
     // Update is called once per frame
     void Update()
     {
-        
+        switch (state)
+        {
+            // œpœj
+            case StateBat.Wander: ConditionWanderUpdate(); break;
+            // ‘Ò‹@ˆÊ’u‚ÉˆÚ“®
+            case StateBat.BattlePreparation: ConditionBattlePreparationUpdate(); break;
+            // ‘Ò‹@
+            case StateBat.Idle: ConditionIdleUpdate(); break;
+            // UŒ‚ŠJŽn
+            case StateBat.AttackStart: ConditionAttackStartUpdate(); break;
+            // UŒ‚’†
+            case StateBat.Attack: ConditionAttackUpdate(); break;
+            // UŒ‚I—¹
+            case StateBat.AttackEnd: ConditionAttackEndUpdate(); break;
+            // Ž€–S
+            case StateBat.Death: ConditionDeathUpdate(); break;
+        };
+
+        Debug.Log(state);
     }
 
     // œpœj
@@ -128,7 +146,6 @@ public class EnemyBatController : BaseEnemy
             if (m_idleTimer > m_idleTimeMax) ConditionWanderState();
         }
 
-
         m_idleTimer += Time.deltaTime;
     }
 
@@ -201,9 +218,13 @@ public class EnemyBatController : BaseEnemy
     private void ConditionDeathState()
     {
         state = StateBat.Death;
+        m_kariTimer = 0.0f;
     }
 
     private void ConditionDeathUpdate()
     {
+        if (m_kariTimer > 2.0f) Destroy(gameObject);
+
+        m_kariTimer += Time.deltaTime;
     }
 }

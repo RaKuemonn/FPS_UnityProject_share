@@ -1,24 +1,23 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
-
-public class SikleCollide : MonoBehaviour
+class SicklesAttackCollider : MonoBehaviour
 {
-    private GameObject targetObject;    // ‚±‚Ì“–‚½‚è”»’èƒIƒuƒWƒFƒNƒg‚Ì‰e‹¿æ
+    private GameObject targetObject;    // ã“ã®å½“ãŸã‚Šåˆ¤å®šã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®å½±éŸ¿å…ˆ
 
-    private Camera mainCamera;          // ƒJƒƒ‰î•ñ‚ÌQÆ—pH
+    private Camera mainCamera;          // ã‚«ãƒ¡ãƒ©æƒ…å ±ã®å‚ç…§ç”¨ï¼Ÿ
 
-    private RectTransform canvas_rect;  // eƒIƒuƒWƒFƒNƒg‚ÌˆÊ’uQÆ—p
+    private RectTransform canvas_rect;  // è¦ªã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ä½ç½®å‚ç…§ç”¨
 
-    private RectTransform rect;         // ©g‚ÌŒ`‚ÌQÆ—p
+    private RectTransform rect;         // è‡ªèº«ã®å½¢ã®å‚ç…§ç”¨
 
-    private float damage_timer;         // –³“GŠÔŠÇ——p
-    
-    private GameObject player;          // ƒvƒŒƒCƒ„[‚ÌˆÊ’uQÆ—p (‹——£‚ğŒvZ‚·‚é‚½‚ß)
+    private float damage_timer;         // ç„¡æ•µæ™‚é–“ç®¡ç†ç”¨
+
+    private GameObject player;          // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ä½ç½®å‚ç…§ç”¨ (è·é›¢ã‚’è¨ˆç®—ã™ã‚‹ãŸã‚)
 
     [SerializeField]
-    private float toleranceLevel; // ƒJƒEƒ“ƒ^[¬Œ÷”ÍˆÍ
+    private float toleranceLevel; // ã‚«ã‚¦ãƒ³ã‚¿ãƒ¼æˆåŠŸç¯„å›²
 
     // Start is called before the first frame update
     void Start()
@@ -28,7 +27,7 @@ public class SikleCollide : MonoBehaviour
         rect = GetComponent<RectTransform>();
 
         canvas_rect = GameObject.Find("Canvas").GetComponent<RectTransform>();
-        
+
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
@@ -82,20 +81,20 @@ public class SikleCollide : MonoBehaviour
 
 
 
-        // ‰æ‘œ‚ÌƒXƒP[ƒ‹‚ğ•Ï‚¦‚é‚Æ, “–‚½‚è”»’è‚à‚Â‚¢‚Ä‚­‚é‚æ
-        rect.localScale = new Vector3(1f,1f,1f) * scale;
+        // ç”»åƒã®ã‚¹ã‚±ãƒ¼ãƒ«ã‚’å¤‰ãˆã‚‹ã¨, å½“ãŸã‚Šåˆ¤å®šã‚‚ã¤ã„ã¦ãã‚‹ã‚ˆ
+        rect.localScale = new Vector3(1f, 1f, 1f) * scale;
 
 
     }
 
     private bool CheckTarget()
     {
-        // QÆ‚µ‚Ä‚¢‚é“G‚ªÁ‚³‚ê‚½‚ç
+        // å‚ç…§ã—ã¦ã„ã‚‹æ•µãŒæ¶ˆã•ã‚ŒãŸã‚‰
         if (targetObject) return false;
 
         //Debug.Log("delete enemy collide");
 
-        // ©•ª©g‚àÁ‚·
+        // è‡ªåˆ†è‡ªèº«ã‚‚æ¶ˆã™
         Destroy(gameObject);
         return true;
     }
@@ -109,7 +108,7 @@ public class SikleCollide : MonoBehaviour
     {
         if (damage_timer > 0f) return;
 
-        // ‚Á‚Ä‚¢‚ématerial‚ÌF‚ªÔ‚Å‚Í‚È‚­—Î‚É‚È‚Á‚Ä‚¢‚½‚ç
+        // æŒã£ã¦ã„ã‚‹materialã®è‰²ãŒèµ¤ã§ã¯ãªãç·‘ã«ãªã£ã¦ã„ãŸã‚‰
         if (targetObject.GetComponent<Renderer>().material.color.r > 0f) return;
 
         var slash = collider.gameObject;
@@ -120,27 +119,27 @@ public class SikleCollide : MonoBehaviour
 
 
 
-        // –³“GŠÔ‚Ìİ’è
+        // ç„¡æ•µæ™‚é–“ã®è¨­å®š
         damage_timer = 1.0f;
-        // ƒJ[ƒ\ƒ‹‚ÌƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚©‚çƒRƒ“ƒ|[ƒlƒ“ƒg‚ğæ“¾‚·‚éB
+        // ã‚«ãƒ¼ã‚½ãƒ«ã®ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‹ã‚‰ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã‚’å–å¾—ã™ã‚‹ã€‚
         var cursor = GameObject.FindGameObjectWithTag("Cursor")
             .GetComponent<CursorController>();
         cursor.SetChainTimer();
 
-        // ƒJƒEƒ“ƒ^[‚Ì‰Â”Û”»•Ê
+        // ã‚«ã‚¦ãƒ³ã‚¿ãƒ¼ã®å¯å¦åˆ¤åˆ¥
         {
-            // TODO 1: slash(‰æ‘œ)‚ÌŠp“x(angle)‚ğæ“¾‚µ‚ÄA’PˆÊƒxƒNƒgƒ‹(Vector2)‚ğì‚éB              ( )
+            // TODO 1: slash(ç”»åƒ)ã®è§’åº¦(angle)ã‚’å–å¾—ã—ã¦ã€å˜ä½ãƒ™ã‚¯ãƒˆãƒ«(Vector2)ã‚’ä½œã‚‹ã€‚              ( )
             var slash_ = GameObject.FindGameObjectWithTag("Slash");
             var slashImage = slash_.GetComponent<SlashImageController>();
             float slashAngle = slashImage.RadianAngle2D();
             Vector2 slashVec = MathHelpar.AngleToVector2(slashAngle);
 
-            // TODO 2: Š™‚Ìw’èƒRƒ}ƒ“ƒh(Vector2)‚Æslash‚ÌƒxƒNƒgƒ‹(Vector2)‚ÌŠp“x‚ğZo‚·‚éB   ( float resutl_angle = Vector2.Angle(ƒxƒNƒgƒ‹1, ƒxƒNƒgƒ‹2); )
-            var sickleControllr = GetComponent<SickleThrowingController>();
+            // TODO 2: éŒã®æŒ‡å®šã‚³ãƒãƒ³ãƒ‰(Vector2)ã¨slashã®ãƒ™ã‚¯ãƒˆãƒ«(Vector2)ã®è§’åº¦ã‚’ç®—å‡ºã™ã‚‹ã€‚   ( float resutl_angle = Vector2.Angle(ãƒ™ã‚¯ãƒˆãƒ«1, ãƒ™ã‚¯ãƒˆãƒ«2); )
+            var sickleControllr = GetComponent<SickleController>();
             float sickleAngle = sickleControllr.GetRadianSlashAngle();
             Vector2 sickleVec = MathHelpar.AngleToVector2(sickleAngle);
 
-            // TODO 3: Šp“x‚ªˆê’èˆÈ“à‚È‚çAƒJƒEƒ“ƒ^[¬Œ÷‚É‚·‚éB
+            // TODO 3: è§’åº¦ãŒä¸€å®šä»¥å†…ãªã‚‰ã€ã‚«ã‚¦ãƒ³ã‚¿ãƒ¼æˆåŠŸã«ã™ã‚‹ã€‚
             var dot = Vector2.Dot(slashVec, sickleVec);
             dot = Mathf.Acos(dot);
             if (toleranceLevel > dot && dot > -toleranceLevel)
@@ -149,13 +148,13 @@ public class SikleCollide : MonoBehaviour
             }
             else
             {
-                // TODO •Ä@¸”s‚µ‚½‚Ìˆ—‚ğ‘‚¯
+                // TODO ç±³ã€€å¤±æ•—ã—ãŸæ™‚ã®å‡¦ç†ã‚’æ›¸ã‘
             }
         }
 
 
 
-        // TODO:Ø’f‚·‚éˆ—‚Ì’Ç‰Á(ˆê’Uíœ‚µ‚Ä‚ ‚é)
+        // TODO:åˆ‡æ–­ã™ã‚‹å‡¦ç†ã®è¿½åŠ (ä¸€æ—¦å‰Šé™¤ã—ã¦ã‚ã‚‹)
         const float const_destroy_time = 0.5f;
         Destroy(targetObject, const_destroy_time);
 
@@ -166,9 +165,9 @@ public class SikleCollide : MonoBehaviour
         if (object_ == null) return;
 
         var impulse_ = impulse_direction_ * 2.0f;
-        impulse_.y += 0.1f;                          // ’µ‚Ë‚³‚¹‚é
+        impulse_.y += 0.1f;                          // è·³ã­ã•ã›ã‚‹
         object_.GetComponent<EnemyController>().SetCutPerformance(is_, impulse_);
-        
+
         const float const_destroy_time = 0.5f;
         Destroy(object_, const_destroy_time);
 

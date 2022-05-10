@@ -16,3 +16,12 @@ public class Easing
         return -max / 2 * (Mathf.Cos(t * Mathf.PI / totaltime) - 1) + min;
     }
 }
+
+public class MathHelpar
+{
+    public static Vector2 AngleToVector2(float angle)
+    {
+        var radian = angle * (Mathf.PI / 180);
+        return new Vector2(Mathf.Cos(radian), Mathf.Sin(radian)).normalized;
+    }
+};
