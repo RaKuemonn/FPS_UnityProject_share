@@ -17,61 +17,61 @@ MonoBehaviour:
   FloorDatas:
   - id: 0
     move_speed_state: 0
-    CondExprName: CondExprTimer
+    CondExprData: {fileID: 11400000, guid: ad1c68016b8f41343bc82f3e035b04cb, type: 2}
     CompleteFloorConditionExpr:
       m_PersistentCalls:
         m_Calls: []
   - id: 1
     move_speed_state: 1
-    CondExprName: 
+    CondExprData: {fileID: 0}
     CompleteFloorConditionExpr:
       m_PersistentCalls:
         m_Calls: []
   - id: 2
     move_speed_state: 2
-    CondExprName: 
+    CondExprData: {fileID: 0}
     CompleteFloorConditionExpr:
       m_PersistentCalls:
         m_Calls: []
   - id: 3
     move_speed_state: 2
-    CondExprName: 
+    CondExprData: {fileID: 0}
     CompleteFloorConditionExpr:
       m_PersistentCalls:
         m_Calls: []
   - id: 4
     move_speed_state: 3
-    CondExprName: 
+    CondExprData: {fileID: 0}
     CompleteFloorConditionExpr:
       m_PersistentCalls:
         m_Calls: []
   - id: 5
     move_speed_state: 0
-    CondExprName: CondExprTimer
+    CondExprData: {fileID: 11400000, guid: ad1c68016b8f41343bc82f3e035b04cb, type: 2}
     CompleteFloorConditionExpr:
       m_PersistentCalls:
         m_Calls: []
   - id: 6
     move_speed_state: 1
-    CondExprName: 
+    CondExprData: {fileID: 0}
     CompleteFloorConditionExpr:
       m_PersistentCalls:
         m_Calls: []
   - id: 7
     move_speed_state: 2
-    CondExprName: 
+    CondExprData: {fileID: 0}
     CompleteFloorConditionExpr:
       m_PersistentCalls:
         m_Calls: []
   - id: 8
     move_speed_state: 2
-    CondExprName: 
+    CondExprData: {fileID: 0}
     CompleteFloorConditionExpr:
       m_PersistentCalls:
         m_Calls: []
   - id: 9
     move_speed_state: 2
-    CondExprName: 
+    CondExprData: {fileID: 0}
     CompleteFloorConditionExpr:
       m_PersistentCalls:
         m_Calls: []

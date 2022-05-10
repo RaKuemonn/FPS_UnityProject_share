@@ -18,10 +18,15 @@ public class FloorData  // 10m*10mマスの床が持つデータ
 {
     public int id = 0;                              // 床の識別子 (要素順で自動設定)
     public FloorInfoMoveSpeed move_speed_state = FloorInfoMoveSpeed.Stop; // 床が持っている速度状態 (この状態をプレイヤーが当たり判定を用いて受け取ることで、プレイヤーの速度を制御させている)
-    public string CondExprName;                 // 追加する条件コンポーネントのクラス名
-    //public BaseCondExpr CondExprPrefab = null;
+    //public string CondExprName;                 // 追加する条件コンポーネントのクラス名
+    [SerializeField]public BaseCondExprData CondExprData;
     public OnCompleteFloorCondExprEvent CompleteFloorConditionExpr; // Stop床から走り出す条件式
 }
+
+
+
+
+
 public enum FloorInfoMoveSpeed
 {
     Stop,       // 待機する,完全停止する床
