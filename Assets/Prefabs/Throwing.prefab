@@ -173,6 +173,7 @@ GameObject:
   - component: {fileID: 5838012975177509302}
   - component: {fileID: 6446717361702158194}
   - component: {fileID: 4871606314126861986}
+  - component: {fileID: 6681330255650651266}
   m_Layer: 0
   m_Name: Throwing
   m_TagString: Untagged
@@ -245,6 +246,19 @@ MonoBehaviour:
   moveSpeed: 3
   player: {fileID: 7790357534801836031, guid: 4065b0a3a50481b408a227796b93b138, type: 3}
   boss: {fileID: 80165577675343467, guid: 6ffc682f938fd3a479c5f8f573fe5f8c, type: 3}
+--- !u!114 &6681330255650651266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7448830665279495077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3a0ea55849b0d64296f015220fb2a81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toleranceLevel: 0.2
 --- !u!1 &8267572455905410415
 GameObject:
   m_ObjectHideFlags: 0

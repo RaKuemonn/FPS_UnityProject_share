@@ -23,12 +23,13 @@ public class SickleController : MonoBehaviour
     [SerializeField]
     private GameObject boss;
 
+    private float slashAngle;
+    public float GetRadianSlashAngle() { return slashAngle * Mathf.Deg2Rad; }
+
     // Start is called before the first frame update
     void Start()
     {
-    
-
-        Debug.Log(target);
+        slashAngle = Random.Range(0.0f, 360.0f);
     }
 
     // Update is called once per frame

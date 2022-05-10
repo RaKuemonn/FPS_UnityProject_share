@@ -26,6 +26,9 @@ public class SickleThrowingController : MonoBehaviour
     [SerializeField]
     private GameObject boss;
 
+    private float slashAngle;
+    public float GetRadianSlashAngle() { return slashAngle * Mathf.Deg2Rad; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +44,8 @@ public class SickleThrowingController : MonoBehaviour
             endPos.x = player.transform.position.x;
             endPos.y = player.transform.position.z - 0;
         }
+
+        slashAngle = Random.Range(0.0f, 360.0f);
         //transform.position = new Vector3(boss.transform.position.x, boss.transform.position.y, boss.transform.position.z);
     }
 

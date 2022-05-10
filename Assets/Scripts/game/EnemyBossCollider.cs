@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Vector3 = UnityEngine.Vector3;
 
-public class SikleCollide : MonoBehaviour
+public class EnemyBossCollider : MonoBehaviour
 {
     private GameObject targetObject;    // この当たり判定オブジェクトの影響先
 
@@ -14,7 +13,7 @@ public class SikleCollide : MonoBehaviour
     private RectTransform rect;         // 自身の形の参照用
 
     private float damage_timer;         // 無敵時間管理用
-    
+
     private GameObject player;          // プレイヤーの位置参照用 (距離を計算するため)
 
     [SerializeField]
@@ -28,7 +27,7 @@ public class SikleCollide : MonoBehaviour
         rect = GetComponent<RectTransform>();
 
         canvas_rect = GameObject.Find("Canvas").GetComponent<RectTransform>();
-        
+
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
@@ -83,7 +82,7 @@ public class SikleCollide : MonoBehaviour
 
 
         // 画像のスケールを変えると, 当たり判定もついてくるよ
-        rect.localScale = new Vector3(1f,1f,1f) * scale;
+        rect.localScale = new Vector3(1f, 1f, 1f) * scale;
 
 
     }
@@ -136,8 +135,8 @@ public class SikleCollide : MonoBehaviour
             Vector2 slashVec = MathHelpar.AngleToVector2(slashAngle);
 
             // TODO 2: 鎌の指定コマンド(Vector2)とslashのベクトル(Vector2)の角度を算出する。   ( float resutl_angle = Vector2.Angle(ベクトル1, ベクトル2); )
-            var sickleControllr = GetComponent<SickleThrowingController>();
-            float sickleAngle = sickleControllr.GetRadianSlashAngle();
+            var bossControllr = GetComponent<EnemyBossController>();
+            float sickleAngle = bossControllr.GetRadianSlashAngle();
             Vector2 sickleVec = MathHelpar.AngleToVector2(sickleAngle);
 
             // TODO 3: 角度が一定以内なら、カウンター成功にする。
@@ -145,7 +144,7 @@ public class SikleCollide : MonoBehaviour
             dot = Mathf.Acos(dot);
             if (toleranceLevel > dot && dot > -toleranceLevel)
             {
-                Destroy(targetObject);
+                bossControllr.SetDownFlag(true);
             }
             else
             {
@@ -168,7 +167,7 @@ public class SikleCollide : MonoBehaviour
         var impulse_ = impulse_direction_ * 2.0f;
         impulse_.y += 0.1f;                          // 跳ねさせる
         object_.GetComponent<EnemyController>().SetCutPerformance(is_, impulse_);
-        
+
         const float const_destroy_time = 0.5f;
         Destroy(object_, const_destroy_time);
 

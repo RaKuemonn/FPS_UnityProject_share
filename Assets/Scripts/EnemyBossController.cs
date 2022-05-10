@@ -9,6 +9,7 @@ public class EnemyBossController : MonoBehaviour
 
     // ダウンフラグ
     private bool downFlag;
+    public void SetDownFlag(bool set) { downFlag = set; }
 
     // 武器表示Flag
     public bool weaponReflect = true;
@@ -61,6 +62,10 @@ public class EnemyBossController : MonoBehaviour
     private float totalTime = 2.0f;
     private float backTimer = 0.0f;
     private Vector3 backStartPosition;
+
+    // 直殴りしに来るとき用
+    private float slashAngle = 0.0f;
+    public float GetRadianSlashAngle() { return slashAngle * Mathf.Deg2Rad; }
 
 
     // ボスダウン状態
@@ -292,13 +297,21 @@ public class EnemyBossController : MonoBehaviour
     {
         state = State.AssaultAttackAnim;
         attackEndTimer = attackEndTimerMax;
+
+        slashAngle = Random.Range(0.0f, 360.0f);
     }
 
     private void ConditionAssaultAttackAnimUpdate()
     {
-        if (attackEndTimer < 0)
+        if (downFlag)
         {
             ConditionDownState();
+            return;
+        }
+
+        if (attackEndTimer < 0)
+        {
+            ConditionBossComeBackState();
         }
 
         attackEndTimer -= Time.deltaTime;
@@ -326,6 +339,8 @@ public class EnemyBossController : MonoBehaviour
 
     private void ConditionDownState()
     {
+        downFlag = false;
+
         state = State.Down;
         downEasingTimer = 0.0f;
         downCountTimer = 0.0f;
