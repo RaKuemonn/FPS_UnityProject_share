@@ -12,12 +12,6 @@ public class CreateFloor : MonoBehaviour
     {
         var floorDataTable = masterData.FloorDataTable;
 
-        //var Floor = floorDataTable.Floor;
-        //var size = Floor.Length;
-        //for (int i = 0; i < size; ++i)
-        //{
-        //    Floor[i].GetComponent<FloorInfo>().FloorData.id = i;
-        //}
         
         var datas = floorDataTable.FloorDatas;
         GameObject floor = null;
@@ -59,14 +53,16 @@ public class CreateFloor : MonoBehaviour
                 
 
                 // 追加するコンポーネントの名前がしていされていれば
-                //if (datas[i].CondExprName.Length <= 0) { continue; }
                 if (datas[i].CondExprData == null) { continue; }
 
                 // Floorにコンポーネント(BaseComdExprを継承したものに限る)を追加して
-                var component = (BaseCondExpr)floor.AddComponent(Type.GetType(datas[i].CondExprData.CondExprComponentName()));
-                component.data = datas[i].CondExprData;
+                var component = (BaseCondExpr)floor.AddComponent(
+                    Type.GetType(datas[i].CondExprData.CondExprComponentName())
+                    );
 
-                //var component = (BaseCondExpr)floor.AddComponent(datas[i].CondExprPrefab.GetType());
+                // 該当データの参照を渡す
+                component.data = datas[i].CondExprData;
+                
                 // FloorのUnityEventとしてコンポーネントの関数を追加する。
                 floorInfo.FloorData.CompleteFloorConditionExpr.AddListener(component.OnCompleteCondExpr);
                 

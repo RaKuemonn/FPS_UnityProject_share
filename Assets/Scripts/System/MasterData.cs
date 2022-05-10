@@ -10,9 +10,16 @@ public class MasterData : MonoBehaviour
 
     [SerializeField] private FloorDataTable floorDataTable;
 
+    public PlayerStatus PlayerStatus { get; private set; }
+
+    [SerializeField] private PlayerStatus playerStatus;
+
     public void Awake() // コンポーネントが生成された際、呼び出される関数
     {
         FloorDataTable = floorDataTable;
+
+        playerStatus.current_hp = playerStatus.max_hp;
+        PlayerStatus = playerStatus;
 
     }
 }

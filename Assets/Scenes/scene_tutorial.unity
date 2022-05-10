@@ -949,6 +949,10 @@ PrefabInstance:
       propertyPath: Enviroments
       value: 
       objectReference: {fileID: 1304556112}
+    - target: {fileID: 2387837039213866002, guid: 92933c80ceffbfc498003489ba3b1580, type: 3}
+      propertyPath: playerStatus
+      value: 
+      objectReference: {fileID: 11400000, guid: fd169fa6d1b87eb4dbe208dd2173dc4b, type: 2}
     - target: {fileID: 2387837039213866003, guid: 92933c80ceffbfc498003489ba3b1580, type: 3}
       propertyPath: m_RootOrder
       value: 4
