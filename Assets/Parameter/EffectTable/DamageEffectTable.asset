@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b437849904ccdb41b47577e81d9c961, type: 3}
-  m_Name: TutorialPlayerStatus
+  m_Script: {fileID: 11500000, guid: c676d049aa02d95448e7e4d7d17370ee, type: 3}
+  m_Name: DamageEffectTable
   m_EditorClassIdentifier: 
-  max_hp: 100
-  current_hp: 100
+  effects: []
