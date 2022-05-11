@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[CreateAssetMenu(menuName = "Table/DamageEffectTable",fileName = "DamageEffectTable")]
-public class DamageEffectTable : ScriptableObject
+[CreateAssetMenu(menuName = "Table/EffectTable",fileName = "EffectTable")]
+public class EffectTable : ScriptableObject
 {
     public Effect[] effects;
 }
@@ -13,5 +13,5 @@ public class DamageEffectTable : ScriptableObject
 [Serializable]
 public class Effect
 {
-    public Image Image;
+    public Texture2D Texture2D;
 }
