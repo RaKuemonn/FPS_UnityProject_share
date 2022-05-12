@@ -7,6 +7,10 @@ public class BaseEnemy : MonoBehaviour
     // 各自で設定
     protected float m_hp;
 
+    // 旋回
+    protected float m_turnAngle = 5.0f;
+    protected float m_turnSpeed = 3.0f;
+
     // 目的地
     protected Vector3 m_targetPosition;
     protected Vector3 m_territoryOrigin;
@@ -45,5 +49,25 @@ public class BaseEnemy : MonoBehaviour
         m_targetPosition.x = m_territoryOrigin.x + Mathf.Sin(theta) * range;
         m_targetPosition.y = m_territoryOrigin.y;
         m_targetPosition.z = m_territoryOrigin.z + Mathf.Cos(theta) * range;
+    }
+
+    protected Quaternion TurnRotation(Vector3 forward, Vector3 dir, float turnAngle, float angularSpeed)
+    {
+        var forward_ = forward;
+        var dir_ = dir;
+
+        dir_.y = forward_.y = 0.0f;
+        float angle = Vector3.Angle(dir_.normalized, forward_.normalized);
+
+        Quaternion rotation = Quaternion.LookRotation(forward_.normalized);
+
+        // 角度が一定以上なら旋回
+        if (angle > turnAngle)
+        {
+            Quaternion rotation2 = Quaternion.LookRotation(dir_.normalized);
+            rotation = Quaternion.RotateTowards(rotation, rotation2, angularSpeed  * Time.deltaTime);
+        }
+
+        return rotation;
     }
 }

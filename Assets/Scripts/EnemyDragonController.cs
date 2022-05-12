@@ -19,6 +19,7 @@ public class EnemyDragonController : BaseEnemy
     private Vector3 m_startPosition;
     private Vector3 m_endPosition;
 
+    private Animator m_animator;
 
     private enum StateDra
     {
@@ -35,8 +36,8 @@ public class EnemyDragonController : BaseEnemy
     // Start is called before the first frame update
     void Start()
     {
+        m_animator = GetComponent<Animator>();
         m_territoryOrigin = transform.position;
-        Debug.Log(m_territoryOrigin);
     }
 
     // Update is called once per frame
@@ -60,6 +61,8 @@ public class EnemyDragonController : BaseEnemy
             case StateDra.Death: ConditionDeathUpdate(); break;
         };
 
+        if (m_death) ConditionDeathState();
+
         Debug.Log(state);
     }
 
@@ -67,9 +70,9 @@ public class EnemyDragonController : BaseEnemy
     private void ConditionWanderState()
     {
         state = StateDra.Wander;
+        m_animator.SetFloat("MoveSpeed", 0.7f);
 
         SetRandamTargetPosition();
-        Debug.Log(m_targetPosition);
 
         m_idleTimer = 0.0f;
     }
@@ -90,6 +93,8 @@ public class EnemyDragonController : BaseEnemy
 
         dir = m_targetPosition - transform.position;
 
+        transform.rotation = TurnRotation(transform.forward, dir, m_turnAngle, m_turnSpeed);
+
         // 目的地に着いたら待機
         var lengthSq = dir.x * dir.x + dir.y * dir.y + dir.z * dir.z;
         if (lengthSq < 0.2f * 0.2f) ConditionIdleState();
@@ -99,6 +104,9 @@ public class EnemyDragonController : BaseEnemy
     private void ConditionBattlePreparationState()
     {
         state = StateDra.BattlePreparation;
+
+        m_animator.SetFloat("MoveSpeed", 0.7f);
+
     }
 
     private void ConditionBattlePreparationUpdate()
@@ -117,12 +125,16 @@ public class EnemyDragonController : BaseEnemy
             ConditionIdleState();
             m_battleFlag = true;
         }
+
+        transform.rotation = TurnRotation(transform.forward, dir, m_turnAngle, m_turnSpeed);
     }
 
     // 待機
     private void ConditionIdleState()
     {
         state = StateDra.Idle;
+
+        m_animator.SetFloat("MoveSpeed",0.0f);
 
         m_idleTimer = 0.0f;
     }
@@ -141,6 +153,7 @@ public class EnemyDragonController : BaseEnemy
         if (m_battleFlag)
         {
             if (m_idleTimer > m_idleTimeMax) ConditionAttackStartState();
+            transform.rotation = TurnRotation(transform.forward, new Vector3(0, 0, -1), m_turnAngle, m_turnSpeed);
         }
         else
         {
@@ -160,6 +173,7 @@ public class EnemyDragonController : BaseEnemy
 
         m_endPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z - 3);
 
+
         m_easingTimer = 0.0f;
     }
 
@@ -171,6 +185,8 @@ public class EnemyDragonController : BaseEnemy
             return;
         }
 
+        m_animator.SetFloat("moveSpeed", 0.5f);
+
         transform.position = Easing.SineInOut(m_easingTimer, 1.5f, m_startPosition, m_endPosition);
 
         m_easingTimer += Time.deltaTime;
@@ -181,12 +197,14 @@ public class EnemyDragonController : BaseEnemy
     {
         state = StateDra.Attack;
 
+        m_animator.SetTrigger("Attack");
+
         m_kariTimer = 2.5f;
     }
 
     private void ConditionAttackUpdate()
     {
-        if (m_kariTimer < 0.0f)
+        if (m_animator.GetCurrentAnimatorStateInfo(0).IsName("stand_by"))
         {
             ConditionAttackEndState();
             return;
@@ -210,6 +228,8 @@ public class EnemyDragonController : BaseEnemy
             return;
         }
 
+        m_animator.SetFloat("moveSpeed", 0.4f);
+
         transform.position = Easing.SineInOut(m_easingTimer, 1.5f, m_endPosition, m_startPosition);
 
         m_easingTimer += Time.deltaTime;
@@ -220,6 +240,7 @@ public class EnemyDragonController : BaseEnemy
     private void ConditionDeathState()
     {
         state = StateDra.Death;
+        m_animator.SetBool("Death",m_death);
     }
 
     private void ConditionDeathUpdate()
