@@ -48,6 +48,9 @@ public class EnemyBossController : MonoBehaviour
     // 鎌 投擢
     public GameObject sickleThrowing;
 
+    // 判定の円
+    public GameObject sickleJudgeImage;
+
     // 鎌大量生成時の距離感
     private float sickleRange = 4;
     private float interval = 0.5f;
@@ -66,6 +69,7 @@ public class EnemyBossController : MonoBehaviour
     // 直殴りしに来るとき用
     private float slashAngle = 0.0f;
     public float GetRadianSlashAngle() { return slashAngle * Mathf.Deg2Rad; }
+    public float GetSlashAngle() { return slashAngle; }
 
 
     // ボスダウン状態
@@ -174,8 +178,12 @@ public class EnemyBossController : MonoBehaviour
         GameObject child = transform.Find("CruiseMissile").gameObject;
 
         GameObject sl = Instantiate(sickleThrowing);
-        sl.transform.position = this.transform.TransformPoint(child.transform.localPosition);
+        //sl.transform.position = this.transform.TransformPoint(child.transform.localPosition);
         sl.transform.position =child.transform.position;
+
+        GameObject effect = Instantiate(sickleJudgeImage);
+        var attack = effect.GetComponent<CreatePointerController>();
+        attack.CreateTargetPointer(sl);
 
         weaponReflect = false;
     }
