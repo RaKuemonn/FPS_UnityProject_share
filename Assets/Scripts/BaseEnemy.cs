@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class BaseEnemy : MonoBehaviour
 {
+    // Še©‚Åİ’è
+    protected float m_hp;
+
     // –Ú“I’n
     protected Vector3 m_targetPosition;
     protected Vector3 m_territoryOrigin;

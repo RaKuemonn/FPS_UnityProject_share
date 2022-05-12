@@ -28,6 +28,7 @@ public class SickleThrowingController : MonoBehaviour
 
     private float slashAngle;
     public float GetRadianSlashAngle() { return slashAngle * Mathf.Deg2Rad; }
+    public float GetSlashAbgle() { return slashAngle; }
 
     // Start is called before the first frame update
     void Start()

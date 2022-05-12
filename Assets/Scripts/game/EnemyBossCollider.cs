@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class EnemyBossCollider : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject createPointer; // 的生成
+
     private GameObject targetObject;    // この当たり判定オブジェクトの影響先
 
     private Camera mainCamera;          // カメラ情報の参照用？
