@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: TutorialFloorDataTable
   m_EditorClassIdentifier: 
   FloorPrefab: {fileID: 3747946527924465562, guid: 70382942a8258214fa488fed22fa70de, type: 3}
-  floor_distance: 10
   FloorDatas:
   - id: 0
     move_speed_state: 0
@@ -70,6 +69,12 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   - id: 9
+    move_speed_state: 2
+    CondExprData: {fileID: 0}
+    CompleteFloorConditionExpr:
+      m_PersistentCalls:
+        m_Calls: []
+  - id: 10
     move_speed_state: 2
     CondExprData: {fileID: 0}
     CompleteFloorConditionExpr:
