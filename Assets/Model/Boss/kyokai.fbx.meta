@@ -1,9 +1,54 @@
 fileFormatVersion: 2
-guid: 7d495bd160fed914584e9a0a628efbda
+guid: e2ac773d0def577409750ac17d26cdec
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hashira_tex
+    second: {fileID: 2100000, guid: 8698fddf57aac50489fb853c6ebb7538, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: kyokai_kabe_tex
+    second: {fileID: 2100000, guid: ed5b0f495d14ac74db6a388f5c11d908, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert1
+    second: {fileID: 2100000, guid: cbb065e91f3551d45836b572ba374394, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: light_tex
+    second: {fileID: 2100000, guid: bdc324062f0c9d0488400122d3765a6f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mado_tex
+    second: {fileID: 2100000, guid: a3129e6238dc9784fa2ab1095030a649, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: moyo_tex
+    second: {fileID: 2100000, guid: 00fb1c28eda17b24fb1a0f0c98148230, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: orugan_hashira_tex
+    second: {fileID: 2100000, guid: c6bfc8e327131f14c9cc0ceaedbe6e9c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: orugan_tex
+    second: {fileID: 2100000, guid: 55639356b81e26c42a2b0415d0a6385f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ue_hashira_tex
+    second: {fileID: 2100000, guid: 88d218e78abcb1a48bc70bcd68a6815b, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
