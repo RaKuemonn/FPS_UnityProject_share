@@ -91,6 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursor_speed: 1280
+  SlashPrefab: {fileID: 6596319650293718587, guid: d72ceffd00a011347ad9d7c07bf714a7, type: 3}
 --- !u!114 &7157484242586144630
 MonoBehaviour:
   m_ObjectHideFlags: 0

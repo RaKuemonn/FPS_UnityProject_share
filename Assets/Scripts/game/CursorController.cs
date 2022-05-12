@@ -8,6 +8,8 @@ public class CursorController : MonoBehaviour
 {
     [SerializeField]
     private float cursor_speed = Screen.width;
+
+    [SerializeField] private GameObject SlashPrefab;
     
 
     private RectTransform rect;
@@ -148,18 +150,20 @@ public class CursorController : MonoBehaviour
             old_angle = degree;
 
             // Slash�̐���
-            GameObject obj = Instantiate((GameObject)Resources.Load("Slash"));
+            //GameObject obj = Instantiate((GameObject)Resources.Load("Slash"));
+            GameObject obj = Instantiate(SlashPrefab);
             var obj_rect = obj.GetComponent<RectTransform>();
             obj_rect.anchoredPosition   = new Vector2(transform.position.x, transform.position.y);
             obj_rect.eulerAngles        = new Vector3(0f, 0f, degree);
+            var local_scale = obj_rect.localScale;
+
             if (chain_kill_timer > 0f)
             {
-                obj_rect.localScale = new Vector3(6.0f * 1f, 0.07f, 1f);
+                obj_rect.localScale = local_scale;
             }
             else
             {
-                obj_rect.localScale = new Vector3(6.0f * 1f, 0.07f, 1f);
-                //obj_rect.localScale = new Vector3(10.0f * 0.5f, 0.1f, 1f);
+                obj_rect.localScale = new Vector3(2f * local_scale.x, 1f, 1f);
             }
             // �e�q�֌W�̐ݒ�
             obj.transform.SetParent(transform.parent);
