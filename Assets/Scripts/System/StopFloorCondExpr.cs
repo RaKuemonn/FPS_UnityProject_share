@@ -29,13 +29,14 @@ public class BooleanClass
 [Serializable]
 public abstract class BaseCondExpr : MonoBehaviour
 {
+    public BaseCondExprData data;
     public abstract void OnCompleteCondExpr(BooleanClass booleanClass);
 }
 
 [Serializable]
 public class CondExprTimer : BaseCondExpr
 {
-    [SerializeField, Range(0f, 100f)] public float idle_seconds = 3f;
+    //[SerializeField, Range(0f, 100f)] public float idle_seconds = 3f;
     public float timer;
 
     public void Start()
@@ -47,7 +48,7 @@ public class CondExprTimer : BaseCondExpr
     {
         timer += Time.deltaTime;
 
-        booleanClass.Boolean = (timer > idle_seconds);
+        booleanClass.Boolean = (timer > ((CondExprTimerData)data).idle_seconds);
     }
     
 }

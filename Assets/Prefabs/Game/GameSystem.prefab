@@ -45,6 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   floorDataTable: {fileID: 11400000, guid: 1964dea6754d8de499af1c14197ee667, type: 2}
+  playerStatus: {fileID: 11400000, guid: fd169fa6d1b87eb4dbe208dd2173dc4b, type: 2}
+  damageEffectTable: {fileID: 11400000, guid: f3aadada4c22398429b33bbe4489be7d, type: 2}
 --- !u!1001 &9179977549646777987
 PrefabInstance:
   m_ObjectHideFlags: 0

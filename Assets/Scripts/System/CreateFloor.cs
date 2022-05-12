@@ -12,12 +12,6 @@ public class CreateFloor : MonoBehaviour
     {
         var floorDataTable = masterData.FloorDataTable;
 
-        //var Floor = floorDataTable.Floor;
-        //var size = Floor.Length;
-        //for (int i = 0; i < size; ++i)
-        //{
-        //    Floor[i].GetComponent<FloorInfo>().FloorData.id = i;
-        //}
         
         var datas = floorDataTable.FloorDatas;
         GameObject floor = null;
@@ -31,9 +25,11 @@ public class CreateFloor : MonoBehaviour
                 floorInfo.FloorData = datas[i];
                 floorInfo.FloorData.id = i;     // idは要素順で設定される
 
+                // Debug 床ごとに色替え
                 var material = floor.GetComponent<Renderer>().material;
                 if (material)
                 {
+#if UNITY_EDITOR
                     switch (datas[i].move_speed_state)
                     {
                         case FloorInfoMoveSpeed.Stop:
@@ -55,19 +51,27 @@ public class CreateFloor : MonoBehaviour
                             material.color = new Color(120f, 0f, 120f, 1f);// 紫
                             break;
                     }
+#else
+                    material.color = new Color(0f,0f,0f,0f); // 透明
+#endif
                 }
                 
 
-                // 追加するコンポーネントの名前がしていされていれば
-                if (datas[i].CondExprName.Length <= 0) { continue; }
-                //if (datas[i].CondExprPrefab == null) { continue; }
+                // 追加するコンポーネントデータがあれば
+                if (datas[i].CondExprData)
+                {
+                    // Floorにコンポーネント(BaseComdExprを継承したものに限る)を追加して
+                    var component = (BaseCondExpr)floor.AddComponent(
+                        Type.GetType(datas[i].CondExprData.CondExprComponentName())
+                    );
 
-                // Floorにコンポーネント(BaseComdExprを継承したものに限る)を追加して
-                var component = (BaseCondExpr)floor.AddComponent(Type.GetType(datas[i].CondExprName));
-                //var component = (BaseCondExpr)floor.AddComponent(datas[i].CondExprPrefab.GetType());
-                // FloorのUnityEventとしてコンポーネントの関数を追加する。
-                floorInfo.FloorData.CompleteFloorConditionExpr.AddListener(component.OnCompleteCondExpr);
-                
+                    // 該当データの参照を渡す
+                    component.data = datas[i].CondExprData;
+
+                    // FloorのUnityEventとしてコンポーネントの関数を追加する。
+                    floorInfo.FloorData.CompleteFloorConditionExpr.AddListener(component.OnCompleteCondExpr);
+                }
+
             }
 
             floor.transform.SetParent(Enviroments);
