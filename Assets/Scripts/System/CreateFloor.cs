@@ -52,6 +52,7 @@ public class CreateFloor : MonoBehaviour
                             break;
                     }
 #else
+                    // ゲーム時は見えないようにする
                     material.color = new Color(0f,0f,0f,0f); // 透明
 #endif
                 }
@@ -74,6 +75,7 @@ public class CreateFloor : MonoBehaviour
 
             }
 
+            // Enviromentsゲームオブジェクトを親にする
             floor.transform.SetParent(Enviroments);
         }
 
