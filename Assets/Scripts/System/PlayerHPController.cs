@@ -90,11 +90,13 @@ public class PlayerHPController : MonoBehaviour
             redGaugeTween.Kill();
         }
 
+
         // 赤ゲージ減少
         redGaugeTween = DOTween.To(
             () => valueFrom,    // 何に
             x => {         // 何を
-                hpBarRed.fillAmount = x;
+                if (hpBarRed)
+                {hpBarRed.fillAmount = x;}
             },
             valueTo,        // 目標値
             time    // 書ける時間
