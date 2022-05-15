@@ -1974,6 +1974,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TutorialSystem
       objectReference: {fileID: 0}
+    - target: {fileID: 9062043526878960180, guid: 92933c80ceffbfc498003489ba3b1580, type: 3}
+      propertyPath: m_TagString
+      value: SceneSystem
+      objectReference: {fileID: 0}
     - target: {fileID: 9062043526878960186, guid: 92933c80ceffbfc498003489ba3b1580, type: 3}
       propertyPath: m_RootOrder
       value: 4

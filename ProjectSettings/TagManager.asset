@@ -12,6 +12,7 @@ TagManager:
   - Weapon
   - Dragon
   - BattleArea
+  - SceneSystem
   layers:
   - Default
   - TransparentFX

@@ -18,6 +18,8 @@ public class EnemyCollide : MonoBehaviour
     
     private GameObject player;          // プレイヤーの位置参照用 (距離を計算するため)
 
+    private PlayerStatus playerStatus;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +30,8 @@ public class EnemyCollide : MonoBehaviour
         canvas_rect = GameObject.Find("Canvas").GetComponent<RectTransform>();
         
         player = GameObject.FindGameObjectWithTag("Player");
+
+        playerStatus = GameObject.FindGameObjectWithTag("SceneSystem").GetComponent<MasterData>().PlayerStatus;
     }
 
     // Update is called once per frame
@@ -107,8 +111,11 @@ public class EnemyCollide : MonoBehaviour
     {
         if (damage_timer > 0f) return;
 
+        // TODO : Debug これ変更する (いったんコメントアウト)
         // 持っているmaterialの色が赤ではなく緑になっていたら
-        if (targetObject.GetComponent<Renderer>().material.color.r > 0f) return;
+        //if (targetObject.GetComponent<Renderer>().material.color.r > 0f) return;
+        if(InSwordArea() == false) return;
+
 
         if (collider.gameObject.tag != "Slash") return;
         collider.gameObject.GetComponent<BoxCollider2D>().enabled = false;
@@ -129,7 +136,7 @@ public class EnemyCollide : MonoBehaviour
         
 
         // 切断する処理   TODO : EnemyControllerコンポーネント内に記述を移すのもあり。
-        if(true/* 条件式を記述　例:体力が0以下ならとか */)
+        if(false/* 条件式を記述　例:体力が0以下ならとか */)
         {
 
             Vector3 normal;
@@ -167,6 +174,14 @@ public class EnemyCollide : MonoBehaviour
             ObjectCutted(result.copy_normalside, false, impulse_copy);
             ObjectCutted(result.original_anitiNormalside, true, impulse_copy * -1.0f);
         }
+        else
+        {
+            // 下のObjectCutted関数からコピペしたテスト用処理
+            const float const_destroy_time = 0.5f;
+            // ScarecrowはEnemyControllerを持たない
+            //targetObject.GetComponent<EnemyController>().SetCutPerformance(false, new Vector3(0f,0f,0f));
+            Destroy(targetObject, const_destroy_time);
+        }
         
     }
 
@@ -181,5 +196,13 @@ public class EnemyCollide : MonoBehaviour
         const float const_destroy_time = 0.5f;
         Destroy(object_, const_destroy_time);
 
+    }
+
+    private bool InSwordArea()
+    {
+        var distance = Vector3.Distance(player.transform.position, targetObject.transform.position);
+        var sword_area_radius = playerStatus.sword_area_radius;
+
+        return (distance <= sword_area_radius);
     }
 }

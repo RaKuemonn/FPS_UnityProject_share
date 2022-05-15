@@ -14,26 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FloorPrefab: {fileID: 3747946527924465562, guid: 70382942a8258214fa488fed22fa70de, type: 3}
   FloorDatas:
-  - id: 10
+  - id: 0
     move_speed_state: 3
     CondExprData: {fileID: 0}
     CompleteFloorConditionExpr:
       m_PersistentCalls:
         m_Calls: []
-  - id: 0
+  - id: 1
     move_speed_state: 0
     CondExprData: {fileID: 11400000, guid: ad1c68016b8f41343bc82f3e035b04cb, type: 2}
     CompleteFloorConditionExpr:
       m_PersistentCalls:
         m_Calls: []
-  - id: 1
-    move_speed_state: 1
-    CondExprData: {fileID: 0}
-    CompleteFloorConditionExpr:
-      m_PersistentCalls:
-        m_Calls: []
   - id: 2
-    move_speed_state: 2
+    move_speed_state: 1
     CondExprData: {fileID: 0}
     CompleteFloorConditionExpr:
       m_PersistentCalls:
@@ -45,25 +39,25 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   - id: 4
-    move_speed_state: 3
+    move_speed_state: 2
     CondExprData: {fileID: 0}
     CompleteFloorConditionExpr:
       m_PersistentCalls:
         m_Calls: []
   - id: 5
-    move_speed_state: 0
-    CondExprData: {fileID: 11400000, guid: 1e541a5826ca76740961e8c4f93bc5f5, type: 2}
-    CompleteFloorConditionExpr:
-      m_PersistentCalls:
-        m_Calls: []
-  - id: 6
-    move_speed_state: 1
+    move_speed_state: 3
     CondExprData: {fileID: 0}
     CompleteFloorConditionExpr:
       m_PersistentCalls:
         m_Calls: []
+  - id: 6
+    move_speed_state: 0
+    CondExprData: {fileID: 11400000, guid: 84cc223bd04e5f74c83079bdcc635dd8, type: 2}
+    CompleteFloorConditionExpr:
+      m_PersistentCalls:
+        m_Calls: []
   - id: 7
-    move_speed_state: 2
+    move_speed_state: 1
     CondExprData: {fileID: 0}
     CompleteFloorConditionExpr:
       m_PersistentCalls:
@@ -81,6 +75,12 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   - id: 10
+    move_speed_state: 2
+    CondExprData: {fileID: 0}
+    CompleteFloorConditionExpr:
+      m_PersistentCalls:
+        m_Calls: []
+  - id: 11
     move_speed_state: 2
     CondExprData: {fileID: 0}
     CompleteFloorConditionExpr:
