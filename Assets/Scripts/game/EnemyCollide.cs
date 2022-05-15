@@ -111,18 +111,20 @@ public class EnemyCollide : MonoBehaviour
     {
         if (damage_timer > 0f) return;
 
-        // TODO : Debug これ変更する (いったんコメントアウト)
-        // 持っているmaterialの色が赤ではなく緑になっていたら
-        //if (targetObject.GetComponent<Renderer>().material.color.r > 0f) return;
-        if(InSwordArea() == false) return;
+        // 敵当たり判定に当たったオブジェクトは Slashか
+        if (collider.tag != "Slash") return;
+        
+        // 間合いに入っているか
+        if (InSwordArea() == false) return;
 
-
-        if (collider.gameObject.tag != "Slash") return;
+        // Slashの当たり判定がこれ以上効かないようにする
         collider.gameObject.GetComponent<BoxCollider2D>().enabled = false;
 
 
-        Debug.Log("slash hit");
 
+#if UNITY_EDITOR
+        Debug.Log("slash hit");
+#endif
 
 
         // 無敵時間の設定

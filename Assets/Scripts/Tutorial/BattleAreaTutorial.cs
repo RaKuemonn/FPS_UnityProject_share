@@ -5,15 +5,13 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider))]
 public class BattleAreaTutorial : MonoBehaviour
 {
-    [SerializeField] private ScarecrowControl scarecrowControl;
-    
     private List<Collider> enemyColliders = new List<Collider>();
 
     void OnTriggerEnter(Collider collider)
     {
         if (collider.tag == "Player")
         {
-            scarecrowControl?.OnEnterBattleArea();
+            CallBack_Scarecrow();
         }
 
         if (collider.tag == "Enemy")
@@ -58,6 +56,18 @@ public class BattleAreaTutorial : MonoBehaviour
     public int InAreaEnemySize()
     {
         return enemyColliders.Count;
+    }
+
+    private void CallBack_Scarecrow()
+    {
+        foreach (var collider in enemyColliders)
+        {
+            var control = collider?.gameObject.GetComponent<ScarecrowControl>();
+
+            if (!control) continue;
+
+            control.OnEnterBattleArea();
+        }
     }
 }
 
