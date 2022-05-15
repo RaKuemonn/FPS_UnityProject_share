@@ -75,9 +75,10 @@ public class ScarecrowControl : BaseEnemy
     {
         if (m_battleFlag/* ˆê‰ñ‚¾‚¯UŒ‚ƒXƒe[ƒg‚Ö‘JˆÚ */)
         {
-            if (m_enter_battle_area && (m_idleTimer > m_idleTimeMax)) { ConditionAttackStartState(); }
-
-            transform.rotation = TurnRotation(transform.forward, new Vector3(0, 0, -1), m_turnAngle, m_turnSpeed);
+            if (m_enter_battle_area && (m_idleTimer > m_idleTimeMax))
+            {
+                ConditionAttackStartState();
+            }
         }
 
         m_idleTimer += Time.deltaTime;
