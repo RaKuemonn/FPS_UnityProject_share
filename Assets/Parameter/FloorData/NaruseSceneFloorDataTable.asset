@@ -13,65 +13,65 @@ MonoBehaviour:
   m_Name: NaruseSceneFloorDataTable
   m_EditorClassIdentifier: 
   FloorPrefab: {fileID: 5729469770362847602, guid: 864818bcf8d0d6140b85f2f19035c37e, type: 3}
-  floor_distance: 10
+  BattleAreaPrefab: {fileID: 5653779070594544327, guid: f6423b59c88846e4ab0fb777adccaac0, type: 3}
   FloorDatas:
   - id: 0
     move_speed_state: 0
-    CondExprName: CondExprTimer
+    CondExprData: {fileID: 0}
     CompleteFloorConditionExpr:
       m_PersistentCalls:
         m_Calls: []
   - id: 1
     move_speed_state: 1
-    CondExprName: 
+    CondExprData: {fileID: 0}
     CompleteFloorConditionExpr:
       m_PersistentCalls:
         m_Calls: []
   - id: 2
     move_speed_state: 2
-    CondExprName: 
+    CondExprData: {fileID: 0}
     CompleteFloorConditionExpr:
       m_PersistentCalls:
         m_Calls: []
   - id: 3
     move_speed_state: 2
-    CondExprName: 
+    CondExprData: {fileID: 0}
     CompleteFloorConditionExpr:
       m_PersistentCalls:
         m_Calls: []
   - id: 4
     move_speed_state: 3
-    CondExprName: 
+    CondExprData: {fileID: 0}
     CompleteFloorConditionExpr:
       m_PersistentCalls:
         m_Calls: []
   - id: 5
     move_speed_state: 0
-    CondExprName: CondExprTimer
+    CondExprData: {fileID: 0}
     CompleteFloorConditionExpr:
       m_PersistentCalls:
         m_Calls: []
   - id: 6
     move_speed_state: 1
-    CondExprName: 
+    CondExprData: {fileID: 0}
     CompleteFloorConditionExpr:
       m_PersistentCalls:
         m_Calls: []
   - id: 7
     move_speed_state: 3
-    CondExprName: 
+    CondExprData: {fileID: 0}
     CompleteFloorConditionExpr:
       m_PersistentCalls:
         m_Calls: []
   - id: 0
     move_speed_state: 0
-    CondExprName: CondExprTimer
+    CondExprData: {fileID: 0}
     CompleteFloorConditionExpr:
       m_PersistentCalls:
         m_Calls: []
   - id: 0
     move_speed_state: 1
-    CondExprName: 
+    CondExprData: {fileID: 0}
     CompleteFloorConditionExpr:
       m_PersistentCalls:
         m_Calls: []

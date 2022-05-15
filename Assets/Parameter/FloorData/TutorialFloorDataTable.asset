@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: TutorialFloorDataTable
   m_EditorClassIdentifier: 
   FloorPrefab: {fileID: 3747946527924465562, guid: 70382942a8258214fa488fed22fa70de, type: 3}
+  BattleAreaPrefab: {fileID: 5653779070594544327, guid: f6423b59c88846e4ab0fb777adccaac0, type: 3}
   FloorDatas:
   - id: 0
     move_speed_state: 3

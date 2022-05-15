@@ -19,8 +19,13 @@ public class CreateFloor : MonoBehaviour
         int size = floorDataTable.FloorDatas.Length;
         for (int i = 0; i < size; ++i)
         {
-            floor = Instantiate(floorDataTable.FloorPrefab, new Vector3(0f, 0f, 10f * i), Quaternion.identity);
+            var position = new Vector3(0f, 0f, 10f * i);
+
+            floor = Instantiate(floorDataTable.FloorPrefab, position, Quaternion.identity);
             {
+                // Enviromentsゲームオブジェクトを親にする
+                floor.transform.SetParent(Enviroments);
+
                 var floorInfo = floor.GetComponent<FloorInfo>();
                 floorInfo.FloorData = datas[i];
                 floorInfo.FloorData.id = i;     // idは要素順で設定される
@@ -61,6 +66,13 @@ public class CreateFloor : MonoBehaviour
                 // 追加するコンポーネントデータがあれば
                 if (datas[i].CondExprData)
                 {
+                    // 条件があるのは Stop床のみなので同時にBattleAreaも生成する (同じ位置)
+                    var battlArea = Instantiate(floorDataTable.BattleAreaPrefab, position, Quaternion.identity);
+
+                    // Enviromentsゲームオブジェクトを親にする
+                    battlArea.transform.SetParent(Enviroments);
+
+
                     // Floorにコンポーネント(BaseComdExprを継承したものに限る)を追加して
                     var component = (BaseCondExpr)floor.AddComponent(
                         Type.GetType(datas[i].CondExprData.CondExprComponentName())
@@ -75,8 +87,6 @@ public class CreateFloor : MonoBehaviour
 
             }
 
-            // Enviromentsゲームオブジェクトを親にする
-            floor.transform.SetParent(Enviroments);
         }
 
     }

@@ -5,19 +5,24 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider))]
 public class BattleAreaTutorial : MonoBehaviour
 {
+    // BattleAreaオブジェクトに存在している敵の総数確認用リスト　(自動更新される)
     private List<Collider> enemyColliders = new List<Collider>();
 
     void OnTriggerEnter(Collider collider)
     {
         if (collider.tag == "Player")
         {
-            CallBack_Scarecrow();
+            // このBattleAreaゲームオブジェクト内にいる
+            // 全Enemyに通知を出す。
+            // 敵(案山子しか設定してない)は戦闘体制になる。
+            CallBack_AllScarecrows();
         }
 
         if (collider.tag == "Enemy")
         {
-            // 入っている敵を追加している (が、同じ敵を入れる可能性がありそう...)
-
+            // BattleAreaゲームオブジェクト内に入っている敵を追加している
+            // (が、同じ敵を入れる可能性がありそう...)
+            // (一回入った敵がBattleAreaから出ることがないようにしておけば問題ない。)
 
             enemyColliders.Add(collider);
         }
@@ -58,7 +63,7 @@ public class BattleAreaTutorial : MonoBehaviour
         return enemyColliders.Count;
     }
 
-    private void CallBack_Scarecrow()
+    private void CallBack_AllScarecrows()
     {
         foreach (var collider in enemyColliders)
         {
