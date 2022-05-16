@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: PlayerStatus
   m_EditorClassIdentifier: 
   max_hp: 100
-  current_hp: 100
+  current_hp: 40
+  sword_area_radius: 4

@@ -36,7 +36,6 @@ public abstract class BaseCondExpr : MonoBehaviour
 [Serializable]
 public class CondExprTimer : BaseCondExpr
 {
-    //[SerializeField, Range(0f, 100f)] public float idle_seconds = 3f;
     public float timer;
 
     public void Start()
@@ -51,4 +50,70 @@ public class CondExprTimer : BaseCondExpr
         booleanClass.Boolean = (timer > ((CondExprTimerData)data).idle_seconds);
     }
     
+}
+
+[Serializable]
+public class CondExprAllKill : BaseCondExpr
+{
+    void Start()
+    {
+        var id_ten_times = gameObject.GetComponent<FloorInfo>().FloorData.id * 10;
+        var areas = GameObject.FindGameObjectsWithTag("BattleArea");
+
+        // 床と同じ位置にBattleAreaが存在するはずなので、それを探す
+        foreach (var area in areas)
+        {
+            if((int)(area.transform.position.z) != id_ten_times /* idとワールド座標z軸の10の位が一緒なら */)
+            { continue;}
+
+            ((CondExprAllKillData)data).battleArea = area.GetComponent<BattleAreaTutorial>();
+            break;
+        }
+        
+    }
+    
+    public override void OnCompleteCondExpr(BooleanClass booleanClass)
+    {
+        var size = ((CondExprAllKillData)data).battleArea?.InAreaEnemySize();
+
+        booleanClass.Boolean = (size <= 0);
+    }
+
+}
+
+
+
+[Serializable]
+public class CondExprEndExplanation : BaseCondExpr
+{
+    private bool m_end_flag = false;
+
+    void Start()
+    {
+        // コールバック関数を該当オブジェクトに登録して、条件の真偽を決定させる。
+        // UnityEvent.AddListener(OnEndExplanation);
+        var component = GameObject
+            .FindGameObjectWithTag("MessageRenderer")
+            .GetComponent<MessageRendererControl>();
+
+        component
+            .CallBackCondExprEndExplanation
+            .AddListener(OnEndExplanation);
+
+
+    }
+
+    public override void OnCompleteCondExpr(BooleanClass booleanClass)
+    {
+        booleanClass.Boolean = m_end_flag;
+    }
+
+    public void OnEndExplanation()
+    {
+        m_end_flag = true;
+
+        var component = GameObject
+            .FindGameObjectWithTag("MessageRenderer")
+            .GetComponent<MessageRendererControl>();
+    }
 }

@@ -11,6 +11,9 @@ TagManager:
   - EnemyCollide
   - Weapon
   - Dragon
+  - BattleArea
+  - SceneSystem
+  - MessageRenderer
   layers:
   - Default
   - TransparentFX
