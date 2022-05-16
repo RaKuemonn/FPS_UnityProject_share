@@ -13,6 +13,7 @@ TagManager:
   - Dragon
   - BattleArea
   - SceneSystem
+  - MessageRenderer
   layers:
   - Default
   - TransparentFX

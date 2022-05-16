@@ -92,6 +92,15 @@ public class CondExprEndExplanation : BaseCondExpr
     {
         // コールバック関数を該当オブジェクトに登録して、条件の真偽を決定させる。
         // UnityEvent.AddListener(OnEndExplanation);
+        var component = GameObject
+            .FindGameObjectWithTag("MessageRenderer")
+            .GetComponent<MessageRendererControl>();
+
+        component
+            .CallBackCondExprEndExplanation
+            .AddListener(OnEndExplanation);
+
+
     }
 
     public override void OnCompleteCondExpr(BooleanClass booleanClass)
@@ -102,5 +111,9 @@ public class CondExprEndExplanation : BaseCondExpr
     public void OnEndExplanation()
     {
         m_end_flag = true;
+
+        var component = GameObject
+            .FindGameObjectWithTag("MessageRenderer")
+            .GetComponent<MessageRendererControl>();
     }
 }
