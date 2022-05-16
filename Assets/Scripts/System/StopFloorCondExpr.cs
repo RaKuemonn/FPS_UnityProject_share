@@ -80,3 +80,27 @@ public class CondExprAllKill : BaseCondExpr
     }
 
 }
+
+
+
+[Serializable]
+public class CondExprEndExplanation : BaseCondExpr
+{
+    private bool m_end_flag = false;
+
+    void Start()
+    {
+        // コールバック関数を該当オブジェクトに登録して、条件の真偽を決定させる。
+        // UnityEvent.AddListener(OnEndExplanation);
+    }
+
+    public override void OnCompleteCondExpr(BooleanClass booleanClass)
+    {
+        booleanClass.Boolean = m_end_flag;
+    }
+
+    public void OnEndExplanation()
+    {
+        m_end_flag = true;
+    }
+}
