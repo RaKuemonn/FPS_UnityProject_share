@@ -19,8 +19,10 @@ public class EnemyBatController : BaseEnemy
     private Vector3 m_startPosition;
     private Vector3 m_endPosition;
 
+    private Animator m_animator;
 
-    private enum StateBat
+
+    public enum StateBat
     {
         Wander,        // プレイヤーがくるまで徘徊
         BattlePreparation, // 戦闘位置に移動
@@ -31,10 +33,13 @@ public class EnemyBatController : BaseEnemy
         Death,           // 死亡
     };
     private StateBat state = StateBat.Idle;
+    public StateBat GetState() { return state; }
 
     // Start is called before the first frame update
     void Start()
     {
+        m_animator = GetComponent<Animator>();
+
         m_territoryOrigin = transform.position;
     }
 
@@ -59,7 +64,8 @@ public class EnemyBatController : BaseEnemy
             case StateBat.Death: ConditionDeathUpdate(); break;
         };
 
-        Debug.Log(state);
+        if (m_death) ConditionDeathState();
+
     }
 
     // 徘徊
@@ -75,6 +81,8 @@ public class EnemyBatController : BaseEnemy
 
     private void ConditionWanderUpdate()
     {
+        m_animator.SetFloat("Move", 0.7f);
+
         // 集合がかかったら集まる
         if (m_assemblyFlag)
         {
@@ -83,11 +91,16 @@ public class EnemyBatController : BaseEnemy
             return;
         }
 
+
+
         var dir = m_targetPosition - transform.position;
+        dir.Normalize();
         dir *= m_moveSpeed * Time.deltaTime;
-        transform.position = new Vector3(dir.x + transform.position.x, transform.position.y, transform.position.z + dir.z);
+        if (Turn(dir)) transform.position = new Vector3(dir.x + transform.position.x, transform.position.y, transform.position.z + dir.z);
 
         dir = m_targetPosition - transform.position;
+
+
 
         // 目的地に着いたら待機
         var lengthSq = dir.x * dir.x + dir.y * dir.y + dir.z * dir.z;
@@ -102,10 +115,12 @@ public class EnemyBatController : BaseEnemy
 
     private void ConditionBattlePreparationUpdate()
     {
+        m_animator.SetFloat("Move", 0.7f);
+
         var dir = m_locationPosition - transform.position;
         dir.Normalize();
         dir *= m_moveSpeed * Time.deltaTime;
-        transform.position = new Vector3(dir.x + transform.position.x, transform.position.y, transform.position.z + dir.z);
+        if (Turn(dir)) transform.position = new Vector3(dir.x + transform.position.x, transform.position.y, transform.position.z + dir.z);
 
         dir = m_locationPosition - transform.position;
 
@@ -128,6 +143,9 @@ public class EnemyBatController : BaseEnemy
 
     private void ConditionIdleUpdate()
     {
+        m_animator.SetFloat("Move", 0.0f);
+
+
         // 集合がかかったら集まる
         if (m_assemblyFlag)
         {
@@ -140,6 +158,7 @@ public class EnemyBatController : BaseEnemy
         if (m_battleFlag)
         {
             if (m_idleTimer > m_idleTimeMax) ConditionAttackStartState();
+            Turn(new Vector3(0, 0, -1));
         }
         else
         {
@@ -169,6 +188,8 @@ public class EnemyBatController : BaseEnemy
             return;
         }
 
+        m_animator.SetFloat("Move", 0.5f);
+
         transform.position = Easing.SineInOut(m_easingTimer, 1.5f, m_startPosition, m_endPosition);
 
         m_easingTimer += Time.deltaTime;
@@ -178,17 +199,19 @@ public class EnemyBatController : BaseEnemy
     private void ConditionAttackState()
     {
         state = StateBat.Attack;
+        m_animator.SetTrigger("Attack");
 
         m_kariTimer = 2.5f;
     }
 
     private void ConditionAttackUpdate()
     {
-        if (m_kariTimer < 0.0f)
+        if (m_animator.GetCurrentAnimatorStateInfo(0).IsName("stand_by"))
         {
             ConditionAttackEndState();
             return;
         }
+
 
         m_kariTimer -= Time.deltaTime;
     }
@@ -202,6 +225,9 @@ public class EnemyBatController : BaseEnemy
 
     private void ConditionAttackEndUpdate()
     {
+        m_animator.SetFloat("Move", 0.4f);
+
+
         if (m_easingTimer > 1.5f)
         {
             ConditionIdleState();
@@ -219,6 +245,8 @@ public class EnemyBatController : BaseEnemy
     {
         state = StateBat.Death;
         m_kariTimer = 0.0f;
+        m_animator.SetBool("Death", m_death);
+
     }
 
     private void ConditionDeathUpdate()

@@ -351,7 +351,7 @@ GameObject:
   - component: {fileID: 1500182471943554173}
   m_Layer: 0
   m_Name: koumori
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -385,7 +385,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d1af919b63ca52488c192aa9723c6c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_moveSpeed: 1
+  m_moveSpeed: 2
   m_idleTimeMax: 5
 --- !u!95 &1500182471943554173
 Animator:

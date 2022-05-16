@@ -549,7 +549,7 @@ GameObject:
   - component: {fileID: 6438706076105533671}
   m_Layer: 0
   m_Name: doragon
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -563,7 +563,7 @@ Transform:
   m_GameObject: {fileID: 6168674603379083785}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
   - {fileID: 5056492293516319886}
   - {fileID: 3820341763883557197}
@@ -601,7 +601,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36424547f3be9b34b80a5e024d615040, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_moveSpeed: 1
+  m_moveSpeed: 2
   m_idleTimeMax: 5
 --- !u!1 &6513375450218546685
 GameObject:
