@@ -67,7 +67,7 @@ public class BattleAreaTutorial : MonoBehaviour
     {
         foreach (var collider in enemyColliders)
         {
-            var control = collider?.gameObject.GetComponent<ScarecrowControl>();
+            var control = collider?.gameObject.GetComponent<ScarecrowMovingControl>();
 
             if (!control) continue;
 

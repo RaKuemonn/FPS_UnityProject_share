@@ -55,6 +55,11 @@ public class EnemyCollide : MonoBehaviour
         UpdateCollisionCircleSize();
     }
 
+    public void SetTarget(GameObject target)
+    {
+        targetObject = target;
+    }
+
     private void UpdatePosition()
     {
         if (targetObject == null) return;
@@ -100,11 +105,6 @@ public class EnemyCollide : MonoBehaviour
         // é©ï™é©êgÇ‡è¡Ç∑
         Destroy(gameObject);
         return true;
-    }
-
-    public void SetTarget(GameObject target)
-    {
-        targetObject = target;
     }
 
     private void OnTriggerEnter2D(Collider2D collider)

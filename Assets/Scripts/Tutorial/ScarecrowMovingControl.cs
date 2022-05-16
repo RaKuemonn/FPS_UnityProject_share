@@ -2,15 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScarecrowControl : BaseEnemy
+public class ScarecrowMovingControl : BaseEnemy
 {
-
-    [SerializeField]
-    private float m_idleTimeMax;
+    [SerializeField] private float m_idleTimeMax;
 
     private float m_idleTimer = 0.0f;
 
-    private bool m_first_condition_idle_state = false;  // ˆê‰ñ–Ú‚ÌConditionIdleState()‚Å‚Ì‚ÝŽÀs
+    private bool m_first_condition_idle_state = false; // ˆê‰ñ–Ú‚ÌConditionIdleState()‚Å‚Ì‚ÝŽÀs
 
     private bool m_enter_battle_area = false;
 
@@ -19,13 +17,14 @@ public class ScarecrowControl : BaseEnemy
 
     private Vector3 m_startPosition;
     private Vector3 m_endPosition;
-    
+
     private enum StateScarecrow
     {
-        Idle,               // ‘Ò‹@
+        Idle, // ‘Ò‹@
         AttackStart, // UŒ‚ŠJŽn
-        Death,           // Ž€–S
+        Death, // Ž€–S
     };
+
     private StateScarecrow state = StateScarecrow.Idle;
 
     // Start is called before the first frame update
@@ -33,6 +32,7 @@ public class ScarecrowControl : BaseEnemy
     {
         m_territoryOrigin = transform.position;
 
+        // ‘Ò‹@ó‘Ô‚ÉÝ’è
         ConditionIdleState();
 
         // “–‚½‚è”»’è‚Ì¶¬
@@ -45,26 +45,34 @@ public class ScarecrowControl : BaseEnemy
         switch (state)
         {
             // ‘Ò‹@
-            case StateScarecrow.Idle: ConditionIdleUpdate(); break;
+            case StateScarecrow.Idle:
+                ConditionIdleUpdate();
+                break;
             // UŒ‚ŠJŽn
-            case StateScarecrow.AttackStart: ConditionAttackStartUpdate(); break;
+            case StateScarecrow.AttackStart:
+                ConditionAttackStartUpdate();
+                break;
             // Ž€–S
-            case StateScarecrow.Death: ConditionDeathUpdate(); break;
-        };
+            case StateScarecrow.Death:
+                ConditionDeathUpdate();
+                break;
+        }
+
+        ;
 
         if (m_death) ConditionDeathState();
 
         //Debug.Log(state);
     }
-    
+
     // ‘Ò‹@
     private void ConditionIdleState()
     {
         state = StateScarecrow.Idle;
-        
+
         m_idleTimer = 0.0f;
 
-        if (m_first_condition_idle_state == false)  // ˆê‰ñ‚Ì‚ÝŽÀs
+        if (m_first_condition_idle_state == false) // ˆê‰ñ‚Ì‚ÝŽÀs
         {
             m_first_condition_idle_state = true;
             m_battleFlag = true;
@@ -73,7 +81,7 @@ public class ScarecrowControl : BaseEnemy
 
     private void ConditionIdleUpdate()
     {
-        if (m_battleFlag/* ˆê‰ñ‚¾‚¯UŒ‚ƒXƒe[ƒg‚Ö‘JˆÚ */)
+        if (m_battleFlag /* ˆê‰ñ‚¾‚¯UŒ‚ƒXƒe[ƒg‚Ö‘JˆÚ */)
         {
             if (m_enter_battle_area && (m_idleTimer > m_idleTimeMax))
             {
@@ -107,13 +115,13 @@ public class ScarecrowControl : BaseEnemy
             ConditionIdleState();
             return;
         }
-        
+
         // ‹ß‚Ã‚­
         transform.position = Easing.SineInOut(m_easingTimer, 1.5f, m_startPosition, m_endPosition);
 
         m_easingTimer += Time.deltaTime;
     }
-    
+
     // Ž€–S
     private void ConditionDeathState()
     {
