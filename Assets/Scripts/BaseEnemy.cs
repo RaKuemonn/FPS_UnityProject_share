@@ -8,7 +8,7 @@ public class BaseEnemy : MonoBehaviour
     protected float m_hp;
 
     // ù‰ñ
-    protected float m_turnAngle = 5.0f;
+    protected float m_turnAngle = 1.0f;
     protected float m_turnSpeed = 3.0f;
 
     // –Ú“I’n
@@ -51,23 +51,40 @@ public class BaseEnemy : MonoBehaviour
         m_targetPosition.z = m_territoryOrigin.z + Mathf.Cos(theta) * range;
     }
 
-    protected Quaternion TurnRotation(Vector3 forward, Vector3 dir, float turnAngle, float angularSpeed)
+    protected void TurnRotation(Vector3 vec)
     {
-        var forward_ = forward;
-        var dir_ = dir;
-
-        dir_.y = forward_.y = 0.0f;
-        float angle = Vector3.Angle(dir_.normalized, forward_.normalized);
-
-        Quaternion rotation = Quaternion.LookRotation(forward_.normalized);
-
-        // Šp“x‚ªˆê’èˆÈã‚È‚çù‰ñ
-        if (angle > turnAngle)
+        // ©•ª‚ÌŒü‚¢‚Ä‚¢‚é•ûŒü‚©‚ç“G‚Ì•ûŒü‚Ü‚Å‚ÌŠp“x‚ğZo‚·‚é
+        var dir = transform.forward;
+        dir.y = vec.y = 0.0f;
+        dir.Normalize();
+        vec.Normalize();
+        float angle = Vector3.Angle(dir, vec);
+        // Šp“x‚ªˆê’èˆÈã‚Ìê‡‚Íù‰ñ‚·‚é
+        if (angle > m_turnAngle)
         {
-            Quaternion rotation2 = Quaternion.LookRotation(dir_.normalized);
-            rotation = Quaternion.RotateTowards(rotation, rotation2, angularSpeed  * Time.deltaTime);
+            Quaternion rotation = Quaternion.LookRotation(vec);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, m_turnSpeed * Time.deltaTime);
+            Debug.Log(transform.rotation);
+        }
+    }
+
+    protected bool Turn(Vector3 vec)
+    {
+        bool check = false;
+
+        // ©•ª‚ÌŒü‚¢‚Ä‚¢‚é•ûŒü‚©‚ç“G‚Ì•ûŒü‚Ü‚Å‚ÌŠp“x‚ğZo‚·‚é
+        var dir = transform.forward;
+        dir.y = vec.y = 0.0f;
+        float angle = Vector3.Angle(dir, vec);
+        // Šp“x‚ªˆê’èˆÈã‚Ìê‡‚ÍOK
+        if (angle < m_turnAngle)
+        {
+            check = true;
         }
 
-        return rotation;
+        var rotate = Quaternion.LookRotation(vec);
+        transform.rotation = Quaternion.LerpUnclamped(transform.rotation, rotate, 0.01f);
+
+        return check;
     }
 }

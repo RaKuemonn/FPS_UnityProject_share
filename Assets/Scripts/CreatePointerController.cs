@@ -24,5 +24,6 @@ public class CreatePointerController : MonoBehaviour
 
         var enemyAttack = obj.GetComponent<EnemyAttackPrudir>();
         enemyAttack.m_gameObject = gameObject;
+
     }
 }

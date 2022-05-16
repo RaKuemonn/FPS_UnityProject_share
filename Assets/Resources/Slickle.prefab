@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 8744390365729276841}
   - component: {fileID: 2759040632788359148}
   - component: {fileID: 5569893251590231917}
-  - component: {fileID: -6539935503959826975}
   m_Layer: 0
   m_Name: Slickle
   m_TagString: Untagged
@@ -113,16 +112,3 @@ MonoBehaviour:
   moveSpeed: 5
   player: {fileID: 7790357534801836031, guid: 4065b0a3a50481b408a227796b93b138, type: 3}
   boss: {fileID: 80165577675343467, guid: 6ffc682f938fd3a479c5f8f573fe5f8c, type: 3}
---- !u!114 &-6539935503959826975
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4014675016919056578}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b68fed4ca1b4a349b73636f2c98872d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  toleranceLevel: 0.2

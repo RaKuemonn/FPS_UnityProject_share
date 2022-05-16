@@ -31,6 +31,8 @@ public class SickleController : MonoBehaviour
     void Start()
     {
         slashAngle = Random.Range(0.0f, 360.0f);
+
+
     }
 
     // Update is called once per frame
@@ -39,6 +41,7 @@ public class SickleController : MonoBehaviour
         if (startTimer > 0)
         {
             startTimer -= Time.deltaTime;
+
             return;
         }
         else if (startTimer <= 0 && count == 0) 
@@ -65,7 +68,8 @@ public class SickleController : MonoBehaviour
             transform.DOLocalPath(path, 3.0f, PathType.CatmullRom)
                 .SetEase(Ease.InExpo).SetLookAt(0.01f).SetOptions(false, AxisConstraint.Y);
 
-            count ++;
+
+            count++;
         }
 
 
@@ -74,8 +78,11 @@ public class SickleController : MonoBehaviour
 
         });
 
-        if (timer < 0) Destroy(gameObject);
+        if (timer < 0)
+        {
 
+            Destroy(gameObject);
+        }
         var ydown = transform.position;
         ydown.y -= moveSpeed * Time.deltaTime;
         //var dir = direction * moveSpeed * Time.deltaTime;

@@ -21,7 +21,7 @@ public class EnemyDragonController : BaseEnemy
 
     private Animator m_animator;
 
-    private enum StateDra
+    public enum StateDra
     {
         Wander,        // プレイヤーがくるまで徘徊
         BattlePreparation, // 戦闘位置に移動
@@ -32,12 +32,14 @@ public class EnemyDragonController : BaseEnemy
         Death,           // 死亡
     };
     private StateDra state = StateDra.Idle;
+    public StateDra GetState() { return state; }
 
     // Start is called before the first frame update
     void Start()
     {
         m_animator = GetComponent<Animator>();
         m_territoryOrigin = transform.position;
+        m_turnAngle = 1.0f;
     }
 
     // Update is called once per frame
@@ -62,15 +64,12 @@ public class EnemyDragonController : BaseEnemy
         };
 
         if (m_death) ConditionDeathState();
-
-        Debug.Log(state);
     }
 
     // 徘徊
     private void ConditionWanderState()
     {
         state = StateDra.Wander;
-        m_animator.SetFloat("MoveSpeed", 0.7f);
 
         SetRandamTargetPosition();
 
@@ -86,14 +85,18 @@ public class EnemyDragonController : BaseEnemy
             m_assemblyFlag = false;
             return;
         }
+        m_animator.SetFloat("MoveSpeed", 0.7f);
+
 
         var dir = m_targetPosition - transform.position;
+        dir.Normalize();
         dir *= m_moveSpeed * Time.deltaTime;
-        transform.position = new Vector3(dir.x + transform.position.x, transform.position.y, transform.position.z + dir.z);
+        if (Turn(dir))  transform.position = new Vector3(dir.x + transform.position.x, transform.position.y, transform.position.z + dir.z);
 
         dir = m_targetPosition - transform.position;
 
-        transform.rotation = TurnRotation(transform.forward, dir, m_turnAngle, m_turnSpeed);
+        //Quaternion rotate = TurnRotation(transform.forward, dir, m_turnAngle, m_turnSpeed);
+        //transform.rotation = rotate;
 
         // 目的地に着いたら待機
         var lengthSq = dir.x * dir.x + dir.y * dir.y + dir.z * dir.z;
@@ -114,7 +117,7 @@ public class EnemyDragonController : BaseEnemy
         var dir = m_locationPosition - transform.position;
         dir.Normalize();
         dir *= m_moveSpeed * Time.deltaTime;
-        transform.position = new Vector3(dir.x + transform.position.x, transform.position.y, transform.position.z + dir.z);
+        if (Turn(dir)) transform.position = new Vector3(dir.x + transform.position.x, transform.position.y, transform.position.z + dir.z);
 
         dir = m_locationPosition - transform.position;
 
@@ -126,7 +129,7 @@ public class EnemyDragonController : BaseEnemy
             m_battleFlag = true;
         }
 
-        transform.rotation = TurnRotation(transform.forward, dir, m_turnAngle, m_turnSpeed);
+        //transform.rotation = TurnRotation(transform.forward, dir, m_turnAngle, m_turnSpeed);
     }
 
     // 待機
@@ -134,13 +137,15 @@ public class EnemyDragonController : BaseEnemy
     {
         state = StateDra.Idle;
 
-        m_animator.SetFloat("MoveSpeed",0.0f);
 
         m_idleTimer = 0.0f;
     }
 
     private void ConditionIdleUpdate()
     {
+        m_animator.SetFloat("MoveSpeed", 0.0f);
+
+
         // 集合がかかったら集まる
         if (m_assemblyFlag)
         {
@@ -153,7 +158,7 @@ public class EnemyDragonController : BaseEnemy
         if (m_battleFlag)
         {
             if (m_idleTimer > m_idleTimeMax) ConditionAttackStartState();
-            transform.rotation = TurnRotation(transform.forward, new Vector3(0, 0, -1), m_turnAngle, m_turnSpeed);
+            Turn(new Vector3(0, 0, -1));
         }
         else
         {
@@ -185,7 +190,7 @@ public class EnemyDragonController : BaseEnemy
             return;
         }
 
-        m_animator.SetFloat("moveSpeed", 0.5f);
+        m_animator.SetFloat("MoveSpeed", 0.5f);
 
         transform.position = Easing.SineInOut(m_easingTimer, 1.5f, m_startPosition, m_endPosition);
 
@@ -228,7 +233,7 @@ public class EnemyDragonController : BaseEnemy
             return;
         }
 
-        m_animator.SetFloat("moveSpeed", 0.4f);
+        m_animator.SetFloat("MoveSpeed", 0.4f);
 
         transform.position = Easing.SineInOut(m_easingTimer, 1.5f, m_endPosition, m_startPosition);
 
