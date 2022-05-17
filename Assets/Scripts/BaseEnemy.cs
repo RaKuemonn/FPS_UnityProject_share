@@ -91,6 +91,20 @@ public class BaseEnemy : MonoBehaviour
         return check;
     }
 
+    // EnemyControllerからコピペして持ってきた
+    protected void CreateCollideOnCanvas()
+    {
+        // 斬られたときに生成されたオブジェクトでなければ（SetCutPerformance()で、変更されていなければ）
+        //if (is_create_collide == false) return;
+
+        // 当たり判定用のオブジェクトをCanvas下に生成
+        GameObject obj = Instantiate(
+            (GameObject)Resources.Load("EnemyCollideOnScreen")
+        );
+        obj.transform.SetParent(GameObject.Find("Canvas").transform);
+        obj.GetComponent<EnemyCollide>().SetTarget(gameObject);
+    }
+
     // 戦闘エリアに入ったらコールバックされる
     public void OnEnterBattleArea()
     {

@@ -40,6 +40,9 @@ public class EnemyDragonController : BaseEnemy
         m_animator = GetComponent<Animator>();
         m_territoryOrigin = transform.position;
         m_turnAngle = 1.0f;
+
+        // “–‚½‚è”»’è‚Ì¶¬
+        CreateCollideOnCanvas();
     }
 
     // Update is called once per frame
