@@ -10,6 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bb3fddb75bd892d42a232afe3c0b6b1a, type: 3}
-  m_Name: CondExprAllKillData test Scarecrow
+  m_Name: CondExprAllKillData
   m_EditorClassIdentifier: 
   battleArea: {fileID: 0}
+  BattleAreaPrefab: {fileID: 5653779070594544327, guid: f6423b59c88846e4ab0fb777adccaac0, type: 3}

@@ -10,8 +10,6 @@ public class ScarecrowMovingControl : BaseEnemy
 
     private bool m_first_condition_idle_state = false; // 一回目のConditionIdleState()でのみ実行
 
-    private bool m_enter_battle_area = false;
-
     // イージング
     private float m_easingTimer;
 
@@ -133,12 +131,7 @@ public class ScarecrowMovingControl : BaseEnemy
     {
     }
 
-    // 戦闘エリアに入ったらコールバックされる
-    public void OnEnterBattleArea()
-    {
-        m_enter_battle_area = true;
-    }
-
+    
     private void CreateCollideOnCanvas()
     {
         // 斬られたときに生成されたオブジェクトでなければ（SetCutPerformance()で、変更されていなければ）

@@ -4,8 +4,8 @@ using UnityEngine;
 
 [CreateAssetMenu(menuName = "CondExprData/CondExprAllKillData", fileName = "CondExprAllKillData")]
 public class CondExprAllKillData : BaseCondExprData
-{
-    [SerializeField] public BattleAreaTutorial battleArea;
+{ 
+    [SerializeField] public GameObject BattleAreaPrefab;
 
     public override string CondExprComponentName()
     {

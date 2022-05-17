@@ -14,6 +14,7 @@ TagManager:
   - BattleArea
   - SceneSystem
   - MessageRenderer
+  - Enviroments
   layers:
   - Default
   - TransparentFX

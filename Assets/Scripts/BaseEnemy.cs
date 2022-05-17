@@ -7,6 +7,9 @@ public class BaseEnemy : MonoBehaviour
     // 各自で設定
     protected float m_hp;
 
+    // バトルエリアに入ったか
+    protected bool m_enter_battle_area;
+
     // 旋回
     protected float m_turnAngle = 1.0f;
     protected float m_turnSpeed = 3.0f;
@@ -86,5 +89,11 @@ public class BaseEnemy : MonoBehaviour
         transform.rotation = Quaternion.LerpUnclamped(transform.rotation, rotate, 0.01f);
 
         return check;
+    }
+
+    // 戦闘エリアに入ったらコールバックされる
+    public void OnEnterBattleArea()
+    {
+        m_enter_battle_area = true;
     }
 }
