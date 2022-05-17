@@ -123,6 +123,36 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &164081675
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 164081676}
+  m_Layer: 0
+  m_Name: Enemies
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &164081676
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 164081675}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &569542405
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -392,7 +422,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4163034832185179699, guid: 86bd9ef0b2a96d348aaa82b73226105f, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4163034832185179699, guid: 86bd9ef0b2a96d348aaa82b73226105f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -470,7 +500,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 998728491823425946, guid: 42d6d441e70a0af44bc9eb7514390bcf, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 998728491823425946, guid: 42d6d441e70a0af44bc9eb7514390bcf, type: 3}
       propertyPath: m_AnchorMax.x
@@ -645,7 +675,7 @@ Transform:
   - {fileID: 2112961029}
   - {fileID: 1897833895}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1897833895 stripped
 Transform:
@@ -1278,18 +1308,50 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1640069247}
     m_Modifications:
+    - target: {fileID: 2796675676264375011, guid: 2a7fac130df041e47b952dc41f5de6a4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2796675676313737625, guid: 2a7fac130df041e47b952dc41f5de6a4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2796675676718524611, guid: 2a7fac130df041e47b952dc41f5de6a4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2796675677118859320, guid: 2a7fac130df041e47b952dc41f5de6a4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4782623867846737307, guid: 2a7fac130df041e47b952dc41f5de6a4, type: 3}
+      propertyPath: Enemies
+      value: 
+      objectReference: {fileID: 164081676}
     - target: {fileID: 4782623867846737307, guid: 2a7fac130df041e47b952dc41f5de6a4, type: 3}
       propertyPath: m_dragon
       value: 
       objectReference: {fileID: 6168674603379083785, guid: c79b1811ab591974f9bae2f00cec6a25, type: 3}
     - target: {fileID: 4782623868239307773, guid: 2a7fac130df041e47b952dc41f5de6a4, type: 3}
+      propertyPath: Enemies
+      value: 
+      objectReference: {fileID: 164081676}
+    - target: {fileID: 4782623868239307773, guid: 2a7fac130df041e47b952dc41f5de6a4, type: 3}
       propertyPath: m_dragon
       value: 
       objectReference: {fileID: 6168674603379083785, guid: c79b1811ab591974f9bae2f00cec6a25, type: 3}
     - target: {fileID: 4782623868498633137, guid: 2a7fac130df041e47b952dc41f5de6a4, type: 3}
+      propertyPath: Enemies
+      value: 
+      objectReference: {fileID: 164081676}
+    - target: {fileID: 4782623868498633137, guid: 2a7fac130df041e47b952dc41f5de6a4, type: 3}
       propertyPath: m_dragon
       value: 
       objectReference: {fileID: 6168674603379083785, guid: c79b1811ab591974f9bae2f00cec6a25, type: 3}
+    - target: {fileID: 4782623869895144615, guid: 2a7fac130df041e47b952dc41f5de6a4, type: 3}
+      propertyPath: Enemies
+      value: 
+      objectReference: {fileID: 164081676}
     - target: {fileID: 4782623869895144615, guid: 2a7fac130df041e47b952dc41f5de6a4, type: 3}
       propertyPath: m_dragon
       value: 
