@@ -6,6 +6,7 @@ using UnityEngine;
 public class CondExprAllKillData : BaseCondExprData
 { 
     [SerializeField] public GameObject BattleAreaPrefab;
+    public BattleAreaTutorial BattleArea;
 
     public override string CondExprComponentName()
     {

@@ -55,9 +55,6 @@ public class CondExprTimer : BaseCondExpr
 [Serializable]
 public class CondExprAllKill : BaseCondExpr
 {
-
-    private BattleAreaTutorial BattleArea;
-
     void Start()
     {
         var id = gameObject.GetComponent<FloorInfo>().FloorData.id;
@@ -77,13 +74,13 @@ public class CondExprAllKill : BaseCondExpr
             battleArea.transform.SetParent(Enviroments.transform);
         }
 
-        BattleArea = battleArea.GetComponent<BattleAreaTutorial>();
+        ((CondExprAllKillData)data).BattleArea = battleArea.GetComponent<BattleAreaTutorial>();
 
     }
     
     public override void OnCompleteCondExpr(BooleanClass booleanClass)
     {
-        var size = BattleArea?.InAreaEnemySize();
+        var size = ((CondExprAllKillData)data).BattleArea?.InAreaEnemySize();
 
         booleanClass.Boolean = (size <= 0);
     }
