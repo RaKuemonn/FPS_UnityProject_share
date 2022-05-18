@@ -57,28 +57,34 @@ public class CondExprAllKill : BaseCondExpr
 {
     void Start()
     {
-        var id_ten_times = gameObject.GetComponent<FloorInfo>().FloorData.id * 10;
-        var areas = GameObject.FindGameObjectsWithTag("BattleArea");
+        var id = gameObject.GetComponent<FloorInfo>().FloorData.id;
 
-        // 床と同じ位置にBattleAreaが存在するはずなので、それを探す
-        foreach (var area in areas)
+        GameObject battleArea = null;
         {
-            if((int)(area.transform.position.z) != id_ten_times /* idとワールド座標z軸の10の位が一緒なら */)
-            { continue;}
+            var position = new Vector3(0f, 0f, id * 10f /*idに10乗算すると、床のz値になる*/);
 
-            ((CondExprAllKillData)data).battleArea = area.GetComponent<BattleAreaTutorial>();
-            break;
+            // Stop床と同じ位置に生成
+            battleArea = Instantiate(
+                ((CondExprAllKillData)data).BattleAreaPrefab,
+                position,
+                Quaternion.identity);
+
+            // Enviromentsゲームオブジェクトを親にする
+            var Enviroments = GameObject.FindGameObjectWithTag("Enviroments");
+            battleArea.transform.SetParent(Enviroments.transform);
         }
-        
+
+        ((CondExprAllKillData)data).BattleArea = battleArea.GetComponent<BattleAreaTutorial>();
+
     }
     
     public override void OnCompleteCondExpr(BooleanClass booleanClass)
     {
-        var size = ((CondExprAllKillData)data).battleArea?.InAreaEnemySize();
+        var size = ((CondExprAllKillData)data).BattleArea?.InAreaEnemySize();
 
         booleanClass.Boolean = (size <= 0);
     }
-
+    
 }
 
 

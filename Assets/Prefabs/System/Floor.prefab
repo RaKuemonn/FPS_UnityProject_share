@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8914215206829036772}
   - component: {fileID: 5370381941759096259}
   - component: {fileID: 4012551483449439836}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,8 +99,10 @@ MonoBehaviour:
   FloorData:
     id: -1
     move_speed_state: 0
-  idle_seconds: 3
-  timer: 0
+    CondExprData: {fileID: 0}
+    CompleteFloorConditionExpr:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!54 &4012551483449439836
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -127,7 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4731068294992417448}
   - component: {fileID: 4731068294992417455}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: HitBoxToControlMoveSpeed
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -64,7 +64,7 @@ public class EnemyBatController : BaseEnemy
             case StateBat.Death: ConditionDeathUpdate(); break;
         };
 
-        if (m_death) ConditionDeathState();
+        if (IsDeath) ConditionDeathState();
 
     }
 
@@ -245,7 +245,7 @@ public class EnemyBatController : BaseEnemy
     {
         state = StateBat.Death;
         m_kariTimer = 0.0f;
-        m_animator.SetBool("Death", m_death);
+        m_animator.SetBool("Death", IsDeath);
 
     }
 

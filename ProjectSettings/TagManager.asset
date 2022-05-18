@@ -15,6 +15,7 @@ TagManager:
   - SceneSystem
   - MessageRenderer
   - Dumy
+  - Enviroments
   layers:
   - Default
   - TransparentFX

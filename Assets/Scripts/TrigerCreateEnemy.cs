@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class TrigerCreateEnemy : MonoBehaviour
 {
+    // ¶¬‚·‚éêŠ
+    [SerializeField] private Transform Enemies;
+
     // ¶¬‚·‚é”
     public int m_createSnakeNum;
     public GameObject m_snake;
@@ -51,6 +54,7 @@ public class TrigerCreateEnemy : MonoBehaviour
             for (int i = 0; i < m_createBatNum; i++)
             {
                 GameObject bat = Instantiate(m_bat);
+                SetParentToEnemies(bat);
                 bat.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + m_createLength);
                 EnemyBatController batController = bat.GetComponent<EnemyBatController>();
 
@@ -64,6 +68,7 @@ public class TrigerCreateEnemy : MonoBehaviour
             for (int i = 0; i < m_createDragonNum; i++)
             {
                 GameObject dragon = Instantiate(m_dragon);
+                SetParentToEnemies(dragon);
                 dragon.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + m_createLength);
 
                 EnemyDragonController dragonController = dragon.GetComponent<EnemyDragonController>();
@@ -78,6 +83,7 @@ public class TrigerCreateEnemy : MonoBehaviour
             for (int i = 0; i < m_createSnakeNum; i++)
             {
                 GameObject snake = Instantiate(m_snake);
+                SetParentToEnemies(snake);
                 snake.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + m_createLength);
 
                 EnemySnakeController snakeController = snake.GetComponent<EnemySnakeController>();
@@ -90,5 +96,12 @@ public class TrigerCreateEnemy : MonoBehaviour
 
             Destroy(gameObject);
         }
+    }
+
+    private void SetParentToEnemies(GameObject object_)
+    {
+        if(Enemies == null) return;
+
+        object_.transform.SetParent(Enemies.transform);
     }
 }

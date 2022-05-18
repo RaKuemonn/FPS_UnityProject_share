@@ -1054,7 +1054,7 @@ GameObject:
   - component: {fileID: 1304556112}
   m_Layer: 0
   m_Name: Enviroments
-  m_TagString: Untagged
+  m_TagString: Enviroments
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2162,6 +2162,14 @@ PrefabInstance:
       propertyPath: noiseProfile
       value: 
       objectReference: {fileID: 11400000, guid: db34532ba2c788742996c94cd4a57a3c, type: 2}
+    - target: {fileID: 4163034832185179701, guid: 86bd9ef0b2a96d348aaa82b73226105f, type: 3}
+      propertyPath: m_fov_state_run
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4163034832185179701, guid: 86bd9ef0b2a96d348aaa82b73226105f, type: 3}
+      propertyPath: m_fov_state_stop
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 4163034832185179701, guid: 86bd9ef0b2a96d348aaa82b73226105f, type: 3}
       propertyPath: m_virtual_main_camera
       value: 

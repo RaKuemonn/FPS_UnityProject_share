@@ -9,7 +9,6 @@ using UnityEngine;
 public class FloorDataTable : ScriptableObject
 {
     public GameObject FloorPrefab;
-    public GameObject BattleAreaPrefab;
     public const float floor_distance = 10f;
     public FloorData[] FloorDatas;
 }

@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class BaseEnemy : MonoBehaviour
 {
@@ -10,7 +12,14 @@ public class BaseEnemy : MonoBehaviour
     public float GetHP() { return m_hp; }
     public void SetHP(float hp) { m_hp = hp; }
 
-    // 旋回
+    // バトルエリアに入ったか
+    protected bool m_enter_battle_area;
+
+    // BattleAreaのコールバック関数
+    public event EventHandler OnDeadEvent;
+
+
+    // 旋回 
     protected float m_turnAngle = 1.0f;
     protected float m_turnSpeed = 3.0f;
 
@@ -19,9 +28,9 @@ public class BaseEnemy : MonoBehaviour
     protected Vector3 m_territoryOrigin;
     protected float m_range = 5.0f;
 
-    protected bool m_death;
+    public bool IsDeath { set; get; } = false;
 
-    // 集合
+// 集合
     protected bool m_assemblyFlag = false;
 
     // 戦闘開始
@@ -47,8 +56,8 @@ public class BaseEnemy : MonoBehaviour
     // ターゲット位置をランダム設定
     protected void SetRandamTargetPosition()
     {
-        float theta = Random.Range(0f, Mathf.PI * 2) - Mathf.PI;
-        float range = Random.Range(0f, m_range);
+        float theta = UnityEngine.Random.Range(0f, Mathf.PI * 2) - Mathf.PI;
+        float range = UnityEngine.Random.Range(0f, m_range);
         m_targetPosition.x = m_territoryOrigin.x + Mathf.Sin(theta) * range;
         m_targetPosition.y = m_territoryOrigin.y;
         m_targetPosition.z = m_territoryOrigin.z + Mathf.Cos(theta) * range;
@@ -89,5 +98,67 @@ public class BaseEnemy : MonoBehaviour
         transform.rotation = Quaternion.LerpUnclamped(transform.rotation, rotate, 0.01f);
 
         return check;
+    }
+
+    // EnemyControllerからコピペして持ってきた
+    protected void CreateCollideOnCanvas()
+    {
+        // 斬られたときに生成されたオブジェクトでなければ（SetCutPerformance()で、変更されていなければ）
+        //if (is_create_collide == false) return;
+
+        // 当たり判定用のオブジェクトをCanvas下に生成
+        GameObject obj = Instantiate(
+            (GameObject)Resources.Load("EnemyCollideOnScreen")
+        );
+        obj.transform.SetParent(GameObject.Find("Canvas").transform);
+        obj.GetComponent<EnemyCollide>().SetTarget(gameObject);
+    }
+
+    // 戦闘エリアに入ったらコールバックされる
+    public void OnEnterBattleArea()
+    {
+        m_enter_battle_area = true;
+    }
+
+
+
+    ///
+    ///
+    /// 斬られたときに呼ばれる(手動で書き込んで呼び出してる)関数
+    ///
+    /// ほぼ。死亡処理なので、それも書き込む
+    /// 
+    /// 
+    public void OnCutted(Vector3 impulse_)
+    {
+
+        var rigidbody = GetComponent<Rigidbody>();
+
+        // rigidbodyプロパティの変更
+        {
+            // 重力に従う
+            rigidbody.useGravity = true;
+
+            // 拘束を無くす
+            rigidbody.constraints = RigidbodyConstraints.None;
+        }
+
+        // 弾き飛ばす
+        rigidbody.AddForce(impulse_, ForceMode.Impulse);
+
+        // 破棄する固定時間
+        const float const_destroy_time = 0.5f;
+        Destroy(gameObject, const_destroy_time);
+    }
+
+    void OnDestroy()
+    {
+        OnDead();
+    }
+
+    // 死亡処理 (private)
+    private void OnDead()
+    {
+        OnDeadEvent?.Invoke(this,EventArgs.Empty);
     }
 }

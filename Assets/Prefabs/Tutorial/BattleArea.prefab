@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5653779070594544324}
   - component: {fileID: 5653779070594544325}
   - component: {fileID: 5653779070594544322}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: BattleArea
   m_TagString: BattleArea
   m_Icon: {fileID: 0}

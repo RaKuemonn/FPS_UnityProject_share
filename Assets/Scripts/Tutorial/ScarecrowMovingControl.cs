@@ -10,8 +10,6 @@ public class ScarecrowMovingControl : BaseEnemy
 
     private bool m_first_condition_idle_state = false; // 一回目のConditionIdleState()でのみ実行
 
-    private bool m_enter_battle_area = false;
-
     // イージング
     private float m_easingTimer;
 
@@ -36,7 +34,7 @@ public class ScarecrowMovingControl : BaseEnemy
         ConditionIdleState();
 
         // 当たり判定の生成
-        CreateCollideOnCanvas();
+        //CreateCollideOnCanvas();
     }
 
     // Update is called once per frame
@@ -60,7 +58,7 @@ public class ScarecrowMovingControl : BaseEnemy
 
         ;
 
-        if (m_death) ConditionDeathState();
+        if (IsDeath) ConditionDeathState();
 
         //Debug.Log(state);
     }
@@ -132,23 +130,5 @@ public class ScarecrowMovingControl : BaseEnemy
     private void ConditionDeathUpdate()
     {
     }
-
-    // 戦闘エリアに入ったらコールバックされる
-    public void OnEnterBattleArea()
-    {
-        m_enter_battle_area = true;
-    }
-
-    private void CreateCollideOnCanvas()
-    {
-        // 斬られたときに生成されたオブジェクトでなければ（SetCutPerformance()で、変更されていなければ）
-        //if (is_create_collide == false) return;
-
-        // 当たり判定用のオブジェクトをCanvas下に生成
-        GameObject obj = Instantiate(
-            (GameObject)Resources.Load("EnemyCollideOnScreen")
-        );
-        obj.transform.SetParent(GameObject.Find("Canvas").transform);
-        obj.GetComponent<EnemyCollide>().SetTarget(gameObject);
-    }
+    
 }
