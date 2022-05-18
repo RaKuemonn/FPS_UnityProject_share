@@ -185,45 +185,7 @@ public class EnemyCollide : MonoBehaviour
             // ScarecrowはEnemyControllerを持たない
             //targetObject.GetComponent<EnemyController>().SetCutPerformance(false, new Vector3(0f,0f,0f));
 
-            //{
-            //    Vector3 normal;
-            //    {
-            //        var slash_ray =
-            //            collider.gameObject.
-            //                GetComponent<SlashImageController>().
-            //                SlashRay();
-
-            //        var cursol_ray = cursor.CursolRay();
-
-
-            //        const float distance = 5.0f;
-            //        var origin_position = mainCamera.transform.position;
-            //        var cursol_far = cursol_ray.GetPoint(distance);
-            //        var slash_far = slash_ray.GetPoint(distance);
-
-            //        var a = slash_far - origin_position;
-            //        var b = cursol_far - origin_position;
-
-            //        normal = Vector3.Cross(a, b).normalized;
-            //    }
-
-            //    var result =
-            //        MeshCut.CutMesh(
-            //            targetObject,                                   // 斬るオブジェクト
-            //            mainCamera.transform.position,    // 平面上の位置
-            //            normal                                          // 平面の法線
-            //        );
-            //}
-
-            Action<CursorController, GameObject> a = (CursorController cursor, GameObject targetGameObject) =>
-            {
-                var impulse = cursor.CursolRay().direction * impulse_power;
-
-                impulse.y += impulse_power; // 上方向に微妙に力を加える
-
-                targetGameObject.GetComponent<BaseEnemy>().OnCutted(impulse);
-            };
-
+            
             // 衝撃を与える処理
             {
                 var impulse = cursor.CursolRay().direction * impulse_power;

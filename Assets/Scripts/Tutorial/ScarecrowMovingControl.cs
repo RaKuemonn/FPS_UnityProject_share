@@ -34,7 +34,7 @@ public class ScarecrowMovingControl : BaseEnemy
         ConditionIdleState();
 
         // ìñÇΩÇËîªíËÇÃê∂ê¨
-        CreateCollideOnCanvas();
+        //CreateCollideOnCanvas();
     }
 
     // Update is called once per frame
@@ -58,7 +58,7 @@ public class ScarecrowMovingControl : BaseEnemy
 
         ;
 
-        if (m_death) ConditionDeathState();
+        if (IsDeath) ConditionDeathState();
 
         //Debug.Log(state);
     }

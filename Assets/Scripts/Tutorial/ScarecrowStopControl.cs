@@ -8,7 +8,7 @@ public class ScarecrowStopControl : BaseEnemy
     void Start()
     {
         // “–‚½‚è”»’è‚Ì¶¬
-        CreateCollideOnCanvas();
+        //CreateCollideOnCanvas();
     }
     
 }

@@ -42,7 +42,7 @@ public class EnemyDragonController : BaseEnemy
         m_turnAngle = 1.0f;
 
         // ìñÇΩÇËîªíËÇÃê∂ê¨
-        CreateCollideOnCanvas();
+        //CreateCollideOnCanvas();
     }
 
     // Update is called once per frame
@@ -66,7 +66,7 @@ public class EnemyDragonController : BaseEnemy
             case StateDra.Death: ConditionDeathUpdate(); break;
         };
 
-        if (m_death) ConditionDeathState();
+        if (IsDeath) ConditionDeathState();
     }
 
     // úpúj
@@ -248,7 +248,7 @@ public class EnemyDragonController : BaseEnemy
     private void ConditionDeathState()
     {
         state = StateDra.Death;
-        m_animator.SetBool("Death",m_death);
+        m_animator.SetBool("Death",IsDeath);
     }
 
     private void ConditionDeathUpdate()

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1094642720366193038}
   - component: {fileID: 1094642720366193041}
   - component: {fileID: 1094642720366193037}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: TrigerArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,6 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 817433fc83976154a93bd68dd5c53039, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Enemies: {fileID: 0}
   m_createSnakeNum: 0
   m_snake: {fileID: 843363060854449768, guid: ca66c590d35e81042bf215342b4d29d8, type: 3}
   m_createDragonNum: 3

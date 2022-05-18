@@ -2163,6 +2163,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: db34532ba2c788742996c94cd4a57a3c, type: 2}
     - target: {fileID: 4163034832185179701, guid: 86bd9ef0b2a96d348aaa82b73226105f, type: 3}
+      propertyPath: m_fov_state_run
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4163034832185179701, guid: 86bd9ef0b2a96d348aaa82b73226105f, type: 3}
+      propertyPath: m_fov_state_stop
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 4163034832185179701, guid: 86bd9ef0b2a96d348aaa82b73226105f, type: 3}
       propertyPath: m_virtual_main_camera
       value: 
       objectReference: {fileID: 1993169345}

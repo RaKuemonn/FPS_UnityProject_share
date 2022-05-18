@@ -306,80 +306,163 @@ public class MeshCut : MonoBehaviour
     /// <returns></returns>
     public static (GameObject copy_normalside, GameObject original_anitiNormalside) CutMesh(GameObject targetGameObject, Vector3 planeAnchorPoint, Vector3 planeNormalDirection, bool makeCutSurface = true, Material cutSurfaceMaterial = null)
     {
-        if (!targetGameObject.GetComponent<MeshFilter>())
-        {
-            Debug.LogError("引数のオブジェクトにはMeshFilterをアタッチしろ!");
-            return (null, null);
-        }
-        else if (!targetGameObject.GetComponent<MeshRenderer>())
-        {
-            Debug.LogError("引数のオブジェクトにはMeshrendererをアタッチしろ!");
-            return (null, null);
-        }
 
-        Mesh mesh = targetGameObject.GetComponent<MeshFilter>().mesh;
-        Transform transform = targetGameObject.transform;
-        bool addNewMaterial;
-
-        MeshRenderer renderer = targetGameObject.GetComponent<MeshRenderer>();
-        //materialにアクセスするとその瞬間にmaterialの個別のインスタンスが作られてマテリアル名に(instance)がついてしまうので読み込みはsharedMaterialで行う
-        Material[] mats = renderer.sharedMaterials;
-        if (makeCutSurface && cutSurfaceMaterial != null)
+        var SkinnedMeshRender = targetGameObject.GetComponentInParentAndChildren<SkinnedMeshRenderer>();
+        if(SkinnedMeshRender) 
         {
-            if (mats[mats.Length - 1]?.name == cutSurfaceMaterial.name)//すでに切断マテリアルが追加されているときはそれを使うので追加しない
+
+
+            if (!SkinnedMeshRender)
             {
-                addNewMaterial = false;
+                Debug.LogError("引数のオブジェクトにはSkinnedMeshRenderをアタッチしろ!");
+                return (null, null);
+            }
+
+            Mesh mesh = SkinnedMeshRender.sharedMesh;
+            Transform transform = targetGameObject.transform;
+            bool addNewMaterial;
+
+
+            //materialにアクセスするとその瞬間にmaterialの個別のインスタンスが作られてマテリアル名に(instance)がついてしまうので読み込みはsharedMaterialで行う
+            Material[] mats = SkinnedMeshRender.sharedMaterials;
+            if (makeCutSurface && cutSurfaceMaterial != null)
+            {
+                if (mats[mats.Length - 1]?.name == cutSurfaceMaterial.name)//すでに切断マテリアルが追加されているときはそれを使うので追加しない
+                {
+                    addNewMaterial = false;
+                }
+                else
+                {
+                    addNewMaterial = true;
+                }
             }
             else
             {
-                addNewMaterial = true;
+                addNewMaterial = false;
             }
+
+            (Mesh fragMesh, Mesh originMesh) = CutMesh(mesh, transform, planeAnchorPoint, planeNormalDirection, makeCutSurface, addNewMaterial);
+
+
+            if (originMesh == null || fragMesh == null)
+            {
+                return (null, null);
+
+            }
+            if (addNewMaterial)
+            {
+                int matLength = mats.Length;
+                Material[] newMats = new Material[matLength + 1];
+                mats.CopyTo(newMats, 0);
+                newMats[matLength] = cutSurfaceMaterial;
+
+                SkinnedMeshRender.sharedMaterials = newMats;
+            }
+
+
+            SkinnedMeshRender.sharedMesh = originMesh;
+
+            //GameObject fragment = new GameObject("Fragment", typeof(MeshFilter), typeof(MeshRenderer));
+            Transform originTransform = targetGameObject.transform;
+            GameObject fragment = Instantiate(targetGameObject, originTransform.position, originTransform.rotation, originTransform.parent);
+            fragment.transform.parent = null;
+            {
+                var fragment_SkinnedMeshRenderer = fragment.GetComponentInParentAndChildren<SkinnedMeshRenderer>();
+                fragment_SkinnedMeshRenderer.sharedMesh = fragMesh;
+                fragment_SkinnedMeshRenderer.sharedMaterials = SkinnedMeshRender.sharedMaterials;
+            }
+
+            if (targetGameObject.GetComponent<MeshCollider>())
+            {
+                //頂点が1点に重なっている場合にはエラーが出るので, 直したい場合はmesh.RecalculateBoundsのあとでmesh.bounds.size.magnitude<0.00001などで条件分けして対処してください
+                targetGameObject.GetComponent<MeshCollider>().sharedMesh = originMesh;
+                fragment.GetComponent<MeshCollider>().sharedMesh = fragMesh;
+            }
+
+            return (fragment, targetGameObject);
         }
+
+        // MeshFilter他を探す
         else
         {
-            addNewMaterial = false;
+            if (!targetGameObject.GetComponent<MeshFilter>())
+            {
+                Debug.LogError("引数のオブジェクトにはMeshFilterをアタッチしろ!");
+                return (null, null);
+            }
+            else if (!targetGameObject.GetComponent<MeshRenderer>())
+            {
+                Debug.LogError("引数のオブジェクトにはMeshrendererをアタッチしろ!");
+                return (null, null);
+            }
+
+            Mesh mesh = targetGameObject.GetComponent<MeshFilter>().mesh;
+            Transform transform = targetGameObject.transform;
+            bool addNewMaterial;
+
+            MeshRenderer renderer = targetGameObject.GetComponent<MeshRenderer>();
+            //materialにアクセスするとその瞬間にmaterialの個別のインスタンスが作られてマテリアル名に(instance)がついてしまうので読み込みはsharedMaterialで行う
+            Material[] mats = renderer.sharedMaterials;
+            if (makeCutSurface && cutSurfaceMaterial != null)
+            {
+                if (mats[mats.Length - 1]?.name == cutSurfaceMaterial.name) //すでに切断マテリアルが追加されているときはそれを使うので追加しない
+                {
+                    addNewMaterial = false;
+                }
+                else
+                {
+                    addNewMaterial = true;
+                }
+            }
+            else
+            {
+                addNewMaterial = false;
+            }
+
+            (Mesh fragMesh, Mesh originMesh) = CutMesh(mesh, transform, planeAnchorPoint, planeNormalDirection,
+                makeCutSurface, addNewMaterial);
+
+
+            if (originMesh == null || fragMesh == null)
+            {
+                return (null, null);
+
+            }
+
+            if (addNewMaterial)
+            {
+                int matLength = mats.Length;
+                Material[] newMats = new Material[matLength + 1];
+                mats.CopyTo(newMats, 0);
+                newMats[matLength] = cutSurfaceMaterial;
+
+
+                renderer.sharedMaterials = newMats;
+            }
+
+
+            targetGameObject.GetComponent<MeshFilter>().mesh = originMesh;
+
+            //GameObject fragment = new GameObject("Fragment", typeof(MeshFilter), typeof(MeshRenderer));
+            Transform originTransform = targetGameObject.transform;
+            GameObject fragment = Instantiate(targetGameObject, originTransform.position, originTransform.rotation,
+                originTransform.parent);
+            fragment.transform.parent = null;
+            fragment.GetComponent<MeshFilter>().mesh = fragMesh;
+            fragment.GetComponent<MeshRenderer>().sharedMaterials =
+                targetGameObject.GetComponent<MeshRenderer>().sharedMaterials;
+
+            if (targetGameObject.GetComponent<MeshCollider>())
+            {
+                //頂点が1点に重なっている場合にはエラーが出るので, 直したい場合はmesh.RecalculateBoundsのあとでmesh.bounds.size.magnitude<0.00001などで条件分けして対処してください
+                targetGameObject.GetComponent<MeshCollider>().sharedMesh = originMesh;
+                fragment.GetComponent<MeshCollider>().sharedMesh = fragMesh;
+            }
+
+
+
+            return (fragment, targetGameObject);
         }
-
-        (Mesh fragMesh, Mesh originMesh) = CutMesh(mesh, transform, planeAnchorPoint, planeNormalDirection, makeCutSurface, addNewMaterial);
-
-
-        if (originMesh == null || fragMesh == null)
-        {
-            return (null, null);
-
-        }
-        if (addNewMaterial)
-        {
-            int matLength = mats.Length;
-            Material[] newMats = new Material[matLength + 1];
-            mats.CopyTo(newMats, 0);
-            newMats[matLength] = cutSurfaceMaterial;
-
-
-            renderer.sharedMaterials = newMats;
-        }
-
-
-        targetGameObject.GetComponent<MeshFilter>().mesh = originMesh;
-
-        //GameObject fragment = new GameObject("Fragment", typeof(MeshFilter), typeof(MeshRenderer));
-        Transform originTransform = targetGameObject.transform;
-        GameObject fragment = Instantiate(targetGameObject, originTransform.position, originTransform.rotation, originTransform.parent);
-        fragment.transform.parent = null;
-        fragment.GetComponent<MeshFilter>().mesh = fragMesh;
-        fragment.GetComponent<MeshRenderer>().sharedMaterials = targetGameObject.GetComponent<MeshRenderer>().sharedMaterials;
-
-        if (targetGameObject.GetComponent<MeshCollider>())
-        {
-            //頂点が1点に重なっている場合にはエラーが出るので, 直したい場合はmesh.RecalculateBoundsのあとでmesh.bounds.size.magnitude<0.00001などで条件分けして対処してください
-            targetGameObject.GetComponent<MeshCollider>().sharedMesh = originMesh;
-            fragment.GetComponent<MeshCollider>().sharedMesh = fragMesh;
-        }
-
-
-
-        return (fragment, targetGameObject);
-
     }
 
 
