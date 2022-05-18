@@ -64,7 +64,7 @@ public class EnemySnakeController : BaseEnemy
             case StateRab.Death: ConditionDeathUpdate(); break;
         };
 
-        if (m_death) ConditionDeathState();
+        if (IsDeath) ConditionDeathState();
 
     }
 
