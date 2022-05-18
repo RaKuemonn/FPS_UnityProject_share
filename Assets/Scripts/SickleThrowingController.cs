@@ -10,6 +10,10 @@ public class SickleThrowingController : MonoBehaviour
     public float moveSpeed;
     private Vector3 direction;
 
+    private float width = 1.0f;
+
+    float rotationSpeed = 1080.0f;
+
     // ÉvÉåÉCÉÑÅ[çÇÇ≥
     private float height = 2.0f;
 
@@ -34,8 +38,9 @@ public class SickleThrowingController : MonoBehaviour
     void Start()
     {
         target = player.transform.position;
-        target.y += height;
-        velocity.y = 5.0f;
+        target.x += RandomTarget();
+
+        target.y += 0.3f;
         startPos = transform.position;
         timerEasing = 0f;
         {
@@ -47,23 +52,30 @@ public class SickleThrowingController : MonoBehaviour
         }
 
         slashAngle = Random.Range(0.0f, 360.0f);
-        //transform.position = new Vector3(boss.transform.position.x, boss.transform.position.y, boss.transform.position.z);
+
+        velocity = target - transform.position;
+        velocity.Normalize();
+
+
+        transform.eulerAngles = new Vector3(transform.eulerAngles.x, -transform.eulerAngles.y, transform.eulerAngles.z);
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(transform.position);
+        var rotate = transform.eulerAngles;
+        var roll = rotate.z + rotationSpeed * Time.deltaTime;
+        roll = rotationSpeed * Time.deltaTime;
+        transform.localRotation *= Quaternion.Euler(0, 0, roll);
 
-        velocity.y -= gravity * Time.deltaTime;
+
+        var vel = velocity * (moveSpeed * Time.deltaTime);
+        vel += transform.position;
 
         if (timer < 0) Destroy(gameObject);
 
-        var newpos = transform.position + velocity * Time.deltaTime;
 
-        Vector2 xzPos = Easing.SineInOutV2(timerEasing / 1.0f, 5.0f, startPos, endPos);
-
-        transform.position = new Vector3(xzPos.x, newpos.y, xzPos.y);
+        transform.position = new Vector3(vel.x, vel.y, vel.z);
 
         //
         //var ydown = transform.position;
@@ -80,5 +92,11 @@ public class SickleThrowingController : MonoBehaviour
         timerEasing += Time.deltaTime;
         timer -= Time.deltaTime;
 
+    }
+
+    private float RandomTarget()
+    {
+        float haba = Random.Range(0, width * 2) - width;
+        return haba;
     }
 }

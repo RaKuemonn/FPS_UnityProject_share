@@ -32,7 +32,8 @@ public class SickleController : MonoBehaviour
     {
         slashAngle = Random.Range(0.0f, 360.0f);
 
-
+        target = GetRandomTarget();
+        Debug.Log(target);
     }
 
     // Update is called once per frame
@@ -46,7 +47,7 @@ public class SickleController : MonoBehaviour
         }
         else if (startTimer <= 0 && count == 0) 
          {
-            target = GetRandomTarget();
+
             //transform.position = new Vector3(boss.transform.position.x, boss.transform.position.y, boss.transform.position.z);
             direction = target - transform.position;
             direction.Normalize();
@@ -54,18 +55,18 @@ public class SickleController : MonoBehaviour
 
             var vec = boss.transform.position - transform.position;
             float dot = (boss.transform.forward.x * vec.x) + (boss.transform.forward.z * vec.z);
-            test.x += dot * 4;
+            test.x += dot * 2;
 
             Vector3[] path =
             {
             transform.position,
-            test,
-            target,
-            new Vector3( target.x, target.y, target.z - 13 )
+            //test,
+            //target,
+            new Vector3( target.x, target.y, target.z + (-20) )
             };
 
 
-            transform.DOLocalPath(path, 3.0f, PathType.CatmullRom)
+            transform.DOLocalPath(path, 4.0f, PathType.CatmullRom)
                 .SetEase(Ease.InExpo).SetLookAt(0.01f).SetOptions(false, AxisConstraint.Y);
 
 
@@ -73,10 +74,13 @@ public class SickleController : MonoBehaviour
         }
 
 
-        this.transform.DOMoveY(-0.1f, 4f).OnUpdate(() =>
+        this.transform.DOMoveY(target.y, 4f).OnUpdate(() =>
         {
-
         });
+
+        transform.DOLocalRotate(new Vector3(180, 90, 270f), 0.1f, RotateMode.FastBeyond360)
+      .SetEase(Ease.Linear)
+      .SetLoops(-1, LoopType.Restart);
 
         if (timer < 0)
         {
@@ -106,7 +110,7 @@ public class SickleController : MonoBehaviour
 
         //‚»‚ê‚¼‚ê‚ÌÀ•W‚ðƒ‰ƒ“ƒ_ƒ€‚É¶¬‚·‚é
         float x = Random.Range(0, right.x * 2)  - right.x;
-        float y = Random.Range(0, 5);
+        float y = Random.Range(1, 3);
         float z = player.transform.position.z ;//Random.Range(zMinPosition, zMaxPosition);
 
         //Vector3Œ^‚ÌPosition‚ð•Ô‚·

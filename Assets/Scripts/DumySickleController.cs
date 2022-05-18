@@ -31,7 +31,7 @@ public class DumySickleController : MonoBehaviour
             for (int i = 0; i < transform.childCount; i++)
             {
                 MeshRenderer mesh = child[i].GetComponent<MeshRenderer>();
-                mesh.enabled = true;
+                if (mesh) mesh.enabled = true;
             }
         }
         else
@@ -39,7 +39,7 @@ public class DumySickleController : MonoBehaviour
             for (int i = 0; i < transform.childCount; i++)
             {
                 MeshRenderer mesh = child[i].GetComponent<MeshRenderer>();
-                mesh.enabled = false;
+                if (mesh) mesh.enabled = false;
             }
         }
     }

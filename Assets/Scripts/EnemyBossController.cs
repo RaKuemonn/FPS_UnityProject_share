@@ -28,7 +28,7 @@ public class EnemyBossController : MonoBehaviour
     [SerializeField]
     private float moveSpeed;
     // 殴りに来る距離
-    private float attackRange = 3.0f;
+    private float attackRange = 1.0f;
 
     // 待機時間
     [SerializeField]
@@ -53,7 +53,7 @@ public class EnemyBossController : MonoBehaviour
 
     // 鎌大量生成時の距離感
     private float sickleRange = 4;
-    private float interval = 0.5f;
+    private float interval = 0.6f;
     private float generationTime = 0.0f;
     private int m_count = 0;
 
@@ -71,6 +71,13 @@ public class EnemyBossController : MonoBehaviour
     public float GetRadianSlashAngle() { return slashAngle * Mathf.Deg2Rad; }
     public float GetSlashAngle() { return slashAngle; }
 
+    private Animator m_animator;
+    private static readonly int hashAttack = Animator.StringToHash("Attack");
+    private static readonly int hashSickleAttack = Animator.StringToHash("Attack2");
+    private static readonly int hashSickleAttackBerserker = Animator.StringToHash("Attack3");
+    private static readonly int hashDown = Animator.StringToHash("Down");
+    private static readonly int hashRevival = Animator.StringToHash("Revival");
+    private static readonly int hashSpeed = Animator.StringToHash("velocity");
 
     // ボスダウン状態
     //private bool m_down = false;
@@ -103,6 +110,7 @@ public class EnemyBossController : MonoBehaviour
         AssaultAttackAnim, // 殴りにきて待機する
         BossComeBack, // 自分のもとの位置に戻る
         Down,  // ボスダウン
+        Death, // 死亡
     }
     private State state = State.Idle;
     public State GetState() { return state; }
@@ -111,6 +119,8 @@ public class EnemyBossController : MonoBehaviour
     void Start()
     {
         ConditionIdleState();
+
+        m_animator = GetComponent<Animator>();
     }  
 
     // Update is called once per frame
@@ -144,6 +154,7 @@ public class EnemyBossController : MonoBehaviour
         idleTimer = idleTimerMax;
 
         weaponReflect = true;
+
     }
 
     private void ConditionIdleUpdate()
@@ -153,11 +164,11 @@ public class EnemyBossController : MonoBehaviour
         // 時間が経過したら鎌を投げる
         if (idleTimer < 0)
         {
-            ConditionSickleAttackBerserkerState();
-            //int test = Random.Range(0, 3);
-            //if(test == 0) ConditionSickleAttackState();
-            //if (test == 1) ConditionSickleAttackBerserkerState();
-            //if (test == 2) ConditionAssaultAttackState();
+            //ConditionAssaultAttackState();
+            int test = Random.Range(0, 3);
+            if(test == 0) ConditionSickleAttackState();
+            if (test == 1) ConditionSickleAttackBerserkerState();
+            if (test == 2) ConditionAssaultAttackState();
         }
 
         if (angle > Mathf.PI) flySpeed = flyDown;
@@ -173,13 +184,14 @@ public class EnemyBossController : MonoBehaviour
     private void ConditionSickleAttackState()
     {
         state = State.SickleAttack;
-        kariTimer = 6.0f;
+        kariTimer = 1.0f;
 
         //鎌をインスタンス化する(生成する)
-        GameObject child = transform.Find("CruiseMissile").gameObject;
+        GameObject child = GameObject.FindWithTag("Dumy");//transform.Find("ThrowingKama").gameObject;
 
-        GameObject sl = Instantiate(sickleThrowing);
-        //sl.transform.position = this.transform.TransformPoint(child.transform.localPosition);
+        GameObject sl = Instantiate(sickleThrowing, child.transform.position, child.transform.rotation);
+        //GameObject sl = Instantiate(sickleThrowing, new Vector3(0,0,0), Quaternion.identity, null);
+        //sl.transform.position = this.transform.TransformPoint(child.transform.localPosition);,
         sl.transform.position =child.transform.position;
 
     
@@ -187,13 +199,24 @@ public class EnemyBossController : MonoBehaviour
         attack.CreateTargetPointer(sl);
 
         weaponReflect = false;
+
+        m_animator.SetTrigger(hashSickleAttack);
     }
 
     private void ConditionSickleAttackUpdate()
     {
         // 時間が経過したら待機に戻る
-        if (kariTimer < 0) 
+        if (kariTimer < 0) //0.05f && kariTimer > -0.05f) 
+        {
             ConditionIdleState();
+            m_animator.SetTrigger("Idle");
+            return;
+        }
+        // if (m_animator.GetCurrentAnimatorStateInfo(0).IsName("standby"))
+        // {
+        //     ConditionIdleState();
+        //     return;
+        // }
 
         kariTimer -= Time.deltaTime;
     }
@@ -202,7 +225,7 @@ public class EnemyBossController : MonoBehaviour
     {
         state = State.SickleAttackBerserker;
 
-        kariTimer = 11.0f;
+        kariTimer = 3.0f;
 
         m_count = 0;
 
@@ -216,6 +239,9 @@ public class EnemyBossController : MonoBehaviour
         weaponReflect = false;
 
         generationTime = 0.0f;
+
+
+        m_animator.SetTrigger(hashSickleAttackBerserker);
     }
 
     private void ConditionSickleAttackBerserkerUpdate()
@@ -227,11 +253,18 @@ public class EnemyBossController : MonoBehaviour
             generationTime = 0.0f;
             m_count++;
         }
+        
 
 
         // 時間が経過したら待機に戻る
-        if (kariTimer < 0)
+        if (kariTimer < 0) //0.05f && kariTimer > -0.05f) 
+        {
             ConditionIdleState();
+            m_animator.SetTrigger("Idle");
+
+            return;
+        }
+    
 
         kariTimer -= Time.deltaTime;
         generationTime += Time.deltaTime;
@@ -244,26 +277,43 @@ public class EnemyBossController : MonoBehaviour
 
         switch(count)
         {
-            case 0: // 右
+            case 2: // 右
                 GameObject sl = Instantiate(sickle);
                 sl.transform.position = transform.position + (directions.right * sickleRange);
-               
+                sl.transform.eulerAngles = new Vector3(70, -90, -20);
+
                 var attack = sickleJudgeImage.GetComponent<CreatePointerController>();
                 attack.CreateTargetPointer(sl);
+
+                GameObject sl5 = Instantiate(sickle);
+                sl5.transform.position = transform.position + (directions.left * sickleRange);
+                sl5.transform.eulerAngles = new Vector3(-70, -90, 20);
+
+                var attack5 = sickleJudgeImage.GetComponent<CreatePointerController>();
+                attack5.CreateTargetPointer(sl5);
                 break;
 
             case 1: // 右斜め上
                 GameObject sl2 = Instantiate(sickle);
                 sl2.transform.position = transform.position + (directions.topRight * (sickleRange + 1));
+                sl2.transform.eulerAngles = new Vector3(30, -90, -20);
 
                 var attack2 = sickleJudgeImage.GetComponent<CreatePointerController>();
                 attack2.CreateTargetPointer(sl2);
 
+                GameObject sl4 = Instantiate(sickle);
+                sl4.transform.position = transform.position + (directions.topLeft * (sickleRange + 1));
+                sl4.transform.eulerAngles = new Vector3(-30, -90, -20);
+
+                var attack4 = sickleJudgeImage.GetComponent<CreatePointerController>();
+                attack4.CreateTargetPointer(sl4);
+
                 break;
 
-            case 2: // 上
+            case 0: // 上
                 GameObject sl3 = Instantiate(sickle);
                 sl3.transform.position = transform.position + (directions.top * sickleRange);
+                sl3.transform.eulerAngles = new Vector3(0, -90, -20);
 
                 var attack3 = sickleJudgeImage.GetComponent<CreatePointerController>();
                 attack3.CreateTargetPointer(sl3);
@@ -271,19 +321,21 @@ public class EnemyBossController : MonoBehaviour
                 break;
 
             case 3: // 左斜め上
-                GameObject sl4 = Instantiate(sickle);
-                sl4.transform.position = transform.position + (directions.topLeft * (sickleRange+ 1));
+                //GameObject sl4 = Instantiate(sickle);
+                //sl4.transform.position = transform.position + (directions.topLeft * (sickleRange+ 1));
+                //sl4.transform.eulerAngles = new Vector3(-30, -90, -20);
 
-                var attack4 = sickleJudgeImage.GetComponent<CreatePointerController>();
-                attack4.CreateTargetPointer(sl4);
+                //var attack4 = sickleJudgeImage.GetComponent<CreatePointerController>();
+                //attack4.CreateTargetPointer(sl4);
                 break;
 
             case 4: // 左
-                GameObject sl5 = Instantiate(sickle);
-                sl5.transform.position = transform.position + (directions.left * sickleRange);
+                //GameObject sl5 = Instantiate(sickle);
+                //sl5.transform.position = transform.position + (directions.left * sickleRange);
+                //sl5.transform.eulerAngles = new Vector3(-70, -90, 20);
 
-                var attack5 = sickleJudgeImage.GetComponent<CreatePointerController>();
-                attack5.CreateTargetPointer(sl5);
+                //var attack5 = sickleJudgeImage.GetComponent<CreatePointerController>();
+                //attack5.CreateTargetPointer(sl5);
                 break;
         }
     }
@@ -294,9 +346,12 @@ public class EnemyBossController : MonoBehaviour
     {
         state = State.AssaultAttack;
         startPosition = transform.position;
+
     }
     private void ConditionAssaultAttackUpdate()
     {
+        m_animator.SetFloat(hashSpeed, 0.5f);
+
         // プレイヤーに向かう方向
         var dir = player.transform.position - transform.position;
         float lengthSq = dir.x * dir.x + dir.y * dir.y + dir.z * dir.z;
@@ -325,6 +380,8 @@ public class EnemyBossController : MonoBehaviour
         attackEndTimer = attackEndTimerMax;
 
         slashAngle = Random.Range(0.0f, 360.0f);
+
+        m_animator.SetTrigger(hashAttack);
     }
 
     private void ConditionAssaultAttackAnimUpdate()
@@ -348,6 +405,8 @@ public class EnemyBossController : MonoBehaviour
         state = State.BossComeBack;
         backTimer = 0.0f;
         backStartPosition = transform.position;
+
+        m_animator.SetTrigger(hashRevival);
     }
     private void ConditionBossComeBackUpdate()
     {
@@ -358,8 +417,11 @@ public class EnemyBossController : MonoBehaviour
 
         var vec = startPosition - pos;
         float length = Mathf.Sqrt(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z);
-        if (length < 0.01f) ConditionIdleState();
-
+        if (length < 0.01f)
+        {
+            ConditionIdleState();
+            m_animator.SetTrigger("Idle");
+        }
         backTimer += Time.deltaTime;
     }
 
@@ -373,6 +435,8 @@ public class EnemyBossController : MonoBehaviour
 
         downStartPosition = transform.position;
         downPosition = new Vector3(transform.position.x, transform.position.y + 0.5f, player.transform.position.z + 6);
+
+        m_animator.SetTrigger(hashDown);
     }
     private void ConditionDownUpdate()
     {

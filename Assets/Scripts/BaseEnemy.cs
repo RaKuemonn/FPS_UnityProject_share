@@ -5,7 +5,10 @@ using UnityEngine;
 public class BaseEnemy : MonoBehaviour
 {
     // Še©‚Åİ’è
+    [SerializeField]
     protected float m_hp;
+    public float GetHP() { return m_hp; }
+    public void SetHP(float hp) { m_hp = hp; }
 
     // ù‰ñ
     protected float m_turnAngle = 1.0f;

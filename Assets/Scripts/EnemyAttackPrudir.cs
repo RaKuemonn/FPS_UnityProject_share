@@ -43,7 +43,7 @@ public class EnemyAttackPrudir : MonoBehaviour
             out var uiLocalPos
         );
 
-        Debug.Log(uiLocalPos);
+        //Debug.Log(uiLocalPos);
 
         // RectTransformのローカル座標を更新
          rect.anchoredPosition = uiLocalPos;
