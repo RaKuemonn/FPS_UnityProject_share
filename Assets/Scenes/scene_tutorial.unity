@@ -280,6 +280,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: koumori
       objectReference: {fileID: 0}
+    - target: {fileID: 5515697536084552901, guid: 552b00572d8c0324aa43edfe8c838077, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 552b00572d8c0324aa43edfe8c838077, type: 3}
 --- !u!1 &185206144
