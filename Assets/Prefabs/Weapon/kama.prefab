@@ -141,7 +141,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3335757649626458536
 Transform:
   m_ObjectHideFlags: 0
@@ -460,7 +460,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 1329512277361396988, guid: ed9f8eebeb251b94ca4d47b20a7822b3, type: 3}
+  m_Mesh: {fileID: 1329512277361396988, guid: 23200684340f82348b5732f9167913fd, type: 3}
   m_Bones:
   - {fileID: 8148624583200225308}
   m_BlendShapeWeights: []
