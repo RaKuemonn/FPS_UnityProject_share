@@ -7,15 +7,20 @@ using UnityEngine.InputSystem;
 
 public class SlashImageController : MonoBehaviour
 {
-    [SerializeField]
-    public BoxCollider2D collider_;
+    [SerializeField] public BoxCollider2D collider_;
+    [SerializeField] private AudioClip clip;
     private Image image;
+
 
     [SerializeField] private RectTransform child_rect_transform;
 
     // Start is called before the first frame update
     void Start()
-    {
+    { 
+        // âπÇçƒê∂
+        GetComponent<AudioSource>().PlayOneShot(clip);
+
+
         var color = GetComponent<Image>().color;
         image = GetComponent<Image>();
         image.color = new Color(color.r, color.g, color.b, 225.0f);
@@ -174,11 +179,13 @@ public class SlashImageController : MonoBehaviour
 
                     Action<GameObject, Vector3> Cutted = (GameObject object_, Vector3 normal_direction_) =>
                     {
+
+#if UNITY_EDITOR
                         if (object_ == null)
                         {
                             Debug.Log("nulllllllllllllllllllllllll");
                         }
-
+#endif
 
                         // éÄñSèàóù
                         const float impulse_power = 5f;
@@ -187,8 +194,8 @@ public class SlashImageController : MonoBehaviour
                         object_?.GetComponent<BaseEnemy>().OnCutted(impulse);
                     };
 
-                    Cutted?.Invoke(original, -1.0f * normal);
-                    Cutted?.Invoke(copy, normal);
+                    Cutted.Invoke(original, -1.0f * normal);
+                    Cutted.Invoke(copy, normal);
 
                 }
 

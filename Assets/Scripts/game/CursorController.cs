@@ -23,7 +23,6 @@ public class CursorController : MonoBehaviour
     private InputAction moveL;
     private InputAction moveR;
 
-    private AudioClip clip;
     private bool now_clip_played;
     private float chain_kill_timer; // 数値が正の値の時,切り返すことが出来る
 
@@ -40,8 +39,6 @@ public class CursorController : MonoBehaviour
 
         moveL   = GetComponent<PlayerInput>().actions["Move"];
         moveR   = GetComponent<PlayerInput>().actions["Direction"]; ;
-
-        clip    = GetComponent<AudioSource>().clip;
         now_clip_played = false;
         chain_kill_timer = 0.0f;
     }
@@ -139,10 +136,6 @@ public class CursorController : MonoBehaviour
                 break;
             }
 #endif
-
-            // 音を再生
-            GetComponent<AudioSource>().PlayOneShot(clip);
-
             // ����̓��͒l��p�x(degree)�Ƃ��ĎZ�o����
             var radian = (_input.y > 0f) ?
             Mathf.Acos(Vector2.Dot(_input, Vector2.right)) :
