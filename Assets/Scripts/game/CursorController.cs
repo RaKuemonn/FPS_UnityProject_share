@@ -35,8 +35,8 @@ public class CursorController : MonoBehaviour
     void Start()
     {
         rect    = GetComponent<RectTransform>();
-        transform.localPosition 
-                = new Vector2(Screen.width / 2f, Screen.height / 2f);
+        //transform.localPosition 
+        //        = new Vector2(Screen.width / 2f, Screen.height / 2f);
         offset  = new Vector2(rect.sizeDelta.x / 2.0f, rect.sizeDelta.y / 2.0f);
 
 
