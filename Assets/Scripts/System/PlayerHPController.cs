@@ -15,7 +15,7 @@ public class PlayerHPController : MonoBehaviour
 
     private Tween redGaugeTween;
 
-    private float timer = 0f;
+    //private float timer = 0f;
 
     public void Start()
     {
@@ -33,17 +33,17 @@ public class PlayerHPController : MonoBehaviour
         /// “®ìŠm”F
         ///
         ////////////////////////////////////////////////////
-        timer += Time.deltaTime;
-        if (timer % 5f > 1f)
-        {
-            OnDamaged(30f);
-            timer = 0f;
-        }
-
-        if (masterData.PlayerStatus.current_hp <= 0f)
-        {
-            masterData.PlayerStatus.current_hp = masterData.PlayerStatus.max_hp;
-        }
+        //timer += Time.deltaTime;
+        //if (timer % 5f > 1f)
+        //{
+        //    OnDamaged(30f);
+        //    timer = 0f;
+        //}
+        //
+        //if (masterData.PlayerStatus.current_hp <= 0f)
+        //{
+        //    masterData.PlayerStatus.current_hp = masterData.PlayerStatus.max_hp;
+        //}
 
     }
     

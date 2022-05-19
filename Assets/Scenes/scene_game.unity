@@ -123,6 +123,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &60031026 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1367096851364536872, guid: d4282ce039a860b4fb465c22dc98037d, type: 3}
+  m_PrefabInstance: {fileID: 639490372}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f492951bd5d0af748b7efebf490e8dc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &63459308 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 998728491823425926, guid: 42d6d441e70a0af44bc9eb7514390bcf, type: 3}
@@ -185,7 +196,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1382974105}
+  - {fileID: 1479491668}
   - {fileID: 272217805}
   - {fileID: 1894009553}
   m_Father: {fileID: 0}
@@ -198,6 +209,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 164081676}
     m_Modifications:
+    - target: {fileID: 7649940341116626734, guid: e2eee8935c2722342903c620af0b5d77, type: 3}
+      propertyPath: m_hp
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7649940341116626734, guid: e2eee8935c2722342903c620af0b5d77, type: 3}
       propertyPath: damageArea
       value: 
@@ -607,7 +622,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7467039292448382881, guid: 4a05defeec96e8d40b3d4310587ea3b3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 75
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 7467039292448382881, guid: 4a05defeec96e8d40b3d4310587ea3b3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -718,6 +733,10 @@ PrefabInstance:
       propertyPath: move_speed
       value: 3.6
       objectReference: {fileID: 0}
+    - target: {fileID: 4163034832185179701, guid: 86bd9ef0b2a96d348aaa82b73226105f, type: 3}
+      propertyPath: hpController
+      value: 
+      objectReference: {fileID: 60031026}
     - target: {fileID: 4163034832185179701, guid: 86bd9ef0b2a96d348aaa82b73226105f, type: 3}
       propertyPath: playerStatus
       value: 
@@ -1013,13 +1032,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8133355340429240342, guid: e410fd0783994dc45adf10a46a10158b, type: 3}
   m_PrefabInstance: {fileID: 1279699008}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1382974104
+--- !u!1001 &1479491667
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 164081676}
     m_Modifications:
+    - target: {fileID: 7649940341116626734, guid: e2eee8935c2722342903c620af0b5d77, type: 3}
+      propertyPath: m_hp
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7649940341116626734, guid: e2eee8935c2722342903c620af0b5d77, type: 3}
       propertyPath: damageArea
       value: 
@@ -1034,7 +1057,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9102458405272874589, guid: e2eee8935c2722342903c620af0b5d77, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9102458405272874589, guid: e2eee8935c2722342903c620af0b5d77, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1074,10 +1097,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2eee8935c2722342903c620af0b5d77, type: 3}
---- !u!4 &1382974105 stripped
+--- !u!4 &1479491668 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9102458405272874589, guid: e2eee8935c2722342903c620af0b5d77, type: 3}
-  m_PrefabInstance: {fileID: 1382974104}
+  m_PrefabInstance: {fileID: 1479491667}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1640069246
 GameObject:
@@ -1139,7 +1162,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7467039292448382881, guid: 4a05defeec96e8d40b3d4310587ea3b3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 55
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7467039292448382881, guid: 4a05defeec96e8d40b3d4310587ea3b3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1223,6 +1246,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 164081676}
     m_Modifications:
+    - target: {fileID: 7649940341116626734, guid: e2eee8935c2722342903c620af0b5d77, type: 3}
+      propertyPath: m_hp
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7649940341116626734, guid: e2eee8935c2722342903c620af0b5d77, type: 3}
       propertyPath: damageArea
       value: 
@@ -2052,7 +2079,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7467039292448382881, guid: 4a05defeec96e8d40b3d4310587ea3b3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 35
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 7467039292448382881, guid: 4a05defeec96e8d40b3d4310587ea3b3, type: 3}
       propertyPath: m_LocalRotation.w

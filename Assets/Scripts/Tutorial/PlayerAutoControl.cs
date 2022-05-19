@@ -12,20 +12,13 @@ public class PlayerAutoControl : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera m_virtual_main_camera;       // cinemachine‚ÌvirtualCamera‚ÌQÆ
     [SerializeField] private float m_fov_state_run = 90f;
     [SerializeField] private float m_fov_state_stop = 60f;
-
-    [SerializeField] private PlayerStatus playerStatus;
-    public float current_hp;
-    public float max_hp;
+    
+    [SerializeField] private PlayerHPController hpController;
 
     private float speed_rate_lerping;
 
     void Start()
     {
-        // ‘Ì—ÍÅ‘å’l
-        current_hp = playerStatus.max_hp;
-        max_hp = playerStatus.max_hp;
-
-
         speed_rate_lerping = speed_rate;
     }
 
@@ -73,4 +66,8 @@ public class PlayerAutoControl : MonoBehaviour
         }
     }
 
+    public void OnDamage(float damage_)
+    {
+        hpController.OnDamaged(damage_);
+    }
 }

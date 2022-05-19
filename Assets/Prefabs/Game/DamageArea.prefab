@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7467039292448382881}
   - component: {fileID: 7467039292448382882}
+  - component: {fileID: -2066048799966368649}
   m_Layer: 0
   m_Name: DamageArea
   m_TagString: Untagged
@@ -44,3 +45,16 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10, y: 10, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-2066048799966368649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7467039292448382880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c76df4f9a2a1d4f46bb93dc3169048cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 2
