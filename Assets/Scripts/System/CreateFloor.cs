@@ -61,11 +61,13 @@ public class CreateFloor : MonoBehaviour
 #else
                     // ÉQÅ[ÉÄéûÇÕå©Ç¶Ç»Ç¢ÇÊÇ§Ç…Ç∑ÇÈ
                     material.color = new Color(0f,0f,0f,0f); // ìßñæ
+                    floor.GetComponent<Renderer>().enabled = false;
+
 #endif
                 }
-                
 
-                if(FloorInfo.FloorData.move_speed_state != FloorInfoMoveSpeed.Stop)
+
+                if (FloorInfo.FloorData.move_speed_state != FloorInfoMoveSpeed.Stop)
                 {continue;}
                 
 
