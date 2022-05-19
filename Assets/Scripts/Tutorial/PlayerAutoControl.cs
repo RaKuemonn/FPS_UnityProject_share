@@ -46,6 +46,7 @@ public class PlayerAutoControl : MonoBehaviour
         var noiseComponent = m_virtual_main_camera
             .GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
 
+        if(noiseComponent == null) return;
 
         noiseComponent.m_FrequencyGain = 5; // ŒÅ’è’l
 
