@@ -89,6 +89,8 @@ public class EnemyBossController : MonoBehaviour
     private bool attackB = false;
     public bool GetAttackBar() { return attackB; }
 
+    private float hpMax;
+
     // ボスダウン状態
     //private bool m_down = false;
 
@@ -128,6 +130,7 @@ public class EnemyBossController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        hpMax = hp;
         ConditionIdleState();
 
         m_animator = GetComponent<Animator>();
@@ -177,11 +180,20 @@ public class EnemyBossController : MonoBehaviour
         // 時間が経過したら鎌を投げる
         if (idleTimer < 0)
         {
-            ConditionSickleAttackBerserkerState();
-            //int test = Random.Range(0, 3);
-            //if(test == 0) ConditionSickleAttackState();
-            //if (test == 1) ConditionSickleAttackBerserkerState();
-            //if (test == 2) ConditionAssaultAttackState();
+            //ConditionSickleAttackBerserkerState();
+            if (hp < hpMax / 2)
+            {
+                int test = Random.Range(0, 3);
+                if (test == 0) ConditionSickleAttackState();
+                if (test == 1) ConditionSickleAttackBerserkerState();
+                if (test == 2) ConditionAssaultAttackState();
+            }
+            else
+            {
+                int test = Random.Range(0, 2);
+                if (test == 0) ConditionSickleAttackState();
+                if (test == 1) ConditionAssaultAttackState();
+            }
         }
 
         if (angle > Mathf.PI) flySpeed = flyDown;
