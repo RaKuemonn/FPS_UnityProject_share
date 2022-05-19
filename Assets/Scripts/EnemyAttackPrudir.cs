@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyAttackPrudir : MonoBehaviour
 {
@@ -24,12 +25,17 @@ public class EnemyAttackPrudir : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // if (m_timer < 0)
-        // {
-        if (!m_gameObject)
+        var mesh = m_gameObject.transform.GetChild(2).GetComponent<SkinnedMeshRenderer>();
+        if (!mesh.enabled)
         {
-            Destroy(this.gameObject);
+            var image = GetComponent<Image>();
+            image.enabled = false;
             return;
+        }
+        else
+        {
+            var image = GetComponent<Image>();
+            image.enabled = true;
         }
 
         // オブジェクトのワールド座標→スクリーン座標変換
