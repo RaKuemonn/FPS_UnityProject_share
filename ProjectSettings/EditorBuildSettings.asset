@@ -23,14 +23,14 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/scene_loading.unity
     guid: 9329ff6dc5eece9459b7df6dc5dff3a9
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/scene_naruse.unity
     guid: fc8599587e1ea334991cde47eca88773
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/scene_nisio.unity
     guid: 4bdaf6f41a50cbd4c8283f7b75ab4652
   - enabled: 0
-    path: Assets/Scenes/Playground.unity
-    guid: 707acc8dffb72b144bb1ffbe1c965f3d
+    path: 
+    guid: 00000000000000000000000000000000
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 9e7be553448fa2546aea5752021cbcf7, type: 2}

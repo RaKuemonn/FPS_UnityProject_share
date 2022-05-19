@@ -41,6 +41,8 @@ public class MeshCut : MonoBehaviour
     static UnsafeList<UnsafeList<int>> _frontSubmeshIndices = new UnsafeList<UnsafeList<int>>(SIZE * 3);
     static UnsafeList<UnsafeList<int>> _backSubmeshIndices = new UnsafeList<UnsafeList<int>>(SIZE * 3);
 
+
+
     /// <summary>
     /// <para>gameObjectを切断して2つのMeshにして返します.1つ目のMeshが切断面の法線に対して表側, 2つ目が裏側です.</para>
     /// <para>何度も切るようなオブジェクトでも頂点数が増えないように処理をしてあるほか, 簡単な物体なら切断面を縫い合わせることもできます</para>
@@ -254,39 +256,39 @@ public class MeshCut : MonoBehaviour
         frontMesh.name = "Split Mesh front";
 
         //unity2019.4以降ならこっちを使うだけで2割程度速くなる(unity2019.2以前は対応していない.2019.3は知らない)
-        //int fcount = _frontVertices.unsafe_count;//unity2019.4以降
-        //frontMesh.SetVertices(_frontVertices.unsafe_array, 0, fcount);//unity2019.4以降
-        //frontMesh.SetNormals(_frontNormals.unsafe_array, 0, fcount);//unity2019.4以降
-        //frontMesh.SetUVs(0, _frontUVs.unsafe_array, 0, fcount);//unity2019.4以降
-        frontMesh.vertices = _frontVertices.ToArray();//unity2019.2以前
-        frontMesh.normals = _frontNormals.ToArray();//unity2019.2以前
-        frontMesh.uv = _frontUVs.ToArray();//unity2019.2以前
+        int fcount = _frontVertices.unsafe_count;//unity2019.4以降
+        frontMesh.SetVertices(_frontVertices.unsafe_array, 0, fcount);//unity2019.4以降
+        frontMesh.SetNormals(_frontNormals.unsafe_array, 0, fcount);//unity2019.4以降
+        frontMesh.SetUVs(0, _frontUVs.unsafe_array, 0, fcount);//unity2019.4以降
+        //frontMesh.vertices = _frontVertices.ToArray();//unity2019.2以前
+        //frontMesh.normals = _frontNormals.ToArray();//unity2019.2以前
+        //frontMesh.uv = _frontUVs.ToArray();//unity2019.2以前
 
 
 
         frontMesh.subMeshCount = _frontSubmeshIndices.Count;
         for (int i = 0; i < _frontSubmeshIndices.Count; i++)
         {
-            frontMesh.SetIndices(_frontSubmeshIndices[i].ToArray(), MeshTopology.Triangles, i, false);//unity2019.2以前
-            //frontMesh.SetIndices(_frontSubmeshIndices[i].unsafe_array, 0, _frontSubmeshIndices[i].unsafe_count, MeshTopology.Triangles, i, false);//unity2019.4以降
+            //frontMesh.SetIndices(_frontSubmeshIndices[i].ToArray(), MeshTopology.Triangles, i, false);//unity2019.2以前
+            frontMesh.SetIndices(_frontSubmeshIndices[i].unsafe_array, 0, _frontSubmeshIndices[i].unsafe_count, MeshTopology.Triangles, i, false);//unity2019.4以降
         }
 
 
         Mesh backMesh = new Mesh();
         backMesh.name = "Split Mesh back";
-        //int bcount = _backVertices.unsafe_count;//unity2019.4以降
-        //backMesh.SetVertices(_backVertices.unsafe_array, 0, bcount);//unity2019.4以降
-        //backMesh.SetNormals(_backNormals.unsafe_array, 0, bcount);//unity2019.4以降
-        //backMesh.SetUVs(0, _backUVs.unsafe_array, 0, bcount);//unity2019.4以降
-        backMesh.vertices = _backVertices.ToArray();//unity2019.2以前
-        backMesh.normals = _backNormals.ToArray();//unity2019.2以前
-        backMesh.uv = _backUVs.ToArray();//unity2019.2以前
+        int bcount = _backVertices.unsafe_count;//unity2019.4以降
+        backMesh.SetVertices(_backVertices.unsafe_array, 0, bcount);//unity2019.4以降
+        backMesh.SetNormals(_backNormals.unsafe_array, 0, bcount);//unity2019.4以降
+        backMesh.SetUVs(0, _backUVs.unsafe_array, 0, bcount);//unity2019.4以降
+        //backMesh.vertices = _backVertices.ToArray();//unity2019.2以前
+        //backMesh.normals = _backNormals.ToArray();//unity2019.2以前
+        //backMesh.uv = _backUVs.ToArray();//unity2019.2以前
 
         backMesh.subMeshCount = _backSubmeshIndices.Count;
         for (int i = 0; i < _backSubmeshIndices.Count; i++)
         {
-            backMesh.SetIndices(_backSubmeshIndices[i].ToArray(), MeshTopology.Triangles, i, false);//unity2019.2以前
-            //backMesh.SetIndices(_backSubmeshIndices[i].unsafe_array, 0, _backSubmeshIndices[i].unsafe_count, MeshTopology.Triangles, i, false);//unity2019.4以降
+            //backMesh.SetIndices(_backSubmeshIndices[i].ToArray(), MeshTopology.Triangles, i, false);//unity2019.2以前
+            backMesh.SetIndices(_backSubmeshIndices[i].unsafe_array, 0, _backSubmeshIndices[i].unsafe_count, MeshTopology.Triangles, i, false);//unity2019.4以降
         }
 
 
@@ -308,9 +310,8 @@ public class MeshCut : MonoBehaviour
     {
 
         var SkinnedMeshRender = targetGameObject.GetComponentInParentAndChildren<SkinnedMeshRenderer>();
-        if(SkinnedMeshRender) 
+        if(SkinnedMeshRender)
         {
-
 
             if (!SkinnedMeshRender)
             {
@@ -360,17 +361,28 @@ public class MeshCut : MonoBehaviour
             }
 
 
-            SkinnedMeshRender.sharedMesh = originMesh;
+            {
+                //originMesh.bindposes = SkinnedMeshRender.sharedMesh.bindposes;
+                //originMesh.boneWeights = SkinnedMeshRender.sharedMesh.boneWeights;
+
+                SkinnedMeshRender.sharedMesh = originMesh;
+
+            }
 
             //GameObject fragment = new GameObject("Fragment", typeof(MeshFilter), typeof(MeshRenderer));
             Transform originTransform = targetGameObject.transform;
             GameObject fragment = Instantiate(targetGameObject, originTransform.position, originTransform.rotation, originTransform.parent);
             fragment.transform.parent = null;
+            var fragment_SkinnedMeshRenderer = fragment.GetComponentInParentAndChildren<SkinnedMeshRenderer>();
             {
-                var fragment_SkinnedMeshRenderer = fragment.GetComponentInParentAndChildren<SkinnedMeshRenderer>();
+                //fragMesh.bindposes = fragment_SkinnedMeshRenderer.sharedMesh.bindposes;
+                //fragMesh.boneWeights = fragment_SkinnedMeshRenderer.sharedMesh.boneWeights;
+
                 fragment_SkinnedMeshRenderer.sharedMesh = fragMesh;
                 fragment_SkinnedMeshRenderer.sharedMaterials = SkinnedMeshRender.sharedMaterials;
+                
             }
+            
 
             if (targetGameObject.GetComponent<MeshCollider>())
             {
@@ -464,16 +476,7 @@ public class MeshCut : MonoBehaviour
             return (fragment, targetGameObject);
         }
     }
-
-
-
-    //ポリゴンを切断
-    //ポリゴンは切断面の表側と裏側に分割される.
-    //このとき三角ポリゴンを表面から見て, なおかつ切断面の表側にある頂点が下に来るように見て,
-    //三角形の左側の辺を形成する点をf0,b0, 右側にある辺を作る点をf1,b1とする.(fは表側にある点でbは裏側)(頂点は3つなので被りが存在する)
-    //ここでポリゴンの向きを決めておくと後々とても便利
-    //以降左側にあるものは0,右側にあるものは1をつけて扱う(例外はあるかも)
-    //(ひょっとすると実際の向きは逆かもしれないけどvertexIndicesと同じまわり方で出力してるので逆でも問題はない.ここでは3点が時計回りで並んでいると仮定して全部の)
+    
     private static void Sepalate(bool[] sides, int[] vertexIndices, int submesh)
     {
         int f0 = 0, f1 = 0, b0 = 0, b1 = 0; //頂点のindex番号を格納するのに使用

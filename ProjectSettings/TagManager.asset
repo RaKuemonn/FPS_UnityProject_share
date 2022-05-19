@@ -18,6 +18,7 @@ TagManager:
   - Enviroments
   - Sickle
   - SickleThrowing
+  - RootBone
   layers:
   - Default
   - TransparentFX

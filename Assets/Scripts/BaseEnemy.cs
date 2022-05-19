@@ -9,6 +9,9 @@ public class BaseEnemy : MonoBehaviour
     // Še©‚Åİ’è
     [SerializeField]
     protected float m_hp;
+
+    [SerializeField] protected float m_damage;
+
     public float GetHP() { return m_hp; }
     public void SetHP(float hp) { m_hp = hp; }
 
@@ -131,6 +134,8 @@ public class BaseEnemy : MonoBehaviour
     /// 
     public void OnCutted(Vector3 impulse_)
     {
+        // €–Sˆ—
+        OnDead();
 
         var rigidbody = GetComponent<Rigidbody>();
 
@@ -153,12 +158,12 @@ public class BaseEnemy : MonoBehaviour
 
     void OnDestroy()
     {
-        OnDead();
+        OnDeadEvent?.Invoke(this, EventArgs.Empty);
     }
 
     // €–Sˆ— (private)
-    private void OnDead()
+    public virtual void OnDead()
     {
-        OnDeadEvent?.Invoke(this,EventArgs.Empty);
+        IsDeath = true;
     }
 }

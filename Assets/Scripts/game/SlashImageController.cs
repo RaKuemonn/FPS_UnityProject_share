@@ -7,15 +7,22 @@ using UnityEngine.InputSystem;
 
 public class SlashImageController : MonoBehaviour
 {
-    [SerializeField]
-    public BoxCollider2D collider_;
+    [SerializeField] private AudioClip clip;
     private Image image;
+
+    public float damage;    // Slashの生成時にCursorControllerで設定される。
 
     [SerializeField] private RectTransform child_rect_transform;
 
+    [SerializeField] private PlayerStatus playerStatus;
+
     // Start is called before the first frame update
     void Start()
-    {
+    { 
+        // 音を再生
+        GetComponent<AudioSource>().PlayOneShot(clip);
+
+
         var color = GetComponent<Image>().color;
         image = GetComponent<Image>();
         image.color = new Color(color.r, color.g, color.b, 225.0f);
@@ -74,10 +81,6 @@ public class SlashImageController : MonoBehaviour
                 Camera.main.ScreenPointToRay(screen_positions[5]),  // 0~5
             };
 
-            
-            // PlayerStatusのSwordAreaを参照してない
-            const float sword_area = 10f;
-
             Collider result_hit_collider = null;           // 最終的に使用する当たり判定の結果
             Ray result_hit_ray = new Ray();
             // 当たり判定処理
@@ -87,7 +90,7 @@ public class SlashImageController : MonoBehaviour
                 foreach (var ray in rays)
                 {
                     RaycastHit hit;
-                    if (Physics.Raycast(ray, out hit, sword_area) /* Rayを投射 */ == false)
+                    if (Physics.Raycast(ray, out hit, playerStatus.sword_area_radius) /* Rayを投射 */ == false)
                     {
 #if UNITY_EDITOR
                         Debug.Log("Miss");
@@ -130,18 +133,22 @@ public class SlashImageController : MonoBehaviour
             // 当たっている敵に処理を行う
             BaseEnemy enemy = result_hit_collider.gameObject.GetComponent<BaseEnemy>();
 
-            
+            var current_enemy_hp = enemy.GetHP() - damage;
+
             // 体力があれば
-            if (false)
+            if (current_enemy_hp > 0f)
             {
                 // ダメージを与える処理
                 // (多分関数呼び出しか、コールバックさせる。)
-                // BaseEnemyにDamage!!!ってvirtual関数つくれ！！！！！！！！！！！！！！！！　（派生先で受けるダメージが変わる）
+                enemy.SetHP(current_enemy_hp);
+
+
             }
             // 体力がなければ
             else
             {
-                enemy.IsDeath = true;
+                enemy.OnDead();
+                enemy.SetHP(0f);
 
                 // 切断処理
                 {
@@ -161,7 +168,6 @@ public class SlashImageController : MonoBehaviour
                         normal = Vector3.Cross(left, right).normalized;
                     }
 
-
                     var result =
                         MeshCut.CutMesh(
                             enemy.gameObject,                                          // 斬るオブジェクト
@@ -172,14 +178,17 @@ public class SlashImageController : MonoBehaviour
                     var original = result.original_anitiNormalside;
                     var copy = result.copy_normalside;
 
+
+
                     Action<GameObject, Vector3> Cutted = (GameObject object_, Vector3 normal_direction_) =>
                     {
+
+#if UNITY_EDITOR
                         if (object_ == null)
                         {
                             Debug.Log("nulllllllllllllllllllllllll");
                         }
-
-
+#endif
                         // 死亡処理
                         const float impulse_power = 5f;
                         var impulse = (result_hit_ray.direction + normal_direction_) * impulse_power;
@@ -187,13 +196,11 @@ public class SlashImageController : MonoBehaviour
                         object_?.GetComponent<BaseEnemy>().OnCutted(impulse);
                     };
 
-                    Cutted?.Invoke(original, -1.0f * normal);
-                    Cutted?.Invoke(copy, normal);
+                    Cutted.Invoke(original, -1.0f * normal);
+                    Cutted.Invoke(copy, normal);
 
                 }
 
-
-                
             }
         }
     }

@@ -34,6 +34,8 @@ public enum FloorInfoMoveSpeed
     SpeedDown,  // ‘¬“x‚ğ—‚Æ‚µn‚ß‚é°
 }
 
+#if UNITY_EDITOR
+
 [CustomPropertyDrawer(typeof(FloorData))]
 public class FloorDatDrawer : PropertyDrawer
 {
@@ -210,3 +212,5 @@ public static class PropertyDrawerUtility
         return height;
     }
 }
+
+#endif

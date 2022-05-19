@@ -12,6 +12,8 @@ public class PlayerAutoControl : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera m_virtual_main_camera;       // cinemachineÇÃvirtualCameraÇÃéQè∆
     [SerializeField] private float m_fov_state_run = 90f;
     [SerializeField] private float m_fov_state_stop = 60f;
+    
+    [SerializeField] private PlayerHPController hpController;
 
     private float speed_rate_lerping;
 
@@ -64,4 +66,8 @@ public class PlayerAutoControl : MonoBehaviour
         }
     }
 
+    public void OnDamage(float damage_)
+    {
+        hpController.OnDamaged(damage_);
+    }
 }

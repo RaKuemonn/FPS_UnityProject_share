@@ -9,6 +9,9 @@ public class CursorController : MonoBehaviour
     [SerializeField]
     private float cursor_speed = Screen.width;
 
+    [SerializeField] private float min_damage;
+    [SerializeField] private float max_damage;
+
     [SerializeField] private GameObject SlashPrefab;
 
     [SerializeField] private Camera currentCamera;
@@ -23,7 +26,6 @@ public class CursorController : MonoBehaviour
     private InputAction moveL;
     private InputAction moveR;
 
-    private AudioClip clip;
     private bool now_clip_played;
     private float chain_kill_timer; // 数値が正の値の時,切り返すことが出来る
 
@@ -40,8 +42,6 @@ public class CursorController : MonoBehaviour
 
         moveL   = GetComponent<PlayerInput>().actions["Move"];
         moveR   = GetComponent<PlayerInput>().actions["Direction"]; ;
-
-        clip    = GetComponent<AudioSource>().clip;
         now_clip_played = false;
         chain_kill_timer = 0.0f;
     }
@@ -139,10 +139,6 @@ public class CursorController : MonoBehaviour
                 break;
             }
 #endif
-
-            // 音を再生
-            GetComponent<AudioSource>().PlayOneShot(clip);
-
             // ����̓��͒l��p�x(degree)�Ƃ��ĎZ�o����
             var radian = (_input.y > 0f) ?
             Mathf.Acos(Vector2.Dot(_input, Vector2.right)) :
@@ -154,6 +150,7 @@ public class CursorController : MonoBehaviour
             // Slash�̐���
             //GameObject obj = Instantiate((GameObject)Resources.Load("Slash"));
             GameObject obj = Instantiate(SlashPrefab);
+            obj.GetComponent<SlashImageController>().damage = (chain_kill_timer >= 0.4f) ? max_damage : min_damage;
             var obj_rect = obj.GetComponent<RectTransform>();
             obj_rect.anchoredPosition   = new Vector2(transform.position.x, transform.position.y);
             obj_rect.eulerAngles        = new Vector3(0f, 0f, degree);
