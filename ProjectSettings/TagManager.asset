@@ -16,6 +16,7 @@ TagManager:
   - MessageRenderer
   - Dumy
   - Enviroments
+  - RootBone
   layers:
   - Default
   - TransparentFX

@@ -293,7 +293,7 @@ GameObject:
   - component: {fileID: 3798542687373353982}
   m_Layer: 0
   m_Name: pCube15
-  m_TagString: Untagged
+  m_TagString: RootBone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -549,6 +549,7 @@ GameObject:
   - component: {fileID: 6438706076105533671}
   - component: {fileID: -1543297752930389084}
   - component: {fileID: -3624442043704914739}
+  - component: {fileID: 7151648003012315725}
   m_Layer: 0
   m_Name: doragon
   m_TagString: Enemy
@@ -635,6 +636,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.1, y: 0.15, z: 0.2243229}
   m_Center: {x: 0, y: 0.08, z: -0.05}
+--- !u!114 &7151648003012315725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6168674603379083785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 169fdbdf66e038c438625792a68b791d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6513375450218546685
 GameObject:
   m_ObjectHideFlags: 0

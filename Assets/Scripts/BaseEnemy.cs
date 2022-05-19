@@ -131,6 +131,8 @@ public class BaseEnemy : MonoBehaviour
     /// 
     public void OnCutted(Vector3 impulse_)
     {
+        // €–Sˆ—
+        OnDead();
 
         var rigidbody = GetComponent<Rigidbody>();
 
@@ -153,12 +155,12 @@ public class BaseEnemy : MonoBehaviour
 
     void OnDestroy()
     {
-        OnDead();
+        OnDeadEvent?.Invoke(this, EventArgs.Empty);
     }
 
     // €–Sˆ— (private)
-    private void OnDead()
+    protected virtual void OnDead()
     {
-        OnDeadEvent?.Invoke(this,EventArgs.Empty);
+        IsDeath = true;
     }
 }

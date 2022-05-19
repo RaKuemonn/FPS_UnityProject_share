@@ -13,10 +13,19 @@ public class PlayerAutoControl : MonoBehaviour
     [SerializeField] private float m_fov_state_run = 90f;
     [SerializeField] private float m_fov_state_stop = 60f;
 
+    [SerializeField] private PlayerStatus playerStatus;
+    public float current_hp;
+    public float max_hp;
+
     private float speed_rate_lerping;
 
     void Start()
     {
+        // ‘Ì—ÍÅ‘å’l
+        current_hp = playerStatus.max_hp;
+        max_hp = playerStatus.max_hp;
+
+
         speed_rate_lerping = speed_rate;
     }
 

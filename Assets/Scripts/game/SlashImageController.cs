@@ -166,7 +166,6 @@ public class SlashImageController : MonoBehaviour
                         normal = Vector3.Cross(left, right).normalized;
                     }
 
-
                     var result =
                         MeshCut.CutMesh(
                             enemy.gameObject,                                          // 斬るオブジェクト
@@ -177,6 +176,8 @@ public class SlashImageController : MonoBehaviour
                     var original = result.original_anitiNormalside;
                     var copy = result.copy_normalside;
 
+
+
                     Action<GameObject, Vector3> Cutted = (GameObject object_, Vector3 normal_direction_) =>
                     {
 
@@ -186,7 +187,6 @@ public class SlashImageController : MonoBehaviour
                             Debug.Log("nulllllllllllllllllllllllll");
                         }
 #endif
-
                         // 死亡処理
                         const float impulse_power = 5f;
                         var impulse = (result_hit_ray.direction + normal_direction_) * impulse_power;
@@ -199,8 +199,6 @@ public class SlashImageController : MonoBehaviour
 
                 }
 
-
-                
             }
         }
     }

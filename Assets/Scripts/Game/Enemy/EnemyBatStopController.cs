@@ -6,6 +6,7 @@ public class EnemyBatStopController : BaseEnemy
 {
     private Animator m_animator;
 
+    [SerializeField] private GameObject damageArea;
 
     public enum StateBat
     {
@@ -42,5 +43,12 @@ public class EnemyBatStopController : BaseEnemy
     private void ConditionIdleUpdate()
     {
         m_animator.SetFloat("Move", 0.0f);
+    }
+
+    protected override void OnDead()
+    {
+        base.OnDead();
+
+        Destroy(damageArea);
     }
 }
