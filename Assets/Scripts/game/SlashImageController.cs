@@ -7,10 +7,10 @@ using UnityEngine.InputSystem;
 
 public class SlashImageController : MonoBehaviour
 {
-    [SerializeField] public BoxCollider2D collider_;
     [SerializeField] private AudioClip clip;
     private Image image;
 
+    public float damage;    // Slashの生成時にCursorControllerで設定される。
 
     [SerializeField] private RectTransform child_rect_transform;
 
@@ -135,18 +135,22 @@ public class SlashImageController : MonoBehaviour
             // 当たっている敵に処理を行う
             BaseEnemy enemy = result_hit_collider.gameObject.GetComponent<BaseEnemy>();
 
-            
+            var current_enemy_hp = enemy.GetHP() - damage;
+
             // 体力があれば
-            if (false)
+            if (current_enemy_hp > 0f)
             {
                 // ダメージを与える処理
                 // (多分関数呼び出しか、コールバックさせる。)
-                // BaseEnemyにDamage!!!ってvirtual関数つくれ！！！！！！！！！！！！！！！！　（派生先で受けるダメージが変わる）
+                enemy.SetHP(current_enemy_hp);
+
+
             }
             // 体力がなければ
             else
             {
-                enemy.IsDeath = true;
+                enemy.OnDead();
+                enemy.SetHP(0f);
 
                 // 切断処理
                 {

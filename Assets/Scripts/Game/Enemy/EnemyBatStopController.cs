@@ -45,7 +45,7 @@ public class EnemyBatStopController : BaseEnemy
         m_animator.SetFloat("Move", 0.0f);
     }
 
-    protected override void OnDead()
+    public override void OnDead()
     {
         base.OnDead();
 

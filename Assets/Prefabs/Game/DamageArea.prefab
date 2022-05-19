@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7467039292448382881}
   - component: {fileID: 7467039292448382882}
   - component: {fileID: -2066048799966368649}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: DamageArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,4 +57,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c76df4f9a2a1d4f46bb93dc3169048cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 2
+  damage: 1

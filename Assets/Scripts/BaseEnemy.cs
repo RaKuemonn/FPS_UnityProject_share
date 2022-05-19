@@ -159,7 +159,7 @@ public class BaseEnemy : MonoBehaviour
     }
 
     // €–Sˆ— (private)
-    protected virtual void OnDead()
+    public virtual void OnDead()
     {
         IsDeath = true;
     }

@@ -9,6 +9,9 @@ public class CursorController : MonoBehaviour
     [SerializeField]
     private float cursor_speed = Screen.width;
 
+    [SerializeField] private float min_damage;
+    [SerializeField] private float max_damage;
+
     [SerializeField] private GameObject SlashPrefab;
 
     [SerializeField] private Camera currentCamera;
@@ -147,6 +150,7 @@ public class CursorController : MonoBehaviour
             // Slash�̐���
             //GameObject obj = Instantiate((GameObject)Resources.Load("Slash"));
             GameObject obj = Instantiate(SlashPrefab);
+            obj.GetComponent<SlashImageController>().damage = (chain_kill_timer >= 0.4f) ? max_damage : min_damage;
             var obj_rect = obj.GetComponent<RectTransform>();
             obj_rect.anchoredPosition   = new Vector2(transform.position.x, transform.position.y);
             obj_rect.eulerAngles        = new Vector3(0f, 0f, degree);

@@ -352,6 +352,14 @@ PrefabInstance:
       value: -190
       objectReference: {fileID: 0}
     - target: {fileID: 7157484242586144629, guid: f0922fdd47673004198fbb11465e6504, type: 3}
+      propertyPath: max_damage
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7157484242586144629, guid: f0922fdd47673004198fbb11465e6504, type: 3}
+      propertyPath: min_damage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7157484242586144629, guid: f0922fdd47673004198fbb11465e6504, type: 3}
       propertyPath: currentCamera
       value: 
       objectReference: {fileID: 1892572234}
@@ -604,6 +612,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1640069247}
     m_Modifications:
+    - target: {fileID: -2066048799966368649, guid: 4a05defeec96e8d40b3d4310587ea3b3, type: 3}
+      propertyPath: damage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7467039292448382880, guid: 4a05defeec96e8d40b3d4310587ea3b3, type: 3}
       propertyPath: m_Name
       value: DamageArea (2)
@@ -1144,6 +1156,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1640069247}
     m_Modifications:
+    - target: {fileID: -2066048799966368649, guid: 4a05defeec96e8d40b3d4310587ea3b3, type: 3}
+      propertyPath: damage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7467039292448382880, guid: 4a05defeec96e8d40b3d4310587ea3b3, type: 3}
       propertyPath: m_Name
       value: DamageArea (1)
@@ -2061,6 +2077,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1640069247}
     m_Modifications:
+    - target: {fileID: -2066048799966368649, guid: 4a05defeec96e8d40b3d4310587ea3b3, type: 3}
+      propertyPath: damage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7467039292448382880, guid: 4a05defeec96e8d40b3d4310587ea3b3, type: 3}
       propertyPath: m_Name
       value: DamageArea
