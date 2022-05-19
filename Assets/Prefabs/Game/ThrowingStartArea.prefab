@@ -61,5 +61,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  RabbitThrowingPrefab: {fileID: 6668055286237365862, guid: 3ab274fadf5505f4abfb33a5dbbf9464, type: 3}
+  RabbitThrowingPrefab: {fileID: 7321371260630161484, guid: 911b5aea53d442c4b91682fdcc54bfd3, type: 3}
   playerAutoControl: {fileID: 0}
+  end_position: {x: 0, y: 0, z: 0}
+  parent: {fileID: 0}

@@ -49,6 +49,12 @@ public class PlayerAutoControl : MonoBehaviour
 
         noiseComponent.m_FrequencyGain = 5; // ŒÅ’è’l
 
+        noiseComponent.m_NoiseProfile.OrientationNoise[0].X.Frequency = Mathf.Lerp(0.22f, 0.25f, speed_rate_lerping);
+        noiseComponent.m_NoiseProfile.OrientationNoise[0].X.Amplitude = Mathf.Lerp(0f, 2.5f, speed_rate_lerping);
+        noiseComponent.m_NoiseProfile.OrientationNoise[0].X.Constant = true;
+
+        return;
+
         // “®‚¢‚Ä‚¢‚é‚È‚ç
         if (speed_rate > 0f)
         {
