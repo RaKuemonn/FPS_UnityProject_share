@@ -209,6 +209,13 @@ public class EnemyBatController : BaseEnemy
         if (m_animator.GetCurrentAnimatorStateInfo(0).IsName("stand_by"))
         {
             ConditionAttackEndState();
+
+            // プレイヤーにダメージを与える
+            GameObject
+                .FindGameObjectWithTag("Player")
+                .GetComponent<PlayerAutoControl>()
+                .OnDamage(m_damage);
+
             return;
         }
 

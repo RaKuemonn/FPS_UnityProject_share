@@ -1996,6 +1996,10 @@ PrefabInstance:
       propertyPath: m_dragon
       value: 
       objectReference: {fileID: 6168674603379083785, guid: c79b1811ab591974f9bae2f00cec6a25, type: 3}
+    - target: {fileID: 4782623867846737307, guid: 2a7fac130df041e47b952dc41f5de6a4, type: 3}
+      propertyPath: m_createLength
+      value: 53
+      objectReference: {fileID: 0}
     - target: {fileID: 4782623868239307773, guid: 2a7fac130df041e47b952dc41f5de6a4, type: 3}
       propertyPath: Enemies
       value: 
@@ -2004,6 +2008,10 @@ PrefabInstance:
       propertyPath: m_dragon
       value: 
       objectReference: {fileID: 6168674603379083785, guid: c79b1811ab591974f9bae2f00cec6a25, type: 3}
+    - target: {fileID: 4782623868239307773, guid: 2a7fac130df041e47b952dc41f5de6a4, type: 3}
+      propertyPath: m_createLength
+      value: 53
+      objectReference: {fileID: 0}
     - target: {fileID: 4782623868498633137, guid: 2a7fac130df041e47b952dc41f5de6a4, type: 3}
       propertyPath: Enemies
       value: 
@@ -2012,6 +2020,10 @@ PrefabInstance:
       propertyPath: m_dragon
       value: 
       objectReference: {fileID: 6168674603379083785, guid: c79b1811ab591974f9bae2f00cec6a25, type: 3}
+    - target: {fileID: 4782623868498633137, guid: 2a7fac130df041e47b952dc41f5de6a4, type: 3}
+      propertyPath: m_createLength
+      value: 53
+      objectReference: {fileID: 0}
     - target: {fileID: 4782623869895144615, guid: 2a7fac130df041e47b952dc41f5de6a4, type: 3}
       propertyPath: Enemies
       value: 
@@ -2020,6 +2032,10 @@ PrefabInstance:
       propertyPath: m_dragon
       value: 
       objectReference: {fileID: 6168674603379083785, guid: c79b1811ab591974f9bae2f00cec6a25, type: 3}
+    - target: {fileID: 4782623869895144615, guid: 2a7fac130df041e47b952dc41f5de6a4, type: 3}
+      propertyPath: m_createLength
+      value: 53
+      objectReference: {fileID: 0}
     - target: {fileID: 5579881670024795274, guid: 2a7fac130df041e47b952dc41f5de6a4, type: 3}
       propertyPath: m_RootOrder
       value: 1

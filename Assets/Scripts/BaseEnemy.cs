@@ -9,6 +9,9 @@ public class BaseEnemy : MonoBehaviour
     // äeé©Ç≈ê›íË
     [SerializeField]
     protected float m_hp;
+
+    [SerializeField] protected float m_damage;
+
     public float GetHP() { return m_hp; }
     public void SetHP(float hp) { m_hp = hp; }
 

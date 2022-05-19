@@ -14,6 +14,8 @@ public class SlashImageController : MonoBehaviour
 
     [SerializeField] private RectTransform child_rect_transform;
 
+    [SerializeField] private PlayerStatus playerStatus;
+
     // Start is called before the first frame update
     void Start()
     { 
@@ -79,10 +81,6 @@ public class SlashImageController : MonoBehaviour
                 Camera.main.ScreenPointToRay(screen_positions[5]),  // 0~5
             };
 
-            
-            // PlayerStatusのSwordAreaを参照してない
-            const float sword_area = 10f;
-
             Collider result_hit_collider = null;           // 最終的に使用する当たり判定の結果
             Ray result_hit_ray = new Ray();
             // 当たり判定処理
@@ -92,7 +90,7 @@ public class SlashImageController : MonoBehaviour
                 foreach (var ray in rays)
                 {
                     RaycastHit hit;
-                    if (Physics.Raycast(ray, out hit, sword_area) /* Rayを投射 */ == false)
+                    if (Physics.Raycast(ray, out hit, playerStatus.sword_area_radius) /* Rayを投射 */ == false)
                     {
 #if UNITY_EDITOR
                         Debug.Log("Miss");
