@@ -190,7 +190,7 @@ public class SlashImageController : MonoBehaviour
                         }
 #endif
                         // €–Sˆ—
-                        const float impulse_power = 5f;
+                        const float impulse_power = 8f;
                         var impulse = (result_hit_ray.direction + normal_direction_) * impulse_power;
 
                         object_?.GetComponent<BaseEnemy>().OnCutted(impulse);

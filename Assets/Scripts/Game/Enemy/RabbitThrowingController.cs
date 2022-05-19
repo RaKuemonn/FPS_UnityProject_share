@@ -7,17 +7,26 @@ public class RabbitThrowingController : BaseEnemy
     public PlayerAutoControl PlayerAutoControl;
     public Vector3 StartPosition;
 
+    private Rigidbody rigidbody;
+
     public float arrive_time;   // ThrowingStartAreaControlÇ≈ê›íË
     private float timer;
 
 
+
     void Start()
     {
+        rigidbody = GetComponent<Rigidbody>();
         timer = 0f;
     }
     
     void Update()
     {
+        if (IsDeath)
+        {
+            return;
+        }
+
         TranslatePosition();
 
         timer += Time.deltaTime;
@@ -37,13 +46,23 @@ public class RabbitThrowingController : BaseEnemy
             Mathf.Lerp(StartPosition.y, PlayerAutoControl.transform.position.y, rate),
             Mathf.Lerp(StartPosition.z, PlayerAutoControl.transform.position.z, rate));
 
-
-        Debug.Log(PlayerAutoControl.transform.position);
-        Debug.Log(StartPosition);
     }
 
     public override void OnDead()
     {
         base.OnDead();
+        GetComponent<Collider>().enabled = false;
+    }
+
+    void OnTriggerEnter(Collider collider)
+    {
+        if (collider.CompareTag("Player") == false) return;
+
+        collider
+            .gameObject
+            .GetComponent<PlayerAutoControl>()
+            .OnDamage(m_damage);
+
+        Destroy(gameObject);
     }
 }
