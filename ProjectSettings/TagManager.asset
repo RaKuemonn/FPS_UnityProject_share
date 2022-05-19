@@ -19,6 +19,7 @@ TagManager:
   - Sickle
   - SickleThrowing
   - RootBone
+  - ThrowingPoint
   layers:
   - Default
   - TransparentFX
