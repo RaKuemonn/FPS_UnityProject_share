@@ -81,6 +81,7 @@ SkinnedMeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 8711ef61a2ee62a47a23c3260049704f, type: 2}
+  - {fileID: 2100000, guid: 33309a3147ba225459584b3e110dd6bf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -526,6 +527,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8573927885528721814}
   - component: {fileID: -606808932288264362}
+  - component: {fileID: 5686577497116454385}
   - component: {fileID: 2436246271046104204}
   - component: {fileID: 2399382357495108614}
   m_Layer: 0
@@ -567,6 +569,22 @@ MonoBehaviour:
   timer: 7
   moveSpeed: 10
   boss: {fileID: 5030218871368432538, guid: 6c8c5929f4ac8b8479daf29786733107, type: 3}
+--- !u!114 &5686577497116454385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9058820572442604332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 451f690d01cfc5747b0130df99a23c71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obj: {fileID: 498084279620437975}
+  Initial_value: 2
+  End_value: -1
+  LostSpeed: 0.5
 --- !u!65 &2436246271046104204
 BoxCollider:
   m_ObjectHideFlags: 0

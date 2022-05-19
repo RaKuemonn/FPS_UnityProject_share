@@ -56,7 +56,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - TransparencyLevel: 0
+    - TransparencyLevel: 2
     - Vector1_4188755dd3bd4afd937889a343dbe07b: 5
     - Vector1_b2cc52c3f0894126afd5d68464f0fa31: 7500
     - Vector1_cedb0c154df44a26bd634a5630cb2199: 0.2
