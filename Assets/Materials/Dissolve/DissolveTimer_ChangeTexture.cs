@@ -28,7 +28,7 @@ public class DissolveTimer_ChangeTexture : MonoBehaviour
     bool test = false;
 
     // ƒfƒBƒ]ƒ‹ƒuŠ®—¹
-    bool complete;
+    bool complete = false;
 
     // Œo‰ßŠÔ‚ğŠi”[‚·‚é•Ï”
     float time = 0.0f;
