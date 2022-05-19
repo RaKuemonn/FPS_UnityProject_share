@@ -15,7 +15,47 @@ ModelImporter:
   - first:
       74: 2834516099664561033
     second: dawn
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Extract11_01
+    second: {fileID: 2100000, guid: 26c9dd2309ee49449b6d54cfe544ed55, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Extract11_03
+    second: {fileID: 2100000, guid: 91555b5cae8b00c48a9eaba3be970f74, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Extract4
+    second: {fileID: 2100000, guid: 2b0ed26143989c045b18b516a21d01b2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Extract6
+    second: {fileID: 2100000, guid: b2355ba6958691d4880b578627cebe39, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Extract8
+    second: {fileID: 2100000, guid: 3c11a35afcce1d04982d0b0de91a21c3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PM3D_Ring3D1
+    second: {fileID: 2100000, guid: a8e74a94e0ccca4458be0269579a366b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Recovered_Tool
+    second: {fileID: 2100000, guid: 9007ee4831c60f844be069b63b2c11e8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: body1
+    second: {fileID: 2100000, guid: 87ae0d41b4a501d4286fa6fdcae55b13, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
