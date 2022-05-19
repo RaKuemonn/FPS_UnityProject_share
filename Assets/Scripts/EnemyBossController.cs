@@ -11,6 +11,10 @@ public class EnemyBossController : MonoBehaviour
     private bool downFlag;
     public void SetDownFlag(bool set) { downFlag = set; }
 
+    // ダウンフラグ
+    private bool deathFlag;
+    public bool GetDownFlag() { return deathFlag; }
+
     // 武器表示Flag
     public bool weaponReflect = true;
 
@@ -77,7 +81,7 @@ public class EnemyBossController : MonoBehaviour
     private static readonly int hashSickleAttackBerserker = Animator.StringToHash("Attack3");
     private static readonly int hashDown = Animator.StringToHash("Down");
     private static readonly int hashRevival = Animator.StringToHash("Revival");
-    private static readonly int hashSpeed = Animator.StringToHash("velocity");
+    private static readonly int hashSpeed = Animator.StringToHash("Zensin");
 
     // ボスダウン状態
     //private bool m_down = false;
@@ -126,7 +130,9 @@ public class EnemyBossController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switch(state)
+        if (hp < 0) deathFlag = true;
+
+        switch (state)
         {
             // 待機
             case State.Idle: ConditionIdleUpdate();  break;
@@ -144,8 +150,7 @@ public class EnemyBossController : MonoBehaviour
             case State.Down: ConditionDownUpdate( ); break;
         }
         Debug.Log(state);
-      
-        
+
     }
 
     private void ConditionIdleState()
@@ -346,11 +351,17 @@ public class EnemyBossController : MonoBehaviour
     {
         state = State.AssaultAttack;
         startPosition = transform.position;
+        m_animator.SetTrigger(hashSpeed);
 
     }
     private void ConditionAssaultAttackUpdate()
     {
-        m_animator.SetFloat(hashSpeed, 0.5f);
+        if (deathFlag)
+        {
+            ConditionDeathState();
+            return;
+        }
+
 
         // プレイヤーに向かう方向
         var dir = player.transform.position - transform.position;
@@ -386,6 +397,13 @@ public class EnemyBossController : MonoBehaviour
 
     private void ConditionAssaultAttackAnimUpdate()
     {
+        if (deathFlag)
+        {
+            ConditionDeathState();
+            return;
+        }
+
+
         if (downFlag)
         {
             ConditionDownState();
@@ -410,6 +428,13 @@ public class EnemyBossController : MonoBehaviour
     }
     private void ConditionBossComeBackUpdate()
     {
+        if (deathFlag)
+        {
+            ConditionDeathState();
+            return;
+        }
+
+
         // 帰る目的地の向き
         var pos = Easing.SineInOut(backTimer / 1.0f, totalTime, backStartPosition, startPosition);
 
@@ -440,6 +465,13 @@ public class EnemyBossController : MonoBehaviour
     }
     private void ConditionDownUpdate()
     {
+        if (deathFlag)
+        {
+            ConditionDeathState();
+            return;
+        }
+
+
         // ダウン時間越えたら元の場所に戻る
         if (downCountTimer > downTimeMax) ConditionBossComeBackState();
 
@@ -451,5 +483,16 @@ public class EnemyBossController : MonoBehaviour
         downEasingTimer += Time.deltaTime;
 
         if (downEasingTimer > 1.0f) downEasingTimer = 1.0f;
+    }
+
+    private void ConditionDeathState()
+    {
+        state = State.Death;
+
+        m_animator.SetTrigger("Death");
+    }
+    private void ConditionDeathUpdate()
+    {
+      
     }
 }

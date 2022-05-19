@@ -325,7 +325,7 @@ MonoBehaviour:
   timer: 7
   moveSpeed: 3
   player: {fileID: 7790357534801836031, guid: 4065b0a3a50481b408a227796b93b138, type: 3}
-  boss: {fileID: 80165577675343467, guid: 6ffc682f938fd3a479c5f8f573fe5f8c, type: 3}
+  boss: {fileID: 5030218871368432538, guid: 6c8c5929f4ac8b8479daf29786733107, type: 3}
 --- !u!1 &7093140867329859506
 GameObject:
   m_ObjectHideFlags: 0

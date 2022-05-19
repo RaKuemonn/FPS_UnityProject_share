@@ -24,8 +24,8 @@ public class SickleThrowingController : MonoBehaviour
     private Vector2 startPos;
     private Vector2 endPos;
 
-    [SerializeField]
-    private GameObject player;
+    //[SerializeField]
+    //private GameObject player;
 
     [SerializeField]
     private GameObject boss;
@@ -37,7 +37,9 @@ public class SickleThrowingController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        target = player.transform.position;
+        GameObject g = GameObject.FindWithTag("Player");
+        target = g.transform.position;
+
         target.x += RandomTarget();
 
         target.y += 0.3f;
@@ -47,8 +49,8 @@ public class SickleThrowingController : MonoBehaviour
             startPos.x = transform.position.x;
             startPos.y = transform.position.z;
 
-            endPos.x = player.transform.position.x;
-            endPos.y = player.transform.position.z - 0;
+            endPos.x = g.transform.position.x;
+            endPos.y = g.transform.position.z - 0;
         }
 
         slashAngle = Random.Range(0.0f, 360.0f);
