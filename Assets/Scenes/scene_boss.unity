@@ -520,6 +520,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1163351796}
     - target: {fileID: 4919411275153964798, guid: 6c8c5929f4ac8b8479daf29786733107, type: 3}
+      propertyPath: sickle
+      value: 
+      objectReference: {fileID: 2666462225408373522, guid: 281d0ce713b48d04e86756f77452a55a, type: 3}
+    - target: {fileID: 4919411275153964798, guid: 6c8c5929f4ac8b8479daf29786733107, type: 3}
       propertyPath: moveSpeed
       value: 6
       objectReference: {fileID: 0}
@@ -1038,6 +1042,10 @@ PrefabInstance:
     - target: {fileID: 7790357534801836031, guid: 4065b0a3a50481b408a227796b93b138, type: 3}
       propertyPath: m_Name
       value: Sphere
+      objectReference: {fileID: 0}
+    - target: {fileID: 7790357534801836031, guid: 4065b0a3a50481b408a227796b93b138, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4065b0a3a50481b408a227796b93b138, type: 3}
