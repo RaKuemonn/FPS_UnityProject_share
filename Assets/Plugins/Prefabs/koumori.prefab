@@ -349,6 +349,8 @@ GameObject:
   - component: {fileID: 5170239038210274943}
   - component: {fileID: 8782719389476086648}
   - component: {fileID: 1500182471943554173}
+  - component: {fileID: -6347637583458004842}
+  - component: {fileID: -8821443628715535564}
   m_Layer: 0
   m_Name: koumori
   m_TagString: Enemy
@@ -385,6 +387,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d1af919b63ca52488c192aa9723c6c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_hp: 0
   m_moveSpeed: 2
   m_idleTimeMax: 5
 --- !u!95 &1500182471943554173
@@ -406,6 +409,35 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!54 &-6347637583458004842
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5515697536084552901}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 1
+  m_AngularDrag: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
+--- !u!65 &-8821443628715535564
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5515697536084552901}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.06, y: 0.05, z: 0.03}
+  m_Center: {x: 0, y: 0.03, z: 0}
 --- !u!1 &5839002001617199831
 GameObject:
   m_ObjectHideFlags: 0

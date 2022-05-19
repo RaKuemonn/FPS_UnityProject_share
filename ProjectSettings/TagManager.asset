@@ -16,6 +16,8 @@ TagManager:
   - MessageRenderer
   - Dumy
   - Enviroments
+  - Sickle
+  - SickleThrowing
   - RootBone
   layers:
   - Default

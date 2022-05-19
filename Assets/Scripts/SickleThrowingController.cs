@@ -24,6 +24,8 @@ public class SickleThrowingController : MonoBehaviour
     private Vector2 startPos;
     private Vector2 endPos;
 
+    private float updateTimer = 0.0f;
+
     //[SerializeField]
     //private GameObject player;
 
@@ -36,6 +38,60 @@ public class SickleThrowingController : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
+    {
+      
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+       if (updateTimer < 0)
+        {
+            var mesh = GetComponentInChildren<Renderer>();
+           // var mesh = transform.GetChild(2).GetComponent<SkinnedMeshRenderer>();
+            mesh.enabled = false;
+            return;
+        }
+
+        var rotate = transform.eulerAngles;
+        var roll = rotate.z + rotationSpeed * Time.deltaTime;
+        roll = rotationSpeed * Time.deltaTime;
+        transform.localRotation *= Quaternion.Euler(0, 0, roll);
+
+
+        var vel = velocity * (moveSpeed * Time.deltaTime);
+        vel += transform.position;
+
+        //if (timer < 0) Destroy(gameObject);
+
+
+        transform.position = new Vector3(vel.x, vel.y, vel.z);
+
+        //
+        //var ydown = transform.position;
+        //ydown.y -= moveSpeed * Time.deltaTime;
+        //
+        //
+        //
+        ////var dir = direction * moveSpeed * Time.deltaTime;
+        ////dir += transform.position;
+        ////transform.position = new Vector3(dir.x, dir.y, dir.z);
+        //transform.position = new Vector3(transform.position.x, ydown.y, transform.position.z);
+        //
+        //
+        timerEasing += Time.deltaTime;
+        timer -= Time.deltaTime;
+
+        updateTimer -= Time.deltaTime;
+    }
+
+    private float RandomTarget()
+    {
+        float haba = Random.Range(0, width * 2) - width;
+        return haba;
+    }
+
+    public void Initilize()
     {
         GameObject g = GameObject.FindWithTag("Player");
         target = g.transform.position;
@@ -58,47 +114,11 @@ public class SickleThrowingController : MonoBehaviour
         velocity = target - transform.position;
         velocity.Normalize();
 
+        updateTimer = 15.0f;
 
         transform.eulerAngles = new Vector3(transform.eulerAngles.x, -transform.eulerAngles.y, transform.eulerAngles.z);
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        var rotate = transform.eulerAngles;
-        var roll = rotate.z + rotationSpeed * Time.deltaTime;
-        roll = rotationSpeed * Time.deltaTime;
-        transform.localRotation *= Quaternion.Euler(0, 0, roll);
-
-
-        var vel = velocity * (moveSpeed * Time.deltaTime);
-        vel += transform.position;
-
-        if (timer < 0) Destroy(gameObject);
-
-
-        transform.position = new Vector3(vel.x, vel.y, vel.z);
-
-        //
-        //var ydown = transform.position;
-        //ydown.y -= moveSpeed * Time.deltaTime;
-        //
-        //
-        //
-        ////var dir = direction * moveSpeed * Time.deltaTime;
-        ////dir += transform.position;
-        ////transform.position = new Vector3(dir.x, dir.y, dir.z);
-        //transform.position = new Vector3(transform.position.x, ydown.y, transform.position.z);
-        //
-        //
-        timerEasing += Time.deltaTime;
-        timer -= Time.deltaTime;
-
-    }
-
-    private float RandomTarget()
-    {
-        float haba = Random.Range(0, width * 2) - width;
-        return haba;
+        var mesh = transform.GetChild(2).GetComponent<SkinnedMeshRenderer>();
+        mesh.enabled = true;
     }
 }

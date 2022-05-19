@@ -6,7 +6,9 @@ using DG.Tweening;
 public class SickleController : MonoBehaviour
 {
     private float width = 3.0f;
-
+    private Vector3 velocity = new Vector3(0f, 0f, 0f);
+    private float updateTimer = 0.0f;
+    float rotationSpeed = 1080.0f;
     private Tween tween;
 
     private Vector3 target;
@@ -16,6 +18,9 @@ public class SickleController : MonoBehaviour
 
     private float startTimer = 2.0f;
     private int count = 0;
+
+    private bool look = false;
+    public void SetLook(bool set) { look = set; }
 
     [SerializeField]
     private GameObject player;
@@ -30,73 +35,76 @@ public class SickleController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        slashAngle = Random.Range(0.0f, 360.0f);
-
-        target = GetRandomTarget();
-        Debug.Log(target);
+        var mesh = transform.Find("kama").GetComponent<SkinnedMeshRenderer>();
+        mesh.enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        if (updateTimer < 0)
+        {
+            var mesh = GetComponentInChildren<Renderer>();
+            mesh.enabled = false;
+            return;
+        }
+
         if (startTimer > 0)
         {
             startTimer -= Time.deltaTime;
-
             return;
         }
-        else if (startTimer <= 0 && count == 0) 
-         {
-
-            //transform.position = new Vector3(boss.transform.position.x, boss.transform.position.y, boss.transform.position.z);
-            direction = target - transform.position;
-            direction.Normalize();
-            var test = (target + transform.position) / 2;
-
-            var vec = boss.transform.position - transform.position;
-            float dot = (boss.transform.forward.x * vec.x) + (boss.transform.forward.z * vec.z);
-            test.x += dot * 2;
-
-            Vector3[] path =
-            {
-            transform.position,
-            //test,
-            //target,
-            new Vector3( target.x, target.y, target.z + (-20) )
-            };
 
 
-            transform.DOLocalPath(path, 4.0f, PathType.CatmullRom)
-                .SetEase(Ease.InExpo).SetLookAt(0.01f).SetOptions(false, AxisConstraint.Y);
+        var rotate = transform.eulerAngles;
+        var roll = rotate.z + rotationSpeed * Time.deltaTime;
+        roll = rotationSpeed * Time.deltaTime;
+        transform.localRotation *= Quaternion.Euler(0, 0, roll);
 
 
-            count++;
-        }
+        var vel = velocity * (moveSpeed * Time.deltaTime);
+        vel += transform.position;
+
+        //if (timer < 0) Destroy(gameObject);
 
 
-        this.transform.DOMoveY(target.y, 4f).OnUpdate(() =>
-        {
-        });
-
-        transform.DOLocalRotate(new Vector3(180, 90, 270f), 0.1f, RotateMode.FastBeyond360)
-      .SetEase(Ease.Linear)
-      .SetLoops(-1, LoopType.Restart);
-
-        if (timer < 0)
-        {
-
-            Destroy(gameObject);
-        }
-        var ydown = transform.position;
-        ydown.y -= moveSpeed * Time.deltaTime;
-        //var dir = direction * moveSpeed * Time.deltaTime;
-        //dir += transform.position;
-        //transform.position = new Vector3(dir.x, dir.y, dir.z);
-        transform.position = new Vector3(transform.position.x, ydown.y, transform.position.z);
-
-
-        timer -= Time.deltaTime;
-
+        transform.position = new Vector3(vel.x, vel.y, vel.z);
+    
+        //  else if (startTimer <= 0 && count == 0) 
+        //   
+        //      //transform.position = new Vector3(boss.transform.position.x, boss.transform.position.y, boss.transform.position.z);
+        //      direction = target - transform.position;
+        //      direction.Normalize();
+        //      var test = (target + transform.position) / 2;
+        //      var vec = boss.transform.position - transform.position;
+        //      float dot = (boss.transform.forward.x * vec.x) + (boss.transform.forward.z * vec.z);
+        //      test.x += dot * 2;
+        //      Vector3[] path =
+        //      {
+        //      transform.position,
+        //      //test,
+        //      //target,
+        //      new Vector3( target.x, target.y, target.z + (-20) )
+        //      };
+        //      transform.DOLocalPath(path, 4.0f, PathType.CatmullRom)
+        //          .SetEase(Ease.InExpo).SetLookAt(0.01f).SetOptions(false, AxisConstraint.Y);
+        //      count++;
+        //  }
+        //  this.transform.DOMoveY(target.y, 4f).OnUpdate(() =>
+        //  {
+        //  });
+        //  transform.DOLocalRotate(new Vector3(180, 90, 270f), 0.1f, RotateMode.FastBeyond360)
+        //.SetEase(Ease.Linear)
+        //.SetLoops(-1, LoopType.Restart);
+        //  var ydown = transform.position;
+        //  ydown.y -= moveSpeed * Time.deltaTime;
+        //  //var dir = direction * moveSpeed * Time.deltaTime;
+        //  //dir += transform.position;
+        //  //transform.position = new Vector3(dir.x, dir.y, dir.z);
+        //  transform.position = new Vector3(transform.position.x, ydown.y, transform.position.z);
+        //  timer -= Time.deltaTime;
+        updateTimer -= Time.deltaTime;
     }
 
     // Š™‚ð“Š‚°‚éˆÊ’u‚ðƒ‰ƒ“ƒ_ƒ€‚É‚·‚é
@@ -116,4 +124,39 @@ public class SickleController : MonoBehaviour
         //Vector3Œ^‚ÌPosition‚ð•Ô‚·
         return new Vector3(x, y, z);
     }
+
+    public void Initilize()
+    {
+        GameObject g = GameObject.FindWithTag("Player");
+        target = GetRandomTarget();
+
+        //target.y += 0.3f;
+   
+
+        slashAngle = Random.Range(0.0f, 360.0f);
+
+        velocity = target - transform.position;
+        velocity.Normalize();
+
+        updateTimer = 15.0f;
+
+        //transform.eulerAngles = new Vector3(transform.eulerAngles.x, -transform.eulerAngles.y, transform.eulerAngles.z);
+
+        var mesh = transform.GetChild(2).GetComponent<SkinnedMeshRenderer>();
+        mesh.enabled = true;
+
+        startTimer = 2.0f;
+
+        //slashAngle = Random.Range(0.0f, 360.0f);
+        //
+        //look = true;
+        //
+        //target = GetRandomTarget();
+        //
+        //var mesh = transform.Find("kama").GetComponent<SkinnedMeshRenderer>();
+        //mesh.enabled = true;
+        //
+        //startTimer = 2.0f;
+        //count = 0;
+    }   //
 }

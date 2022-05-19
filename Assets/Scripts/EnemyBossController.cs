@@ -83,6 +83,12 @@ public class EnemyBossController : MonoBehaviour
     private static readonly int hashRevival = Animator.StringToHash("Revival");
     private static readonly int hashSpeed = Animator.StringToHash("Zensin");
 
+    private bool attackThrowing = false;
+    public bool GetAttackThrowing() { return attackThrowing; }
+
+    private bool attackB = false;
+    public bool GetAttackBar() { return attackB; }
+
     // ボスダウン状態
     //private bool m_down = false;
 
@@ -148,6 +154,8 @@ public class EnemyBossController : MonoBehaviour
             case State.BossComeBack: ConditionBossComeBackUpdate();  break;
             // ボスダウン状態
             case State.Down: ConditionDownUpdate( ); break;
+            // 死亡
+            case State.Death: ConditionDeathUpdate(); break;
         }
         Debug.Log(state);
 
@@ -169,11 +177,11 @@ public class EnemyBossController : MonoBehaviour
         // 時間が経過したら鎌を投げる
         if (idleTimer < 0)
         {
-            //ConditionAssaultAttackState();
-            int test = Random.Range(0, 3);
-            if(test == 0) ConditionSickleAttackState();
-            if (test == 1) ConditionSickleAttackBerserkerState();
-            if (test == 2) ConditionAssaultAttackState();
+            ConditionSickleAttackBerserkerState();
+            //int test = Random.Range(0, 3);
+            //if(test == 0) ConditionSickleAttackState();
+            //if (test == 1) ConditionSickleAttackBerserkerState();
+            //if (test == 2) ConditionAssaultAttackState();
         }
 
         if (angle > Mathf.PI) flySpeed = flyDown;
@@ -194,18 +202,24 @@ public class EnemyBossController : MonoBehaviour
         //鎌をインスタンス化する(生成する)
         GameObject child = GameObject.FindWithTag("Dumy");//transform.Find("ThrowingKama").gameObject;
 
-        GameObject sl = Instantiate(sickleThrowing, child.transform.position, child.transform.rotation);
+        //GameObject sl = Instantiate(sickleThrowing, child.transform.position, child.transform.rotation);
+        GameObject[] sickles = GameObject.FindGameObjectsWithTag("SickleThrowing");
+
         //GameObject sl = Instantiate(sickleThrowing, new Vector3(0,0,0), Quaternion.identity, null);
         //sl.transform.position = this.transform.TransformPoint(child.transform.localPosition);,
-        sl.transform.position =child.transform.position;
-
+        sickles[0].transform.position = child.transform.position;
+        var throwing = sickles[0].GetComponent<SickleThrowingController>();
+        throwing.Initilize();
     
-        var attack = sickleJudgeImage.GetComponent<CreatePointerController>();
-        attack.CreateTargetPointer(sl);
+        //var attack = sickleJudgeImage.GetComponent<CreatePointerController>();
+        //attack.CreateTargetPointer(sickles[0]);
 
         weaponReflect = false;
 
         m_animator.SetTrigger(hashSickleAttack);
+
+        attackThrowing = true;
+
     }
 
     private void ConditionSickleAttackUpdate()
@@ -215,6 +229,7 @@ public class EnemyBossController : MonoBehaviour
         {
             ConditionIdleState();
             m_animator.SetTrigger("Idle");
+            attackThrowing = false;
             return;
         }
         // if (m_animator.GetCurrentAnimatorStateInfo(0).IsName("standby"))
@@ -245,6 +260,7 @@ public class EnemyBossController : MonoBehaviour
 
         generationTime = 0.0f;
 
+        attackB = true;
 
         m_animator.SetTrigger(hashSickleAttackBerserker);
     }
@@ -266,7 +282,7 @@ public class EnemyBossController : MonoBehaviour
         {
             ConditionIdleState();
             m_animator.SetTrigger("Idle");
-
+            attackB = false;
             return;
         }
     
@@ -278,69 +294,61 @@ public class EnemyBossController : MonoBehaviour
     // 生成する場所
     private void SetSickle(int count)
     {
-        
+        GameObject[] sickles = GameObject.FindGameObjectsWithTag("Sickle");
 
-        switch(count)
+
+        switch (count)
         {
             case 2: // 右
-                GameObject sl = Instantiate(sickle);
-                sl.transform.position = transform.position + (directions.right * sickleRange);
-                sl.transform.eulerAngles = new Vector3(70, -90, -20);
+                //GameObject sl = Instantiate(sickle);
+                sickles[0].transform.position = transform.position + (directions.right * sickleRange);
+                sickles[0].transform.eulerAngles = new Vector3(70, -90, -20);
+                var controller = sickles[0].GetComponent<SickleController>();
+                controller.Initilize();
 
-                var attack = sickleJudgeImage.GetComponent<CreatePointerController>();
-                attack.CreateTargetPointer(sl);
 
-                GameObject sl5 = Instantiate(sickle);
-                sl5.transform.position = transform.position + (directions.left * sickleRange);
-                sl5.transform.eulerAngles = new Vector3(-70, -90, 20);
+                //var attack = sickleJudgeImage.GetComponent<CreatePointerController>();
+                //attack.CreateTargetPointer(sickles[0]);
 
-                var attack5 = sickleJudgeImage.GetComponent<CreatePointerController>();
-                attack5.CreateTargetPointer(sl5);
-                break;
+                // GameObject sl5 = Instantiate(sickle);
+                sickles[1].transform.position = transform.position + (directions.left * sickleRange);
+                sickles[1].transform.eulerAngles = new Vector3(-70, -90, 20);
+                var controller2 = sickles[1].GetComponent<SickleController>();
+                controller2.Initilize();
+
+                //var attack5 = sickleJudgeImage.GetComponent<CreatePointerController>();
+                //attack5.CreateTargetPointer(sickles[1]);
+                break;                                   
 
             case 1: // 右斜め上
-                GameObject sl2 = Instantiate(sickle);
-                sl2.transform.position = transform.position + (directions.topRight * (sickleRange + 1));
-                sl2.transform.eulerAngles = new Vector3(30, -90, -20);
+                //GameObject sl2 = Instantiate(sickle);
+                sickles[2].transform.position = transform.position + (directions.topRight * (sickleRange + 1));
+                sickles[2].transform.eulerAngles = new Vector3(30, -90, -20);
+                var controller3 = sickles[2].GetComponent<SickleController>();
+                controller3.Initilize();
 
-                var attack2 = sickleJudgeImage.GetComponent<CreatePointerController>();
-                attack2.CreateTargetPointer(sl2);
+                //var attack2 = sickleJudgeImage.GetComponent<CreatePointerController>();
+                //attack2.CreateTargetPointer(sickles[2]);
 
-                GameObject sl4 = Instantiate(sickle);
-                sl4.transform.position = transform.position + (directions.topLeft * (sickleRange + 1));
-                sl4.transform.eulerAngles = new Vector3(-30, -90, -20);
+                //GameObject sl4 = Instantiate(sickle);
+                sickles[3].transform.position = transform.position + (directions.topLeft * (sickleRange + 1));
+                sickles[3].transform.eulerAngles = new Vector3(-30, -90, -20);
+                var controller4 = sickles[3].GetComponent<SickleController>();
+                controller4.Initilize();
 
-                var attack4 = sickleJudgeImage.GetComponent<CreatePointerController>();
-                attack4.CreateTargetPointer(sl4);
-
+                //var attack4 = sickleJudgeImage.GetComponent<CreatePointerController>();
+                //attack4.CreateTargetPointer(sickles[3]);
                 break;
 
             case 0: // 上
-                GameObject sl3 = Instantiate(sickle);
-                sl3.transform.position = transform.position + (directions.top * sickleRange);
-                sl3.transform.eulerAngles = new Vector3(0, -90, -20);
+                //GameObject sl3 = Instantiate(sickle);
+                sickles[4].transform.position = transform.position + (directions.top * sickleRange);
+                sickles[4].transform.eulerAngles = new Vector3(0, -90, -20);
+                var controller5 = sickles[4].GetComponent<SickleController>();
+                controller5.Initilize();
 
-                var attack3 = sickleJudgeImage.GetComponent<CreatePointerController>();
-                attack3.CreateTargetPointer(sl3);
-
-                break;
-
-            case 3: // 左斜め上
-                //GameObject sl4 = Instantiate(sickle);
-                //sl4.transform.position = transform.position + (directions.topLeft * (sickleRange+ 1));
-                //sl4.transform.eulerAngles = new Vector3(-30, -90, -20);
-
-                //var attack4 = sickleJudgeImage.GetComponent<CreatePointerController>();
-                //attack4.CreateTargetPointer(sl4);
-                break;
-
-            case 4: // 左
-                //GameObject sl5 = Instantiate(sickle);
-                //sl5.transform.position = transform.position + (directions.left * sickleRange);
-                //sl5.transform.eulerAngles = new Vector3(-70, -90, 20);
-
-                //var attack5 = sickleJudgeImage.GetComponent<CreatePointerController>();
-                //attack5.CreateTargetPointer(sl5);
+                //var attack3 = sickleJudgeImage.GetComponent<CreatePointerController>();
+                //attack3.CreateTargetPointer(sickles[4]);
                 break;
         }
     }

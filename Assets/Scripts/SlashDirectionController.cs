@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SlashDirectionController : MonoBehaviour
 {
@@ -14,7 +15,21 @@ public class SlashDirectionController : MonoBehaviour
     void Update()
     {
         var sickle = transform.parent.GetComponent<EnemyAttackPrudir>().m_gameObject;
-        if (!sickle) return; 
+        if (!sickle) return;
+
+        var parent = transform.parent.GetComponent<Image>();
+        if (!parent.enabled)
+        {
+            var image = GetComponent<Image>();
+            image.enabled = false;
+            return;
+        }
+        else
+        {
+            var image = GetComponent<Image>();
+            image.enabled = true;
+        }
+
 
         var throwing = sickle.GetComponent<SickleThrowingController>();
         if (throwing)
