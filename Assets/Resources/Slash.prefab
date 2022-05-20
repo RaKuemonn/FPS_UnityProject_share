@@ -167,6 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: 082866bff88d4ef4292c37cb3156347b, type: 3}
+  cutSurfaceMaterial: {fileID: 2100000, guid: 1a43c5c966c9f3c4d9ecf4fa536cc26d, type: 2}
   damage: 0
   child_rect_transform: {fileID: 2781419719946971444}
   playerStatus: {fileID: 11400000, guid: fd169fa6d1b87eb4dbe208dd2173dc4b, type: 2}

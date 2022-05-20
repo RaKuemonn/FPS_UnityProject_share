@@ -10,6 +10,8 @@ public class SlashImageController : MonoBehaviour
     [SerializeField] private AudioClip clip;
     private Image image;
 
+    [SerializeField] private Material cutSurfaceMaterial = null;
+
     public float damage;    // Slashの生成時にCursorControllerで設定される。
 
     [SerializeField] private RectTransform child_rect_transform;
@@ -172,7 +174,9 @@ public class SlashImageController : MonoBehaviour
                         MeshCut.CutMesh(
                             enemy.gameObject,                                          // 斬るオブジェクト
                             Camera.main.transform.position,   // 平面上の位置
-                            normal                                          // 平面の法線
+                            normal,                                          // 平面の法線
+                            true,
+                            cutSurfaceMaterial
                         );
 
                     var original = result.original_anitiNormalside;
