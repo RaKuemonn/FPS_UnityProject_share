@@ -9,7 +9,7 @@ public class TeleportTimerMaterialChange : MonoBehaviour
     //Renderer r;
 
     Material[] materials = new Material[2];
-    //Material[] materials = new Material[3];
+    //GMaterial[] materials = new Material[3];
     
     // ‰Šú’l
     [SerializeField]
