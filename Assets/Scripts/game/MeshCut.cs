@@ -381,14 +381,14 @@ public class MeshCut : MonoBehaviour
             var has_component_origin = SkinnedMeshRender.gameObject;
             var has_component_fragment = fragment_SkinnedMeshRenderer.gameObject;
 
-            Destroy(targetGameObject.GetComponentInParentAndChildren<SkinnedMeshRenderer>());
-            Destroy(fragment.GetComponentInParentAndChildren<SkinnedMeshRenderer>());
+            Destroy(has_component_origin.GetComponent<SkinnedMeshRenderer>());
+            Destroy(has_component_fragment.GetComponent<SkinnedMeshRenderer>());
 
             has_component_fragment.AddComponent<MeshFilter>().sharedMesh = fragMesh;
-            has_component_fragment.AddComponent<MeshRenderer>().materials = materials;
+            has_component_fragment.AddComponent<MeshRenderer>().sharedMaterials = materials;
 
             has_component_origin.AddComponent<MeshFilter>().sharedMesh = originMesh;
-            has_component_origin.AddComponent<MeshRenderer>().materials = materials;
+            has_component_origin.AddComponent<MeshRenderer>().sharedMaterials = materials;
 
 
             if (targetGameObject.GetComponent<MeshCollider>())

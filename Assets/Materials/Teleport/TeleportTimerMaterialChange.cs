@@ -6,7 +6,10 @@ public class TeleportTimerMaterialChange : MonoBehaviour
 {
     [SerializeField] private GameObject obj; // 対象のシェーダーが適用されたGameObjectを設定する
 
-    Renderer r;
+    //Renderer r;
+
+    Material[] materials = new Material[2];
+    //Material[] materials = new Material[3];
     
     // 初期値
     [SerializeField]
@@ -18,7 +21,7 @@ public class TeleportTimerMaterialChange : MonoBehaviour
 
     // 消えるスピード
     [SerializeField]
-    float LostSpeed = 0.75f;
+    float LostSpeed = 2.0f;
 
     //方向逆転
     float sign;
@@ -40,21 +43,25 @@ public class TeleportTimerMaterialChange : MonoBehaviour
     void Start()
     {
         // 値変更処理
-        r = obj.GetComponent<Renderer>();
+        //r = obj.GetComponent<Renderer>();
+        
 
-        r.materials[0].color = new Color(r.materials[0].color.r, r.materials[0].color.g, r.materials[0].color.b, 0);
+        // OnDead関数に移動
+        //r.materials[0].color = new Color(r.materials[0].color.r, r.materials[0].color.g, r.materials[0].color.b, 0);
 
         // 0番目に入ってるマテリアルのalbedoとnormalをディゾルブマテリアルにコピーする
-        r.materials[r.materials.Length - 1].SetTexture("_MainTex", r.materials[0].GetTexture("_BaseMap"));
-        r.materials[r.materials.Length - 1].SetTexture("_BumpMap", r.materials[0].GetTexture("_BumpMap"));
+        //r.materials[r.materials.Length - 1].SetTexture("_MainTex", r.materials[0].GetTexture("_BaseMap"));
+        //r.materials[r.materials.Length - 1].SetTexture("_BumpMap", r.materials[0].GetTexture("_BumpMap"));
+
+        //sign = r.materials[r.materials.Length - 1].GetFloat("_sign");
 
 
-        sign = r.materials[r.materials.Length - 1].GetFloat("_sign");
+
         //方向逆転しているかどうか
 
-        value = initial_value;
-        test = false;
-        time = 0.0f;
+        //value = initial_value;
+        //test = false;
+        //time = 0.0f;
     }
     void Update()
     {
@@ -67,10 +74,10 @@ public class TeleportTimerMaterialChange : MonoBehaviour
         if (complete == false)
         {
             // 今は仮で2秒後に開始するようにしている
-            if (time > 2 && test == false)
-            {
-                test = true;
-            }
+            //if (time > 2 && test == false)
+            //{
+            //    test = true;
+            //}
 
 
             if (test)
@@ -80,9 +87,9 @@ public class TeleportTimerMaterialChange : MonoBehaviour
                 {
                     value -= Time.deltaTime * LostSpeed;
                     var t = value / duration;
-                    for (int i = 0; i < r.materials.Length; i++)
+                    for (int i = 0; i < materials.Length; i++)
                     {
-                        r.materials[i].SetFloat("_Slider", t);
+                        materials[i].SetFloat("_Slider", t);
                     }
                 }
                 //方向逆転してるとき
@@ -91,14 +98,15 @@ public class TeleportTimerMaterialChange : MonoBehaviour
                     value += Time.deltaTime * LostSpeed;
                     var t = value / duration;
 
-                    for (int i = 0; i < r.materials.Length; i++)
+                    for (int i = 0; i < materials.Length; i++)
                     {
-                        r.materials[i].SetFloat("_Slider", t);
+                        materials[i].SetFloat("_Slider", t);
                     }
                 }
 
                 // ディゾルブをかけ終わったらtrueに
-                if (r.materials[r.materials.Length - 1].GetFloat("_Slider") > End_value)
+                //if (materials[materials.Length - 1].GetFloat("_Slider") > End_value)
+                if (materials[0].GetFloat("_Slider") > End_value)
                 {
                     complete = true;
                     // 敵が鎌を投擲し始めていいように許可
@@ -106,5 +114,70 @@ public class TeleportTimerMaterialChange : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void OnDead()
+    {
+        test = true;
+
+        //var r = gameObject.GetComponentInParentAndChildren<MeshRenderer>();
+        // 
+        //r.materials[0].color = new Color(r.materials[0].color.r, r.materials[0].color.g, r.materials[0].color.b, 0);
+        //
+        //// 0番目に入ってるマテリアルのalbedoとnormalをディゾルブマテリアルにコピーする
+        //r.materials[1].SetTexture("_MainTex",
+        //    r.materials[0].GetTexture("_BaseMap"));
+        //r.materials[1].SetTexture("_BumpMap",
+        //    r.materials[0].GetTexture("_BumpMap"));
+        //
+        //sign = r.materials[1].GetFloat("_sign");
+        //
+        //materials[0] = r.sharedMaterials[1];
+        //materials[1] = r.sharedMaterials[2];
+        //
+        //
+        ////r.materials[1].CopyPropertiesFromMaterial(r.materials[0]);
+
+
+#if true
+
+        // SlashHighを使って　成功
+        // materialsも3に変える
+
+        var r = gameObject.GetComponentInParentAndChildren<MeshRenderer>();
+        r.materials[0].color = new Color(r.materials[0].color.r, r.materials[0].color.g, r.materials[0].color.b, 0);
+
+        // 0番目に入ってるマテリアルのalbedoとnormalをディゾルブマテリアルにコピーする
+        r.materials[1].SetTexture("_MainTex", r.materials[0].GetTexture("_BaseMap"));
+        r.materials[1].SetTexture("_BumpMap", r.materials[0].GetTexture("_BumpMap"));
+
+        sign = r.materials[1].GetFloat("_sign");
+
+
+        materials[0] = r.sharedMaterials[1];
+        materials[1] = r.sharedMaterials[1];
+
+        value = initial_value;
+
+#else
+        var r = gameObject.GetComponentInParentAndChildren<MeshRenderer>();
+        r.materials[0].color = new Color(r.materials[0].color.r, r.materials[0].color.g, r.materials[0].color.b, 0);
+
+        // 0番目に入ってるマテリアルのalbedoとnormalをディゾルブマテリアルにコピーする
+        r.materials[1].SetTexture("_MainTex", r.materials[0].GetTexture("_BaseMap"));
+        r.materials[1].SetTexture("_BumpMap", r.materials[0].GetTexture("_BumpMap"));
+
+        sign = r.materials[1].GetFloat("_sign");
+
+        r.materials[1].CopyPropertiesFromMaterial(r.materials[0]);
+
+        materials[0] = r.sharedMaterials[1];
+        materials[1] = r.sharedMaterials[1];
+        materials[2] = r.sharedMaterials[2];
+
+
+
+        value = initial_value;
+#endif
     }
 }

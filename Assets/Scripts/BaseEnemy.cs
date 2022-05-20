@@ -138,8 +138,7 @@ public class BaseEnemy : MonoBehaviour
         CuttedImpulse(impulse_);
 
         // ”jŠü‚·‚éŒÅ’èŠÔ
-        const float const_destroy_time = 0.5f;
-        Destroy(gameObject, const_destroy_time);
+        Destroy(gameObject, DestroyTime());
     }
 
     void OnDestroy()
@@ -163,7 +162,13 @@ public class BaseEnemy : MonoBehaviour
         // ’e‚«”ò‚Î‚·
         rigidbody.AddForce(impulse_, ForceMode.Impulse);
     }
-    
+
+    protected virtual float DestroyTime()
+    {
+        const float const_destroy_time = 0.5f;
+        return const_destroy_time;
+    }
+
     // €–Sˆ— (private)
     public virtual void OnDead()
     {
