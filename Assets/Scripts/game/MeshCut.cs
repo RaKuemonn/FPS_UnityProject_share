@@ -343,6 +343,7 @@ public class MeshCut : MonoBehaviour
             }
 
             (Mesh fragMesh, Mesh originMesh) = CutMesh(mesh, transform, planeAnchorPoint, planeNormalDirection, makeCutSurface, addNewMaterial);
+            
 
 
             if (originMesh == null || fragMesh == null)
@@ -360,29 +361,35 @@ public class MeshCut : MonoBehaviour
                 SkinnedMeshRender.sharedMaterials = newMats;
             }
 
-
-            {
-                //originMesh.bindposes = SkinnedMeshRender.sharedMesh.bindposes;
-                //originMesh.boneWeights = SkinnedMeshRender.sharedMesh.boneWeights;
-
-                SkinnedMeshRender.sharedMesh = originMesh;
-
-            }
+            //{
+            //    SkinnedMeshRender.sharedMesh = originMesh;
+            //}
 
             //GameObject fragment = new GameObject("Fragment", typeof(MeshFilter), typeof(MeshRenderer));
             Transform originTransform = targetGameObject.transform;
             GameObject fragment = Instantiate(targetGameObject, originTransform.position, originTransform.rotation, originTransform.parent);
             fragment.transform.parent = null;
             var fragment_SkinnedMeshRenderer = fragment.GetComponentInParentAndChildren<SkinnedMeshRenderer>();
-            {
-                //fragMesh.bindposes = fragment_SkinnedMeshRenderer.sharedMesh.bindposes;
-                //fragMesh.boneWeights = fragment_SkinnedMeshRenderer.sharedMesh.boneWeights;
+            //{
+            //    fragment_SkinnedMeshRenderer.sharedMesh = fragMesh;
+            //    fragment_SkinnedMeshRenderer.sharedMaterials = SkinnedMeshRender.sharedMaterials;
+            //    
+            //}
 
-                fragment_SkinnedMeshRenderer.sharedMesh = fragMesh;
-                fragment_SkinnedMeshRenderer.sharedMaterials = SkinnedMeshRender.sharedMaterials;
-                
-            }
-            
+            var materials = SkinnedMeshRender.sharedMaterials;
+
+            var has_component_origin = SkinnedMeshRender.gameObject;
+            var has_component_fragment = fragment_SkinnedMeshRenderer.gameObject;
+
+            Destroy(targetGameObject.GetComponentInParentAndChildren<SkinnedMeshRenderer>());
+            Destroy(fragment.GetComponentInParentAndChildren<SkinnedMeshRenderer>());
+
+            has_component_fragment.AddComponent<MeshFilter>().sharedMesh = fragMesh;
+            has_component_fragment.AddComponent<MeshRenderer>().materials = materials;
+
+            has_component_origin.AddComponent<MeshFilter>().sharedMesh = originMesh;
+            has_component_origin.AddComponent<MeshRenderer>().materials = materials;
+
 
             if (targetGameObject.GetComponent<MeshCollider>())
             {
