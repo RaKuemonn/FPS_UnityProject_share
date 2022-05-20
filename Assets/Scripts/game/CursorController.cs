@@ -14,8 +14,6 @@ public class CursorController : MonoBehaviour
 
     [SerializeField] private GameObject SlashPrefab;
 
-    [SerializeField] private Camera currentCamera;
-
 
     private RectTransform rect;
 

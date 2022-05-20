@@ -134,9 +134,21 @@ public class BaseEnemy : MonoBehaviour
     /// 
     public void OnCutted(Vector3 impulse_)
     {
-        // €–Sˆ—
-        OnDead();
+        // ÕŒ‚‚ğ—^‚¦‚éˆ— (virtual)
+        CuttedImpulse(impulse_);
 
+        // ”jŠü‚·‚éŒÅ’èŠÔ
+        const float const_destroy_time = 0.5f;
+        Destroy(gameObject, const_destroy_time);
+    }
+
+    void OnDestroy()
+    {
+        OnDeadEvent?.Invoke(this, EventArgs.Empty);
+    }
+
+    protected virtual void CuttedImpulse(Vector3 impulse_)
+    {
         var rigidbody = GetComponent<Rigidbody>();
 
         // rigidbodyƒvƒƒpƒeƒB‚Ì•ÏX
@@ -150,17 +162,8 @@ public class BaseEnemy : MonoBehaviour
 
         // ’e‚«”ò‚Î‚·
         rigidbody.AddForce(impulse_, ForceMode.Impulse);
-
-        // ”jŠü‚·‚éŒÅ’èŠÔ
-        const float const_destroy_time = 0.5f;
-        Destroy(gameObject, const_destroy_time);
     }
-
-    void OnDestroy()
-    {
-        OnDeadEvent?.Invoke(this, EventArgs.Empty);
-    }
-
+    
     // €–Sˆ— (private)
     public virtual void OnDead()
     {
