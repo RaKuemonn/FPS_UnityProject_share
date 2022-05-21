@@ -854,6 +854,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obj: {fileID: 2112439367303250419}
+  materials:
+  - {fileID: 2100000, guid: 1712402317bb21b479f9ec8dca0c7ff7, type: 2}
   initial_value: -1.5
   End_value: 5
   LostSpeed: 2
@@ -931,7 +933,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5847327039207167860, guid: dd8b4f1eaafcc044d812834081ded9d4, type: 3}
       propertyPath: m_Materials.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5847327039207167860, guid: dd8b4f1eaafcc044d812834081ded9d4, type: 3}
       propertyPath: m_Materials.Array.data[1]

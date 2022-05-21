@@ -6,9 +6,12 @@ public class TeleportTimerMaterialChange : MonoBehaviour
 {
     [SerializeField] private GameObject obj; // 対象のシェーダーが適用されたGameObjectを設定する
 
-    //Renderer r;
-
-    Material[] materials = new Material[2];
+    // updateで使うためにコメント解除 黒マテリアル入れるときはだめだっけ？
+    Renderer r;
+    // インスペクター側からテレポートマテリアルの追加する
+    [SerializeField]
+    Material[] materials = new Material[1];
+    //Material[] materials = new Material[2];
     //GMaterial[] materials = new Material[3];
     
     // 初期値
@@ -87,10 +90,15 @@ public class TeleportTimerMaterialChange : MonoBehaviour
                 {
                     value -= Time.deltaTime * LostSpeed;
                     var t = value / duration;
-                    for (int i = 0; i < materials.Length; i++)
-                    {
-                        materials[i].SetFloat("_Slider", t);
-                    }
+                    //for (int i = 0; i < materials.Length; i++)
+                    //{
+                    //    materials[i].SetFloat("_Slider", t);
+                    //}
+                    //for (int i = 0; i < materials.Length; i++)
+                    //{
+                    //見た目に関わるのは1つだけなので0でいい
+                    r.materials[0].SetFloat("_Slider", t);
+                    //}
                 }
                 //方向逆転してるとき
                 else if (sign == 1)
@@ -98,15 +106,20 @@ public class TeleportTimerMaterialChange : MonoBehaviour
                     value += Time.deltaTime * LostSpeed;
                     var t = value / duration;
 
-                    for (int i = 0; i < materials.Length; i++)
-                    {
-                        materials[i].SetFloat("_Slider", t);
-                    }
+                    //for (int i = 0; i < materials.Length; i++)
+                    //{
+                    //    materials[i].SetFloat("_Slider", t);
+                    //}
+                    //for (int i = 0; i < materials.Length; i++)
+                    //{
+                    //見た目に関わるのは1つだけなので0でいい
+                    r.materials[0].SetFloat("_Slider", t);
+                    //}
                 }
 
                 // ディゾルブをかけ終わったらtrueに
                 //if (materials[materials.Length - 1].GetFloat("_Slider") > End_value)
-                if (materials[0].GetFloat("_Slider") > End_value)
+                if (r.materials[0].GetFloat("_Slider") > End_value)
                 {
                     complete = true;
                     // 敵が鎌を投擲し始めていいように許可
@@ -139,7 +152,7 @@ public class TeleportTimerMaterialChange : MonoBehaviour
         ////r.materials[1].CopyPropertiesFromMaterial(r.materials[0]);
 
 
-#if true
+#if false
 
         // SlashHighを使って　成功
         // materialsも3に変える
@@ -160,22 +173,42 @@ public class TeleportTimerMaterialChange : MonoBehaviour
         value = initial_value;
 
 #else
-        var r = gameObject.GetComponentInParentAndChildren<MeshRenderer>();
-        r.materials[0].color = new Color(r.materials[0].color.r, r.materials[0].color.g, r.materials[0].color.b, 0);
+        //var r = gameObject.GetComponentInParentAndChildren<MeshRenderer>();
+        //r.materials[0].color = new Color(r.materials[0].color.r, r.materials[0].color.g, r.materials[0].color.b, 0);
 
-        // 0番目に入ってるマテリアルのalbedoとnormalをディゾルブマテリアルにコピーする
-        r.materials[1].SetTexture("_MainTex", r.materials[0].GetTexture("_BaseMap"));
-        r.materials[1].SetTexture("_BumpMap", r.materials[0].GetTexture("_BumpMap"));
+        //// 0番目に入ってるマテリアルのalbedoとnormalをディゾルブマテリアルにコピーする
+        //r.materials[1].SetTexture("_MainTex", r.materials[0].GetTexture("_BaseMap"));
+        //r.materials[1].SetTexture("_BumpMap", r.materials[0].GetTexture("_BumpMap"));
 
-        sign = r.materials[1].GetFloat("_sign");
+        //sign = r.materials[1].GetFloat("_sign");
 
-        r.materials[1].CopyPropertiesFromMaterial(r.materials[0]);
+        //r.materials[1].CopyPropertiesFromMaterial(r.materials[0]);
 
-        materials[0] = r.sharedMaterials[1];
-        materials[1] = r.sharedMaterials[1];
-        materials[2] = r.sharedMaterials[2];
+        //materials[0] = r.sharedMaterials[1];
+        //materials[1] = r.sharedMaterials[1];
+        //materials[2] = r.sharedMaterials[2];
 
+        // ここで末尾(2番目、 r.materials[1])に黒マテリアルが追加される
+        r = gameObject.GetComponentInParentAndChildren<MeshRenderer>();
 
+        // r.materials[0]を使うのでコメントアウト
+        //r.materials[0].color = new Color(r.materials[0].color.r, r.materials[0].color.g,r.materials[0].color.b, 0);
+
+        // 0番目に入ってるマテリアルのalbedoとnormaをテレポートマテリアルにコピーする
+        materials[0].SetTexture("_MainTex", r.materials[0].GetTexture("_BaseMap"));
+        materials[0].SetTexture("_BumpMap", r.materials[0].GetTexture("_BumpMap"));
+
+        //テレポートマテリアルの情報から方向逆転しているか取得
+        sign = materials[0].GetFloat("_sign");
+
+        //r.materials[1].CopyPropertiesFromMaterial(r.materials[0]);
+        //materials[0] = r.sharedMaterials[1];
+        //materials[1] = r.sharedMaterials[1];
+        //materials[2] = r.sharedMaterials[2];
+
+        // 見た目を担うr.materials[0]にテクスチャをコピーしてあるテレポートマテリアルを入れる
+        r.materials[0].shader = materials[0].shader;
+        r.materials[0].CopyPropertiesFromMaterial(materials[0]);
 
         value = initial_value;
 #endif
