@@ -11,6 +11,8 @@ public class StopEnemyController : BaseEnemy
     {
         base.OnDead();
 
+        if(damageArea == null) return;
+        
         Destroy(damageArea);
     }
 }

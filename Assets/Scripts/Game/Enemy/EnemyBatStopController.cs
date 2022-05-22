@@ -42,7 +42,7 @@ public class EnemyBatStopController : BaseEnemy
 
     private void ConditionIdleUpdate()
     {
-        m_animator.SetFloat("Move", 0.0f);
+        m_animator.SetFloat("stand_by", 0.0f);
     }
 
     public override void OnDead()
