@@ -15,6 +15,12 @@ public class Easing
         max -= min;
         return -max / 2 * (Mathf.Cos(t * Mathf.PI / totaltime) - 1) + min;
     }
+
+    public static float SineInOutF(float t, float totaltime, float min, float max)
+    {
+        max -= min;
+        return -max / 2 * (Mathf.Cos(t * Mathf.PI / totaltime) - 1) + min;
+    }
 }
 
 public class MathHelpar

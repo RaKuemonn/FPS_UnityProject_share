@@ -549,6 +549,7 @@ GameObject:
   - component: {fileID: 6438706076105533671}
   - component: {fileID: -1543297752930389084}
   - component: {fileID: -3624442043704914739}
+  - component: {fileID: 7948230198278724932}
   m_Layer: 0
   m_Name: doragon
   m_TagString: Enemy
@@ -636,6 +637,24 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.1, y: 0.15, z: 0.2243229}
   m_Center: {x: 0, y: 0.08, z: -0.05}
+--- !u!143 &7948230198278724932
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6168674603379083785}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 10
+  m_Radius: 15
+  m_SlopeLimit: 0.45
+  m_StepOffset: 0.3
+  m_SkinWidth: 10
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6513375450218546685
 GameObject:
   m_ObjectHideFlags: 0

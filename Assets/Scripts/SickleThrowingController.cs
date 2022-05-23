@@ -26,9 +26,6 @@ public class SickleThrowingController : MonoBehaviour
 
     private float updateTimer = 0.0f;
 
-    //[SerializeField]
-    //private GameObject player;
-
     [SerializeField]
     private GameObject boss;
 
@@ -45,10 +42,9 @@ public class SickleThrowingController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       if (updateTimer < 0)
+        if (updateTimer < 0)
         {
             var mesh = GetComponentInChildren<Renderer>();
-           // var mesh = transform.GetChild(2).GetComponent<SkinnedMeshRenderer>();
             mesh.enabled = false;
             return;
         }
@@ -58,27 +54,11 @@ public class SickleThrowingController : MonoBehaviour
         roll = rotationSpeed * Time.deltaTime;
         transform.localRotation *= Quaternion.Euler(0, 0, roll);
 
-
         var vel = velocity * (moveSpeed * Time.deltaTime);
         vel += transform.position;
 
-        //if (timer < 0) Destroy(gameObject);
-
-
         transform.position = new Vector3(vel.x, vel.y, vel.z);
 
-        //
-        //var ydown = transform.position;
-        //ydown.y -= moveSpeed * Time.deltaTime;
-        //
-        //
-        //
-        ////var dir = direction * moveSpeed * Time.deltaTime;
-        ////dir += transform.position;
-        ////transform.position = new Vector3(dir.x, dir.y, dir.z);
-        //transform.position = new Vector3(transform.position.x, ydown.y, transform.position.z);
-        //
-        //
         timerEasing += Time.deltaTime;
         timer -= Time.deltaTime;
 
@@ -114,7 +94,7 @@ public class SickleThrowingController : MonoBehaviour
         velocity = target - transform.position;
         velocity.Normalize();
 
-        updateTimer = 15.0f;
+        updateTimer = 3.0f;
 
         transform.eulerAngles = new Vector3(transform.eulerAngles.x, -transform.eulerAngles.y, transform.eulerAngles.z);
 

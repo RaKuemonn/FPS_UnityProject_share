@@ -91,6 +91,8 @@ public class EnemyBossController : MonoBehaviour
 
     private float hpMax;
 
+    private int idleCount = 0;
+
     // ボスダウン状態
     //private bool m_down = false;
 
@@ -171,37 +173,62 @@ public class EnemyBossController : MonoBehaviour
 
         weaponReflect = true;
 
+        idleCount++;
     }
 
     private void ConditionIdleUpdate()
     {
+        float oldAngle = angle;
+
+        var rotateCube = transform.parent.GetComponent<RotateCubeController>();
+
+        if (idleCount > 2)
+        {
+            idleCount = 0;
+            var paretState = rotateCube.GetState();
+            if (paretState == RotateCubeController.State.Right) rotateCube.CentralSet();
+            if (paretState == RotateCubeController.State.Left) rotateCube.CentralSet();
+            if (paretState == RotateCubeController.State.Central)
+            {
+                int rand = Random.Range(0, 2);
+                if (rand == 0) rotateCube.RightSet();
+                if (rand == 1) rotateCube.LeftSet();
+            }
+        }
+
         weaponReflect = true;
 
         // 時間が経過したら鎌を投げる
         if (idleTimer < 0)
         {
-            //ConditionSickleAttackBerserkerState();
-            if (hp < hpMax / 2)
+            if (rotateCube.GetRotateCheck())
             {
-                int test = Random.Range(0, 3);
-                if (test == 0) ConditionSickleAttackState();
-                if (test == 1) ConditionSickleAttackBerserkerState();
-                if (test == 2) ConditionAssaultAttackState();
-            }
-            else
-            {
-                int test = Random.Range(0, 2);
-                if (test == 0) ConditionSickleAttackState();
-                if (test == 1) ConditionAssaultAttackState();
+                ConditionSickleAttackBerserkerState();
+                //if (hp < hpMax / 2)
+                //{
+                //    int test = Random.Range(0, 3);
+                //    if (test == 0) ConditionSickleAttackState();
+                //    if (test == 1) ConditionSickleAttackBerserkerState();
+                //    if (test == 2) ConditionAssaultAttackState();
+                //}
+                //else
+                //{
+                //    int test = Random.Range(0, 2);
+                //    if (test == 0) ConditionSickleAttackState();
+                //    if (test == 1) ConditionAssaultAttackState();
+                //}
             }
         }
 
         if (angle > Mathf.PI) flySpeed = flyDown;
         if (angle < -Mathf.PI) flySpeed = flyUp;
 
+
         angle += flySpeed * Mathf.PI * Time.deltaTime;
 
-        transform.position = new Vector3(transform.position.x, transform.position.y + angle * Time.deltaTime, transform.position.z);
+        float angleLerp = Mathf.Lerp(oldAngle, angle, 0.01f);
+
+        transform.position = new Vector3(transform.position.x, transform.position.y + angleLerp * Time.deltaTime, transform.position.z);
 
         idleTimer -= Time.deltaTime;
     }
