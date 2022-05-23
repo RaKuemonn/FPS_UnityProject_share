@@ -25,9 +25,8 @@ public class CursorController : MonoBehaviour
     private InputAction moveR;
 
     private bool now_clip_played;
-    private float chain_kill_timer; // 数値が正の値の時,切り返すことが出来る
-
- 
+    //private float chain_kill_timer; // 数値が正の値の時,切り返すことが出来る
+    private float scale_cool_timer;
 
     // Start is called before the first frame update
     void Start()
@@ -41,15 +40,22 @@ public class CursorController : MonoBehaviour
         moveL   = GetComponent<PlayerInput>().actions["Move"];
         moveR   = GetComponent<PlayerInput>().actions["Direction"]; ;
         now_clip_played = false;
-        chain_kill_timer = 0.0f;
+        scale_cool_timer = 0.0f;
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        chain_kill_timer += -Time.deltaTime;
-        
+        //chain_kill_timer += -Time.deltaTime;
+
+        if (scale_cool_timer < 0f)
+        {
+            scale_cool_timer = ((scale_cool_timer + Time.deltaTime) < 0f ) ?
+                    (scale_cool_timer + Time.deltaTime) :
+                    0f;
+        }
+
         CursorControl();
 
         SlashControl();
@@ -148,20 +154,38 @@ public class CursorController : MonoBehaviour
             // Slash�̐���
             //GameObject obj = Instantiate((GameObject)Resources.Load("Slash"));
             GameObject obj = Instantiate(SlashPrefab);
-            obj.GetComponent<SlashImageController>().damage = (chain_kill_timer >= 0.4f) ? max_damage : min_damage;
+            obj.GetComponent<SlashImageController>().damage = /*max_damage :*/ min_damage;
             var obj_rect = obj.GetComponent<RectTransform>();
             obj_rect.anchoredPosition   = new Vector2(transform.position.x, transform.position.y);
             obj_rect.eulerAngles        = new Vector3(0f, 0f, degree);
             var local_scale = obj_rect.localScale;
 
-            if (chain_kill_timer > 0f)
+
+            // 斬撃の大きさ
+            const float max_cool_time = -2.0f;
             {
-                obj_rect.localScale = local_scale;
+                var scale = (scale_cool_timer >= 0.0f) ?
+                    (1f) :
+                    (1f - scale_cool_timer / max_cool_time);
+
+                const float min_scale = 0.2f;
+                if (scale <= min_scale)
+                {
+                    scale = min_scale;
+                }
+
+                obj_rect.localScale = new Vector3(
+                    local_scale.x * scale,
+                    local_scale.y,
+                    local_scale.z);
+
             }
-            else
-            {
-                obj_rect.localScale = new Vector3(2f * local_scale.x, 1f, 1f);
-            }
+            const float cool_time = -0.5f;
+            scale_cool_timer += cool_time;
+            scale_cool_timer = Mathf.Max(scale_cool_timer, max_cool_time);
+            
+
+
             // �e�q�֌W�̐ݒ�
             obj.transform.SetParent(transform.parent);
         }
@@ -194,6 +218,6 @@ public class CursorController : MonoBehaviour
 
     public void SetChainTimer()
     {
-        chain_kill_timer = 0.5f;
+        //chain_kill_timer = 0.5f;
     }
 }

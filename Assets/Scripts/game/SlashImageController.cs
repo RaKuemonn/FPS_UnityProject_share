@@ -17,6 +17,8 @@ public class SlashImageController : MonoBehaviour
     [SerializeField] private RectTransform child_rect_transform;
 
     [SerializeField] private PlayerStatus playerStatus;
+    
+    [SerializeField] private float toleranceLevel; // カウンター成功範囲
 
     // Start is called before the first frame update
     void Start()
@@ -34,7 +36,7 @@ public class SlashImageController : MonoBehaviour
         {
             var rectTransform = GetComponent<RectTransform>();
             var image_screen_position = rectTransform.position;
-            var image_width = rectTransform.sizeDelta.x * rectTransform.lossyScale.x;                                        // 前提:スケールが全て1.0f
+            var image_width = rectTransform.sizeDelta.x * rectTransform.lossyScale.x;
             var image_radian = rectTransform.eulerAngles.z * Mathf.Deg2Rad;
             //var input_direction = new Vector2(Mathf.Cos(image_radian), Mathf.Sin(image_radian));
 
@@ -50,38 +52,38 @@ public class SlashImageController : MonoBehaviour
                 );
             };
 
+            // Rayの数を指定
+            const int max_size = 6;
+            //const int min_size = 2;
+            //var size = Mathf.Min(
+            //    min_size,
+            //    (int)(max_size * rectTransform.lossyScale.x/* 0.2f ~ 1.0f */)
+            //);
+            var size = max_size;
+
             // 傾いたベクトル (スクリーン上でのRayの発射位置計算用)
-            var vectors = new Vector2[] // size 6
+            var vectors = new Vector2[size];
+            for (int i = 0; i < size; ++i)
             {
-                Rotate(new Vector2(-width_half + width_div5 * 0f, 0f), image_radian),
-                Rotate(new Vector2(-width_half + width_div5 * 1f, 0f), image_radian),
-                Rotate(new Vector2(-width_half + width_div5 * 2f, 0f), image_radian),
-                Rotate(new Vector2(-width_half + width_div5 * 3f, 0f), image_radian),
-                Rotate(new Vector2(-width_half + width_div5 * 4f, 0f), image_radian),
-                Rotate(new Vector2(-width_half + width_div5 * 5f, 0f), image_radian),   // 0~5
-            };
+                vectors[i] = Rotate(new Vector2(-width_half + width_div5 * i, 0f), image_radian);
+            }
+
 
             //  (たぶんできた)　傾きに合わせた位置にする必要がある
-            var screen_positions = new Vector2[] // size 6
+            var screen_positions = new Vector2[size];
+            for (int i = 0; i < size; ++i)
             {
-                new Vector2(image_screen_position.x + vectors[0].x, image_screen_position.y + vectors[0].y),
-                new Vector2(image_screen_position.x + vectors[1].x, image_screen_position.y + vectors[1].y),
-                new Vector2(image_screen_position.x + vectors[2].x, image_screen_position.y + vectors[2].y),
-                new Vector2(image_screen_position.x + vectors[3].x, image_screen_position.y + vectors[3].y),
-                new Vector2(image_screen_position.x + vectors[4].x, image_screen_position.y + vectors[4].y),
-                new Vector2(image_screen_position.x + vectors[5].x, image_screen_position.y + vectors[5].y),   // 0~5
-            };
+                screen_positions[i] = new Vector2(
+                    image_screen_position.x + vectors[i].x,
+                    image_screen_position.y + vectors[i].y);
+            }
 
             // 発射するRay達
-            var rays = new Ray[] // size 6
+            var rays = new Ray[size];
+            for (int i = 0; i < size; ++i)
             {
-                Camera.main.ScreenPointToRay(screen_positions[0]),
-                Camera.main.ScreenPointToRay(screen_positions[1]),
-                Camera.main.ScreenPointToRay(screen_positions[2]),
-                Camera.main.ScreenPointToRay(screen_positions[3]),
-                Camera.main.ScreenPointToRay(screen_positions[4]),
-                Camera.main.ScreenPointToRay(screen_positions[5]),  // 0~5
-            };
+                rays[i] = Camera.main.ScreenPointToRay(screen_positions[i]);
+            }
 
             Collider result_hit_collider = null;           // 最終的に使用する当たり判定の結果
             Ray result_hit_ray = new Ray();
@@ -152,7 +154,41 @@ public class SlashImageController : MonoBehaviour
                 enemy.OnDead();
                 enemy.SetHP(0f);
 
+
+
+                // カウンター処理
+                if (enemy.name == "SickleController")
+                {
+                    var Sickle = ((SickleController)enemy);
+                    Vector2 slashVec = MathHelpar.AngleToVector2(RadianAngle2D());
+                    Vector2 sickleVec = MathHelpar.AngleToVector2((Sickle.GetRadianSlashAngle()));
+
+                    // TODO 3: 角度が一定以内なら、カウンター成功にする。
+                    var dot = Vector2.Dot(slashVec, sickleVec);
+                    dot = Mathf.Acos(dot);
+                    if (toleranceLevel > dot && dot > -toleranceLevel)
+                    {
+                        Sickle.DisableMesh();
+                    }
+                    else
+                    {
+                        // TODO 米　失敗した時の処理を書け
+                         GameObject
+                             .FindGameObjectWithTag("Player")
+                             .GetComponent<PlayerAutoControl>()
+                             .OnDamage(enemy.m_damage);
+
+                         Sickle.DisableMesh();
+                         var Circle = Sickle.EffectCircle;
+                         var Arrow = Circle.GetComponentInChildren<SlashDirectionController>().gameObject;
+
+                         Circle.GetComponent<Image>().enabled = false;
+                         Arrow.GetComponent<Image>().enabled = false;
+                    }
+                }
+
                 // 切断処理
+                else
                 {
                     Vector3 normal;
                     {
@@ -202,6 +238,7 @@ public class SlashImageController : MonoBehaviour
 
                 }
 
+                
             }
         }
     }
@@ -222,6 +259,65 @@ public class SlashImageController : MonoBehaviour
         else
         {
             Destroy(gameObject);
+        }
+
+
+        {
+            var rectTransform = GetComponent<RectTransform>();
+            var image_screen_position = rectTransform.position;
+            var image_width = rectTransform.sizeDelta.x * rectTransform.lossyScale.x;
+            var image_radian = rectTransform.eulerAngles.z * Mathf.Deg2Rad;
+            //var input_direction = new Vector2(Mathf.Cos(image_radian), Mathf.Sin(image_radian));
+
+            var width_half = image_width / 2f;
+            var width_div5 = image_width / 5f;
+
+            // 2D回転関数 ※ラムダ式で書いただけ 
+            Func<Vector2, float, Vector2> Rotate = (Vector2 vector_, float radian_) =>
+            {
+                return new Vector2(
+                    vector_.x * Mathf.Cos(radian_) - vector_.y * Mathf.Sin(radian_),
+                    vector_.x * Mathf.Sin(radian_) + vector_.y * Mathf.Cos(radian_)
+                );
+            };
+
+            // Rayの数を指定
+            const int max_size = 6;
+            //const int min_size = 2;
+            //var size = Mathf.Min(
+            //    min_size,
+            //    (int)(max_size * rectTransform.lossyScale.x/* 0.2f ~ 1.0f */)
+            //);
+            var size = max_size;
+
+            // 傾いたベクトル (スクリーン上でのRayの発射位置計算用)
+            var vectors = new Vector2[size];
+            for (int i = 0; i < size; ++i)
+            {
+                vectors[i] = Rotate(new Vector2(-width_half + width_div5 * i, 0f), image_radian);
+            }
+
+
+            //  (たぶんできた)　傾きに合わせた位置にする必要がある
+            var screen_positions = new Vector2[size];
+            for (int i = 0; i < size; ++i)
+            {
+                screen_positions[i] = new Vector2(
+                    image_screen_position.x + vectors[i].x,
+                    image_screen_position.y + vectors[i].y);
+            }
+
+            // 発射するRay達
+            var rays = new Ray[size];
+            for (int i = 0; i < size; ++i)
+            {
+                rays[i] = Camera.main.ScreenPointToRay(screen_positions[i]);
+            }
+
+            foreach (var ray in rays)
+            {
+                Debug.DrawRay(ray.origin, ray.direction);
+            }
         }
         
     }

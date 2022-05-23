@@ -10,7 +10,7 @@ public class BaseEnemy : MonoBehaviour
     [SerializeField]
     protected float m_hp;
 
-    [SerializeField] protected float m_damage;
+    [SerializeField] public float m_damage { private set; get; }
 
     public float GetHP() { return m_hp; }
     public void SetHP(float hp) { m_hp = hp; }
@@ -137,6 +137,9 @@ public class BaseEnemy : MonoBehaviour
         // 衝撃を与える処理 (virtual)
         CuttedImpulse(impulse_);
 
+        // マイナスなら破棄しない
+        if (DestroyTime() < 0.0f) return;
+
         // 破棄する固定時間
         Destroy(gameObject, DestroyTime());
     }
@@ -165,6 +168,7 @@ public class BaseEnemy : MonoBehaviour
 
     protected virtual float DestroyTime()
     {
+        // マイナスなら破棄しない
         const float const_destroy_time = 0.5f;
         return const_destroy_time;
     }

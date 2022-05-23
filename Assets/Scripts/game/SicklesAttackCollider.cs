@@ -56,6 +56,8 @@ class SicklesAttackCollider : MonoBehaviour
     {
         if (targetObject == null) return;
 
+        
+
         var screen_position = mainCamera.WorldToScreenPoint(
             targetObject.transform.position);
 

@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using DG.Tweening;
 
-public class SickleController : MonoBehaviour
+public class SickleController : BaseEnemy
 {
     private float width = 3.0f;
     private Vector3 velocity = new Vector3(0f, 0f, 0f);
@@ -28,9 +29,13 @@ public class SickleController : MonoBehaviour
     [SerializeField]
     private GameObject boss;
 
+    [SerializeField] public GameObject EffectCircle;
+
     private float slashAngle;
     public float GetRadianSlashAngle() { return slashAngle * Mathf.Deg2Rad; }
     public float GetSlashAngle() { return slashAngle; }
+
+    public void DisableMesh() { updateTimer = -0.1f; /* Update()でmesh.enable = falseにしている */}
 
     // Start is called before the first frame update
     void Start()
@@ -144,8 +149,17 @@ public class SickleController : MonoBehaviour
 
         var mesh = transform.GetChild(2).GetComponent<SkinnedMeshRenderer>();
         mesh.enabled = true;
+        var Circle = EffectCircle;
+        var Arrow = Circle.GetComponentInChildren<SlashDirectionController>().gameObject;
+
+        Circle.GetComponent<Image>().enabled = true;
+        Arrow.GetComponent<Image>().enabled = true;
 
         startTimer = 2.0f;
+
+        m_hp = 1;
+
+        
 
         //slashAngle = Random.Range(0.0f, 360.0f);
         //
@@ -159,4 +173,14 @@ public class SickleController : MonoBehaviour
         //startTimer = 2.0f;
         //count = 0;
     }   //
+
+    protected override float DestroyTime()
+    {
+        return -1.0f; // マイナスだと破棄されない
+    }
+
+    protected override void CuttedImpulse(Vector3 impulse_)
+    {
+        // なにもしない
+    }
 }

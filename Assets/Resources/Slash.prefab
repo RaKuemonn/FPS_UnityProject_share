@@ -105,7 +105,7 @@ RectTransform:
   m_GameObject: {fileID: 6596319650293718587}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2781419719946971444}
   m_Father: {fileID: 0}
@@ -171,6 +171,7 @@ MonoBehaviour:
   damage: 0
   child_rect_transform: {fileID: 2781419719946971444}
   playerStatus: {fileID: 11400000, guid: fd169fa6d1b87eb4dbe208dd2173dc4b, type: 2}
+  toleranceLevel: 0.174533
 --- !u!61 &3567322533757439515
 BoxCollider2D:
   m_ObjectHideFlags: 0
