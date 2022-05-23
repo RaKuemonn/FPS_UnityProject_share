@@ -1869,6 +1869,10 @@ PrefabInstance:
       value: 3.6
       objectReference: {fileID: 0}
     - target: {fileID: 4163034832185179701, guid: 86bd9ef0b2a96d348aaa82b73226105f, type: 3}
+      propertyPath: speed_rate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4163034832185179701, guid: 86bd9ef0b2a96d348aaa82b73226105f, type: 3}
       propertyPath: hpController
       value: 
       objectReference: {fileID: 60031026}
@@ -4313,6 +4317,10 @@ PrefabInstance:
     - target: {fileID: 4782623869895144615, guid: 2a7fac130df041e47b952dc41f5de6a4, type: 3}
       propertyPath: m_createLength
       value: 53
+      objectReference: {fileID: 0}
+    - target: {fileID: 5579881669826845331, guid: 2a7fac130df041e47b952dc41f5de6a4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 490
       objectReference: {fileID: 0}
     - target: {fileID: 5579881670024795274, guid: 2a7fac130df041e47b952dc41f5de6a4, type: 3}
       propertyPath: m_RootOrder

@@ -34,7 +34,7 @@ public class SlashImageController : MonoBehaviour
         {
             var rectTransform = GetComponent<RectTransform>();
             var image_screen_position = rectTransform.position;
-            var image_width = rectTransform.sizeDelta.x;                                        // 前提:スケールが全て1.0f
+            var image_width = rectTransform.sizeDelta.x * rectTransform.lossyScale.x;                                        // 前提:スケールが全て1.0f
             var image_radian = rectTransform.eulerAngles.z * Mathf.Deg2Rad;
             //var input_direction = new Vector2(Mathf.Cos(image_radian), Mathf.Sin(image_radian));
 
@@ -156,9 +156,6 @@ public class SlashImageController : MonoBehaviour
                 {
                     Vector3 normal;
                     {
-
-
-
                         const float distance = 5.0f;
                         var origin_position = rays[0].origin;
                         var far_left = rays[0].GetPoint(distance);
@@ -213,7 +210,7 @@ public class SlashImageController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      
+
         if (image == null) return;
         
         var color   = image.color;

@@ -303,25 +303,25 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   - id: 48
-    move_speed_state: 2
-    CondExprData: {fileID: 0}
-    CompleteFloorConditionExpr:
-      m_PersistentCalls:
-        m_Calls: []
-  - id: 49
     move_speed_state: 3
     CondExprData: {fileID: 0}
     CompleteFloorConditionExpr:
       m_PersistentCalls:
         m_Calls: []
-  - id: 50
+  - id: 49
     move_speed_state: 0
     CondExprData: {fileID: 11400000, guid: df46326905b068b4d927e7fca22c8ce9, type: 2}
     CompleteFloorConditionExpr:
       m_PersistentCalls:
         m_Calls: []
-  - id: 51
+  - id: 50
     move_speed_state: 1
+    CondExprData: {fileID: 0}
+    CompleteFloorConditionExpr:
+      m_PersistentCalls:
+        m_Calls: []
+  - id: 51
+    move_speed_state: 2
     CondExprData: {fileID: 0}
     CompleteFloorConditionExpr:
       m_PersistentCalls:
