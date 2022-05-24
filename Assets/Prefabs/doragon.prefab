@@ -671,14 +671,14 @@ MonoBehaviour:
   materials:
   - {fileID: 2100000, guid: 1712402317bb21b479f9ec8dca0c7ff7, type: 2}
   initial_value:
-  - -2
+  - 0.1
   - 0.5
   End_value:
-  - 0.5
+  - -1.1
   - -0.5
   LostSpeed:
+  - 1
   - 2
-  - 0.5
 --- !u!1 &6513375450218546685
 GameObject:
   m_ObjectHideFlags: 0
