@@ -168,7 +168,7 @@
       }
     },
     "com.unity.universaltoonshader.urp": {
-      "version": "file:../Assets/ToonShader/UnityChanToonShaderVer2_Project-urp-2.5.0",
+      "version": "file:ToonShader/UnityChanToonShaderVer2_Project-urp-2.5.0",
       "depth": 0,
       "source": "local",
       "dependencies": {
