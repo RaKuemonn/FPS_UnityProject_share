@@ -856,9 +856,15 @@ MonoBehaviour:
   obj: {fileID: 2112439367303250419}
   materials:
   - {fileID: 2100000, guid: 1712402317bb21b479f9ec8dca0c7ff7, type: 2}
-  initial_value: -1.5
-  End_value: 5
-  LostSpeed: 2
+  initial_value:
+  - -2
+  - 2
+  End_value:
+  - 0.5
+  - -0.5
+  LostSpeed:
+  - 2
+  - 1.2
 --- !u!1 &2112439367303250419 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4025137723737156272, guid: dd8b4f1eaafcc044d812834081ded9d4, type: 3}
