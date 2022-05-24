@@ -124,7 +124,7 @@ public class BaseEnemy : MonoBehaviour
         m_enter_battle_area = true;
     }
 
-    void FixUpdate()
+    void FixedUpdate()
     {
         if (IsDeath == false) return;
 
