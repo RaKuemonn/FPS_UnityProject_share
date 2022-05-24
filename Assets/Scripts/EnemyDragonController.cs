@@ -179,7 +179,9 @@ public class EnemyDragonController : BaseEnemy
 
         m_startPosition = transform.position;
 
-        m_endPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z - 3);
+        GameObject player = GameObject.FindWithTag("Player");
+
+        m_endPosition = new Vector3(transform.position.x, transform.position.y, player.transform.position.z + 1.7f);
 
 
         m_easingTimer = 0.0f;
@@ -212,6 +214,10 @@ public class EnemyDragonController : BaseEnemy
 
     private void ConditionAttackUpdate()
     {
+        GameObject player = GameObject.FindWithTag("Player");
+        var dir = player.transform.position - transform.position;
+        Turn(dir);
+
         if (m_animator.GetCurrentAnimatorStateInfo(0).IsName("stand_by"))
         {
             ConditionAttackEndState();
@@ -237,6 +243,8 @@ public class EnemyDragonController : BaseEnemy
 
     private void ConditionAttackEndUpdate()
     {
+        Turn(new Vector3(0,0,-1));
+
         if (m_easingTimer > 1.5f)
         {
             ConditionIdleState();
@@ -245,7 +253,7 @@ public class EnemyDragonController : BaseEnemy
 
         m_animator.SetFloat("MoveSpeed", 0.4f);
 
-        transform.position = Easing.SineInOut(m_easingTimer, 1.5f, m_endPosition, m_startPosition);
+        transform.position = Easing.SineInOut(m_easingTimer, 1.5f, m_endPosition, m_locationPosition);
 
         m_easingTimer += Time.deltaTime;
     }

@@ -125,6 +125,7 @@ public class EnemyBossController : MonoBehaviour
         BossComeBack, // 自分のもとの位置に戻る
         Down,  // ボスダウン
         Death, // 死亡
+        BatleStart    // バトル開始前
     }
     private State state = State.Idle;
     public State GetState() { return state; }
@@ -341,7 +342,7 @@ public class EnemyBossController : MonoBehaviour
             case 2: // 右
                 //GameObject sl = Instantiate(sickle);
                 sickles[0].transform.position = transform.position + (directions.right * sickleRange);
-                sickles[0].transform.eulerAngles = new Vector3(70, -90, -20);
+                sickles[0].transform.localEulerAngles = new Vector3(70, 90, -20);
                 var controller = sickles[0].GetComponent<SickleController>();
                 controller.Initilize();
 
@@ -351,7 +352,7 @@ public class EnemyBossController : MonoBehaviour
 
                 // GameObject sl5 = Instantiate(sickle);
                 sickles[1].transform.position = transform.position + (directions.left * sickleRange);
-                sickles[1].transform.eulerAngles = new Vector3(-70, -90, 20);
+                sickles[1].transform.localEulerAngles = new Vector3(-70, 90, 20);
                 var controller2 = sickles[1].GetComponent<SickleController>();
                 controller2.Initilize();
 
@@ -362,7 +363,7 @@ public class EnemyBossController : MonoBehaviour
             case 1: // 右斜め上
                 //GameObject sl2 = Instantiate(sickle);
                 sickles[2].transform.position = transform.position + (directions.topRight * (sickleRange + 1));
-                sickles[2].transform.eulerAngles = new Vector3(30, -90, -20);
+                sickles[2].transform.localEulerAngles = new Vector3(30, 90, -20);
                 var controller3 = sickles[2].GetComponent<SickleController>();
                 controller3.Initilize();
 
@@ -371,7 +372,7 @@ public class EnemyBossController : MonoBehaviour
 
                 //GameObject sl4 = Instantiate(sickle);
                 sickles[3].transform.position = transform.position + (directions.topLeft * (sickleRange + 1));
-                sickles[3].transform.eulerAngles = new Vector3(-30, -90, -20);
+                sickles[3].transform.localEulerAngles = new Vector3(-30, 90, -20);
                 var controller4 = sickles[3].GetComponent<SickleController>();
                 controller4.Initilize();
 
@@ -382,7 +383,7 @@ public class EnemyBossController : MonoBehaviour
             case 0: // 上
                 //GameObject sl3 = Instantiate(sickle);
                 sickles[4].transform.position = transform.position + (directions.top * sickleRange);
-                sickles[4].transform.eulerAngles = new Vector3(0, -90, -20);
+                sickles[4].transform.localEulerAngles = new Vector3(0, 90, -20);
                 var controller5 = sickles[4].GetComponent<SickleController>();
                 controller5.Initilize();
 
@@ -541,5 +542,17 @@ public class EnemyBossController : MonoBehaviour
     private void ConditionDeathUpdate()
     {
       
+    }
+
+    //  バトル開始前
+    private void ConditionBatleStartState()
+    {
+        state = State.Death;
+
+        m_animator.SetTrigger("Death");
+    }
+    private void ConditionBatleStartUpdate()
+    {
+
     }
 }
