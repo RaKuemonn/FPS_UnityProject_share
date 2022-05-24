@@ -234,13 +234,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 74083071}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.043619405, y: 0, z: 0, w: 0.9990483}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 5, y: 0, z: 0}
 --- !u!114 &74083076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2015,6 +2015,29 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3008921518853992251, guid: 2ad77165a8e1893479dad09b6c91e6aa, type: 3}
   m_PrefabInstance: {fileID: 1754910844}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1754910846 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2892952898888743302, guid: 2ad77165a8e1893479dad09b6c91e6aa, type: 3}
+  m_PrefabInstance: {fileID: 1754910844}
+  m_PrefabAsset: {fileID: 0}
+--- !u!143 &1754910847
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1754910846}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 5.6
+  m_Radius: 111111110
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &1793545212 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2555757788557816167, guid: dfe19c6bccf534f4bba1a262840e6c7c, type: 3}
@@ -2537,11 +2560,11 @@ PrefabInstance:
     - target: {fileID: 5454197653153553135, guid: 2fdf91720d5452f4499ffcce085733ae, type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: 730f8ddcc132f514097500828b25d8e9, type: 2}
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 5454197653153553135, guid: 2fdf91720d5452f4499ffcce085733ae, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: -5217532893160916816, guid: 730f8ddcc132f514097500828b25d8e9, type: 2}
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 5454197653552947346, guid: 2fdf91720d5452f4499ffcce085733ae, type: 3}
       propertyPath: m_Name
       value: Title UI
@@ -2633,11 +2656,11 @@ PrefabInstance:
     - target: {fileID: 5454197653972918516, guid: 2fdf91720d5452f4499ffcce085733ae, type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: 730f8ddcc132f514097500828b25d8e9, type: 2}
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 5454197653972918516, guid: 2fdf91720d5452f4499ffcce085733ae, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: -5217532893160916816, guid: 730f8ddcc132f514097500828b25d8e9, type: 2}
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 5454197654002025579, guid: 2fdf91720d5452f4499ffcce085733ae, type: 3}
       propertyPath: m_text
       value: Blader
@@ -2649,7 +2672,7 @@ PrefabInstance:
     - target: {fileID: 5454197654002025579, guid: 2fdf91720d5452f4499ffcce085733ae, type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: 730f8ddcc132f514097500828b25d8e9, type: 2}
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 5454197654002025579, guid: 2fdf91720d5452f4499ffcce085733ae, type: 3}
       propertyPath: m_fontStyle
       value: 35
@@ -2681,7 +2704,7 @@ PrefabInstance:
     - target: {fileID: 5454197654002025579, guid: 2fdf91720d5452f4499ffcce085733ae, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: -5217532893160916816, guid: 730f8ddcc132f514097500828b25d8e9, type: 2}
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 5454197654002025579, guid: 2fdf91720d5452f4499ffcce085733ae, type: 3}
       propertyPath: m_characterSpacing
       value: 23.34
@@ -2826,7 +2849,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2555757788557816167, guid: dfe19c6bccf534f4bba1a262840e6c7c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.096
+      value: 22.92
       objectReference: {fileID: 0}
     - target: {fileID: 2555757788557816167, guid: dfe19c6bccf534f4bba1a262840e6c7c, type: 3}
       propertyPath: m_LocalRotation.w
