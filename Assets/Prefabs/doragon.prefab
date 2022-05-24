@@ -331,7 +331,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 8748892135801146194, guid: fcc438896f3918c4f87a24220c089305, type: 3}
+  - {fileID: 2100000, guid: 2d6a3ff1e5396684f86cc88e3e3bd8fb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -550,6 +550,7 @@ GameObject:
   - component: {fileID: -1543297752930389084}
   - component: {fileID: -3624442043704914739}
   - component: {fileID: 7948230198278724932}
+  - component: {fileID: -2356439859923709843}
   m_Layer: 0
   m_Name: doragon
   m_TagString: Enemy
@@ -605,7 +606,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_hp: 0
-  m_damage: 1
   m_moveSpeed: 2
   m_idleTimeMax: 5
 --- !u!54 &-1543297752930389084
@@ -655,6 +655,30 @@ CharacterController:
   m_SkinWidth: 10
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.1, z: -0.05}
+--- !u!114 &-2356439859923709843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6168674603379083785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 675adbc1c31b3f345a4ef7a0db19e1d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obj: {fileID: 4458276313313712535}
+  materials:
+  - {fileID: 2100000, guid: 1712402317bb21b479f9ec8dca0c7ff7, type: 2}
+  initial_value:
+  - -2
+  - 0.5
+  End_value:
+  - 0.5
+  - -0.5
+  LostSpeed:
+  - 2
+  - 0.5
 --- !u!1 &6513375450218546685
 GameObject:
   m_ObjectHideFlags: 0
