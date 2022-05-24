@@ -571,7 +571,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_hp: 1
-  m_damage: 0
   damageArea: {fileID: 0}
 --- !u!95 &3261649226426817631
 Animator:

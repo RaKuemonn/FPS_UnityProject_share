@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.PlayerLoop;
 
 public class BaseEnemy : MonoBehaviour
 {
@@ -123,6 +124,15 @@ public class BaseEnemy : MonoBehaviour
         m_enter_battle_area = true;
     }
 
+    void FixUpdate()
+    {
+        if (IsDeath == false) return;
+
+        GetComponent<Rigidbody>()?.AddForce(
+            new Vector3(0f, -4.95f, 0f),    // 徐々に重力を下げていくみたいに出来たらいい
+            ForceMode.Acceleration
+        );
+    }
 
 
     ///
@@ -156,7 +166,7 @@ public class BaseEnemy : MonoBehaviour
         // rigidbodyプロパティの変更
         {
             // 重力に従う
-            rigidbody.useGravity = true;
+            //rigidbody.useGravity = true;
 
             // 拘束を無くす
             rigidbody.constraints = RigidbodyConstraints.None;
