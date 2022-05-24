@@ -20,6 +20,7 @@ TagManager:
   - SickleThrowing
   - RootBone
   - ThrowingPoint
+  - EffectCircle
   layers:
   - Default
   - TransparentFX

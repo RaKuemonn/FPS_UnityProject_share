@@ -236,7 +236,7 @@ public class EnemyBossController : MonoBehaviour
     private void ConditionSickleAttackState()
     {
         state = State.SickleAttack;
-        kariTimer = 1.0f;
+        kariTimer = 4.0f;
 
         //鎌をインスタンス化する(生成する)
         GameObject child = GameObject.FindWithTag("Dumy");//transform.Find("ThrowingKama").gameObject;
@@ -284,7 +284,7 @@ public class EnemyBossController : MonoBehaviour
     {
         state = State.SickleAttackBerserker;
 
-        kariTimer = 3.0f;
+        kariTimer = 9.0f;
 
         m_count = 0;
 

@@ -38,6 +38,20 @@ public class EnemyAttackPrudir : MonoBehaviour
             image.enabled = true;
         }
 
+        {
+            var dot = Vector2.Dot(Camera.main.transform.forward.normalized,
+                GameObject.FindGameObjectWithTag("Player").transform.forward.normalized);
+
+
+            if (dot < 0.0f)
+            {
+                var image = GetComponent<Image>();
+                image.enabled = false;
+
+                return;
+            }
+        }
+
         // オブジェクトのワールド座標→スクリーン座標変換
         var targetScreenPos = Camera.main.WorldToScreenPoint(m_gameObject.transform.position);
         
