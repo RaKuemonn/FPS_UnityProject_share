@@ -125,13 +125,7 @@ public class SlashImageController : MonoBehaviour
             // “–‚½‚Á‚Ä‚¢‚È‚¯‚ê‚Î‘Šúreturn‚³‚¹‚é
             if (result_hit_collider == null) return;
 
-
-#if UNITY_EDITOR
-            foreach (var ray in rays)
-            {
-                Debug.DrawRay(ray.origin, ray.direction);
-            }
-#endif
+            
 
 
             // “–‚½‚Á‚Ä‚¢‚é“G‚Éˆ—‚ğs‚¤
