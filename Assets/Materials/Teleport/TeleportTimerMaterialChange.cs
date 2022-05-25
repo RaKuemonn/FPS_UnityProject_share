@@ -73,7 +73,7 @@ public class TeleportTimerMaterialChange : MonoBehaviour
 
         time += Time.deltaTime;
 
-        // ディゾルブ完了したら入らないように
+        // テレポート完了したら入らないように
         if (complete == false)
         {
             // 今は仮で2秒後に開始するようにしている
@@ -119,12 +119,12 @@ public class TeleportTimerMaterialChange : MonoBehaviour
                         }
                     }
 
-                    // ディゾルブをかけ終わったらtrueに
+                    // テレポートをかけ終わったらtrueに
                     //if (materials[materials.Length - 1].GetFloat("_Slider") > End_value)
                     if (r.materials[0].GetFloat("_Slider") > End_value[0] && r.materials[0].GetFloat("_Slider") < End_value[1])
                     {
                         complete = true;
-                        // 敵が鎌を投擲し始めていいように許可
+                        // 消去許可
                         // 投げる = true;
                     }
                 }

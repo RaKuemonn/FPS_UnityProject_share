@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: -5274379174153012101}
   - component: {fileID: 2395325568155738898}
   - component: {fileID: 7749966575566359693}
+  - component: {fileID: 1768321930062657462}
   m_Layer: 0
   m_Name: kama
   m_TagString: Sickle
@@ -171,10 +172,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3943d5c4184fddd4eaaf8f7d675408a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_hp: 0
+  m_damage: 0
   timer: 15
   moveSpeed: 5
   player: {fileID: 7790357534801836031, guid: 4065b0a3a50481b408a227796b93b138, type: 3}
   boss: {fileID: 5030218871368432538, guid: 6c8c5929f4ac8b8479daf29786733107, type: 3}
+  EffectCircle: {fileID: 0}
 --- !u!54 &2395325568155738898
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -204,6 +208,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.5, y: 2.2, z: 0.3}
   m_Center: {x: -0.4, y: 1.2, z: 0}
+--- !u!114 &1768321930062657462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2666462225408373522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 451f690d01cfc5747b0130df99a23c71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obj: {fileID: 6800370669004261353}
+  Initial_value: 2
+  End_value: -0.05
+  LostSpeed: 1.45
 --- !u!1 &3139403445745466792
 GameObject:
   m_ObjectHideFlags: 0
@@ -435,7 +455,8 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8711ef61a2ee62a47a23c3260049704f, type: 2}
+  - {fileID: 2100000, guid: edede76f031d9514595d1bc4b6d76ce9, type: 2}
+  - {fileID: 2100000, guid: 33309a3147ba225459584b3e110dd6bf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
