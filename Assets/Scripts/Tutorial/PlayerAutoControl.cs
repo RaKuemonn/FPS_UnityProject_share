@@ -75,6 +75,8 @@ public class PlayerAutoControl : MonoBehaviour
 
     public void OnDamage(float damage_)
     {
-        hpController.OnDamaged(damage_);
+        hpController.OnDamaged(
+            damage_,
+            delegate () { GetComponent<ChangeScene>().Change(); });
     }
 }
