@@ -93,6 +93,22 @@ public class EnemyBossController : MonoBehaviour
 
     private int idleCount = 0;
 
+
+    private Vector3[] targetPositions =
+    {
+        new Vector3(0f,0.05f, 17.118f),
+        new Vector3(0f, 0.73f, 145.7f),
+        new Vector3(0f, 1.737f, 9.789f),
+        new Vector3(0f, 1.59f, 3.4599f)
+    };
+    private float[] easingTimers =
+    {
+        1.0f,
+        0.5f,
+        0.3f,
+    };
+
+
     // ボスダウン状態
     //private bool m_down = false;
 
@@ -134,7 +150,7 @@ public class EnemyBossController : MonoBehaviour
     void Start()
     {
         hpMax = hp;
-        ConditionIdleState();
+        ConditionBatleStartState();
 
         m_animator = GetComponent<Animator>();
     }  
@@ -162,6 +178,8 @@ public class EnemyBossController : MonoBehaviour
             case State.Down: ConditionDownUpdate( ); break;
             // 死亡
             case State.Death: ConditionDeathUpdate(); break;
+            // 戦闘前
+            case State.BatleStart: ConditionBatleStartUpdate(); break;
         }
         Debug.Log(state);
 
@@ -547,9 +565,6 @@ public class EnemyBossController : MonoBehaviour
     //  バトル開始前
     private void ConditionBatleStartState()
     {
-        state = State.Death;
-
-        m_animator.SetTrigger("Death");
     }
     private void ConditionBatleStartUpdate()
     {

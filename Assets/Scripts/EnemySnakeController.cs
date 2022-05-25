@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class EnemySnakeController : BaseEnemy
 {
+    private static readonly int hashAttack = Animator.StringToHash("Attack");
+    private static readonly int hashDeath = Animator.StringToHash("Death");
+
+
     // 移動スピード
     public float m_moveSpeed;
 
@@ -19,7 +23,7 @@ public class EnemySnakeController : BaseEnemy
     private Vector3 m_startPosition;
     private Vector3 m_endPosition;
 
-    //private Animator m_animator;
+    private Animator m_animator;
 
 
     public enum StateRab
@@ -38,7 +42,7 @@ public class EnemySnakeController : BaseEnemy
     // Start is called before the first frame update
     void Start()
     {
-       // m_animator = GetComponent<Animator>();
+        m_animator = GetComponent<Animator>();
 
         m_territoryOrigin = transform.position;
     }
@@ -199,19 +203,29 @@ public class EnemySnakeController : BaseEnemy
     private void ConditionAttackState()
     {
         state = StateRab.Attack;
-     //   m_animator.SetTrigger("Attack");
+        m_animator.SetTrigger("Attack");
 
         m_kariTimer = 2.5f;
     }
 
     private void ConditionAttackUpdate()
     {
-     //   if (m_animator.GetCurrentAnimatorStateInfo(0).IsName("stand_by"))
-     //   {
-     //       ConditionAttackEndState();
-     //       return;
-     //   }
+        GameObject player = GameObject.FindWithTag("Player");
+        var dir = player.transform.position - transform.position;
+        Turn(dir);
 
+        if (m_animator.GetCurrentAnimatorStateInfo(0).IsName("stand_by"))
+        {
+            ConditionAttackEndState();
+
+            // プレイヤーにダメージを与える
+            GameObject
+                .FindGameObjectWithTag("Player")
+                .GetComponent<PlayerAutoControl>()
+                .OnDamage(m_damage);
+
+            return;
+        }
 
         m_kariTimer -= Time.deltaTime;
     }
@@ -245,7 +259,7 @@ public class EnemySnakeController : BaseEnemy
     {
         state = StateRab.Death;
         m_kariTimer = 0.0f;
-     //   m_animator.SetBool("Death", m_death);
+        m_animator.SetTrigger("Death");
 
     }
 
