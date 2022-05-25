@@ -14,9 +14,16 @@ public class ChangeScene : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
-        var player = collider.transform.gameObject;
-        if (player.name != "Player") return;
+        if (gameObject.tag == "Player") return;
 
+        var player = collider.transform.gameObject;
+        if (player.tag != "Player") return;
+
+        SceneManager.LoadScene(SceneName);
+    }
+
+    public void Change()
+    {
         SceneManager.LoadScene(SceneName);
     }
 }

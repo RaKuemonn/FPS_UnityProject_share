@@ -161,7 +161,8 @@ public class SickleController : BaseEnemy
 
         m_hp = 1;
 
-        
+        gameObject.GetComponent<DissolveTimer_ChangeTexture>()?.OnGenerate();
+
 
         //slashAngle = Random.Range(0.0f, 360.0f);
         //

@@ -80,7 +80,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8711ef61a2ee62a47a23c3260049704f, type: 2}
+  - {fileID: 2100000, guid: edede76f031d9514595d1bc4b6d76ce9, type: 2}
   - {fileID: 2100000, guid: 33309a3147ba225459584b3e110dd6bf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -584,7 +584,7 @@ MonoBehaviour:
   obj: {fileID: 498084279620437975}
   Initial_value: 2
   End_value: -1
-  LostSpeed: 0.5
+  LostSpeed: 1.45
 --- !u!65 &2436246271046104204
 BoxCollider:
   m_ObjectHideFlags: 0

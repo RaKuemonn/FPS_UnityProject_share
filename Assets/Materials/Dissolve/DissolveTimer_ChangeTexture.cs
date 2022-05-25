@@ -35,19 +35,20 @@ public class DissolveTimer_ChangeTexture : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
-    {
-        // 値変更処理
-        r = obj.GetComponent<Renderer>();
-        // ディゾルブ以外のアルファ値を0にして非表示にする
-        r.materials[0].color = new Color(r.materials[0].color.r, r.materials[0].color.g, r.materials[0].color.b, 0);
-        
-        // 0番目に入ってるマテリアルのalbedoとnormalをディゾルブマテリアルにコピーする
-        r.materials[r.materials.Length - 1].SetTexture("Main_Texture", r.materials[0].GetTexture("_BaseMap"));
-        r.materials[r.materials.Length - 1].SetTexture("Normal", r.materials[0].GetTexture("_BumpMap"));
-        
-        value = Initial_value;
-    }
+    //void Start()
+    //{
+        //// 値変更処理
+        //r = obj.GetComponent<Renderer>();
+        //// ディゾルブ以外のアルファ値を0にして非表示にする
+        ////r.materials[0].color = new Color(r.materials[0].color.r, r.materials[0].color.g, r.materials[0].color.b, 0);
+        //r.materials[0].SetFloat("_Inverse_Clipping", 1);
+
+        //// 0番目に入ってるマテリアルのalbedoとnormalをディゾルブマテリアルにコピーする
+        //r.materials[r.materials.Length - 1].SetTexture("Main_Texture", r.materials[0].GetTexture("_MainTex"));
+        ////r.materials[r.materials.Length - 1].SetTexture("Normal", r.materials[0].GetTexture("_BumpMap"));
+
+        //value = Initial_value;
+    //}
     void Update()
     {
         // 間隔
@@ -62,10 +63,10 @@ public class DissolveTimer_ChangeTexture : MonoBehaviour
         {
             // 生成されたらディゾルブ開始
             // 今は仮で2秒後に開始するようにしている
-            if (time > 2)
-            {
-                test = true;
-            }
+            //if (time > 2)
+            //{
+                
+            //}
 
             if (test)
             //if (time > 2)
@@ -81,10 +82,32 @@ public class DissolveTimer_ChangeTexture : MonoBehaviour
                 if (r.materials[r.materials.Length - 1].GetFloat("TransparencyLevel") < End_value)
                 {
                     complete = true;
+
+                    r.materials[0].SetFloat("_Inverse_Clipping", 0); 
+                    r.materials[r.materials.Length - 1].SetFloat("TransparencyLevel", Initial_value);
                     // 敵が鎌を投擲し始めていいように許可
                     // 投げる = true;
                 }
             }
         }
+    }
+
+    public void OnGenerate()
+    {
+
+        // 値変更処理
+        r = obj.GetComponent<Renderer>();
+        // ディゾルブ以外のアルファ値を0にして非表示にする
+        //r.materials[0].color = new Color(r.materials[0].color.r, r.materials[0].color.g, r.materials[0].color.b, 0);
+        r.materials[0].SetFloat("_Inverse_Clipping", 1);
+
+        // 0番目に入ってるマテリアルのalbedoとnormalをディゾルブマテリアルにコピーする
+        r.materials[r.materials.Length - 1].SetTexture("Main_Texture", r.materials[0].GetTexture("_MainTex"));
+        //r.materials[r.materials.Length - 1].SetTexture("Normal", r.materials[0].GetTexture("_BumpMap"));
+
+        // 数値の初期化
+        value = Initial_value;
+        test = true;
+        complete = false;
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
@@ -49,7 +50,7 @@ public class PlayerHPController : MonoBehaviour
     
     
 
-    public void OnDamaged(float damaged_)
+    public void OnDamaged(float damaged_, Action game_over_)
     {
         var playerStatus = masterData.PlayerStatus;
         var damaged_hp = playerStatus.current_hp - damaged_; // ダメージを受けた体力値
@@ -70,7 +71,7 @@ public class PlayerHPController : MonoBehaviour
         if (damaged_hp <= 0f)
         {
             // なにかしらの関数を呼び出す。
-
+            game_over_?.Invoke();
         }
     }
 
