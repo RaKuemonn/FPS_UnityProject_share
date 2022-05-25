@@ -10,7 +10,7 @@ public class BaseEnemy : MonoBehaviour
     [SerializeField]
     protected float m_hp;
 
-    [SerializeField] public float m_damage { private set; get; }
+    [SerializeField] public float m_damage;
 
     public float GetHP() { return m_hp; }
     public void SetHP(float hp) { m_hp = hp; }

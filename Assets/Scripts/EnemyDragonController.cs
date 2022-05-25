@@ -141,6 +141,8 @@ public class EnemyDragonController : BaseEnemy
         state = StateDra.Idle;
 
 
+        //if (m_battleFlag) m_idleTimeMax = Random.Range(1.5f, 4.0f);
+
         m_idleTimer = 0.0f;
     }
 

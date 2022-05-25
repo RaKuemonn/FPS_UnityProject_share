@@ -367,6 +367,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DamageArea box(1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7467039292448382880, guid: 4a05defeec96e8d40b3d4310587ea3b3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7467039292448382881, guid: 4a05defeec96e8d40b3d4310587ea3b3, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -1179,6 +1183,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DamageArea (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 7467039292448382880, guid: 4a05defeec96e8d40b3d4310587ea3b3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7467039292448382881, guid: 4a05defeec96e8d40b3d4310587ea3b3, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -1743,6 +1751,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DamageArea (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7467039292448382880, guid: 4a05defeec96e8d40b3d4310587ea3b3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7467039292448382881, guid: 4a05defeec96e8d40b3d4310587ea3b3, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -2080,6 +2092,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DamageArea (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 7467039292448382880, guid: 4a05defeec96e8d40b3d4310587ea3b3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7467039292448382881, guid: 4a05defeec96e8d40b3d4310587ea3b3, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -2238,6 +2254,37 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8133355340429240342, guid: e410fd0783994dc45adf10a46a10158b, type: 3}
   m_PrefabInstance: {fileID: 1279699008}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1322333060 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2107520782769508994, guid: b750189f7330e054b8c893cad3794f01, type: 3}
+  m_PrefabInstance: {fileID: 463160918}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1322333064
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1322333060}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.2815995, z: 10.538898}
+  m_Center: {x: 4, y: 0, z: 0}
+--- !u!65 &1322333065
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1322333060}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.2815995, z: 10.538898}
+  m_Center: {x: -4, y: 0, z: 0}
 --- !u!1001 &1336247824
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2248,6 +2295,10 @@ PrefabInstance:
     - target: {fileID: 7467039292448382880, guid: 4a05defeec96e8d40b3d4310587ea3b3, type: 3}
       propertyPath: m_Name
       value: DamageArea box(2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7467039292448382880, guid: 4a05defeec96e8d40b3d4310587ea3b3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7467039292448382881, guid: 4a05defeec96e8d40b3d4310587ea3b3, type: 3}
       propertyPath: m_RootOrder
@@ -2590,6 +2641,10 @@ PrefabInstance:
     - target: {fileID: 7467039292448382880, guid: 4a05defeec96e8d40b3d4310587ea3b3, type: 3}
       propertyPath: m_Name
       value: DamageArea (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7467039292448382880, guid: 4a05defeec96e8d40b3d4310587ea3b3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7467039292448382881, guid: 4a05defeec96e8d40b3d4310587ea3b3, type: 3}
       propertyPath: m_RootOrder
@@ -3031,6 +3086,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DamageArea (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 7467039292448382880, guid: 4a05defeec96e8d40b3d4310587ea3b3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7467039292448382881, guid: 4a05defeec96e8d40b3d4310587ea3b3, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -3101,6 +3160,10 @@ PrefabInstance:
     - target: {fileID: 7467039292448382880, guid: 4a05defeec96e8d40b3d4310587ea3b3, type: 3}
       propertyPath: m_Name
       value: DamageArea (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7467039292448382880, guid: 4a05defeec96e8d40b3d4310587ea3b3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7467039292448382881, guid: 4a05defeec96e8d40b3d4310587ea3b3, type: 3}
       propertyPath: m_RootOrder
@@ -3278,6 +3341,10 @@ PrefabInstance:
     - target: {fileID: 7467039292448382880, guid: 4a05defeec96e8d40b3d4310587ea3b3, type: 3}
       propertyPath: m_Name
       value: DamageArea box
+      objectReference: {fileID: 0}
+    - target: {fileID: 7467039292448382880, guid: 4a05defeec96e8d40b3d4310587ea3b3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7467039292448382881, guid: 4a05defeec96e8d40b3d4310587ea3b3, type: 3}
       propertyPath: m_RootOrder
@@ -3982,6 +4049,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ThrowingStartArea
       objectReference: {fileID: 0}
+    - target: {fileID: 1217440010157611171, guid: 31d2a61a15baf024ca3ed15dfdce6620, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1217440010157611172, guid: 31d2a61a15baf024ca3ed15dfdce6620, type: 3}
       propertyPath: parent
       value: 
@@ -4386,6 +4457,10 @@ PrefabInstance:
     - target: {fileID: 7467039292448382880, guid: 4a05defeec96e8d40b3d4310587ea3b3, type: 3}
       propertyPath: m_Name
       value: DamageArea
+      objectReference: {fileID: 0}
+    - target: {fileID: 7467039292448382880, guid: 4a05defeec96e8d40b3d4310587ea3b3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7467039292448382881, guid: 4a05defeec96e8d40b3d4310587ea3b3, type: 3}
       propertyPath: m_RootOrder
