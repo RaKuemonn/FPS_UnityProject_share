@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: HOTATE_Teleport Z
   m_Shader: {fileID: 4800000, guid: d644b45a73cc1cf45806ffb3479e7149, type: 3}
-  m_ShaderKeywords: Sign
+  m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -41,20 +41,20 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _Size: 0.001
-    - _Slider: 0.7
+    - _Slider: -1.1
     - _Smoothness: 0.5
     - _dir: 0
     - _noisepower: 0
     - _particle: 0.2
-    - _sign: 1
+    - _sign: 0
     - _sv1: 0.01
     - _sv2: 0.5
     - _sv3: 5
-    - _tess: 5
+    - _tess: 25
     - _width: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _color: {r: 0, g: 1, b: 1, a: 1}
+    - _color: {r: 1, g: 1, b: 1, a: 1}
     - _fvec: {r: 0, g: 1, b: 0, a: 0}
     - _svec: {r: 3, g: -2, b: 3, a: 0}
   m_BuildTextureStacks: []
