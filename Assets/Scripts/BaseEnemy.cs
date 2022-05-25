@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.PlayerLoop;
 
 public class BaseEnemy : MonoBehaviour
 {
@@ -123,6 +124,15 @@ public class BaseEnemy : MonoBehaviour
         m_enter_battle_area = true;
     }
 
+    //void FixedUpdate()
+    //{
+    //    //if (IsDeath == false) return;
+    //    //
+    //    //GetComponent<Rigidbody>()?.AddForce(
+    //    //    new Vector3(0f, -4.95f, 0f),    // 徐々に重力を下げていくみたいに出来たらいい
+    //    //    ForceMode.Acceleration
+    //    //);
+    //}
 
 
     ///
@@ -134,8 +144,13 @@ public class BaseEnemy : MonoBehaviour
     /// 
     public void OnCutted(Vector3 impulse_)
     {
+
+        IsDeath = true;
+
         // 衝撃を与える処理 (virtual)
         CuttedImpulse(impulse_);
+
+        gameObject.GetComponent<TeleportTimerMaterialChange>()?.OnDead();
 
         // マイナスなら破棄しない
         if (DestroyTime() < 0.0f) return;
@@ -156,20 +171,20 @@ public class BaseEnemy : MonoBehaviour
         // rigidbodyプロパティの変更
         {
             // 重力に従う
-            rigidbody.useGravity = true;
+            //rigidbody.useGravity = true;
 
             // 拘束を無くす
             rigidbody.constraints = RigidbodyConstraints.None;
         }
 
         // 弾き飛ばす
-        rigidbody.AddForce(impulse_, ForceMode.Impulse);
+        //rigidbody.AddForce(impulse_, ForceMode.Impulse);
     }
 
     protected virtual float DestroyTime()
     {
         // マイナスなら破棄しない
-        const float const_destroy_time = 0.5f;
+        const float const_destroy_time = 5f;
         return const_destroy_time;
     }
 
@@ -177,5 +192,6 @@ public class BaseEnemy : MonoBehaviour
     public virtual void OnDead()
     {
         IsDeath = true;
+
     }
 }

@@ -142,7 +142,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 8748892135801146194, guid: 52e4440fc5cc45a48845a73522351fc3, type: 3}
+  - {fileID: 2100000, guid: c59ec8706120b354389197a5c12c8606, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -534,6 +534,7 @@ GameObject:
   - component: {fileID: 3261649226426817631}
   - component: {fileID: 37022231412486574}
   - component: {fileID: -7487804448019244170}
+  - component: {fileID: 3025268491673900315}
   m_Layer: 0
   m_Name: BatStop
   m_TagString: Enemy
@@ -571,7 +572,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_hp: 1
-  m_damage: 0
   damageArea: {fileID: 0}
 --- !u!95 &3261649226426817631
 Animator:
@@ -621,6 +621,30 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &3025268491673900315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8437983312592418023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 675adbc1c31b3f345a4ef7a0db19e1d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obj: {fileID: 2607928320080881825}
+  materials:
+  - {fileID: 2100000, guid: 1712402317bb21b479f9ec8dca0c7ff7, type: 2}
+  initial_value:
+  - 0.1
+  - 0.5
+  End_value:
+  - -1.5
+  - -0.5
+  LostSpeed:
+  - 1
+  - 3
 --- !u!1 &8878838685084859434
 GameObject:
   m_ObjectHideFlags: 0

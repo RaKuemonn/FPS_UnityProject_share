@@ -36,7 +36,7 @@ public class BattleAreaTutorial : MonoBehaviour
 
     void Update()
     {
-        if(false){
+        {
             // 中にいる敵の数を常に確認する。 (死んだ敵はOnTriggerExit()で感知できないので、この処理をしている)
             // 最後の削除後に、現在の戦闘に残っている敵の数がわかる
 
@@ -51,7 +51,7 @@ public class BattleAreaTutorial : MonoBehaviour
 
                 var enemy = enemies[i];
 
-                if (enemy) continue;
+                if (enemy.IsDeath == false) continue;
                 remove_indexes[i] = i; // 削除条件(敵が死んでcolliderが消えている)を満たしていてもすぐ消さない(イテレーターが逝かれそう)
             }
 

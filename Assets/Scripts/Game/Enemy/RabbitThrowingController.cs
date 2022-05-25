@@ -10,15 +10,8 @@ public class RabbitThrowingController : BaseEnemy
     private Rigidbody rigidbody;
 
     public float arrive_time;   // ThrowingStartAreaControlÇ≈ê›íË
-    private float timer;
+    private float timer = 0f;
 
-
-
-    void Start()
-    {
-        rigidbody = GetComponent<Rigidbody>();
-        timer = 0f;
-    }
     
     void Update()
     {

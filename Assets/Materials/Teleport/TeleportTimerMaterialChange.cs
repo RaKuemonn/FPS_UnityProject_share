@@ -16,21 +16,21 @@ public class TeleportTimerMaterialChange : MonoBehaviour
     
     // 初期値
     [SerializeField]
-    float initial_value = -2.0f;
+    float[] initial_value = { -2.0f, 0.5f};
 
     // 終了値
     [SerializeField]
-    float End_value = 0.5f;
+    float[] End_value = { 0.5f, -0.5f};
 
     // 消えるスピード
     [SerializeField]
-    float LostSpeed = 2.0f;
+    float[] LostSpeed = { 2.0f, 0.5f };
 
     //方向逆転
     float sign;
 
     // 値
-    float value;
+    float[] value = {0,0};
 
     // テレポート開始許可
     bool test = false;
@@ -85,45 +85,48 @@ public class TeleportTimerMaterialChange : MonoBehaviour
 
             if (test)
             {
-                //方向逆転してないとき
-                if (sign == 0)
+                for (int i = 0; i < r.materials.Length; i++)
                 {
-                    value -= Time.deltaTime * LostSpeed;
-                    var t = value / duration;
-                    //for (int i = 0; i < materials.Length; i++)
-                    //{
-                    //    materials[i].SetFloat("_Slider", t);
-                    //}
-                    //for (int i = 0; i < materials.Length; i++)
-                    //{
-                    //見た目に関わるのは1つだけなので0でいい
-                    r.materials[0].SetFloat("_Slider", t);
-                    //}
-                }
-                //方向逆転してるとき
-                else if (sign == 1)
-                {
-                    value += Time.deltaTime * LostSpeed;
-                    var t = value / duration;
+                    //方向逆転してないとき
+                    if (r.materials[i].GetFloat("_sign") == 0)
+                    {
+                        value[i] -= Time.deltaTime * LostSpeed[i];
+                        var t = value[i] / duration;
+                        //for (int i = 0; i < materials.Length; i++)
+                        //{
+                        //    materials[i].SetFloat("_Slider", t);
+                        //}
+                        //for (int i = 0; i < r.materials.Length; i++)
+                        {
+                            // 見た目に関わるのは1つだけなので0でいい
+                            r.materials[i].SetFloat("_Slider", t);
+                        }
+                    }
+                    //方向逆転してるとき
+                    else if (r.materials[i].GetFloat("_sign") == 1)
+                    {
+                        value[i] += Time.deltaTime * LostSpeed[i];
+                        var t = value[i] / duration;
 
-                    //for (int i = 0; i < materials.Length; i++)
-                    //{
-                    //    materials[i].SetFloat("_Slider", t);
-                    //}
-                    //for (int i = 0; i < materials.Length; i++)
-                    //{
-                    //見た目に関わるのは1つだけなので0でいい
-                    r.materials[0].SetFloat("_Slider", t);
-                    //}
-                }
+                        //for (int i = 0; i < materials.Length; i++)
+                        //{
+                        //    materials[i].SetFloat("_Slider", t);
+                        //}
+                        //for (int i = 0; i < r.materials.Length; i++)
+                        {
+                            // 見た目に関わるのは1つだけなので0でいい
+                            r.materials[i].SetFloat("_Slider", t);
+                        }
+                    }
 
-                // ディゾルブをかけ終わったらtrueに
-                //if (materials[materials.Length - 1].GetFloat("_Slider") > End_value)
-                if (r.materials[0].GetFloat("_Slider") > End_value)
-                {
-                    complete = true;
-                    // 敵が鎌を投擲し始めていいように許可
-                    // 投げる = true;
+                    // ディゾルブをかけ終わったらtrueに
+                    //if (materials[materials.Length - 1].GetFloat("_Slider") > End_value)
+                    if (r.materials[0].GetFloat("_Slider") > End_value[0] && r.materials[0].GetFloat("_Slider") < End_value[1])
+                    {
+                        complete = true;
+                        // 敵が鎌を投擲し始めていいように許可
+                        // 投げる = true;
+                    }
                 }
             }
         }
@@ -199,7 +202,7 @@ public class TeleportTimerMaterialChange : MonoBehaviour
         materials[0].SetTexture("_BumpMap", r.materials[0].GetTexture("_BumpMap"));
 
         //テレポートマテリアルの情報から方向逆転しているか取得
-        sign = materials[0].GetFloat("_sign");
+        //r.materials[1].SetFloat("_sign", materials[0].GetFloat("_sign"));
 
         //r.materials[1].CopyPropertiesFromMaterial(r.materials[0]);
         //materials[0] = r.sharedMaterials[1];
@@ -210,7 +213,9 @@ public class TeleportTimerMaterialChange : MonoBehaviour
         r.materials[0].shader = materials[0].shader;
         r.materials[0].CopyPropertiesFromMaterial(materials[0]);
 
-        value = initial_value;
+        //r.materials[1].SetFloat("_sign", 1);
+        value[0] = initial_value[0];
+        value[1] = initial_value[1];
 #endif
     }
 }
