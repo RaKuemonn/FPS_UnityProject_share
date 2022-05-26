@@ -8,9 +8,9 @@ public class SquareBattleArea : MonoBehaviour
     public bool is_end { private set; get; }
     public const int battle_enemy_size = 3;
 
-    [SerializeField] private Transform TerritoryOrigin_1;
-    [SerializeField] private Transform TerritoryOrigin_2;
-    [SerializeField] private Transform TerritoryOrigin_3;
+    [SerializeField] private TerritoryOrigin TerritoryOrigin_1;
+    [SerializeField] private TerritoryOrigin TerritoryOrigin_2;
+    [SerializeField] private TerritoryOrigin TerritoryOrigin_3;
 
     // SquareBattleAreaオブジェクトに存在している敵の総数確認用リスト　(自動更新される)
     private List<BaseEnemy> enemies = new List<BaseEnemy>();
@@ -65,6 +65,17 @@ public class SquareBattleArea : MonoBehaviour
             // 集合させる
             enemy.SetAssemblyFlag(true);
             enemy.OnEnterBattleArea();
+
+            // 位置決める
+            if (TerritoryOrigin_1.is_in_territory == false)
+            { enemy.SetLocationPosition(TerritoryOrigin_1.transform.position); TerritoryOrigin_1.is_in_territory = true; continue; }
+
+            else if (TerritoryOrigin_2.is_in_territory == false)
+            { enemy.SetLocationPosition(TerritoryOrigin_2.transform.position); TerritoryOrigin_2.is_in_territory = true; continue; }
+
+            else if (TerritoryOrigin_3.is_in_territory == false)
+            { enemy.SetLocationPosition(TerritoryOrigin_3.transform.position); TerritoryOrigin_3.is_in_territory = true; continue; }
+
         }
     }
 
@@ -140,12 +151,24 @@ public class SquareBattleArea : MonoBehaviour
                 foreach (var enemy in enemies)
                 {
                   // 集合していない敵
-                  if(enemy.GetAssemblyFlag())continue;
+                  if(enemy.GetEnterBattleArea())continue;
 
                   // 集合させる
                   enemy.SetAssemblyFlag(true);
                   enemy.OnEnterBattleArea();
+
                   battle_enemies.Add(enemy);
+
+                  // 位置決める
+                  if (TerritoryOrigin_1.is_in_territory == false)
+                  { enemy.SetLocationPosition(TerritoryOrigin_1.transform.position); TerritoryOrigin_1.is_in_territory = true; break; }
+
+                  else if (TerritoryOrigin_2.is_in_territory == false)
+                  { enemy.SetLocationPosition(TerritoryOrigin_2.transform.position); TerritoryOrigin_2.is_in_territory = true; break; }
+
+                  else if (TerritoryOrigin_3.is_in_territory == false)
+                  { enemy.SetLocationPosition(TerritoryOrigin_3.transform.position); TerritoryOrigin_3.is_in_territory = true; break; }
+
                   break;
                 }
             }
@@ -157,5 +180,10 @@ public class SquareBattleArea : MonoBehaviour
         enemies.Remove(enemy_);
         battle_enemies.Remove(enemy_);
         Debug.Log("CurrentEnemyCount:" + enemies.Count);
+    }
+
+    public int InAreaEnemySize()
+    {
+        return enemies.Count;
     }
 }

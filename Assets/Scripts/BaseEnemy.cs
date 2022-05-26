@@ -42,7 +42,7 @@ public class BaseEnemy : MonoBehaviour
 
     protected Vector3 m_locationPosition;
 
-    public bool GetAssemblyFlag() { return m_assemblyFlag;}
+    public bool GetEnterBattleArea() { return m_enter_battle_area; }
 
     public void SetAssemblyFlag(bool set)
     {

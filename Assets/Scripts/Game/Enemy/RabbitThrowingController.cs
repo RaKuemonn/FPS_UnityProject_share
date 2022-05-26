@@ -7,7 +7,7 @@ public class RabbitThrowingController : BaseEnemy
     public PlayerAutoControl PlayerAutoControl;
     public Vector3 StartPosition;
 
-    private Rigidbody rigidbody;
+    //private Rigidbody rigidbody;
 
     public float arrive_time;   // ThrowingStartAreaControlÇ≈ê›íË
     private float timer = 0f;

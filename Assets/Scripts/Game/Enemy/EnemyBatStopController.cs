@@ -14,7 +14,7 @@ public class EnemyBatStopController : BaseEnemy
     private float m_easingTimer = 0.0f;
     private float m_easingTimeMax = 0.5f;
 
-    private Vector3 m_targetPosition;
+    //private Vector3 m_targetPosition;
     private Vector3 m_oldPosition;
 
     public enum StateBat

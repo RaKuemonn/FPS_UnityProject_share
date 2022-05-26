@@ -57,6 +57,7 @@ public class CondExprAllKill : BaseCondExpr
 {
     void Start()
     {
+
         var id = gameObject.GetComponent<FloorInfo>().FloorData.id;
 
         GameObject battleArea = null;
@@ -135,14 +136,12 @@ public class CondExprSquareAllKill : BaseCondExpr
             GetComponent<SquareBattleArea>();
 
         ((CondExprSquareAllKillData)data).SquareBattleArea = SquareBattleArea;
-
     }
 
     public override void OnCompleteCondExpr(BooleanClass booleanClass)
     {
-        var is_end = ((CondExprSquareAllKillData)data).SquareBattleArea.is_end;
-
-        booleanClass.Boolean = is_end;
+        var size = ((CondExprSquareAllKillData)data).SquareBattleArea.InAreaEnemySize();
+        booleanClass.Boolean = (size <= 0);
     }
 
 }
