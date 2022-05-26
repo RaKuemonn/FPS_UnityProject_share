@@ -14,13 +14,19 @@ public class SquareBattleArea : MonoBehaviour
 
     // SquareBattleAreaオブジェクトに存在している敵の総数確認用リスト　(自動更新される)
     private List<BaseEnemy> enemies = new List<BaseEnemy>();
-
     private List<BaseEnemy> battle_enemies = new List<BaseEnemy>();
 
     void OnTriggerEnter(Collider collider)
     {
         if (collider.tag == "Player")
         {
+            // 霧の表示を消す
+            GameObject
+                .FindGameObjectWithTag("Fog")
+                .GetComponent<Renderer>()
+                .enabled = false;
+
+            // 戦闘させる敵をbattle_enemiesに追加していく
             int i = 0;
             foreach (var enemy in enemies)
             {
@@ -51,16 +57,13 @@ public class SquareBattleArea : MonoBehaviour
 
         }
     }
-
-    void OnTriggerStay(Collider collider)
-    {
-
-    }
-
+    
     void CallBack_FirstEnemies()
     {
         foreach (var enemy in battle_enemies)
         {
+            // 集合させる
+            enemy.SetAssemblyFlag(true);
             enemy.OnEnterBattleArea();
         }
     }
@@ -136,9 +139,10 @@ public class SquareBattleArea : MonoBehaviour
                 //enemy.OnEnterBattleArea();
                 foreach (var enemy in enemies)
                 {
+                  // 集合していない敵
                   if(enemy.GetAssemblyFlag())continue;
 
-                  // 集合していない敵
+                  // 集合させる
                   enemy.SetAssemblyFlag(true);
                   enemy.OnEnterBattleArea();
                   battle_enemies.Add(enemy);

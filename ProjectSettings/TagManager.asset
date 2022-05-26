@@ -21,6 +21,8 @@ TagManager:
   - RootBone
   - ThrowingPoint
   - EffectCircle
+  - SquareBattleArea
+  - Fog
   layers:
   - Default
   - TransparentFX

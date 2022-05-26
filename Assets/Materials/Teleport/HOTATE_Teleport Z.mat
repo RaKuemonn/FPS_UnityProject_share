@@ -24,11 +24,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 03a9538f8fa010e46901c5190633803c, type: 3}
+        m_Texture: {fileID: 2800000, guid: 00744d3aef871c14588141ff0416534b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: ac77350f571df954a81b60f1bcb50bb2, type: 3}
+        m_Texture: {fileID: 2800000, guid: 2daf867c8e2b934459b927ab13946d44, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
