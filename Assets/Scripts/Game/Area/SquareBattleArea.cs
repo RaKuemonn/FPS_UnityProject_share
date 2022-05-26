@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class SquareBattleArea : MonoBehaviour
 {
-    public bool is_end { private set; get; }
     public const int battle_enemy_size = 3;
 
     [SerializeField] private TerritoryOrigin TerritoryOrigin_1;
@@ -15,11 +14,15 @@ public class SquareBattleArea : MonoBehaviour
     // SquareBattleAreaオブジェクトに存在している敵の総数確認用リスト　(自動更新される)
     private List<BaseEnemy> enemies = new List<BaseEnemy>();
     private List<BaseEnemy> battle_enemies = new List<BaseEnemy>();
+    
+    private bool is_player_in;
 
     void OnTriggerEnter(Collider collider)
     {
         if (collider.tag == "Player")
         {
+            is_player_in = true;
+
             // 霧の表示を消す
             GameObject
                 .FindGameObjectWithTag("Fog")
@@ -83,6 +86,12 @@ public class SquareBattleArea : MonoBehaviour
 
     void Update()
     {
+
+        //////////////////////////////////////
+        if (is_player_in == false) return;
+        //////////////////////////////////////
+        
+
         {
             // 中にいる敵の数を常に確認する。 (死んだ敵はOnTriggerExit()で感知できないので、この処理をしている)
             // 最後の削除後に、現在の戦闘に残っている敵の数がわかる
@@ -144,6 +153,7 @@ public class SquareBattleArea : MonoBehaviour
 
         // SquareBattleAreaの敵が減ったら
         {
+
             if (battle_enemies.Count < battle_enemy_size)
             {
                 //var enemy = enemies.First();

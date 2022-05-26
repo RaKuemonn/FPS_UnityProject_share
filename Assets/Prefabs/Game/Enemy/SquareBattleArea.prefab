@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7345022500774997502}
   - component: {fileID: 7345022500774997497}
   - component: {fileID: 7345022500774997496}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: TerritoryOrigin_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,6 +57,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f38771804c56cdb40b6007349a66a1d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  is_in_territory: 0
 --- !u!1 &7345022501831469848
 GameObject:
   m_ObjectHideFlags: 0
@@ -68,7 +69,7 @@ GameObject:
   - component: {fileID: 7345022501831469851}
   - component: {fileID: 7345022501831469850}
   - component: {fileID: 7345022501831469845}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: SquareBattleArea
   m_TagString: SquareBattleArea
   m_Icon: {fileID: 0}
@@ -131,7 +132,7 @@ GameObject:
   - component: {fileID: 7345022502279847203}
   - component: {fileID: 7345022502279847202}
   - component: {fileID: 7345022502279847229}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: TerritoryOrigin_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,6 +178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f38771804c56cdb40b6007349a66a1d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  is_in_territory: 0
 --- !u!1 &7345022502284490918
 GameObject:
   m_ObjectHideFlags: 0
@@ -188,7 +190,7 @@ GameObject:
   - component: {fileID: 7345022502284490913}
   - component: {fileID: 7345022502284490912}
   - component: {fileID: 7345022502284490915}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: TerritoryOrigin_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -234,3 +236,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f38771804c56cdb40b6007349a66a1d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  is_in_territory: 0
