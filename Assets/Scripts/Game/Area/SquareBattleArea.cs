@@ -21,6 +21,8 @@ public class SquareBattleArea : MonoBehaviour
     {
         if (collider.tag == "Player")
         {
+            if (battle_enemies.Count >= battle_enemy_size) return;
+
             is_player_in = true;
 
             // 霧の表示を消す
@@ -30,13 +32,20 @@ public class SquareBattleArea : MonoBehaviour
                 .enabled = false;
 
             // 戦闘させる敵をbattle_enemiesに追加していく
-            int i = 0;
-            foreach (var enemy in enemies)
-            {
-                if (i > battle_enemy_size - 1) break;
+            //int i = 0;
+            //foreach (var enemy in enemies)
+            //{
+            //    if (i > battle_enemy_size - 1) break;
+            //
+            //    battle_enemies.Add(enemy);
+            //    ++i;
+            //}
 
-                battle_enemies.Add(enemy);
-                ++i;
+            var size = enemies.Count;
+            var divide_three_size = size / 3;
+            for (int i = 0; i < battle_enemy_size; ++i)
+            {
+                battle_enemies.Add(enemies[i * divide_three_size]);
             }
 
             // このBattleAreaゲームオブジェクト内にいる
@@ -71,13 +80,13 @@ public class SquareBattleArea : MonoBehaviour
 
             // 位置決める
             if (TerritoryOrigin_1.is_in_territory == false)
-            { enemy.SetLocationPosition(TerritoryOrigin_1.transform.position); TerritoryOrigin_1.is_in_territory = true; continue; }
+            { enemy.SetLocationPosition(TerritoryOrigin_1.transform.position); TerritoryOrigin_1.is_in_territory = true; TerritoryOrigin_1.enemy = enemy; continue; }
 
             else if (TerritoryOrigin_2.is_in_territory == false)
-            { enemy.SetLocationPosition(TerritoryOrigin_2.transform.position); TerritoryOrigin_2.is_in_territory = true; continue; }
+            { enemy.SetLocationPosition(TerritoryOrigin_2.transform.position); TerritoryOrigin_2.is_in_territory = true; TerritoryOrigin_2.enemy = enemy; continue; }
 
             else if (TerritoryOrigin_3.is_in_territory == false)
-            { enemy.SetLocationPosition(TerritoryOrigin_3.transform.position); TerritoryOrigin_3.is_in_territory = true; continue; }
+            { enemy.SetLocationPosition(TerritoryOrigin_3.transform.position); TerritoryOrigin_3.is_in_territory = true; TerritoryOrigin_3.enemy = enemy; continue; }
 
         }
     }
@@ -159,8 +168,13 @@ public class SquareBattleArea : MonoBehaviour
                 //var enemy = enemies.First();
                 //enemy.OnEnterBattleArea();
                 foreach (var enemy in enemies)
-                {
-                  // 集合していない敵
+                { 
+
+                  if (TerritoryOrigin_1.is_in_territory &&
+                      TerritoryOrigin_2.is_in_territory &&
+                      TerritoryOrigin_3.is_in_territory) break;
+
+                    // 集合していない敵
                   if(enemy.GetEnterBattleArea())continue;
 
                   // 集合させる
@@ -171,15 +185,14 @@ public class SquareBattleArea : MonoBehaviour
 
                   // 位置決める
                   if (TerritoryOrigin_1.is_in_territory == false)
-                  { enemy.SetLocationPosition(TerritoryOrigin_1.transform.position); TerritoryOrigin_1.is_in_territory = true; break; }
+                  { enemy.SetLocationPosition(TerritoryOrigin_1.transform.position); TerritoryOrigin_1.is_in_territory = true; TerritoryOrigin_1.enemy = enemy; continue; }
 
                   else if (TerritoryOrigin_2.is_in_territory == false)
-                  { enemy.SetLocationPosition(TerritoryOrigin_2.transform.position); TerritoryOrigin_2.is_in_territory = true; break; }
+                  { enemy.SetLocationPosition(TerritoryOrigin_2.transform.position); TerritoryOrigin_2.is_in_territory = true; TerritoryOrigin_2.enemy = enemy; continue; }
 
                   else if (TerritoryOrigin_3.is_in_territory == false)
-                  { enemy.SetLocationPosition(TerritoryOrigin_3.transform.position); TerritoryOrigin_3.is_in_territory = true; break; }
-
-                  break;
+                  { enemy.SetLocationPosition(TerritoryOrigin_3.transform.position); TerritoryOrigin_3.is_in_territory = true; TerritoryOrigin_3.enemy = enemy; continue; }
+                  
                 }
             }
         }
