@@ -24,6 +24,24 @@ public class ChangeScene : MonoBehaviour
 
     public void Change()
     {
+        var se = GameObject.Find("SE");
+        var bgm = GameObject.Find("BGM");
+        var soundManager = GameObject.Find("SoundManager");
+
+        if (SceneName == "scene_title")
+        {
+            Destroy(se);
+            Destroy(bgm);
+            Destroy(soundManager);
+            SceneManager.LoadScene(SceneName);
+            return;
+        }
+
+
+        DontDestroyOnLoad(se);
+        DontDestroyOnLoad(bgm);
+        DontDestroyOnLoad(soundManager);
+
         SceneManager.LoadScene(SceneName);
     }
 }
