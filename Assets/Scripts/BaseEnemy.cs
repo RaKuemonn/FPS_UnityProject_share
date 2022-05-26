@@ -42,6 +42,8 @@ public class BaseEnemy : MonoBehaviour
 
     protected Vector3 m_locationPosition;
 
+    public bool GetAssemblyFlag() { return m_assemblyFlag;}
+
     public void SetAssemblyFlag(bool set)
     {
         m_assemblyFlag = set;
@@ -171,14 +173,14 @@ public class BaseEnemy : MonoBehaviour
         // rigidbodyプロパティの変更
         {
             // 重力に従う
-            //rigidbody.useGravity = true;
+            rigidbody.useGravity = true;
 
             // 拘束を無くす
             rigidbody.constraints = RigidbodyConstraints.None;
         }
 
         // 弾き飛ばす
-        //rigidbody.AddForce(impulse_, ForceMode.Impulse);
+        rigidbody.AddForce(impulse_, ForceMode.Impulse);
     }
 
     protected virtual float DestroyTime()
