@@ -51,7 +51,7 @@ public class TrigerAssemblyController : MonoBehaviour
             {
                 
                 // ƒvƒŒƒCƒ„[‚æ‚èŒã‚ë‚È‚çcontinue
-                if(other.transform.position.z <
+                if(other.transform.position.z >
                    battleArea.transform.position.z) continue;
                 
                 // null‚È‚ç
