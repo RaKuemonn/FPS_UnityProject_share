@@ -54299,7 +54299,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fe08f325ff395a743a3e1a5425d740ef, type: 3}
       propertyPath: m_LocalScale.x
-      value: 10
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fe08f325ff395a743a3e1a5425d740ef, type: 3}
       propertyPath: m_LocalScale.y
@@ -80837,7 +80837,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 096b4c7c096e6ff4f8ff1c3846b5c142, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1fe009449efa0d542a1fc0e8712355e5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
