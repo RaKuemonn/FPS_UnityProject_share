@@ -123,3 +123,26 @@ public class CondExprEndExplanation : BaseCondExpr
             .GetComponent<MessageRendererControl>();
     }
 }
+
+[Serializable]
+public class CondExprSquareAllKill : BaseCondExpr
+{
+    void Start()
+    {
+        var SquareBattleArea =
+            GameObject.
+            FindGameObjectWithTag("SquareBattleArea")?.
+            GetComponent<SquareBattleArea>();
+
+        ((CondExprSquareAllKillData)data).SquareBattleArea = SquareBattleArea;
+
+    }
+
+    public override void OnCompleteCondExpr(BooleanClass booleanClass)
+    {
+        var is_end = ((CondExprSquareAllKillData)data).SquareBattleArea.is_end;
+
+        booleanClass.Boolean = is_end;
+    }
+
+}

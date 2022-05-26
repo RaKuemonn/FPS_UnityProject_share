@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// scene_gameでも利用している
 [RequireComponent(typeof(BoxCollider))]
 public class BattleAreaTutorial : MonoBehaviour
 {
@@ -14,8 +15,8 @@ public class BattleAreaTutorial : MonoBehaviour
         {
             // このBattleAreaゲームオブジェクト内にいる
             // 全Enemyに通知を出す。
-            // 敵(案山子しか設定してない)は戦闘体制になる。
-            CallBack_AllScarecrows();
+            // 敵は戦闘体制になる。
+            CallBack_AllEnemies();
         }
 
         if (collider.tag == "Enemy")
@@ -71,7 +72,7 @@ public class BattleAreaTutorial : MonoBehaviour
         return enemies.Count;
     }
 
-    private void CallBack_AllScarecrows()
+    private void CallBack_AllEnemies()
     {
         foreach (var enemy in enemies)
         {
