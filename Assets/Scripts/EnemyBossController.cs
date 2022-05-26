@@ -7,6 +7,11 @@ public class EnemyBossController : MonoBehaviour
     [SerializeField]
     public float hp;
 
+
+    // 旋回 
+    protected float m_turnAngle = 1.0f;
+    protected float m_turnSpeed = 3.0f;
+
     // ダウンフラグ
     private bool downFlag;
     public void SetDownFlag(bool set) { downFlag = set; }
@@ -100,15 +105,15 @@ public class EnemyBossController : MonoBehaviour
         new Vector3(0f, 0.73f, 14.57f),
         new Vector3(0f, 1.737f, 9.789f),
         new Vector3(0f, 1.9f, 9.789f),
-        new Vector3(0f, 1.59f, 3.4599f)
+        new Vector3(0f, -0.5f, 5.4599f)
     };
     private float[] easingTimers =
     {
         2f,
         3f,
-        3f,
+        2f,
         1f,
-        3f
+        1f
     };
     private Vector3 registerPosition;
     int batleStartCount = 0;
@@ -583,6 +588,14 @@ public class EnemyBossController : MonoBehaviour
 
         transform.localPosition = Vector3.Lerp(oldLocalPositon, curPosition, 0.7f);
 
+        if (batleStartCount > 0)
+        {
+            var dir = player.transform.position - transform.position;
+            dir.y = 0f;
+            Turn(dir);
+            
+        }
+
         if (easingTimer > easingTimers[batleStartCount])
         {
             batleStartCount++;
@@ -598,5 +611,25 @@ public class EnemyBossController : MonoBehaviour
 
 
         easingTimer += Time.deltaTime;
+    }
+
+    protected bool Turn(Vector3 vec)
+    {
+        bool check = false;
+
+        // 自分の向いている方向から敵の方向までの角度を算出する
+        var dir = transform.forward;
+        dir.y = vec.y = 0.0f;
+        float angle = Vector3.Angle(dir, vec);
+        // 角度が一定以上の場合はOK
+        if (angle < m_turnAngle)
+        {
+            check = true;
+        }
+
+        var rotate = Quaternion.LookRotation(vec);
+        transform.rotation = Quaternion.LerpUnclamped(transform.rotation, rotate, 0.01f);
+
+        return check;
     }
 }
