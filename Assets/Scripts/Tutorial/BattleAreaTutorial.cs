@@ -9,10 +9,15 @@ public class BattleAreaTutorial : MonoBehaviour
     // BattleAreaオブジェクトに存在している敵の総数確認用リスト　(自動更新される)
     private List<BaseEnemy> enemies = new List<BaseEnemy>();
 
+    private bool is_player_in;
+
+
     void OnTriggerEnter(Collider collider)
     {
         if (collider.tag == "Player")
         {
+            if (is_player_in) return;
+            is_player_in = true;
             // このBattleAreaゲームオブジェクト内にいる
             // 全Enemyに通知を出す。
             // 敵は戦闘体制になる。
@@ -37,7 +42,8 @@ public class BattleAreaTutorial : MonoBehaviour
 
     void Update()
     {
-        {
+        if (is_player_in == false) return;
+        /*{
             // 中にいる敵の数を常に確認する。 (死んだ敵はOnTriggerExit()で感知できないので、この処理をしている)
             // 最後の削除後に、現在の戦闘に残っている敵の数がわかる
 
@@ -63,7 +69,9 @@ public class BattleAreaTutorial : MonoBehaviour
 
                 enemies.RemoveAt(removeIndex);
             }
-        }
+        }*/
+
+        enemies.RemoveAll(e => e.IsDeath == true);
     }
 
 
@@ -84,6 +92,14 @@ public class BattleAreaTutorial : MonoBehaviour
     {
         enemies.Remove(enemy_);
         Debug.Log("CurrentEnemyCount:" + InAreaEnemySize());
+    }
+
+    public void AssemblyEnemies()
+    {
+        foreach (var enemy in enemies)
+        {
+            enemy.SetAssemblyFlag(true);
+        }
     }
 }
 
