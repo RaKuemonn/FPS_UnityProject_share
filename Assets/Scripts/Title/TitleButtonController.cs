@@ -22,7 +22,14 @@ public class TitleButtonController : MonoBehaviour
     public void StartButton()
     {
         SceneManager.LoadScene("scene_tutorial");
-        //SceneManager.LoadScene("Playground");
+
+        var se = GameObject.Find("SE");
+        var bgm = GameObject.Find("BGM");
+        var soundManager = GameObject.Find("SoundManager");
+
+        DontDestroyOnLoad(se);
+        DontDestroyOnLoad(bgm);
+        DontDestroyOnLoad(soundManager);
     }
 
     public void ExitButton()
