@@ -153,7 +153,7 @@ public class SlashImageController : MonoBehaviour
 
 
                 // カウンター処理
-                if (enemy.name == "SickleController")
+                if (enemy.tag == "Sickle")
                 {
                     var Sickle = ((SickleController)enemy);
                     Vector2 slashVec = MathHelpar.AngleToVector2(RadianAngle2D());
@@ -183,7 +183,7 @@ public class SlashImageController : MonoBehaviour
                     }
                 }
 
-                else if (enemy.name == "SickleThrowingController")
+                else if (enemy.tag == "SickleThrowing")
                 {
                     var Sickle = ((SickleThrowingController)enemy);
                     Vector2 slashVec = MathHelpar.AngleToVector2(RadianAngle2D());
