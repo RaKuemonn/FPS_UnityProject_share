@@ -91,7 +91,6 @@ public class EnemyAttackPrudir : MonoBehaviour
 
         m_timer -= Time.deltaTime;
     }
-
     Vector3 GetViewportPos(Vector3 targetPos)
     {
         return Camera.main.ViewportToWorldPoint(targetPos);
@@ -108,6 +107,17 @@ public class EnemyAttackPrudir : MonoBehaviour
             vector.normalized
         );
 
-        return dot > 0.2f;
+        return dot > 0.4f;
+    }
+
+    public void Invisible()
+    {
+        GetComponent<Image>()
+            .enabled = false;
+
+        GetComponentInChildren<SlashDirectionController>()
+            .gameObject
+            .GetComponent<Image>()
+            .enabled = false;
     }
 }

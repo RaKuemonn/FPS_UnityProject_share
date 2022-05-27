@@ -4,21 +4,41 @@ using UnityEngine;
 
 public class EnemyBossController : MonoBehaviour
 {
+    private float hp;
+    public void SetHP(float hp_)
+    {
+        hp = hp_;
+    }
     [SerializeField]
-    public float hp;
+    private BossHPController bossHpController;
+    public void OnDamaged(float damage_)
+    {
+        bossHpController.OnDamaged(damage_);
+    }
+
+    public float GetHP()
+    {
+        return hp;}
+
+
+    [SerializeField] public float m_damage;
 
 
     // 旋回 
     protected float m_turnAngle = 1.0f;
     protected float m_turnSpeed = 3.0f;
-
+      
     // ダウンフラグ
     private bool downFlag;
     public void SetDownFlag(bool set) { downFlag = set; }
 
-    // ダウンフラグ
+    // 死亡フラグ
     private bool deathFlag;
-    public bool GetDownFlag() { return deathFlag; }
+    public void SetDeathFlag(){ deathFlag = true;}
+    public bool GetDeathFlag() { return deathFlag; }
+    [SerializeField] private float deathAnimationTime;
+    private float deathAnimationTimer;
+
 
     // 武器表示Flag
     public bool weaponReflect = true;
@@ -94,7 +114,10 @@ public class EnemyBossController : MonoBehaviour
     private bool attackB = false;
     public bool GetAttackBar() { return attackB; }
 
+    [SerializeField]
     private float hpMax;
+
+    public float GetMaxHP() { return hpMax;}
 
     private int idleCount = 0;
 
@@ -160,7 +183,7 @@ public class EnemyBossController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        hpMax = hp;
+        hp = hpMax;
         ConditionBatleStartState();
 
         m_animator = GetComponent<Animator>();
@@ -437,7 +460,11 @@ public class EnemyBossController : MonoBehaviour
             ConditionDeathState();
             return;
         }
-
+        if (downFlag)
+        {
+            ConditionDownState();
+            return;
+        }
 
         // プレイヤーに向かう方向
         var dir = player.transform.position - transform.position;
@@ -446,6 +473,7 @@ public class EnemyBossController : MonoBehaviour
         if (attackRange * attackRange > lengthSq)
         {
             ConditionAssaultAttackAnimState();
+            
             return;
         }
 
@@ -469,6 +497,8 @@ public class EnemyBossController : MonoBehaviour
         slashAngle = Random.Range(0.0f, 360.0f);
 
         m_animator.SetTrigger(hashAttack);
+
+        
     }
 
     private void ConditionAssaultAttackAnimUpdate()
@@ -478,9 +508,7 @@ public class EnemyBossController : MonoBehaviour
             ConditionDeathState();
             return;
         }
-
-
-        if (downFlag)
+        if (downFlag && attackEndTimer > attackEndTimerMax / 2.0f)
         {
             ConditionDownState();
             return;
@@ -489,6 +517,11 @@ public class EnemyBossController : MonoBehaviour
         if (attackEndTimer < 0)
         {
             ConditionBossComeBackState();
+            // プレイヤーにダメージを与える
+            GameObject
+                .FindGameObjectWithTag("Player")
+                .GetComponent<PlayerAutoControl>()
+                .OnDamage(m_damage);
         }
 
         attackEndTimer -= Time.deltaTime;
@@ -566,10 +599,15 @@ public class EnemyBossController : MonoBehaviour
         state = State.Death;
 
         m_animator.SetTrigger("Death");
+        deathAnimationTimer = deathAnimationTime;
     }
     private void ConditionDeathUpdate()
     {
-      
+        deathAnimationTimer -= Time.deltaTime;
+
+        if (deathAnimationTimer > 0.0f) return;
+
+        GetComponent<ChangeScene>().Change();
     }
 
     //  バトル開始前

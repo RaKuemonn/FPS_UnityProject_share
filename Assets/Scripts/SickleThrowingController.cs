@@ -67,6 +67,20 @@ public class SickleThrowingController : BaseEnemy
         updateTimer -= Time.deltaTime;
     }
 
+    void OnTriggerEnter(Collider collider)
+    {
+        if (collider.CompareTag("Player") == false) return;
+
+        if (updateTimer < 0.0f) return;
+
+        // プレイヤーにダメージを与える
+        collider.gameObject
+            .GetComponent<PlayerAutoControl>()
+            .OnDamage(m_damage);
+
+        DisableMesh();
+    }
+
     private float RandomTarget()
     {
         float haba = Random.Range(0, width * 2) - width;
