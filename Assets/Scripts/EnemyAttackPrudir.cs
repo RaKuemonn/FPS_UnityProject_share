@@ -25,6 +25,30 @@ public class EnemyAttackPrudir : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // カメラの外に出たら表示しない
+        {
+            var vector = m_gameObject.transform.position - GameObject.FindGameObjectWithTag("Player").transform.position;
+            var dot = Vector2.Dot(
+                Camera.main.transform.forward.normalized,
+                vector.normalized
+                );
+
+
+            if (dot < 0.3f)
+            {
+                var image = GetComponent<Image>();
+                image.enabled = false;
+
+                return;
+            }
+        }
+
+        // ディゾルブ(召喚が終わり切ったら表示する
+        {
+            var dissolve = m_gameObject.GetComponent<DissolveTimer_ChangeTexture>();
+
+        }
+
         var mesh = m_gameObject.transform.GetChild(2).GetComponent<SkinnedMeshRenderer>();
         if (!mesh.enabled)
         {
@@ -36,20 +60,6 @@ public class EnemyAttackPrudir : MonoBehaviour
         {
             var image = GetComponent<Image>();
             image.enabled = true;
-        }
-
-        {
-            var dot = Vector2.Dot(Camera.main.transform.forward.normalized,
-                GameObject.FindGameObjectWithTag("Player").transform.forward.normalized);
-
-
-            if (dot < 0.0f)
-            {
-                var image = GetComponent<Image>();
-                image.enabled = false;
-
-                return;
-            }
         }
 
         // オブジェクトのワールド座標→スクリーン座標変換
