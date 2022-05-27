@@ -508,6 +508,7 @@ public class EnemyBossController : MonoBehaviour
             ConditionDeathState();
             return;
         }
+        // 斬るアニメーションが半分まで進んだとき
         if (downFlag && attackEndTimer > attackEndTimerMax / 2.0f)
         {
             ConditionDownState();
@@ -568,7 +569,8 @@ public class EnemyBossController : MonoBehaviour
         downCountTimer = 0.0f;
 
         downStartPosition = transform.position;
-        downPosition = new Vector3(transform.position.x, transform.position.y + 0.5f, player.transform.position.z + 6);
+        //downPosition = new Vector3(transform.position.x, transform.position.y + 0.5f, player.transform.position.z + 6);
+        downPosition = transform.position + new Vector3(0.0f ,0.5f, 0.0f) + transform.forward * -1.0f * 3;
 
         m_animator.SetTrigger(hashDown);
     }
