@@ -35,7 +35,11 @@ public class SickleController : BaseEnemy
     public float GetRadianSlashAngle() { return slashAngle * Mathf.Deg2Rad; }
     public float GetSlashAngle() { return slashAngle; }
 
-    public void DisableMesh() { updateTimer = -0.1f; /* Update()‚Åmesh.enable = false‚É‚µ‚Ä‚¢‚é */}
+    public void DisableMesh() 
+    { 
+        EffectCircle.GetComponent<EnemyAttackPrudir>().Invisible();
+        updateTimer = -0.1f; /* Update()‚Åmesh.enable = false‚É‚µ‚Ä‚¢‚é */
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -154,8 +158,8 @@ public class SickleController : BaseEnemy
         var Circle = EffectCircle;
         var Arrow = Circle.GetComponentInChildren<SlashDirectionController>().gameObject;
 
-        Circle.GetComponent<Image>().enabled = true;
-        Arrow.GetComponent<Image>().enabled = true;
+        //Circle.GetComponent<Image>().enabled = true;
+        //Arrow.GetComponent<Image>().enabled = true;
 
         startTimer = timer;
 

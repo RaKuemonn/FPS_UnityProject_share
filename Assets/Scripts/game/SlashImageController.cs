@@ -111,7 +111,8 @@ public class SlashImageController : MonoBehaviour
                     // Tagが敵か鎌
                     if (hit.collider?.CompareTag("Enemy") == false &&
                         hit.collider?.CompareTag("Sickle") == false &&
-                        hit.collider?.CompareTag("SickleThrowing") == false) continue;
+                        hit.collider?.CompareTag("SickleThrowing") == false &&
+                        hit.collider?.CompareTag("Boss") == false) continue;
 
                     // 距離がhit_distanceより長く、遠い場所にある。
                     if (hit.distance > hit_distance) continue;
@@ -132,135 +133,160 @@ public class SlashImageController : MonoBehaviour
 
             // 当たっている敵に処理を行う
             BaseEnemy enemy = result_hit_collider.gameObject.GetComponent<BaseEnemy>();
+            EnemyBossController boss = result_hit_collider.gameObject.GetComponent<EnemyBossController>();
 
-            var current_enemy_hp = enemy.GetHP() - damage;
-
-            // 体力があれば
-            if (current_enemy_hp > 0f)
+            if (enemy)
             {
-                // ダメージを与える処理
-                // (多分関数呼び出しか、コールバックさせる。)
-                enemy.SetHP(current_enemy_hp);
+                var current_enemy_hp = enemy.GetHP() - damage;
 
-
-            }
-            // 体力がなければ
-            else
-            {
-                enemy.OnDead();
-                enemy.SetHP(0f);
-
-
-
-                // カウンター処理
-                if (enemy.tag == "Sickle")
+                // 体力があれば
+                if (current_enemy_hp > 0f)
                 {
-                    var Sickle = ((SickleController)enemy);
-                    Vector2 slashVec = MathHelpar.AngleToVector2(RadianAngle2D());
-                    Vector2 sickleVec = MathHelpar.AngleToVector2((Sickle.GetRadianSlashAngle()));
+                    // ダメージを与える処理
+                    // (多分関数呼び出しか、コールバックさせる。)
+                    enemy.SetHP(current_enemy_hp);
 
-                    // TODO 3: 角度が一定以内なら、カウンター成功にする。
-                    var dot = Vector2.Dot(slashVec, sickleVec);
-                    dot = Mathf.Acos(dot);
-                    if (toleranceLevel > dot && dot > -toleranceLevel)
-                    {
-                        Sickle.DisableMesh();
-                    }
-                    else
-                    {
-                        // TODO 米　失敗した時の処理を書け
-                        GameObject
-                            .FindGameObjectWithTag("Player")
-                            .GetComponent<PlayerAutoControl>()
-                            .OnDamage(enemy.m_damage);
 
-                        Sickle.DisableMesh();
-                        var Circle = Sickle.EffectCircle;
-                        var Arrow = Circle.GetComponentInChildren<SlashDirectionController>().gameObject;
-
-                        Circle.GetComponent<Image>().enabled = false;
-                        Arrow.GetComponent<Image>().enabled = false;
-                    }
                 }
-
-                else if (enemy.tag == "SickleThrowing")
-                {
-                    var Sickle = ((SickleThrowingController)enemy);
-                    Vector2 slashVec = MathHelpar.AngleToVector2(RadianAngle2D());
-                    Vector2 sickleVec = MathHelpar.AngleToVector2((Sickle.GetRadianSlashAngle()));
-
-                    // TODO 3: 角度が一定以内なら、カウンター成功にする。
-                    var dot = Vector2.Dot(slashVec, sickleVec);
-                    dot = Mathf.Acos(dot);
-                    if (toleranceLevel > dot && dot > -toleranceLevel)
-                    {
-                        Sickle.DisableMesh();
-                    }
-                    else
-                    {
-                        // TODO 米　失敗した時の処理を書け
-                        GameObject
-                            .FindGameObjectWithTag("Player")
-                            .GetComponent<PlayerAutoControl>()
-                            .OnDamage(enemy.m_damage);
-
-                        Sickle.DisableMesh();
-                    }
-                }
-
-                // 切断処理
+                // 体力がなければ
                 else
                 {
-                    Vector3 normal;
+                    enemy.OnDead();
+                    enemy.SetHP(0f);
+
+
+
+                    // カウンター処理
+                    if (enemy.tag == "Sickle")
                     {
-                        const float distance = 5.0f;
-                        var origin_position = rays[0].origin;
-                        var far_left = rays[0].GetPoint(distance);
-                        var far_right = rays[1].GetPoint(distance);
+                        var Sickle = ((SickleController)enemy);
+                        Vector2 slashVec = MathHelpar.AngleToVector2(RadianAngle2D());
+                        Vector2 sickleVec = MathHelpar.AngleToVector2((Sickle.GetRadianSlashAngle()));
 
-                        var left = far_left - origin_position;
-                        var right = far_right - origin_position;
+                        // TODO 3: 角度が一定以内なら、カウンター成功にする。
+                        var dot = Vector2.Dot(slashVec, sickleVec);
+                        dot = Mathf.Acos(dot);
+                        if (toleranceLevel > dot && dot > -toleranceLevel)
+                        {
+                            Sickle.DisableMesh();
+                        }
+                        else
+                        {
+                            GameObject
+                                .FindGameObjectWithTag("Player")
+                                .GetComponent<PlayerAutoControl>()
+                                .OnDamage(enemy.m_damage);
 
-                        normal = Vector3.Cross(left, right).normalized;
+                            Sickle.DisableMesh();
+                            var Circle = Sickle.EffectCircle;
+                            var Arrow = Circle.GetComponentInChildren<SlashDirectionController>().gameObject;
+
+                            Circle.GetComponent<Image>().enabled = false;
+                            Arrow.GetComponent<Image>().enabled = false;
+                        }
                     }
 
-                    var result =
-                        MeshCut.CutMesh(
-                            enemy.gameObject,                                          // 斬るオブジェクト
-                            Camera.main.transform.position,   // 平面上の位置
-                            normal,                                          // 平面の法線
-                            true,
-                            cutSurfaceMaterial
-                        );
-
-                    var original = result.original_anitiNormalside;
-                    var copy = result.copy_normalside;
-
-
-
-                    Action<GameObject, Vector3> Cutted = (GameObject object_, Vector3 normal_direction_) =>
+                    else if (enemy.tag == "SickleThrowing")
                     {
+                        var Sickle = ((SickleThrowingController)enemy);
+                        Vector2 slashVec = MathHelpar.AngleToVector2(RadianAngle2D());
+                        Vector2 sickleVec = MathHelpar.AngleToVector2((Sickle.GetRadianSlashAngle()));
 
-#if UNITY_EDITOR
-                        if (object_ == null)
+                        // TODO 3: 角度が一定以内なら、カウンター成功にする。
+                        var dot = Vector2.Dot(slashVec, sickleVec);
+                        dot = Mathf.Acos(dot);
+                        if (toleranceLevel > dot && dot > -toleranceLevel)
                         {
-                            Debug.Log("nulllllllllllllllllllllllll");
+                            Sickle.DisableMesh();
                         }
-#endif
-                        // 死亡処理
-                        const float impulse_power = 8f;
-                        var impulse = (result_hit_ray.direction + normal_direction_) * impulse_power;
+                        else
+                        {
+                            GameObject
+                                .FindGameObjectWithTag("Player")
+                                .GetComponent<PlayerAutoControl>()
+                                .OnDamage(enemy.m_damage);
 
-                        object_?.GetComponent<BaseEnemy>().OnCutted(impulse);
-                    };
+                            Sickle.DisableMesh();
+                        }
+                    }
 
-                    Cutted.Invoke(original, -1.0f * normal);
-                    Cutted.Invoke(copy, normal);
+                    // 切断処理
+                    else
+                    {
+                        //var dot = Vector2.Dot(MathHelpar.AngleToVector2(RadianAngle2D()), sickleVec);
+                        //dot = Mathf.Acos(dot);
+                        //if (toleranceLevel > dot && dot > -toleranceLevel)
+                        //{
+                        //    //Sickle.DisableMesh();
+                        //}
+                        //else
+                        //{
+                        //    GameObject
+                        //        .FindGameObjectWithTag("Player")
+                        //        .GetComponent<PlayerAutoControl>()
+                        //        .OnDamage(enemy.m_damage);
+                        //}
+                        Cut(enemy, cutSurfaceMaterial, result_hit_ray);
+                    }
+
 
                 }
-
-                
             }
+            else if(boss)
+            {
+                var current_boss_hp = boss.GetHP() - damage;
+
+                // 体力があれば
+                if (current_boss_hp > 0f)
+                {
+                    switch (boss.GetState())
+                    {
+                        case EnemyBossController.State.AssaultAttack:
+                            boss.SetDownFlag(true);
+                            break;
+
+                        case EnemyBossController.State.AssaultAttackAnim:
+                            boss.SetDownFlag(true);
+                            break;
+
+                        case EnemyBossController.State.Down:
+                            // ダメージを与える処理
+                            // (多分関数呼び出しか、コールバックさせる。)
+                            boss.OnDamaged(damage);
+                            break;
+
+                        default:
+                            // nothing
+                            break;
+                    }
+
+                    
+
+                }
+                // 体力がなければ
+                else
+                {
+                    switch (boss.GetState())
+                    {
+                        case EnemyBossController.State.AssaultAttack:
+                            boss.SetDeathFlag();
+                            boss.OnDamaged(damage);
+                            break;
+
+                        case EnemyBossController.State.Down:
+                            boss.SetDeathFlag();
+                            boss.OnDamaged(damage);
+                            break;
+
+                        default:
+                            // nothing
+                            break;
+                    }
+                    
+                }
+            }
+
+
         }
     }
     
@@ -351,6 +377,56 @@ public class SlashImageController : MonoBehaviour
     public float RadianAngle2D()
     {
         return image.rectTransform.eulerAngles.z * Mathf.Deg2Rad;
+    }
+
+    static void Cut(BaseEnemy enemy, Material cutSurfaceMaterial, Ray result_hit_ray)
+    {
+
+        Vector3 normal;
+        {
+            const float distance = 5.0f;
+            var origin_position = result_hit_ray.origin;
+            var far_left = result_hit_ray.GetPoint(distance);
+            var far_right = result_hit_ray.GetPoint(distance);
+
+            var left = far_left - origin_position;
+            var right = far_right - origin_position;
+
+            normal = Vector3.Cross(left, right).normalized;
+        }
+
+        var result =
+            MeshCut.CutMesh(
+                enemy.gameObject,                                          // 斬るオブジェクト
+                Camera.main.transform.position,   // 平面上の位置
+                normal,                                          // 平面の法線
+                true,
+                cutSurfaceMaterial
+            );
+
+        var original = result.original_anitiNormalside;
+        var copy = result.copy_normalside;
+
+
+
+        Action<GameObject, Vector3> Cutted = (GameObject object_, Vector3 normal_direction_) =>
+        {
+
+#if UNITY_EDITOR
+            if (object_ == null)
+            {
+                Debug.Log("nulllllllllllllllllllllllll");
+            }
+#endif
+            // 死亡処理
+            const float impulse_power = 8f;
+            var impulse = (result_hit_ray.direction + normal_direction_) * impulse_power;
+
+            object_?.GetComponent<BaseEnemy>().OnCutted(impulse);
+        };
+
+        Cutted.Invoke(original, -1.0f * normal);
+        Cutted.Invoke(copy, normal);
     }
 
 }

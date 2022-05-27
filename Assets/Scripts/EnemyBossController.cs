@@ -4,8 +4,25 @@ using UnityEngine;
 
 public class EnemyBossController : MonoBehaviour
 {
+    private float hp;
+    public void SetHP(float hp_)
+    {
+        hp = hp_;
+    }
     [SerializeField]
-    public float hp;
+    private BossHPController bossHpController;
+    public void OnDamaged(float damage_)
+    {
+        bossHpController.OnDamaged(damage_);
+    }
+
+    public float GetHP()
+    {
+        return hp;
+    }
+
+
+    [SerializeField] public float m_damage;
 
 
     // 旋回 
@@ -16,9 +33,13 @@ public class EnemyBossController : MonoBehaviour
     private bool downFlag;
     public void SetDownFlag(bool set) { downFlag = set; }
 
-    // ダウンフラグ
+    // 死亡フラグ
     private bool deathFlag;
-    public bool GetDownFlag() { return deathFlag; }
+    public void SetDeathFlag() { deathFlag = true; }
+    public bool GetDeathFlag() { return deathFlag; }
+    [SerializeField] private float deathAnimationTime;
+    private float deathAnimationTimer;
+
 
     // 武器表示Flag
     public bool weaponReflect = true;
@@ -94,7 +115,10 @@ public class EnemyBossController : MonoBehaviour
     private bool attackB = false;
     public bool GetAttackBar() { return attackB; }
 
+    [SerializeField]
     private float hpMax;
+
+    public float GetMaxHP() { return hpMax; }
 
     private int idleCount = 0;
 
@@ -160,11 +184,11 @@ public class EnemyBossController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        hpMax = hp;
+        hp = hpMax;
         ConditionBatleStartState();
 
         m_animator = GetComponent<Animator>();
-    }  
+    }
 
     // Update is called once per frame
     void Update()
@@ -174,7 +198,7 @@ public class EnemyBossController : MonoBehaviour
         switch (state)
         {
             // 待機
-            case State.Idle: ConditionIdleUpdate();  break;
+            case State.Idle: ConditionIdleUpdate(); break;
             // 鎌投げ
             case State.SickleAttack: ConditionSickleAttackUpdate(); break;
             // 鎌大量投げ
@@ -184,9 +208,9 @@ public class EnemyBossController : MonoBehaviour
             // 殴ってきたときに少し待機時間がある
             case State.AssaultAttackAnim: ConditionAssaultAttackAnimUpdate(); break;
             // 自分のもとの位置に戻る
-            case State.BossComeBack: ConditionBossComeBackUpdate();  break;
+            case State.BossComeBack: ConditionBossComeBackUpdate(); break;
             // ボスダウン状態
-            case State.Down: ConditionDownUpdate( ); break;
+            case State.Down: ConditionDownUpdate(); break;
             // 死亡
             case State.Death: ConditionDeathUpdate(); break;
             // 戦闘前
@@ -278,7 +302,7 @@ public class EnemyBossController : MonoBehaviour
         sickles[0].transform.position = child.transform.position;
         var throwing = sickles[0].GetComponent<SickleThrowingController>();
         throwing.Initilize();
-    
+
         //var attack = sickleJudgeImage.GetComponent<CreatePointerController>();
         //attack.CreateTargetPointer(sickles[0]);
 
@@ -342,7 +366,7 @@ public class EnemyBossController : MonoBehaviour
             generationTime = 0.0f;
             m_count++;
         }
-        
+
 
 
         // 時間が経過したら待機に戻る
@@ -353,7 +377,7 @@ public class EnemyBossController : MonoBehaviour
             attackB = false;
             return;
         }
-    
+
 
         kariTimer -= Time.deltaTime;
         generationTime += Time.deltaTime;
@@ -372,7 +396,7 @@ public class EnemyBossController : MonoBehaviour
                 sickles[0].transform.position = transform.position + (directions.right * sickleRange);
                 sickles[0].transform.localEulerAngles = new Vector3(70, 90, -20);
                 var controller = sickles[0].GetComponent<SickleController>();
-                controller.Initilize(2.0f);
+                controller.Initilize(5.25f);
 
 
                 //var attack = sickleJudgeImage.GetComponent<CreatePointerController>();
@@ -382,18 +406,18 @@ public class EnemyBossController : MonoBehaviour
                 sickles[1].transform.position = transform.position + (directions.left * sickleRange);
                 sickles[1].transform.localEulerAngles = new Vector3(-70, 90, 20);
                 var controller2 = sickles[1].GetComponent<SickleController>();
-                controller2.Initilize(2.0f);
+                controller2.Initilize(4.5f);
 
                 //var attack5 = sickleJudgeImage.GetComponent<CreatePointerController>();
                 //attack5.CreateTargetPointer(sickles[1]);
-                break;                                   
+                break;
 
             case 1: // 右斜め上
                 //GameObject sl2 = Instantiate(sickle);
                 sickles[2].transform.position = transform.position + (directions.topRight * (sickleRange + 1));
                 sickles[2].transform.localEulerAngles = new Vector3(30, 90, -20);
                 var controller3 = sickles[2].GetComponent<SickleController>();
-                controller3.Initilize(2.0f);
+                controller3.Initilize(3.75f);
 
                 //var attack2 = sickleJudgeImage.GetComponent<CreatePointerController>();
                 //attack2.CreateTargetPointer(sickles[2]);
@@ -402,7 +426,7 @@ public class EnemyBossController : MonoBehaviour
                 sickles[3].transform.position = transform.position + (directions.topLeft * (sickleRange + 1));
                 sickles[3].transform.localEulerAngles = new Vector3(-30, 90, -20);
                 var controller4 = sickles[3].GetComponent<SickleController>();
-                controller4.Initilize(2.0f);
+                controller4.Initilize(3.0f);
 
                 //var attack4 = sickleJudgeImage.GetComponent<CreatePointerController>();
                 //attack4.CreateTargetPointer(sickles[3]);
@@ -437,7 +461,11 @@ public class EnemyBossController : MonoBehaviour
             ConditionDeathState();
             return;
         }
-
+        if (downFlag)
+        {
+            ConditionDownState();
+            return;
+        }
 
         // プレイヤーに向かう方向
         var dir = player.transform.position - transform.position;
@@ -446,12 +474,13 @@ public class EnemyBossController : MonoBehaviour
         if (attackRange * attackRange > lengthSq)
         {
             ConditionAssaultAttackAnimState();
+
             return;
         }
 
         // ノーマライズする
         dir.Normalize();
-        
+
         // 移動スピードを掛ける
         dir *= moveSpeed * Time.deltaTime;
 
@@ -469,6 +498,8 @@ public class EnemyBossController : MonoBehaviour
         slashAngle = Random.Range(0.0f, 360.0f);
 
         m_animator.SetTrigger(hashAttack);
+
+
     }
 
     private void ConditionAssaultAttackAnimUpdate()
@@ -478,9 +509,8 @@ public class EnemyBossController : MonoBehaviour
             ConditionDeathState();
             return;
         }
-
-
-        if (downFlag)
+        // 斬るアニメーションが半分まで進んだとき
+        if (downFlag && attackEndTimer > attackEndTimerMax / 2.0f)
         {
             ConditionDownState();
             return;
@@ -489,6 +519,11 @@ public class EnemyBossController : MonoBehaviour
         if (attackEndTimer < 0)
         {
             ConditionBossComeBackState();
+            // プレイヤーにダメージを与える
+            GameObject
+                .FindGameObjectWithTag("Player")
+                .GetComponent<PlayerAutoControl>()
+                .OnDamage(m_damage);
         }
 
         attackEndTimer -= Time.deltaTime;
@@ -535,7 +570,10 @@ public class EnemyBossController : MonoBehaviour
         downCountTimer = 0.0f;
 
         downStartPosition = transform.position;
-        downPosition = new Vector3(transform.position.x, transform.position.y + 0.5f, player.transform.position.z + 6);
+        //downPosition = new Vector3(transform.position.x, transform.position.y + 0.5f, player.transform.position.z + 6);
+        downPosition = transform.position +
+                       new Vector3(0.0f, 0.5f, 0.0f) +
+                       transform.forward * -1.0f * 3;
 
         m_animator.SetTrigger(hashDown);
     }
@@ -566,10 +604,15 @@ public class EnemyBossController : MonoBehaviour
         state = State.Death;
 
         m_animator.SetTrigger("Death");
+        deathAnimationTimer = deathAnimationTime;
     }
     private void ConditionDeathUpdate()
     {
-      
+        deathAnimationTimer -= Time.deltaTime;
+
+        if (deathAnimationTimer > 0.0f) return;
+
+        GetComponent<ChangeScene>().Change();
     }
 
     //  バトル開始前
@@ -592,7 +635,7 @@ public class EnemyBossController : MonoBehaviour
             var dir = player.transform.position - transform.position;
             dir.y = 0f;
             Turn(dir);
-            
+
         }
 
         if (easingTimer > easingTimers[batleStartCount])

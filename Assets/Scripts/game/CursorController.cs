@@ -11,6 +11,7 @@ public class CursorController : MonoBehaviour
 
     [SerializeField] private float min_damage;
     [SerializeField] private float max_damage;
+    [SerializeField] private float slash_scale = 1.0f;
 
     [SerializeField] private GameObject SlashPrefab;
 
@@ -154,7 +155,6 @@ public class CursorController : MonoBehaviour
             // Slash�̐���
             //GameObject obj = Instantiate((GameObject)Resources.Load("Slash"));
             GameObject obj = Instantiate(SlashPrefab);
-            obj.GetComponent<SlashImageController>().damage = /*max_damage :*/ min_damage;
             var obj_rect = obj.GetComponent<RectTransform>();
             obj_rect.anchoredPosition   = new Vector2(transform.position.x, transform.position.y);
             obj_rect.eulerAngles        = new Vector3(0f, 0f, degree);
@@ -175,10 +175,15 @@ public class CursorController : MonoBehaviour
                 }
 
                 obj_rect.localScale = new Vector3(
-                    local_scale.x * scale,
+                    local_scale.x * scale * slash_scale,
                     local_scale.y,
                     local_scale.z);
 
+
+                // ダメージの大きさ
+                obj
+                    .GetComponent<SlashImageController>()
+                    .damage = Mathf.Clamp(scale * max_damage, min_damage, max_damage);
             }
             const float cool_time = -0.5f;
             scale_cool_timer += cool_time;
