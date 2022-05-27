@@ -64,6 +64,9 @@ public class CreateFloor : MonoBehaviour
                     floor.GetComponent<Renderer>().enabled = false;
 
 #endif
+                    // ÉQÅ[ÉÄéûÇÕå©Ç¶Ç»Ç¢ÇÊÇ§Ç…Ç∑ÇÈ
+                    material.color = new Color(0f, 0f, 0f, 0f); // ìßñæ
+                    floor.GetComponent<Renderer>().enabled = false;
                 }
 
 

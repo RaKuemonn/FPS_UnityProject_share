@@ -108,8 +108,10 @@ public class SlashImageController : MonoBehaviour
 #endif
 
 
-                    // Tagが敵
-                    if (hit.collider?.CompareTag("Enemy") == false) continue;
+                    // Tagが敵か鎌
+                    if (hit.collider?.CompareTag("Enemy") == false &&
+                        hit.collider?.CompareTag("Sickle") == false &&
+                        hit.collider?.CompareTag("SickleThrowing") == false) continue;
 
                     // 距離がhit_distanceより長く、遠い場所にある。
                     if (hit.distance > hit_distance) continue;
@@ -167,17 +169,42 @@ public class SlashImageController : MonoBehaviour
                     else
                     {
                         // TODO 米　失敗した時の処理を書け
-                         GameObject
-                             .FindGameObjectWithTag("Player")
-                             .GetComponent<PlayerAutoControl>()
-                             .OnDamage(enemy.m_damage);
+                        GameObject
+                            .FindGameObjectWithTag("Player")
+                            .GetComponent<PlayerAutoControl>()
+                            .OnDamage(enemy.m_damage);
 
-                         Sickle.DisableMesh();
-                         var Circle = Sickle.EffectCircle;
-                         var Arrow = Circle.GetComponentInChildren<SlashDirectionController>().gameObject;
+                        Sickle.DisableMesh();
+                        var Circle = Sickle.EffectCircle;
+                        var Arrow = Circle.GetComponentInChildren<SlashDirectionController>().gameObject;
 
-                         Circle.GetComponent<Image>().enabled = false;
-                         Arrow.GetComponent<Image>().enabled = false;
+                        Circle.GetComponent<Image>().enabled = false;
+                        Arrow.GetComponent<Image>().enabled = false;
+                    }
+                }
+
+                else if (enemy.name == "SickleThrowingController")
+                {
+                    var Sickle = ((SickleThrowingController)enemy);
+                    Vector2 slashVec = MathHelpar.AngleToVector2(RadianAngle2D());
+                    Vector2 sickleVec = MathHelpar.AngleToVector2((Sickle.GetRadianSlashAngle()));
+
+                    // TODO 3: 角度が一定以内なら、カウンター成功にする。
+                    var dot = Vector2.Dot(slashVec, sickleVec);
+                    dot = Mathf.Acos(dot);
+                    if (toleranceLevel > dot && dot > -toleranceLevel)
+                    {
+                        Sickle.DisableMesh();
+                    }
+                    else
+                    {
+                        // TODO 米　失敗した時の処理を書け
+                        GameObject
+                            .FindGameObjectWithTag("Player")
+                            .GetComponent<PlayerAutoControl>()
+                            .OnDamage(enemy.m_damage);
+
+                        Sickle.DisableMesh();
                     }
                 }
 
