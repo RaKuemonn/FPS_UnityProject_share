@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class SickleThrowingController : MonoBehaviour
+public class SickleThrowingController : BaseEnemy
 {
     private Vector3 target;
     public float timer;
@@ -28,10 +28,12 @@ public class SickleThrowingController : MonoBehaviour
 
     [SerializeField]
     private GameObject boss;
+    
 
     private float slashAngle;
     public float GetRadianSlashAngle() { return slashAngle * Mathf.Deg2Rad; }
     public float GetSlashAbgle() { return slashAngle; }
+    public void DisableMesh() { updateTimer = -0.1f; /* Update()‚Åmesh.enable = false‚É‚µ‚Ä‚¢‚é */}
 
     // Start is called before the first frame update
     void Start()
