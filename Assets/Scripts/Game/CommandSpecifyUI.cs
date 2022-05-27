@@ -112,6 +112,12 @@ public class CommandSpecifyUI : MonoBehaviour
             Circle.enabled = false;
             return;
         }
+
+        var rate = 1.0f - timer / invisible_time;
+        Arrow.GetComponent<Image>().color = new Color(0f,0f,0f, rate);
+        Frame.color = new Color(0f, 0f, 0f, rate);
+        Circle.color = new Color(0f, 0f, 0f, rate);
+
         // •`‰æ‚·‚é
         Rendering();
 
