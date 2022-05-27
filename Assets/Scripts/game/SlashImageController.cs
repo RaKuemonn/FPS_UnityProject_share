@@ -213,52 +213,20 @@ public class SlashImageController : MonoBehaviour
                     // 切断処理
                     else
                     {
-                        Vector3 normal;
-                        {
-                            const float distance = 5.0f;
-                            var origin_position = rays[0].origin;
-                            var far_left = rays[0].GetPoint(distance);
-                            var far_right = rays[1].GetPoint(distance);
-
-                            var left = far_left - origin_position;
-                            var right = far_right - origin_position;
-
-                            normal = Vector3.Cross(left, right).normalized;
-                        }
-
-                        var result =
-                            MeshCut.CutMesh(
-                                enemy.gameObject,                                          // 斬るオブジェクト
-                                Camera.main.transform.position,   // 平面上の位置
-                                normal,                                          // 平面の法線
-                                true,
-                                cutSurfaceMaterial
-                            );
-
-                        var original = result.original_anitiNormalside;
-                        var copy = result.copy_normalside;
-
-
-
-                        Action<GameObject, Vector3> Cutted = (GameObject object_, Vector3 normal_direction_) =>
-                        {
-
-#if UNITY_EDITOR
-                            if (object_ == null)
-                            {
-                                Debug.Log("nulllllllllllllllllllllllll");
-                            }
-#endif
-                            // 死亡処理
-                            const float impulse_power = 8f;
-                            var impulse = (result_hit_ray.direction + normal_direction_) * impulse_power;
-
-                            object_?.GetComponent<BaseEnemy>().OnCutted(impulse);
-                        };
-
-                        Cutted.Invoke(original, -1.0f * normal);
-                        Cutted.Invoke(copy, normal);
-
+                        //var dot = Vector2.Dot(MathHelpar.AngleToVector2(RadianAngle2D()), sickleVec);
+                        //dot = Mathf.Acos(dot);
+                        //if (toleranceLevel > dot && dot > -toleranceLevel)
+                        //{
+                        //    //Sickle.DisableMesh();
+                        //}
+                        //else
+                        //{
+                        //    GameObject
+                        //        .FindGameObjectWithTag("Player")
+                        //        .GetComponent<PlayerAutoControl>()
+                        //        .OnDamage(enemy.m_damage);
+                        //}
+                        Cut(enemy, cutSurfaceMaterial, result_hit_ray);
                     }
 
 
@@ -409,6 +377,56 @@ public class SlashImageController : MonoBehaviour
     public float RadianAngle2D()
     {
         return image.rectTransform.eulerAngles.z * Mathf.Deg2Rad;
+    }
+
+    static void Cut(BaseEnemy enemy, Material cutSurfaceMaterial, Ray result_hit_ray)
+    {
+
+        Vector3 normal;
+        {
+            const float distance = 5.0f;
+            var origin_position = result_hit_ray.origin;
+            var far_left = result_hit_ray.GetPoint(distance);
+            var far_right = result_hit_ray.GetPoint(distance);
+
+            var left = far_left - origin_position;
+            var right = far_right - origin_position;
+
+            normal = Vector3.Cross(left, right).normalized;
+        }
+
+        var result =
+            MeshCut.CutMesh(
+                enemy.gameObject,                                          // 斬るオブジェクト
+                Camera.main.transform.position,   // 平面上の位置
+                normal,                                          // 平面の法線
+                true,
+                cutSurfaceMaterial
+            );
+
+        var original = result.original_anitiNormalside;
+        var copy = result.copy_normalside;
+
+
+
+        Action<GameObject, Vector3> Cutted = (GameObject object_, Vector3 normal_direction_) =>
+        {
+
+#if UNITY_EDITOR
+            if (object_ == null)
+            {
+                Debug.Log("nulllllllllllllllllllllllll");
+            }
+#endif
+            // 死亡処理
+            const float impulse_power = 8f;
+            var impulse = (result_hit_ray.direction + normal_direction_) * impulse_power;
+
+            object_?.GetComponent<BaseEnemy>().OnCutted(impulse);
+        };
+
+        Cutted.Invoke(original, -1.0f * normal);
+        Cutted.Invoke(copy, normal);
     }
 
 }

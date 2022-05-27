@@ -18,7 +18,8 @@ public class EnemyBossController : MonoBehaviour
 
     public float GetHP()
     {
-        return hp;}
+        return hp;
+    }
 
 
     [SerializeField] public float m_damage;
@@ -27,14 +28,14 @@ public class EnemyBossController : MonoBehaviour
     // 旋回 
     protected float m_turnAngle = 1.0f;
     protected float m_turnSpeed = 3.0f;
-      
+
     // ダウンフラグ
     private bool downFlag;
     public void SetDownFlag(bool set) { downFlag = set; }
 
     // 死亡フラグ
     private bool deathFlag;
-    public void SetDeathFlag(){ deathFlag = true;}
+    public void SetDeathFlag() { deathFlag = true; }
     public bool GetDeathFlag() { return deathFlag; }
     [SerializeField] private float deathAnimationTime;
     private float deathAnimationTimer;
@@ -117,7 +118,7 @@ public class EnemyBossController : MonoBehaviour
     [SerializeField]
     private float hpMax;
 
-    public float GetMaxHP() { return hpMax;}
+    public float GetMaxHP() { return hpMax; }
 
     private int idleCount = 0;
 
@@ -187,7 +188,7 @@ public class EnemyBossController : MonoBehaviour
         ConditionBatleStartState();
 
         m_animator = GetComponent<Animator>();
-    }  
+    }
 
     // Update is called once per frame
     void Update()
@@ -197,7 +198,7 @@ public class EnemyBossController : MonoBehaviour
         switch (state)
         {
             // 待機
-            case State.Idle: ConditionIdleUpdate();  break;
+            case State.Idle: ConditionIdleUpdate(); break;
             // 鎌投げ
             case State.SickleAttack: ConditionSickleAttackUpdate(); break;
             // 鎌大量投げ
@@ -207,9 +208,9 @@ public class EnemyBossController : MonoBehaviour
             // 殴ってきたときに少し待機時間がある
             case State.AssaultAttackAnim: ConditionAssaultAttackAnimUpdate(); break;
             // 自分のもとの位置に戻る
-            case State.BossComeBack: ConditionBossComeBackUpdate();  break;
+            case State.BossComeBack: ConditionBossComeBackUpdate(); break;
             // ボスダウン状態
-            case State.Down: ConditionDownUpdate( ); break;
+            case State.Down: ConditionDownUpdate(); break;
             // 死亡
             case State.Death: ConditionDeathUpdate(); break;
             // 戦闘前
@@ -301,7 +302,7 @@ public class EnemyBossController : MonoBehaviour
         sickles[0].transform.position = child.transform.position;
         var throwing = sickles[0].GetComponent<SickleThrowingController>();
         throwing.Initilize();
-    
+
         //var attack = sickleJudgeImage.GetComponent<CreatePointerController>();
         //attack.CreateTargetPointer(sickles[0]);
 
@@ -365,7 +366,7 @@ public class EnemyBossController : MonoBehaviour
             generationTime = 0.0f;
             m_count++;
         }
-        
+
 
 
         // 時間が経過したら待機に戻る
@@ -376,7 +377,7 @@ public class EnemyBossController : MonoBehaviour
             attackB = false;
             return;
         }
-    
+
 
         kariTimer -= Time.deltaTime;
         generationTime += Time.deltaTime;
@@ -409,7 +410,7 @@ public class EnemyBossController : MonoBehaviour
 
                 //var attack5 = sickleJudgeImage.GetComponent<CreatePointerController>();
                 //attack5.CreateTargetPointer(sickles[1]);
-                break;                                   
+                break;
 
             case 1: // 右斜め上
                 //GameObject sl2 = Instantiate(sickle);
@@ -473,13 +474,13 @@ public class EnemyBossController : MonoBehaviour
         if (attackRange * attackRange > lengthSq)
         {
             ConditionAssaultAttackAnimState();
-            
+
             return;
         }
 
         // ノーマライズする
         dir.Normalize();
-        
+
         // 移動スピードを掛ける
         dir *= moveSpeed * Time.deltaTime;
 
@@ -498,7 +499,7 @@ public class EnemyBossController : MonoBehaviour
 
         m_animator.SetTrigger(hashAttack);
 
-        
+
     }
 
     private void ConditionAssaultAttackAnimUpdate()
@@ -570,7 +571,9 @@ public class EnemyBossController : MonoBehaviour
 
         downStartPosition = transform.position;
         //downPosition = new Vector3(transform.position.x, transform.position.y + 0.5f, player.transform.position.z + 6);
-        downPosition = transform.position + new Vector3(0.0f ,0.5f, 0.0f) + transform.forward * -1.0f * 3;
+        downPosition = transform.position +
+                       new Vector3(0.0f, 0.5f, 0.0f) +
+                       transform.forward * -1.0f * 3;
 
         m_animator.SetTrigger(hashDown);
     }
@@ -632,7 +635,7 @@ public class EnemyBossController : MonoBehaviour
             var dir = player.transform.position - transform.position;
             dir.y = 0f;
             Turn(dir);
-            
+
         }
 
         if (easingTimer > easingTimers[batleStartCount])
