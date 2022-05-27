@@ -154,8 +154,8 @@ public class SickleController : BaseEnemy
         var Circle = EffectCircle;
         var Arrow = Circle.GetComponentInChildren<SlashDirectionController>().gameObject;
 
-        Circle.GetComponent<Image>().enabled = true;
-        Arrow.GetComponent<Image>().enabled = true;
+        //Circle.GetComponent<Image>().enabled = true;
+        //Arrow.GetComponent<Image>().enabled = true;
 
         startTimer = timer;
 
