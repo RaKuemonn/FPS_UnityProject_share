@@ -373,7 +373,7 @@ public class EnemyBossController : MonoBehaviour
                 sickles[0].transform.position = transform.position + (directions.right * sickleRange);
                 sickles[0].transform.localEulerAngles = new Vector3(70, 90, -20);
                 var controller = sickles[0].GetComponent<SickleController>();
-                controller.Initilize();
+                controller.Initilize(2.0f);
 
 
                 //var attack = sickleJudgeImage.GetComponent<CreatePointerController>();
@@ -383,7 +383,7 @@ public class EnemyBossController : MonoBehaviour
                 sickles[1].transform.position = transform.position + (directions.left * sickleRange);
                 sickles[1].transform.localEulerAngles = new Vector3(-70, 90, 20);
                 var controller2 = sickles[1].GetComponent<SickleController>();
-                controller2.Initilize();
+                controller2.Initilize(2.0f);
 
                 //var attack5 = sickleJudgeImage.GetComponent<CreatePointerController>();
                 //attack5.CreateTargetPointer(sickles[1]);
@@ -394,7 +394,7 @@ public class EnemyBossController : MonoBehaviour
                 sickles[2].transform.position = transform.position + (directions.topRight * (sickleRange + 1));
                 sickles[2].transform.localEulerAngles = new Vector3(30, 90, -20);
                 var controller3 = sickles[2].GetComponent<SickleController>();
-                controller3.Initilize();
+                controller3.Initilize(2.0f);
 
                 //var attack2 = sickleJudgeImage.GetComponent<CreatePointerController>();
                 //attack2.CreateTargetPointer(sickles[2]);
@@ -403,7 +403,7 @@ public class EnemyBossController : MonoBehaviour
                 sickles[3].transform.position = transform.position + (directions.topLeft * (sickleRange + 1));
                 sickles[3].transform.localEulerAngles = new Vector3(-30, 90, -20);
                 var controller4 = sickles[3].GetComponent<SickleController>();
-                controller4.Initilize();
+                controller4.Initilize(2.0f);
 
                 //var attack4 = sickleJudgeImage.GetComponent<CreatePointerController>();
                 //attack4.CreateTargetPointer(sickles[3]);
@@ -414,7 +414,7 @@ public class EnemyBossController : MonoBehaviour
                 sickles[4].transform.position = transform.position + (directions.top * sickleRange);
                 sickles[4].transform.localEulerAngles = new Vector3(0, 90, -20);
                 var controller5 = sickles[4].GetComponent<SickleController>();
-                controller5.Initilize();
+                controller5.Initilize(2.0f);
 
                 //var attack3 = sickleJudgeImage.GetComponent<CreatePointerController>();
                 //attack3.CreateTargetPointer(sickles[4]);

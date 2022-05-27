@@ -132,7 +132,7 @@ public class SickleController : BaseEnemy
         return new Vector3(x, y, z);
     }
 
-    public void Initilize()
+    public void Initilize(float timer)
     {
         GameObject g = GameObject.FindWithTag("Player");
         target = g.transform.position;//GetRandomTarget();
@@ -145,7 +145,7 @@ public class SickleController : BaseEnemy
         velocity = target - transform.position;
         velocity.Normalize();
 
-        updateTimer = 15.0f;
+        updateTimer = 6.0f;
 
         //transform.eulerAngles = new Vector3(transform.eulerAngles.x, -transform.eulerAngles.y, transform.eulerAngles.z);
 
@@ -157,7 +157,7 @@ public class SickleController : BaseEnemy
         Circle.GetComponent<Image>().enabled = true;
         Arrow.GetComponent<Image>().enabled = true;
 
-        startTimer = 2.0f;
+        startTimer = timer;
 
         m_hp = 1;
 
