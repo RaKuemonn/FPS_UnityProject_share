@@ -38,7 +38,7 @@ public class SliderMover : MonoBehaviour
         //If slider has 'focus'
         if (thisSlider == EventSystem.current.currentSelectedGameObject)
         {
-            sliderChange =moveR.ReadValue<Vector2>().normalized.x * sliderRange / SLIDERSTEP;
+            sliderChange = moveR.ReadValue<Vector2>().normalized.x * sliderRange / SLIDERSTEP;
             float sliderValue = mySlider.value;
             float tempValue = sliderValue + sliderChange;
             if (tempValue <= maxSliderValue && tempValue >= minSliderValue)
@@ -49,7 +49,7 @@ public class SliderMover : MonoBehaviour
                     Debug.Log("SE");
                     sliderValue = tempValue;
                 }
-               
+
             }
             else if (sliderValue > 0.99f && moveR.ReadValue<Vector2>().x > 0.3f)
             {
@@ -61,5 +61,10 @@ public class SliderMover : MonoBehaviour
             GameObject.Find("SoundManager").GetComponent<S_SoundManager>().SEAudioSource.volume = mySlider.value;
 
         }
+    }
+
+    public void OnClick()
+    {
+        GameObject.Find("SoundManager").GetComponent<S_SoundManager>().PlaySE((int)S_SoundManager.SE.TEST_SLASH);
     }
 }

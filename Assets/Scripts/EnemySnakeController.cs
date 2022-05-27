@@ -6,6 +6,8 @@ public class EnemySnakeController : BaseEnemy
 {
     private static readonly int hashAttack = Animator.StringToHash("Attack");
     private static readonly int hashDeath = Animator.StringToHash("Death");
+    private static readonly int hashWalk = Animator.StringToHash("Walk");
+    private static readonly int hashIdle = Animator.StringToHash("Idle");
 
 
     // 移動スピード
@@ -143,6 +145,8 @@ public class EnemySnakeController : BaseEnemy
         state = StateRab.Idle;
 
         m_idleTimer = 0.0f;
+
+
     }
 
     private void ConditionIdleUpdate()
@@ -182,6 +186,8 @@ public class EnemySnakeController : BaseEnemy
         m_endPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z - 3);
 
         m_easingTimer = 0.0f;
+
+        m_animator.SetTrigger(hashWalk);
     }
 
     private void ConditionAttackStartUpdate()
@@ -235,6 +241,8 @@ public class EnemySnakeController : BaseEnemy
     {
         state = StateRab.AttackEnd;
         m_easingTimer = 0.0f;
+        m_animator.SetTrigger(hashWalk);
+
     }
 
     private void ConditionAttackEndUpdate()
@@ -245,6 +253,8 @@ public class EnemySnakeController : BaseEnemy
         if (m_easingTimer > 1.5f)
         {
             ConditionIdleState();
+            m_animator.SetTrigger(hashIdle);
+
             return;
         }
 
