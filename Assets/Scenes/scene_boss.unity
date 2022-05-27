@@ -2041,6 +2041,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1045555241}
     - target: {fileID: -5274379174153012101, guid: 281d0ce713b48d04e86756f77452a55a, type: 3}
+      propertyPath: moveSpeed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: -5274379174153012101, guid: 281d0ce713b48d04e86756f77452a55a, type: 3}
       propertyPath: EffectCircle
       value: 
       objectReference: {fileID: 775195827}
@@ -2220,7 +2224,7 @@ PrefabInstance:
       objectReference: {fileID: 1045555241}
     - target: {fileID: -5274379174153012101, guid: 281d0ce713b48d04e86756f77452a55a, type: 3}
       propertyPath: moveSpeed
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -5274379174153012101, guid: 281d0ce713b48d04e86756f77452a55a, type: 3}
       propertyPath: EffectCircle
@@ -2366,7 +2370,7 @@ PrefabInstance:
       objectReference: {fileID: 1045555241}
     - target: {fileID: -5274379174153012101, guid: 281d0ce713b48d04e86756f77452a55a, type: 3}
       propertyPath: moveSpeed
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: -5274379174153012101, guid: 281d0ce713b48d04e86756f77452a55a, type: 3}
       propertyPath: EffectCircle

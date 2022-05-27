@@ -1938,6 +1938,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TitleDoragon (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 9054408265318629273, guid: dfe19c6bccf534f4bba1a262840e6c7c, type: 3}
+      propertyPath: width
+      value: 25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dfe19c6bccf534f4bba1a262840e6c7c, type: 3}
 --- !u!1 &945810062
@@ -2162,6 +2166,10 @@ PrefabInstance:
     - target: {fileID: 2899245614155787229, guid: dfe19c6bccf534f4bba1a262840e6c7c, type: 3}
       propertyPath: m_Name
       value: TitleDoragon (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9054408265318629273, guid: dfe19c6bccf534f4bba1a262840e6c7c, type: 3}
+      propertyPath: width
+      value: 40
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dfe19c6bccf534f4bba1a262840e6c7c, type: 3}
@@ -3272,7 +3280,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 1
-  width: 0
+  width: 50
   checkFlag: 0
 --- !u!4 &1818028407 stripped
 Transform:
@@ -3685,6 +3693,10 @@ PrefabInstance:
     - target: {fileID: 2899245614155787229, guid: dfe19c6bccf534f4bba1a262840e6c7c, type: 3}
       propertyPath: m_Name
       value: TitleDoragon (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9054408265318629273, guid: dfe19c6bccf534f4bba1a262840e6c7c, type: 3}
+      propertyPath: width
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dfe19c6bccf534f4bba1a262840e6c7c, type: 3}
