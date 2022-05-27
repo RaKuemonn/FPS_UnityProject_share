@@ -110,4 +110,9 @@ public class DissolveTimer_ChangeTexture : MonoBehaviour
         test = true;
         complete = false;
     }
+
+    public bool GetComplete()
+    {
+        return complete;
+    }
 }
