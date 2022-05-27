@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class CommandSpecifyUI : MonoBehaviour
 {
     [SerializeField] private PlayerAutoControl player;
-    [SerializeField] private GameObject target;                 // こいつが元凶
+    [SerializeField] private GameObject target;                 // こいつがの位置に表示される
     [SerializeField] private GameObject Arrow;
     [SerializeField] private Image Frame;
     [SerializeField] private Image Circle;
@@ -14,6 +14,7 @@ public class CommandSpecifyUI : MonoBehaviour
     [SerializeField] private float degree_z;
     [SerializeField] private RectTransform canvas;
     [SerializeField] private float invisible_time;
+    [SerializeField] private float offset_y = 1.5f;
     private bool cutted;
     private float timer;
 
@@ -62,9 +63,9 @@ public class CommandSpecifyUI : MonoBehaviour
 
 
         var vector = target.transform.position -
-                     GameObject.FindGameObjectWithTag("Player").transform.position;
+                     player.transform.position;
 
-        var dot = Vector2.Dot(
+        var dot = Vector3.Dot(
             Camera.main.transform.forward.normalized,
             vector.normalized
         );
@@ -86,8 +87,10 @@ public class CommandSpecifyUI : MonoBehaviour
         Frame.enabled = true;
         Circle.enabled = true;
 
+        var position = target.transform.position;
+        position.y += offset_y;
         // オブジェクトのワールド座標→スクリーン座標変換
-        var targetScreenPos = Camera.main.WorldToScreenPoint(target.transform.position);
+        var targetScreenPos = Camera.main.WorldToScreenPoint(position);
         // スクリーン座標変換→UIローカル座標変換
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             canvas,
