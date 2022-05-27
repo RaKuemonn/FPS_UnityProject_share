@@ -81,7 +81,7 @@ public class EnemyBatStopController : BaseEnemy
         m_oldPosition = transform.position;
 
         float height = Random.Range(0.5f, 2.0f);
-        float width = Random.Range(0f, 3.5f);
+        float width = Random.Range(0f, 2.5f);
 
         GameObject player = GameObject.FindWithTag("Player");
         var dir = transform.position - player.transform.position;

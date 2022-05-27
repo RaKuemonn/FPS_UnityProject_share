@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class TitleButtonController : MonoBehaviour
 {
+    public GameObject uiBlocker;
+    public GameObject titleUi;
 
     // Start is called before the first frame update
     void Start()
@@ -43,5 +46,25 @@ public class TitleButtonController : MonoBehaviour
 
     }
 
+    public void SettingButton()
+    {
+        //var se = GameObject.Find("EventSystem").GetComponent<EventSystem>();
+        //se.firstSelectedGameObject = uiBlocker.transform.GetChild(1).gameObject;
 
+        EventSystem.current.SetSelectedGameObject(uiBlocker.transform.GetChild(2).gameObject);
+
+        //var se = GameObject.Find("UIblocker");
+        uiBlocker.SetActive(true);
+
+        titleUi.SetActive(false);
+    }
+
+    public void SettingExitButton()
+    {
+        EventSystem.current.SetSelectedGameObject(titleUi.transform.GetChild(1).gameObject);
+
+        uiBlocker.SetActive(false);
+
+        titleUi.SetActive(true);
+    }
 }
