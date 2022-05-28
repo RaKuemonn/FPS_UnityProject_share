@@ -550,9 +550,10 @@ GameObject:
   - component: {fileID: 2375454052346366484}
   - component: {fileID: 685270051843338169}
   - component: {fileID: 2724360265608625981}
+  - component: {fileID: 4599097214318427742}
   m_Layer: 0
   m_Name: usagi_T
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -564,15 +565,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5920921632083764324}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.47361553, y: 0.99, z: 95}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
   - {fileID: 4848750769161112246}
   - {fileID: 2291344270380683743}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!95 &2375454052346366484
 Animator:
   serializedVersion: 3
@@ -604,8 +605,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b76e7ce53e4be944784cfdb2224aa520, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_hp: 0
-  m_damage: 0
+  m_hp: 5
+  m_damage: 3
+  DamageEffectPrefab: {fileID: 4449824010848829943, guid: 175eb8d7315f3ff4fa13fc363a12a7d1, type: 3}
   m_moveSpeed: 1
   m_idleTimeMax: 5
 --- !u!143 &2724360265608625981
@@ -626,6 +628,22 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.15, z: 0}
+--- !u!54 &4599097214318427742
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5920921632083764324}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 1
+  m_AngularDrag: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!1 &6312537085429212841
 GameObject:
   m_ObjectHideFlags: 0
