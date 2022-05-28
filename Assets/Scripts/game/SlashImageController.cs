@@ -260,8 +260,6 @@ public class SlashImageController : MonoBehaviour
                             break;
                     }
 
-                    
-
                 }
                 // ‘Ì—Í‚ª‚È‚¯‚ê‚Î
                 else

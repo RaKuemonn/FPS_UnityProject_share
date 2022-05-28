@@ -685,13 +685,12 @@ public class EnemyBossController : MonoBehaviour
 
         var damageEffect = Instantiate(DamageEffectPrefab);
 
+        var canvas = GameObject.Find("Canvas")?.transform;
+        damageEffect.transform.SetParent(canvas);
+
         damageEffect
             ?.GetComponent<DamageEffect>()
             .SelectRenderDamageEffect(type_, transform.position);
 
-        var canvas = GameObject.Find("Canvas")?.transform;
-        if (canvas == null) return;
-
-        damageEffect.transform.SetParent(canvas);
     }
 }

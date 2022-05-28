@@ -216,6 +216,8 @@ public class EnemyBatController : BaseEnemy
                 .GetComponent<PlayerAutoControl>()
                 .OnDamage(m_damage);
 
+            AttackEffect(DamageEffect.DamageEffectType.Bat, transform.position);
+
             return;
         }
 

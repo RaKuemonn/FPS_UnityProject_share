@@ -25,7 +25,7 @@ public class DamageEffect : MonoBehaviour
         var color = DamageImage.color;
         if (color.a > 0.1f)
         {
-            float alpha = Mathf.Lerp(color.a, 0.0f, 10.0f * Time.deltaTime);
+            float alpha = Mathf.Lerp(color.a, 0.0f, 3.0f * Time.deltaTime);
             DamageImage.color = new Color(color.r, color.g, color.b, alpha);
         }
         else

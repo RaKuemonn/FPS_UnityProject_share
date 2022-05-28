@@ -201,19 +201,18 @@ public class BaseEnemy : MonoBehaviour
 
 
     // ÉvÉåÉCÉÑÅ[Ç…çUåÇÇ∑ÇÈç€åƒÇŒÇÍÇÈÇÊÇ§Ç…Ç∑ÇÈ
-    protected void AttackEffect(DamageEffect.DamageEffectType type_)
+    protected void AttackEffect(DamageEffect.DamageEffectType type_, Vector3 position_)
     {
         if (DamageEffectPrefab == null) return;
 
         var damageEffect = Instantiate(DamageEffectPrefab);
 
+        damageEffect.transform.SetParent(
+            GameObject.Find("Canvas")?.transform);
+
         damageEffect
             ?.GetComponent<DamageEffect>()
-            .SelectRenderDamageEffect(type_, transform.position);
+            .SelectRenderDamageEffect(type_, position_);
 
-        var canvas = GameObject.Find("Canvas")?.transform;
-        if (canvas == null) return;
-
-        damageEffect.transform.SetParent(canvas);
     }
 }
