@@ -81,7 +81,7 @@ public class EnemySnakeController : BaseEnemy
 
         SetRandamTargetPosition();
         Debug.Log(m_targetPosition);
-
+        m_animator.SetTrigger(hashWalk);
         m_idleTimer = 0.0f;
     }
 
@@ -110,7 +110,12 @@ public class EnemySnakeController : BaseEnemy
 
         // 目的地に着いたら待機
         var lengthSq = dir.x * dir.x + dir.y * dir.y + dir.z * dir.z;
-        if (lengthSq < 0.2f * 0.2f) ConditionIdleState();
+        if (lengthSq < 0.2f * 0.2f)
+        {
+            ConditionIdleState();
+            m_animator.SetTrigger(hashIdle);
+
+        }
     }
 
     // 待機位置に移動
