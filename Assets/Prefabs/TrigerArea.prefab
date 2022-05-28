@@ -59,10 +59,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Enemies: {fileID: 0}
   m_createSnakeNum: 0
-  m_snake: {fileID: 843363060854449768, guid: ca66c590d35e81042bf215342b4d29d8, type: 3}
+  m_snake: {fileID: 5920921632083764324, guid: dedfea18e211b0e49bcfeb94763575d9, type: 3}
   m_createDragonNum: 3
   m_dragon: {fileID: 843363060854449768, guid: ca66c590d35e81042bf215342b4d29d8, type: 3}
   m_createBatNum: 0
-  m_bat: {fileID: 843363060854449768, guid: ca66c590d35e81042bf215342b4d29d8, type: 3}
+  m_bat: {fileID: 5515697536084552901, guid: 552b00572d8c0324aa43edfe8c838077, type: 3}
   m_createLength: 30
   m_widthSize: 4
