@@ -226,7 +226,7 @@ public class SlashImageController : MonoBehaviour
                         //        .GetComponent<PlayerAutoControl>()
                         //        .OnDamage(enemy.m_damage);
                         //}
-                        Cut(enemy, cutSurfaceMaterial, result_hit_ray);
+                        Cut(enemy, cutSurfaceMaterial, result_hit_ray, rays[0], rays[1]);
                     }
 
 
@@ -380,15 +380,15 @@ public class SlashImageController : MonoBehaviour
         return image.rectTransform.eulerAngles.z * Mathf.Deg2Rad;
     }
 
-    static void Cut(BaseEnemy enemy, Material cutSurfaceMaterial, Ray result_hit_ray)
+    static void Cut(BaseEnemy enemy, Material cutSurfaceMaterial, Ray result_hit_ray, Ray need_to_culculate_ray_1, Ray need_to_culculate_ray_2)
     {
 
         Vector3 normal;
         {
             const float distance = 5.0f;
             var origin_position = result_hit_ray.origin;
-            var far_left = result_hit_ray.GetPoint(distance);
-            var far_right = result_hit_ray.GetPoint(distance);
+            var far_left = need_to_culculate_ray_1.GetPoint(distance);
+            var far_right = need_to_culculate_ray_2.GetPoint(distance);
 
             var left = far_left - origin_position;
             var right = far_right - origin_position;
