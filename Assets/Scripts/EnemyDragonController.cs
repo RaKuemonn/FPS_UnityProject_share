@@ -230,6 +230,8 @@ public class EnemyDragonController : BaseEnemy
                 .GetComponent<PlayerAutoControl>()
                 .OnDamage(m_damage);
 
+            AttackEffect(DamageEffect.DamageEffectType.Dragon, transform.position);
+
             return;
         }
 

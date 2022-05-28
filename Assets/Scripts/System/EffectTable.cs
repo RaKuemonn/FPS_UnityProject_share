@@ -13,5 +13,5 @@ public class EffectTable : ScriptableObject
 [Serializable]
 public class Effect
 {
-    public Texture2D Texture2D;
+    public Sprite Sprite;
 }

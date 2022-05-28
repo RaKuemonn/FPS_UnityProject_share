@@ -390,6 +390,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_hp: 0
   m_damage: 0
+  DamageEffectPrefab: {fileID: 4449824010848829943, guid: 175eb8d7315f3ff4fa13fc363a12a7d1, type: 3}
   m_moveSpeed: 2
   m_idleTimeMax: 5
 --- !u!95 &1500182471943554173

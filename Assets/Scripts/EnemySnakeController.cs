@@ -230,6 +230,8 @@ public class EnemySnakeController : BaseEnemy
                 .GetComponent<PlayerAutoControl>()
                 .OnDamage(m_damage);
 
+            AttackEffect(DamageEffect.DamageEffectType.Rabbit, transform.position);
+
             return;
         }
 

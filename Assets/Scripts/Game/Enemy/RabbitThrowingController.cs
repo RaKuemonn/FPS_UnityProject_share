@@ -56,6 +56,13 @@ public class RabbitThrowingController : BaseEnemy
             .GetComponent<PlayerAutoControl>()
             .OnDamage(m_damage);
 
+        var position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        
+        // プレイヤーの前方に位置を押し出している
+        position += collider.gameObject.transform.forward * 2.0f;
+
+        AttackEffect(DamageEffect.DamageEffectType.Rabbit, position);
+
         Destroy(gameObject);
     }
 }

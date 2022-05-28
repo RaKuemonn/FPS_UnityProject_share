@@ -566,6 +566,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e51594402f4fa3d4a8ef35e31ca0ecb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_hp: 0
+  m_damage: 0
+  DamageEffectPrefab: {fileID: 4449824010848829943, guid: 175eb8d7315f3ff4fa13fc363a12a7d1, type: 3}
   timer: 7
   moveSpeed: 10
   boss: {fileID: 5030218871368432538, guid: 6c8c5929f4ac8b8479daf29786733107, type: 3}

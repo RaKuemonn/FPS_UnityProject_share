@@ -1914,7 +1914,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47f1f98c2961de243aa4664ce2b0f820, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 0
+  DamageEffectPrefab: {fileID: 4449824010848829943, guid: 175eb8d7315f3ff4fa13fc363a12a7d1, type: 3}
+  bossHpController: {fileID: 0}
+  m_damage: 0
+  deathAnimationTime: 0
   weaponReflect: 1
   moveSpeed: 1
   idleTimerMax: 7
@@ -1922,6 +1925,7 @@ MonoBehaviour:
   sickle: {fileID: 2666462225408373522, guid: 281d0ce713b48d04e86756f77452a55a, type: 3}
   sickleThrowing: {fileID: 9058820572442604332, guid: 80427c0f0e97c0842add9009d3dd9125, type: 3}
   sickleJudgeImage: {fileID: 0}
+  hpMax: 0
   downTimeMax: 5
 --- !u!95 &6495572611470904312
 Animator:
