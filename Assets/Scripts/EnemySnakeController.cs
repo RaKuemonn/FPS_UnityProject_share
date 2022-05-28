@@ -190,7 +190,9 @@ public class EnemySnakeController : BaseEnemy
 
         m_startPosition = transform.position;
 
-        m_endPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z - 3);
+        GameObject player = GameObject.FindWithTag("Player");
+
+        m_endPosition = new Vector3(transform.position.x, transform.position.y, player.transform.position.z + 3.2f);
 
         m_easingTimer = 0.0f;
 
