@@ -65,6 +65,7 @@ public class DamageEffect : MonoBehaviour
 
         // 描画位置の設定
         var position = attacker_position;
+        position.y += 1.0f; // 高さを微妙に上げる
 
         // オブジェクトのワールド座標→スクリーン座標変換
         var targetScreenPos = Camera.main.WorldToScreenPoint(position);
