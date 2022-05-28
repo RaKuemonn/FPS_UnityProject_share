@@ -352,6 +352,7 @@ GameObject:
   - component: {fileID: -6347637583458004842}
   - component: {fileID: -8821443628715535564}
   - component: {fileID: 593571702126637894}
+  - component: {fileID: 772461989262508626}
   m_Layer: 0
   m_Name: koumori
   m_TagString: Enemy
@@ -459,6 +460,30 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.03, z: 0}
+--- !u!114 &772461989262508626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5515697536084552901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 675adbc1c31b3f345a4ef7a0db19e1d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obj: {fileID: 2135608162604396675}
+  materials:
+  - {fileID: 2100000, guid: 1712402317bb21b479f9ec8dca0c7ff7, type: 2}
+  initial_value:
+  - 0.1
+  - 0.5
+  End_value:
+  - -1.5
+  - -0.5
+  LostSpeed:
+  - 0.75
+  - 3
 --- !u!1 &5839002001617199831
 GameObject:
   m_ObjectHideFlags: 0

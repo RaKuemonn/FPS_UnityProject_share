@@ -551,6 +551,7 @@ GameObject:
   - component: {fileID: 685270051843338169}
   - component: {fileID: 2724360265608625981}
   - component: {fileID: 4599097214318427742}
+  - component: {fileID: 6089467272362394735}
   m_Layer: 0
   m_Name: usagi_T
   m_TagString: Enemy
@@ -644,6 +645,30 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &6089467272362394735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5920921632083764324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 675adbc1c31b3f345a4ef7a0db19e1d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obj: {fileID: 266027470953031234}
+  materials:
+  - {fileID: 2100000, guid: 1712402317bb21b479f9ec8dca0c7ff7, type: 2}
+  initial_value:
+  - 0.3
+  - 0.5
+  End_value:
+  - -0.5
+  - -0.5
+  LostSpeed:
+  - 0.75
+  - 2
 --- !u!1 &6312537085429212841
 GameObject:
   m_ObjectHideFlags: 0

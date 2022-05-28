@@ -3778,14 +3778,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1818028407}
     m_Modifications:
-    - target: {fileID: 2271726821182112295, guid: b055c8593525b65429d51c3f1a3438c3, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 1329512277361396988, guid: 48e547ce6468d9540a9686c925b2510a, type: 3}
-    - target: {fileID: 2271726821182112295, guid: b055c8593525b65429d51c3f1a3438c3, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 8711ef61a2ee62a47a23c3260049704f, type: 2}
     - target: {fileID: 3927872787762066213, guid: b055c8593525b65429d51c3f1a3438c3, type: 3}
       propertyPath: m_RootOrder
       value: 2

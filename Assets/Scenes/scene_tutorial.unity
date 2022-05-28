@@ -1376,10 +1376,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1084141624264207692, guid: 0131bbff8c3af1f4caba0a2e3109507c, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 8.46
-      objectReference: {fileID: 0}
-    - target: {fileID: 1084141624264207692, guid: 0131bbff8c3af1f4caba0a2e3109507c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -1422,6 +1418,18 @@ PrefabInstance:
     - target: {fileID: 1084141624264207696, guid: 0131bbff8c3af1f4caba0a2e3109507c, type: 3}
       propertyPath: m_Name
       value: gateFog
+      objectReference: {fileID: 0}
+    - target: {fileID: 4563993173685689972, guid: 0131bbff8c3af1f4caba0a2e3109507c, type: 3}
+      propertyPath: scroolSpeed.x
+      value: 0.105
+      objectReference: {fileID: 0}
+    - target: {fileID: 4563993174220794949, guid: 0131bbff8c3af1f4caba0a2e3109507c, type: 3}
+      propertyPath: scroolSpeed.x
+      value: 0.105
+      objectReference: {fileID: 0}
+    - target: {fileID: 4563993174609990886, guid: 0131bbff8c3af1f4caba0a2e3109507c, type: 3}
+      propertyPath: scroolSpeed.x
+      value: 0.105
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0131bbff8c3af1f4caba0a2e3109507c, type: 3}
@@ -3289,7 +3297,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6577656849166865007, guid: 78bb769207b5ccb40bf4b103f3228ee8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 105
+      value: 110
       objectReference: {fileID: 0}
     - target: {fileID: 6577656849166865007, guid: 78bb769207b5ccb40bf4b103f3228ee8, type: 3}
       propertyPath: m_LocalRotation.w

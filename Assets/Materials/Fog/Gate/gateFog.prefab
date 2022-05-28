@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 1084141624264207696}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 2, z: -95.971}
-  m_LocalScale: {x: 9, y: 5, z: 1}
+  m_LocalScale: {x: 8.46, y: 5, z: 1}
   m_Children:
   - {fileID: 4563993173685689968}
   - {fileID: 4563993174220794945}
@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alpha: 0.45
-  scroolSpeed: {x: 0.07, y: 0}
+  scroolSpeed: {x: 0.105, y: 0}
   RightMove: 1
 --- !u!1 &4563993173685689969
 GameObject:
