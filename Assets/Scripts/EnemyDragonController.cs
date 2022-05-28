@@ -183,7 +183,7 @@ public class EnemyDragonController : BaseEnemy
 
         GameObject player = GameObject.FindWithTag("Player");
 
-        m_endPosition = new Vector3(transform.position.x, transform.position.y, player.transform.position.z + 1.7f);
+        m_endPosition = new Vector3(transform.position.x, transform.position.y, player.transform.position.z + 3.2f);
 
 
         m_easingTimer = 0.0f;

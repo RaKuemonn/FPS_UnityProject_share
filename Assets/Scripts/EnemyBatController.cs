@@ -117,12 +117,14 @@ public class EnemyBatController : BaseEnemy
     {
         m_animator.SetFloat("Move", 0.7f);
 
-        var dir = m_locationPosition - transform.position;
+        var position = new Vector3(transform.position.x, 0f, transform.position.z);
+
+        var dir = m_locationPosition - position;
         dir.Normalize();
         dir *= m_moveSpeed * Time.deltaTime;
         if (Turn(dir)) transform.position = new Vector3(dir.x + transform.position.x, transform.position.y, transform.position.z + dir.z);
 
-        dir = m_locationPosition - transform.position;
+        dir = m_locationPosition - position;
 
         // –Ú“I’n‚É’…‚¢‚½‚ç‘Ò‹@
         var lengthSq = dir.x * dir.x + dir.y * dir.y + dir.z * dir.z;
@@ -175,7 +177,8 @@ public class EnemyBatController : BaseEnemy
 
         m_startPosition = transform.position;
 
-        m_endPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z - 3);
+        GameObject player = GameObject.FindWithTag("Player");
+        m_endPosition = new Vector3(transform.position.x, transform.position.y, player.transform.position.z + 3.2f);
 
         m_easingTimer = 0.0f;
     }
