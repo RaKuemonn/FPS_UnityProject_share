@@ -572,6 +572,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_hp: 1
+  m_damage: 0
+  DamageEffectPrefab: {fileID: 4449824010848829943, guid: 175eb8d7315f3ff4fa13fc363a12a7d1, type: 3}
   damageArea: {fileID: 0}
 --- !u!95 &3261649226426817631
 Animator:

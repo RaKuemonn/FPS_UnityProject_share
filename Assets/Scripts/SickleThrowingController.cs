@@ -78,6 +78,8 @@ public class SickleThrowingController : BaseEnemy
             .GetComponent<PlayerAutoControl>()
             .OnDamage(m_damage);
 
+        AttackEffect(DamageEffect.DamageEffectType.Sickle);
+
         DisableMesh();
     }
 

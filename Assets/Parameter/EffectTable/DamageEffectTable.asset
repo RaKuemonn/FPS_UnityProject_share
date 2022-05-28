@@ -13,4 +13,7 @@ MonoBehaviour:
   m_Name: DamageEffectTable
   m_EditorClassIdentifier: 
   effects:
-  - Texture2D: {fileID: 2800000, guid: e54d24ff71e9bb346bf85644fb469f60, type: 3}
+  - Sprite: {fileID: 21300000, guid: 7c1f61ce30361db408b9e95e5acbf881, type: 3}
+  - Sprite: {fileID: 21300000, guid: 7c1f61ce30361db408b9e95e5acbf881, type: 3}
+  - Sprite: {fileID: 21300000, guid: 1fe009449efa0d542a1fc0e8712355e5, type: 3}
+  - Sprite: {fileID: 21300000, guid: 8d7dc9975cb34504799f4dadaab6477d, type: 3}

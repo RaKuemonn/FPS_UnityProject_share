@@ -56,6 +56,8 @@ public class RabbitThrowingController : BaseEnemy
             .GetComponent<PlayerAutoControl>()
             .OnDamage(m_damage);
 
+        AttackEffect(DamageEffect.DamageEffectType.Rabbit);
+
         Destroy(gameObject);
     }
 }

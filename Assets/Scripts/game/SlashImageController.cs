@@ -307,8 +307,8 @@ public class SlashImageController : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-
+         
+#if false
         {
             var rectTransform = GetComponent<RectTransform>();
             var image_screen_position = rectTransform.position;
@@ -366,6 +366,7 @@ public class SlashImageController : MonoBehaviour
                 Debug.DrawRay(ray.origin, ray.direction);
             }
         }
+#endif
         
     }
 

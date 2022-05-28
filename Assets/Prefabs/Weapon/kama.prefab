@@ -174,6 +174,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_hp: 0
   m_damage: 2
+  DamageEffectPrefab: {fileID: 4449824010848829943, guid: 175eb8d7315f3ff4fa13fc363a12a7d1, type: 3}
   timer: 15
   moveSpeed: 5
   player: {fileID: 7790357534801836031, guid: 4065b0a3a50481b408a227796b93b138, type: 3}

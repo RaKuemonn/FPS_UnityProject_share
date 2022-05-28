@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class EnemyBossController : MonoBehaviour
 {
+
+    [SerializeField] private GameObject DamageEffectPrefab;
+
     private float hp;
     public void SetHP(float hp_)
     {
@@ -524,6 +527,7 @@ public class EnemyBossController : MonoBehaviour
                 .FindGameObjectWithTag("Player")
                 .GetComponent<PlayerAutoControl>()
                 .OnDamage(m_damage);
+            AttackEffect(DamageEffect.DamageEffectType.Sickle);
         }
 
         attackEndTimer -= Time.deltaTime;
@@ -673,5 +677,21 @@ public class EnemyBossController : MonoBehaviour
         transform.rotation = Quaternion.LerpUnclamped(transform.rotation, rotate, 0.01f);
 
         return check;
+    }
+
+    void AttackEffect(DamageEffect.DamageEffectType type_)
+    {
+        if (DamageEffectPrefab == null) return;
+
+        var damageEffect = Instantiate(DamageEffectPrefab);
+
+        damageEffect
+            ?.GetComponent<DamageEffect>()
+            .SelectRenderDamageEffect(type_, transform.position);
+
+        var canvas = GameObject.Find("Canvas")?.transform;
+        if (canvas == null) return;
+
+        damageEffect.transform.SetParent(canvas);
     }
 }

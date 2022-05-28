@@ -13,6 +13,8 @@ public class BaseEnemy : MonoBehaviour
 
     [SerializeField] public float m_damage;
 
+    [SerializeField] private GameObject DamageEffectPrefab;
+
     public float GetHP() { return m_hp; }
     public void SetHP(float hp) { m_hp = hp; }
 
@@ -195,5 +197,23 @@ public class BaseEnemy : MonoBehaviour
     {
         IsDeath = true;
 
+    }
+
+
+    // ÉvÉåÉCÉÑÅ[Ç…çUåÇÇ∑ÇÈç€åƒÇŒÇÍÇÈÇÊÇ§Ç…Ç∑ÇÈ
+    protected void AttackEffect(DamageEffect.DamageEffectType type_)
+    {
+        if (DamageEffectPrefab == null) return;
+
+        var damageEffect = Instantiate(DamageEffectPrefab);
+
+        damageEffect
+            ?.GetComponent<DamageEffect>()
+            .SelectRenderDamageEffect(type_, transform.position);
+
+        var canvas = GameObject.Find("Canvas")?.transform;
+        if (canvas == null) return;
+
+        damageEffect.transform.SetParent(canvas);
     }
 }
