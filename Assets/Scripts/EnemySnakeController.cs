@@ -122,6 +122,7 @@ public class EnemySnakeController : BaseEnemy
     private void ConditionBattlePreparationState()
     {
         state = StateRab.BattlePreparation;
+        m_animator.SetTrigger(hashWalk);
     }
 
     private void ConditionBattlePreparationUpdate()
@@ -140,6 +141,7 @@ public class EnemySnakeController : BaseEnemy
         if (lengthSq < 0.1f * 0.1f)
         {
             ConditionIdleState();
+            m_animator.SetTrigger(hashIdle);
             m_battleFlag = true;
         }
     }
@@ -214,7 +216,7 @@ public class EnemySnakeController : BaseEnemy
     private void ConditionAttackState()
     {
         state = StateRab.Attack;
-        m_animator.SetTrigger("Attack");
+        m_animator.SetTrigger(hashAttack);
 
         m_kariTimer = 2.5f;
     }
@@ -225,7 +227,7 @@ public class EnemySnakeController : BaseEnemy
         var dir = player.transform.position - transform.position;
         Turn(dir);
 
-        if (m_animator.GetCurrentAnimatorStateInfo(0).IsName("stand_by"))
+       if( m_kariTimer < 0 )// if (m_animator.GetCurrentAnimatorStateInfo(0).IsName("stand_by"))
         {
             ConditionAttackEndState();
 
