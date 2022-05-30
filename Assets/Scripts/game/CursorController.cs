@@ -28,6 +28,7 @@ public class CursorController : MonoBehaviour
     private bool now_clip_played;
     //private float chain_kill_timer; // 数値が正の値の時,切り返すことが出来る
     private float scale_cool_timer;
+    private bool is_can_slash;
 
     // Start is called before the first frame update
     void Start()
@@ -81,6 +82,8 @@ public class CursorController : MonoBehaviour
 
     private void SlashControl()
     {
+        if (is_can_slash == false) return;
+
         Ray ray_ = CursolRay();
         //Debug.Log(ray_.origin);
         Debug.DrawRay(ray_.origin , ray_.direction);
@@ -168,7 +171,8 @@ public class CursorController : MonoBehaviour
                     (1f) :
                     (1f - scale_cool_timer / max_cool_time);
 
-                const float min_scale = 0.2f;
+                const float min_scale = 0.15f;
+                var scale_damage = scale;
                 if (scale <= min_scale)
                 {
                     scale = min_scale;
@@ -183,7 +187,7 @@ public class CursorController : MonoBehaviour
                 // ダメージの大きさ
                 obj
                     .GetComponent<SlashImageController>()
-                    .damage = Mathf.Clamp(scale * max_damage, min_damage, max_damage);
+                    .damage = Mathf.Clamp(scale_damage * max_damage, min_damage, max_damage);
             }
             const float cool_time = -0.5f;
             scale_cool_timer += cool_time;
@@ -195,6 +199,12 @@ public class CursorController : MonoBehaviour
             obj.transform.SetParent(transform.parent);
         }
 
+        Invoke("SetIsCanSlash", 0.3f);
+    }
+
+    private void SetIsCanSlash()
+    {
+        is_can_slash = true;
     }
 
     public Ray CursolRay()

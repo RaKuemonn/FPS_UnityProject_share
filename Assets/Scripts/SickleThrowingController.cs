@@ -28,12 +28,18 @@ public class SickleThrowingController : BaseEnemy
 
     [SerializeField]
     private GameObject boss;
+
+    [SerializeField] private GameObject EffectCircle;
     
 
     private float slashAngle;
     public float GetRadianSlashAngle() { return slashAngle * Mathf.Deg2Rad; }
     public float GetSlashAbgle() { return slashAngle; }
-    public void DisableMesh() { updateTimer = -0.1f; /* Update()でmesh.enable = falseにしている */}
+    public void DisableMesh() {
+        EffectCircle.GetComponent<EnemyAttackPrudir>().Invisible();
+        updateTimer = -0.1f; 
+        GetComponent<Collider>().enabled = false;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -73,11 +79,6 @@ public class SickleThrowingController : BaseEnemy
 
         if (updateTimer < 0.0f) return;
 
-        // プレイヤーにダメージを与える
-        collider.gameObject
-            .GetComponent<PlayerAutoControl>()
-            .OnDamage(m_damage);
-
         var position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
 
         // プレイヤーの前方に位置を押し出している
@@ -86,6 +87,11 @@ public class SickleThrowingController : BaseEnemy
         AttackEffect(DamageEffect.DamageEffectType.Sickle, position);
 
         DisableMesh();
+
+        // プレイヤーにダメージを与える
+        collider.gameObject
+            .GetComponent<PlayerAutoControl>()
+            .OnDamage(m_damage);
     }
 
     private float RandomTarget()
@@ -96,6 +102,8 @@ public class SickleThrowingController : BaseEnemy
 
     public void Initilize()
     {
+        GetComponent<Collider>().enabled = true;
+
         GameObject g = GameObject.FindWithTag("Player");
         target = g.transform.position;
 
