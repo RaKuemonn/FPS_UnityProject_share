@@ -9,7 +9,7 @@ public class TitleButtonController : MonoBehaviour
     public GameObject uiBlocker;
     public GameObject titleUi;
     public GameObject start;
-    private bool is_can_submit;
+    private bool is_can_submit = true;
 
     
     //ƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚½‚Ìˆ—

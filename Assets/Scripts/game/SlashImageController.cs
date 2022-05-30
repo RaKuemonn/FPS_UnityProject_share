@@ -190,13 +190,17 @@ public class SlashImageController : MonoBehaviour
                     else if (enemy.tag == "SickleThrowing")
                     {
                         var Sickle = ((SickleThrowingController)enemy);
-                        Vector2 slashVec = MathHelpar.AngleToVector2(RadianAngle2D());
-                        Vector2 sickleVec = MathHelpar.AngleToVector2((Sickle.GetRadianSlashAngle()));
+                        Vector2 slashVec = new Vector2(
+                            Mathf.Cos(RadianAngle2D()),
+                            Mathf.Sin(RadianAngle2D())).normalized;
+                        Vector2 sickleVec = new Vector2(
+                            Mathf.Cos(Sickle.GetRadianSlashAngle()),
+                            Mathf.Sin(Sickle.GetRadianSlashAngle())).normalized;
 
                         // TODO 3: 角度が一定以内なら、カウンター成功にする。
                         var dot = Vector2.Dot(slashVec, sickleVec);
                         dot = Mathf.Acos(dot);
-                        if (toleranceLevel > dot && dot > -toleranceLevel)
+                        if (dot < toleranceLevel)
                         {
                             Sickle.DisableMesh();
                         }

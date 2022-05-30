@@ -43,19 +43,22 @@ public class EnemyAttackPrudir : MonoBehaviour
         {
             var dissolve = m_gameObject.GetComponent<DissolveTimer_ChangeTexture>();
             var image = GetComponent<Image>();
-
-            if (dissolve.GetComplete())
+            if (dissolve)
             {
-                Debug.Log("Screen In , do dissolved");
-                image.enabled = true;
-            }
-            else
-            {
+                if (dissolve.GetComplete())
+                {
+                    Debug.Log("Screen In , do dissolved");
+                    image.enabled = true;
+                }
+                else
+                {
 
-                Debug.Log("Screen In , not dissolved");
-                image.enabled = false;
-                return;
+                    Debug.Log("Screen In , not dissolved");
+                    image.enabled = false;
+                    return;
+                }
             }
+            
         }
 
 
