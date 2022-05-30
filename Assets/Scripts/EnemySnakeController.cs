@@ -6,8 +6,9 @@ public class EnemySnakeController : BaseEnemy
 {
     private static readonly int hashAttack = Animator.StringToHash("Attack");
     private static readonly int hashDeath = Animator.StringToHash("Death");
-    private static readonly int hashWalk = Animator.StringToHash("Walk");
-    private static readonly int hashIdle = Animator.StringToHash("Idle");
+    //private static readonly int hashWalk = Animator.StringToHash("Walk");
+    //private static readonly int hashIdle = Animator.StringToHash("Idle");
+    private static readonly int hashSpeed = Animator.StringToHash("Speed");
 
 
     // 移動スピード
@@ -81,13 +82,14 @@ public class EnemySnakeController : BaseEnemy
 
         SetRandamTargetPosition();
         Debug.Log(m_targetPosition);
-        m_animator.SetTrigger(hashWalk);
         m_idleTimer = 0.0f;
     }
 
     private void ConditionWanderUpdate()
     {
-      //  m_animator.SetFloat("Move", 0.7f);
+        //  m_animator.SetFloat("Move", 0.7f);
+        m_animator.SetFloat(hashSpeed, 0.4f);
+
 
         // 集合がかかったら集まる
         if (m_assemblyFlag)
@@ -113,7 +115,6 @@ public class EnemySnakeController : BaseEnemy
         if (lengthSq < 0.2f * 0.2f)
         {
             ConditionIdleState();
-            m_animator.SetTrigger(hashIdle);
 
         }
     }
@@ -122,12 +123,12 @@ public class EnemySnakeController : BaseEnemy
     private void ConditionBattlePreparationState()
     {
         state = StateRab.BattlePreparation;
-        m_animator.SetTrigger(hashWalk);
+        //m_animator.SetTrigger(hashWalk);
     }
 
     private void ConditionBattlePreparationUpdate()
     {
-     //   m_animator.SetFloat("Move", 0.7f);
+    m_animator.SetFloat(hashSpeed, 0.7f);
 
         var dir = m_locationPosition - transform.position;
         dir.Normalize();
@@ -138,10 +139,10 @@ public class EnemySnakeController : BaseEnemy
 
         // 目的地に着いたら待機
         var lengthSq = dir.x * dir.x + dir.y * dir.y + dir.z * dir.z;
-        if (lengthSq < 0.1f * 0.1f)
+        if (lengthSq < 0.2f * 0.2f)
         {
             ConditionIdleState();
-            m_animator.SetTrigger(hashIdle);
+            //m_animator.SetTrigger(hashIdle);
             m_battleFlag = true;
         }
     }
@@ -158,7 +159,8 @@ public class EnemySnakeController : BaseEnemy
 
     private void ConditionIdleUpdate()
     {
-     //   m_animator.SetFloat("Move", 0.0f);
+        //   m_animator.SetFloat("Move", 0.0f);
+        m_animator.SetFloat(hashSpeed, 0.0f);
 
 
         // 集合がかかったら集まる
@@ -196,11 +198,12 @@ public class EnemySnakeController : BaseEnemy
 
         m_easingTimer = 0.0f;
 
-        m_animator.SetTrigger(hashWalk);
     }
 
     private void ConditionAttackStartUpdate()
     {
+        m_animator.SetFloat(hashSpeed, 0.7f);
+
         if (m_easingTimer > 1.5f)
         {
             ConditionAttackState();
@@ -252,19 +255,18 @@ public class EnemySnakeController : BaseEnemy
     {
         state = StateRab.AttackEnd;
         m_easingTimer = 0.0f;
-        m_animator.SetTrigger(hashWalk);
 
     }
 
     private void ConditionAttackEndUpdate()
     {
-       // m_animator.SetFloat("Move", 0.4f);
+       m_animator.SetFloat(hashSpeed, 0.4f);
 
 
         if (m_easingTimer > 1.5f)
         {
             ConditionIdleState();
-            m_animator.SetTrigger(hashIdle);
+            //m_animator.SetTrigger(hashIdle);
 
             return;
         }
