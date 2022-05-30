@@ -53,7 +53,7 @@ public class PlayerAutoControl : MonoBehaviour
 
         if(noiseComponent == null) return;
 
-        noiseComponent.m_FrequencyGain = Mathf.Lerp(0.0f, 5.0f, speed_rate_lerping); // ŒÅ’è’l
+        noiseComponent.m_FrequencyGain = Mathf.Lerp(1.0f, 2.0f, speed_rate_lerping); // ŒÅ’è’l
         
 
         noiseComponent
