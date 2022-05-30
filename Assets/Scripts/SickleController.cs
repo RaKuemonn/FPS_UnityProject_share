@@ -6,7 +6,7 @@ using DG.Tweening;
 
 public class SickleController : BaseEnemy
 {
-    private float width = 1.5f;
+    private float width = 1.0f;
     private Vector3 velocity = new Vector3(0f, 0f, 0f);
     private float updateTimer = 0.0f;
     float rotationSpeed = 1080.0f;
@@ -38,8 +38,8 @@ public class SickleController : BaseEnemy
     public void DisableMesh() 
     { 
         EffectCircle.GetComponent<EnemyAttackPrudir>().Invisible();
-        updateTimer = -0.1f; /* Update()‚Åmesh.enable = false‚É‚µ‚Ä‚¢‚é */
-        // “–‚½‚è”»’è‚ğInitialize‚³‚ê‚é‚Ü‚Åoff‚É‚·‚é
+        updateTimer = -0.1f; /* Update()ï¿½ï¿½mesh.enable = falseï¿½É‚ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ */
+        // ï¿½ï¿½ï¿½ï¿½ï¿½è”»ï¿½ï¿½ï¿½Initializeï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½offï¿½É‚ï¿½ï¿½ï¿½
         GetComponent<Collider>().enabled = false;
     }
 
@@ -119,7 +119,7 @@ public class SickleController : BaseEnemy
         updateTimer -= Time.deltaTime;
     }
 
-    // Š™‚ğ“Š‚°‚éˆÊ’u‚ğƒ‰ƒ“ƒ_ƒ€‚É‚·‚é
+    // ï¿½ï¿½ï¿½ğ“Š‚ï¿½ï¿½ï¿½Ê’uï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½É‚ï¿½ï¿½ï¿½
     public Vector3 GetRandomTarget()
     {
         var forward = player.transform.forward;
@@ -128,25 +128,22 @@ public class SickleController : BaseEnemy
         right.Normalize();
         right *= width;
 
-        //‚»‚ê‚¼‚ê‚ÌÀ•W‚ğƒ‰ƒ“ƒ_ƒ€‚É¶¬‚·‚é
-        float x = Random.Range(0, right.x * 2)  - right.x;
-        float y = Random.Range(1, 3);
-        float z = Random.Range(0, right.z * 2) - right.z;
+        //ï¿½ï¿½ï¿½ê‚¼ï¿½ï¿½Ìï¿½ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½Éï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        float x = Random.Range(0, width * 2)  - width;
+        float y = Random.Range(0, 1.2f);
+        float z = Random.Range(0, width * 2) - width;
         //Random.Range(zMinPosition, zMaxPosition);
 
-        //Vector3Œ^‚ÌPosition‚ğ•Ô‚·
-        return new Vector3(x, y, z);
+        //Vector3ï¿½^ï¿½ï¿½Positionï¿½ï¿½Ô‚ï¿½
+        return new Vector3(x + player.transform.position.x, y, z + player.transform.position.z);
     }
 
     public void Initilize(float timer)
     {
-        // OnTriggerEnter‚É“ü‚é‚Æoff‚É‚³‚ê‚é‚Ì‚ÅOn‚É‚·‚é
+        // OnTriggerEnterï¿½É“ï¿½ï¿½ï¿½ï¿½offï¿½É‚ï¿½ï¿½ï¿½ï¿½Ì‚ï¿½Onï¿½É‚ï¿½ï¿½ï¿½
         GetComponent<Collider>().enabled = true;
 
-        GameObject g = GameObject.FindWithTag("Player");
-        target = g.transform.position;//GetRandomTarget();
-        target.y += 1f;
-        //target.y += 0.3f;
+        target = GetRandomTarget();
         transform.localScale = new Vector3(1, 1, 1);
 
         slashAngle = Random.Range(0.0f, 360.0f);
@@ -188,12 +185,12 @@ public class SickleController : BaseEnemy
 
     protected override float DestroyTime()
     {
-        return -1.0f; // ƒ}ƒCƒiƒX‚¾‚Æ”jŠü‚³‚ê‚È‚¢
+        return -1.0f; // ï¿½}ï¿½Cï¿½iï¿½Xï¿½ï¿½ï¿½Æ”jï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È‚ï¿½
     }
 
     protected override void CuttedImpulse(Vector3 impulse_)
     {
-        // ‚È‚É‚à‚µ‚È‚¢
+        // ï¿½È‚É‚ï¿½ï¿½ï¿½ï¿½È‚ï¿½
     }
 
     void OnTriggerEnter(Collider collider)
@@ -204,14 +201,14 @@ public class SickleController : BaseEnemy
 
         var position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
 
-        // ƒvƒŒƒCƒ„[‚Ì‘O•û‚ÉˆÊ’u‚ğ‰Ÿ‚µo‚µ‚Ä‚¢‚é
+        // ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½Ì‘Oï¿½ï¿½ï¿½ÉˆÊ’uï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½oï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
         position += Camera.main.transform.forward * 2.0f;
 
         AttackEffect(DamageEffect.DamageEffectType.Sickle, position);
 
         DisableMesh();
 
-        // ƒvƒŒƒCƒ„[‚Éƒ_ƒ[ƒW‚ğ—^‚¦‚é
+        // ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½Éƒ_ï¿½ï¿½ï¿½[ï¿½Wï¿½ï¿½^ï¿½ï¿½ï¿½ï¿½
         collider.gameObject
             .GetComponent<PlayerAutoControl>()
             .OnDamage(m_damage);

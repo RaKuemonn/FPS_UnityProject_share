@@ -8,6 +8,9 @@ public class DumySickleController : MonoBehaviour
     private GameObject boss;
 
 
+    private bool a = false;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,27 +22,27 @@ public class DumySickleController : MonoBehaviour
     {
         EnemyBossController enemyBoss = boss.GetComponent<EnemyBossController>();
 
-        GameObject[] child = new GameObject[transform.childCount];
-
-        for (int i = 0; i < transform.childCount; i++)
-        {
-            child[i] = transform.GetChild(i).gameObject;
-        }
 
         if (enemyBoss.weaponReflect)
         {
-            for (int i = 0; i < transform.childCount; i++)
+            SkinnedMeshRenderer mesh = transform.GetChild(2).GetComponent<SkinnedMeshRenderer>();
+            if (mesh)
             {
-                SkinnedMeshRenderer mesh = child[i].GetComponent<SkinnedMeshRenderer>();
-                if (mesh) mesh.enabled = true;
+                mesh.enabled = true;
+                if (a == false)
+                {
+                    gameObject.GetComponent<DissolveTimer_ChangeTexture>()?.OnGenerate();
+                    a = true;
+                }
             }
         }
         else
         {
-            for (int i = 0; i < transform.childCount; i++)
+            SkinnedMeshRenderer mesh = transform.GetChild(2).GetComponent<SkinnedMeshRenderer>();
+            if (mesh)
             {
-                SkinnedMeshRenderer mesh = child[i].GetComponent<SkinnedMeshRenderer>();
-                if (mesh) mesh.enabled = false;
+                mesh.enabled = false;
+                a = false;
             }
         }
     }
