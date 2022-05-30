@@ -8,22 +8,15 @@ public class TitleButtonController : MonoBehaviour
 {
     public GameObject uiBlocker;
     public GameObject titleUi;
+    public GameObject start;
+    private bool is_can_submit;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    
     //ボタンを押した時の処理
     public void StartButton()
     {
+        if (is_can_submit == false) return;
+
         SceneManager.LoadScene("scene_tutorial");
 
         var se = GameObject.Find("SE");
@@ -33,10 +26,12 @@ public class TitleButtonController : MonoBehaviour
         DontDestroyOnLoad(se);
         DontDestroyOnLoad(bgm);
         DontDestroyOnLoad(soundManager);
+        
     }
 
     public void ExitButton()
     {
+        if (is_can_submit == false) return;
 
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;//ゲームプレイ終了
@@ -48,6 +43,7 @@ public class TitleButtonController : MonoBehaviour
 
     public void SettingButton()
     {
+
         //var se = GameObject.Find("EventSystem").GetComponent<EventSystem>();
         //se.firstSelectedGameObject = uiBlocker.transform.GetChild(1).gameObject;
 
@@ -57,6 +53,9 @@ public class TitleButtonController : MonoBehaviour
         uiBlocker.SetActive(true);
 
         titleUi.SetActive(false);
+
+
+        is_can_submit = false;
     }
 
     public void SettingExitButton()
@@ -66,5 +65,12 @@ public class TitleButtonController : MonoBehaviour
         uiBlocker.SetActive(false);
 
         titleUi.SetActive(true);
+
+        Invoke("ChangeCanSubmitBoolean", 0.2f);
+    }
+
+    private void ChangeCanSubmitBoolean()
+    {
+        is_can_submit = true;
     }
 }

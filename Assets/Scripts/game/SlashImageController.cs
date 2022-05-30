@@ -115,10 +115,6 @@ public class SlashImageController : MonoBehaviour
                         hit.collider?.CompareTag("SickleThrowing") == false &&
                         hit.collider?.CompareTag("Boss") == false) continue;
 
-                    if (hit.collider.CompareTag("Sickle"))
-                    {
-
-                    }
 
                     // ‹——£‚ªhit_distance‚æ‚è’·‚­A‰“‚¢êŠ‚É‚ ‚éB
                     if (hit.distance > hit_distance) continue;
