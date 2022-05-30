@@ -58,6 +58,17 @@ public class S_SoundManager : MonoBehaviour
         BGMAudioSource.PlayOneShot(BGMClip[(int)index]);
     }
 
+    public void PlayBGM(AudioClip clip, bool set)
+    {
+        BGMAudioSource.PlayOneShot(clip);
+        BGMAudioSource.loop = set;
+    }
+
+    public void StopBGM(AudioClip clip)
+    {
+        BGMAudioSource.Stop();
+    }
+
     //AudioSourceがnullの場合警告を出す
     private void D_CheckNullAudioSource()
     {
