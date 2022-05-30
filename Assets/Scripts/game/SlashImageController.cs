@@ -25,7 +25,7 @@ public class SlashImageController : MonoBehaviour
     {
         // âπÇçƒê∂
         //GetComponent<AudioSource>().PlayOneShot(clip);
-        //GameObject.Find("SoundManager").GetComponent<S_SoundManager>().PlaySE((int)S_SoundManager.SE.TEST_SLASH);
+        GameObject.Find("SoundManager").GetComponent<S_SoundManager>().PlaySE((clip));
         //Debug.Log(GameObject.Find("SoundManager").GetComponent<S_SoundManager>().SEAudioSource.volume);
 
         var color = GetComponent<Image>().color;

@@ -47,6 +47,12 @@ public class S_SoundManager : MonoBehaviour
         Debug.Log(SEAudioSource.volume);
     }
 
+    public void PlaySE(AudioClip clip)
+    {
+        SEAudioSource.PlayOneShot(clip);
+        Debug.Log(SEAudioSource.volume);
+    }
+
     public void PlayBGM(BGM index)
     {
         BGMAudioSource.PlayOneShot(BGMClip[(int)index]);
