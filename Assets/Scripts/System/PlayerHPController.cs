@@ -53,22 +53,24 @@ public class PlayerHPController : MonoBehaviour
     public void OnDamaged(float damaged_, Action game_over_)
     {
         var playerStatus = masterData.PlayerStatus;
-        var damaged_hp = playerStatus.current_hp - damaged_; // ダメージを受けた体力値
-
+        
         // ダメージ処理
         {
-            var safety_damaged = (damaged_hp > 0f) ?
+            var damaged_hp = playerStatus.current_hp - damaged_; // ダメージを受けた体力値
+
+            var safety_damaged = (damaged_hp >= 0f) ?
                 damaged_ :                                  // そのままダメージを与える
                 damaged_ - damaged_hp;                      // ０を下回らないダメージを与える
 
-            // ダメージ計算
-            playerStatus.current_hp -= safety_damaged;
             // 体力ゲージの更新
             GaugeReduction(safety_damaged);
+
+            // ダメージ計算
+            playerStatus.current_hp -= safety_damaged;
         }
         
         // ゲームオーバー処理
-        if (damaged_hp <= 0f)
+        if (playerStatus.current_hp <= 0f + float.Epsilon * 2.0f)
         {
             // なにかしらの関数を呼び出す。
             game_over_?.Invoke();

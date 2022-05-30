@@ -38,9 +38,9 @@ public class ChangeScene : MonoBehaviour
         }
 
 
-        DontDestroyOnLoad(se);
-        DontDestroyOnLoad(bgm);
-        DontDestroyOnLoad(soundManager);
+        if(se){DontDestroyOnLoad(se);}
+        if(bgm){DontDestroyOnLoad(bgm);}
+        if(soundManager){DontDestroyOnLoad(soundManager);}
 
         SceneManager.LoadScene(SceneName);
     }
