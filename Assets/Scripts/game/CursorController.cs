@@ -28,7 +28,7 @@ public class CursorController : MonoBehaviour
     private bool now_clip_played;
     //private float chain_kill_timer; // 数値が正の値の時,切り返すことが出来る
     private float scale_cool_timer;
-    private bool is_can_slash;
+    private bool is_can_slash = true;
 
     // Start is called before the first frame update
     void Start()
