@@ -61,7 +61,7 @@ public class EnemyBossController : MonoBehaviour
     [SerializeField]
     private float moveSpeed;
     // 殴りに来る距離
-    private float attackRange = 1.0f;
+    private float attackRange = 0.5f;
 
     // 待機時間
     [SerializeField]
@@ -263,10 +263,11 @@ public class EnemyBossController : MonoBehaviour
                 //ConditionSickleAttackBerserkerState();
                 if (hp < hpMax / 2)
                 {
-                    int test = Random.Range(0, 3);
+                    int test = Random.Range(0, 4);
                     if (test == 0) ConditionSickleAttackState();
                     if (test == 1) ConditionSickleAttackBerserkerState();
                     if (test == 2) ConditionAssaultAttackState();
+                    if (test == 3) ConditionSickleAttackBerserkerState();
                 }
                 else
                 {
@@ -465,11 +466,11 @@ public class EnemyBossController : MonoBehaviour
             ConditionDeathState();
             return;
         }
-        if (downFlag)
-        {
-            ConditionDownState();
-            return;
-        }
+        //if (downFlag)
+        //{
+        //    ConditionDownState();
+        //    return;
+        //}
 
         // プレイヤーに向かう方向
         var dir = player.transform.position - transform.position;
