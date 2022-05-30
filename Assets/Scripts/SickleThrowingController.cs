@@ -100,6 +100,7 @@ public class SickleThrowingController : BaseEnemy
         target = g.transform.position;
 
         target.x += RandomTarget();
+        target.z += RandomTarget();
 
         target.y += 0.3f;
         startPos = transform.position;

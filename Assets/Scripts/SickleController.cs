@@ -6,7 +6,7 @@ using DG.Tweening;
 
 public class SickleController : BaseEnemy
 {
-    private float width = 1.5f;
+    private float width = 1.0f;
     private Vector3 velocity = new Vector3(0f, 0f, 0f);
     private float updateTimer = 0.0f;
     float rotationSpeed = 1080.0f;
@@ -127,21 +127,18 @@ public class SickleController : BaseEnemy
         right *= width;
 
         //ÇªÇÍÇºÇÍÇÃç¿ïWÇÉâÉìÉ_ÉÄÇ…ê∂ê¨Ç∑ÇÈ
-        float x = Random.Range(0, right.x * 2)  - right.x;
-        float y = Random.Range(1, 3);
-        float z = Random.Range(0, right.z * 2) - right.z;
+        float x = Random.Range(0, width * 2)  - width;
+        float y = Random.Range(0, 1.2f);
+        float z = Random.Range(0, width * 2) - width;
         //Random.Range(zMinPosition, zMaxPosition);
 
         //Vector3å^ÇÃPositionÇï‘Ç∑
-        return new Vector3(x, y, z);
+        return new Vector3(x + player.transform.position.x, y, z + player.transform.position.z);
     }
 
     public void Initilize(float timer)
     {
-        GameObject g = GameObject.FindWithTag("Player");
-        target = g.transform.position;//GetRandomTarget();
-        target.y += 1f;
-        //target.y += 0.3f;
+        target = GetRandomTarget();
         transform.localScale = new Vector3(1, 1, 1);
 
         slashAngle = Random.Range(0.0f, 360.0f);

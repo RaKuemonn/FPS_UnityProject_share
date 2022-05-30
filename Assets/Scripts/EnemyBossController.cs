@@ -50,9 +50,9 @@ public class EnemyBossController : MonoBehaviour
     // 浮遊するよう
     private float angle = 0;
     // 浮遊スピード
-    private float flySpeed = 2.0f;
-    private float flyUp = 2.0f;
-    private float flyDown = -2.0f;
+    private float flySpeed = 1.0f;
+    private float flyUp = 1.0f;
+    private float flyDown = -1.0f;
 
     // ボスの開始位置
     private Vector3 startPosition;
@@ -132,7 +132,7 @@ public class EnemyBossController : MonoBehaviour
         new Vector3(0f, 0.73f, 14.57f),
         new Vector3(0f, 1.737f, 9.789f),
         new Vector3(0f, 1.9f, 9.789f),
-        new Vector3(0f, -0.5f, 5.4599f)
+        new Vector3(0f, -3.2f, 5.4599f)
     };
     private float[] easingTimers =
     {
@@ -276,13 +276,13 @@ public class EnemyBossController : MonoBehaviour
             }
         }
 
-        if (angle > Mathf.PI) flySpeed = flyDown;
-        if (angle < -Mathf.PI) flySpeed = flyUp;
+        if (angle > Mathf.PI /2) flySpeed = flyDown;
+        if (angle < -Mathf.PI / 2) flySpeed = flyUp;
 
 
         angle += flySpeed * Mathf.PI * Time.deltaTime;
 
-        float angleLerp = Mathf.Lerp(oldAngle, angle, 0.01f);
+        float angleLerp = Mathf.Lerp(oldAngle, angle, 1f);
 
         transform.position = new Vector3(transform.position.x, transform.position.y + angleLerp * Time.deltaTime, transform.position.z);
 
@@ -577,7 +577,7 @@ public class EnemyBossController : MonoBehaviour
         //downPosition = new Vector3(transform.position.x, transform.position.y + 0.5f, player.transform.position.z + 6);
         downPosition = transform.position +
                        new Vector3(0.0f, 0.5f, 0.0f) +
-                       transform.forward * -1.0f * 3;
+                       transform.forward * -1.0f * 2;
 
         m_animator.SetTrigger(hashDown);
     }
