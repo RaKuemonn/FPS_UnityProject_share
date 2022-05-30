@@ -38,10 +38,10 @@ public class BossHPController : MonoBehaviour
                 damaged_ :                                  // そのままダメージを与える
                 damaged_ - damaged_hp;                      // ０を下回らないダメージを与える
 
-            // ダメージ計算
-            boss.SetHP(boss.GetHP() - safety_damaged);
             // 体力ゲージの更新
             GaugeReduction(safety_damaged);
+            // ダメージ計算
+            boss.SetHP(boss.GetHP() - safety_damaged);
         }
     }
 
