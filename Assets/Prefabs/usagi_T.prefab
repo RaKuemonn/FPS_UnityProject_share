@@ -606,7 +606,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b76e7ce53e4be944784cfdb2224aa520, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_hp: 5
+  m_hp: 3
   m_damage: 3
   DamageEffectPrefab: {fileID: 4449824010848829943, guid: 175eb8d7315f3ff4fa13fc363a12a7d1, type: 3}
   m_moveSpeed: 1

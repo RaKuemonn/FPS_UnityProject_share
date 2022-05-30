@@ -61,7 +61,7 @@ public class EnemyBossController : MonoBehaviour
     [SerializeField]
     private float moveSpeed;
     // ‰£‚è‚É—ˆ‚é‹——£
-    private float attackRange = 0.5f;
+    private float attackRange = 1.0f;
 
     // ‘Ò‹@ŽžŠÔ
     [SerializeField]

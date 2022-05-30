@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b437849904ccdb41b47577e81d9c961, type: 3}
   m_Name: PlayerStatus
   m_EditorClassIdentifier: 
-  max_hp: 10
-  current_hp: 7
+  max_hp: 15
+  current_hp: 9
   sword_area_radius: 5
