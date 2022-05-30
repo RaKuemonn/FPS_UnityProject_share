@@ -260,20 +260,20 @@ public class EnemyBossController : MonoBehaviour
         {
             if (rotateCube.GetRotateCheck())
             {
-                ConditionSickleAttackBerserkerState();
-                //if (hp < hpMax / 2)
-                //{
-                //    int test = Random.Range(0, 3);
-                //    if (test == 0) ConditionSickleAttackState();
-                //    if (test == 1) ConditionSickleAttackBerserkerState();
-                //    if (test == 2) ConditionAssaultAttackState();
-                //}
-                //else
-                //{
-                //    int test = Random.Range(0, 2);
-                //    if (test == 0) ConditionSickleAttackState();
-                //    if (test == 1) ConditionAssaultAttackState();
-                //}
+                //ConditionSickleAttackBerserkerState();
+                if (hp < hpMax / 2)
+                {
+                    int test = Random.Range(0, 3);
+                    if (test == 0) ConditionSickleAttackState();
+                    if (test == 1) ConditionSickleAttackBerserkerState();
+                    if (test == 2) ConditionAssaultAttackState();
+                }
+                else
+                {
+                    int test = Random.Range(0, 2);
+                    if (test == 0) ConditionSickleAttackState();
+                    if (test == 1) ConditionAssaultAttackState();
+                }
             }
         }
 
