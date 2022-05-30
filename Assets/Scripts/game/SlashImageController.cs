@@ -14,7 +14,7 @@ public class SlashImageController : MonoBehaviour
 
     public float damage;    // SlashÇÃê∂ê¨éûÇ…CursorControllerÇ≈ê›íËÇ≥ÇÍÇÈÅB
 
-    [SerializeField] private RectTransform child_rect_transform;
+    //[SerializeField] private RectTransform child_rect_transform;
 
     [SerializeField] private PlayerStatus playerStatus;
     
@@ -371,7 +371,8 @@ public class SlashImageController : MonoBehaviour
 
     public Ray SlashRay()
     {
-        return Camera.main.ScreenPointToRay(child_rect_transform.position);
+        return Camera.main.ScreenPointToRay(transform.position);
+        //return Camera.main.ScreenPointToRay(child_rect_transform.position);
     }
 
     public float RadianAngle2D()

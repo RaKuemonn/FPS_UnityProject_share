@@ -55,7 +55,7 @@ public class TrigerCreateEnemy : MonoBehaviour
             {
                 GameObject bat = Instantiate(m_bat);
                 SetParentToEnemies(bat);
-                bat.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + m_createLength);
+                bat.transform.position = new Vector3(transform.position.x, transform.position.y + 2.0f, transform.position.z + m_createLength);
                 EnemyBatController batController = bat.GetComponent<EnemyBatController>();
 
                 Vector3 pos = new Vector3(createPosX + leftPosX, transform.position.y, transform.position.z + m_createLength);

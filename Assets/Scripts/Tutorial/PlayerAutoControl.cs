@@ -25,7 +25,12 @@ public class PlayerAutoControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        speed_rate_lerping = Mathf.Lerp(speed_rate_lerping, speed_rate, Time.deltaTime * 2f);
+        if (speed_rate <= 0f)
+        {
+            int a = 0;
+        }
+
+        speed_rate_lerping = Mathf.Lerp(speed_rate_lerping, speed_rate, Time.deltaTime * 0.5f);
 
         m_virtual_main_camera.m_Lens.FieldOfView = Mathf.Lerp(m_fov_state_stop, m_fov_state_run, speed_rate_lerping);
 
@@ -48,7 +53,7 @@ public class PlayerAutoControl : MonoBehaviour
 
         if(noiseComponent == null) return;
 
-        noiseComponent.m_FrequencyGain = 5; // ŒÅ’è’l
+        noiseComponent.m_FrequencyGain = Mathf.Lerp(0.0f, 5.0f, speed_rate_lerping); // ŒÅ’è’l
         
 
         noiseComponent
