@@ -25,7 +25,7 @@ public class SlashImageController : MonoBehaviour
     {
         // âπÇçƒê∂
         //GetComponent<AudioSource>().PlayOneShot(clip);
-        GameObject.Find("SoundManager").GetComponent<S_SoundManager>().PlaySE((clip));
+        GameObject.Find("SoundManager")?.GetComponent<S_SoundManager>()?.PlaySE((clip));
         //Debug.Log(GameObject.Find("SoundManager").GetComponent<S_SoundManager>().SEAudioSource.volume);
 
         var color = GetComponent<Image>().color;
@@ -295,8 +295,8 @@ public class SlashImageController : MonoBehaviour
     {
 
         if (image == null) return;
-        
-        var color   = image.color;
+
+        var color = image.color;
         if (color.a > 0.1f)
         {
             float alpha = Mathf.Lerp(color.a, 0.0f, 10.0f * Time.deltaTime);
@@ -306,7 +306,7 @@ public class SlashImageController : MonoBehaviour
         {
             Destroy(gameObject);
         }
-         
+
 #if false
         {
             var rectTransform = GetComponent<RectTransform>();
@@ -366,7 +366,7 @@ public class SlashImageController : MonoBehaviour
             }
         }
 #endif
-        
+
     }
 
     public Ray SlashRay()
