@@ -39,6 +39,8 @@ public class SickleController : BaseEnemy
     { 
         EffectCircle.GetComponent<EnemyAttackPrudir>().Invisible();
         updateTimer = -0.1f; /* Update()でmesh.enable = falseにしている */
+        // 当たり判定をInitializeされるまでoffにする
+        GetComponent<Collider>().enabled = false;
     }
 
     // Start is called before the first frame update
@@ -138,6 +140,9 @@ public class SickleController : BaseEnemy
 
     public void Initilize(float timer)
     {
+        // OnTriggerEnterに入るとoffにされるのでOnにする
+        GetComponent<Collider>().enabled = true;
+
         GameObject g = GameObject.FindWithTag("Player");
         target = g.transform.position;//GetRandomTarget();
         target.y += 1f;
@@ -189,5 +194,26 @@ public class SickleController : BaseEnemy
     protected override void CuttedImpulse(Vector3 impulse_)
     {
         // なにもしない
+    }
+
+    void OnTriggerEnter(Collider collider)
+    {
+        if (collider.CompareTag("Player") == false) return;
+
+        if (updateTimer < 0.0f) return;
+
+        var position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+
+        // プレイヤーの前方に位置を押し出している
+        position += Camera.main.transform.forward * 2.0f;
+
+        AttackEffect(DamageEffect.DamageEffectType.Sickle, position);
+
+        DisableMesh();
+
+        // プレイヤーにダメージを与える
+        collider.gameObject
+            .GetComponent<PlayerAutoControl>()
+            .OnDamage(m_damage);
     }
 }

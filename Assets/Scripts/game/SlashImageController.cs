@@ -115,6 +115,11 @@ public class SlashImageController : MonoBehaviour
                         hit.collider?.CompareTag("SickleThrowing") == false &&
                         hit.collider?.CompareTag("Boss") == false) continue;
 
+                    if (hit.collider.CompareTag("Sickle"))
+                    {
+
+                    }
+
                     // 距離がhit_distanceより長く、遠い場所にある。
                     if (hit.distance > hit_distance) continue;
 
@@ -161,13 +166,17 @@ public class SlashImageController : MonoBehaviour
                     if (enemy.tag == "Sickle")
                     {
                         var Sickle = ((SickleController)enemy);
-                        Vector2 slashVec = MathHelpar.AngleToVector2(RadianAngle2D());
-                        Vector2 sickleVec = MathHelpar.AngleToVector2((Sickle.GetRadianSlashAngle()));
+                        Vector2 slashVec = new Vector2(
+                            Mathf.Cos(RadianAngle2D()),
+                            Mathf.Sin(RadianAngle2D())).normalized;
+                        Vector2 sickleVec = new Vector2(
+                            Mathf.Cos(Sickle.GetRadianSlashAngle()),
+                            Mathf.Sin(Sickle.GetRadianSlashAngle())).normalized;
 
                         // TODO 3: 角度が一定以内なら、カウンター成功にする。
                         var dot = Vector2.Dot(slashVec, sickleVec);
                         dot = Mathf.Acos(dot);
-                        if (toleranceLevel > dot && dot > -toleranceLevel)
+                        if (dot < toleranceLevel)
                         {
                             Sickle.DisableMesh();
                         }
@@ -179,11 +188,6 @@ public class SlashImageController : MonoBehaviour
                                 .OnDamage(enemy.m_damage);
 
                             Sickle.DisableMesh();
-                            var Circle = Sickle.EffectCircle;
-                            var Arrow = Circle.GetComponentInChildren<SlashDirectionController>().gameObject;
-
-                            Circle.GetComponent<Image>().enabled = false;
-                            Arrow.GetComponent<Image>().enabled = false;
                         }
                     }
 
@@ -214,19 +218,6 @@ public class SlashImageController : MonoBehaviour
                     // 切断処理
                     else
                     {
-                        //var dot = Vector2.Dot(MathHelpar.AngleToVector2(RadianAngle2D()), sickleVec);
-                        //dot = Mathf.Acos(dot);
-                        //if (toleranceLevel > dot && dot > -toleranceLevel)
-                        //{
-                        //    //Sickle.DisableMesh();
-                        //}
-                        //else
-                        //{
-                        //    GameObject
-                        //        .FindGameObjectWithTag("Player")
-                        //        .GetComponent<PlayerAutoControl>()
-                        //        .OnDamage(enemy.m_damage);
-                        //}
                         Cut(enemy, cutSurfaceMaterial, result_hit_ray, rays[0], rays[1]);
                     }
 
@@ -242,9 +233,6 @@ public class SlashImageController : MonoBehaviour
                 {
                     switch (boss.GetState())
                     {
-                        case EnemyBossController.State.AssaultAttack:
-                            boss.SetDownFlag(true);
-                            break;
 
                         case EnemyBossController.State.AssaultAttackAnim:
                             boss.SetDownFlag(true);
@@ -378,6 +366,11 @@ public class SlashImageController : MonoBehaviour
     public float RadianAngle2D()
     {
         return image.rectTransform.eulerAngles.z * Mathf.Deg2Rad;
+    }
+
+    private float Angle2D()
+    {
+        return image.rectTransform.eulerAngles.z;
     }
 
     static void Cut(BaseEnemy enemy, Material cutSurfaceMaterial, Ray result_hit_ray, Ray need_to_culculate_ray_1, Ray need_to_culculate_ray_2)

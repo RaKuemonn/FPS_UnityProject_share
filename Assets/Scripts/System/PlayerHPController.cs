@@ -15,8 +15,10 @@ public class PlayerHPController : MonoBehaviour
     private Image hpBarGreen;
 
     private Tween redGaugeTween;
+    private Tween Timer;
 
-    //private float timer = 0f;
+    private const float time = 2.0f;
+    private float timer = 0f;
 
     public void Start()
     {
@@ -29,22 +31,6 @@ public class PlayerHPController : MonoBehaviour
 
     public void Update()
     {
-        ////////////////////////////////////////////////////
-        ///
-        /// 動作確認
-        ///
-        ////////////////////////////////////////////////////
-        //timer += Time.deltaTime;
-        //if (timer % 5f > 1f)
-        //{
-        //    OnDamaged(30f);
-        //    timer = 0f;
-        //}
-        //
-        //if (masterData.PlayerStatus.current_hp <= 0f)
-        //{
-        //    masterData.PlayerStatus.current_hp = masterData.PlayerStatus.max_hp;
-        //}
 
     }
     
@@ -60,13 +46,13 @@ public class PlayerHPController : MonoBehaviour
 
             var safety_damaged = (damaged_hp >= 0f) ?
                 damaged_ :                                  // そのままダメージを与える
-                damaged_ - damaged_hp;                      // ０を下回らないダメージを与える
+                damaged_ + damaged_hp;                      // ０を下回らないダメージに変更する
 
             // 体力ゲージの更新
             GaugeReduction(safety_damaged);
 
             // ダメージ計算
-            playerStatus.current_hp -= safety_damaged;
+            playerStatus.current_hp += -safety_damaged;
         }
         
         // ゲームオーバー処理
@@ -87,21 +73,34 @@ public class PlayerHPController : MonoBehaviour
         // 緑ゲージ減少
         hpBarGreen.fillAmount = valueTo;
 
+        timer = time;
         if (redGaugeTween != null)
         {
             // kill() は　途中で停止
             redGaugeTween.Kill();
+            Timer.Kill();
         }
 
-
-        // 赤ゲージ減少
-        redGaugeTween = DOTween.To(
-            () => valueFrom,    // 何に
+        // 赤ゲージ減少のスタート時間タイマー
+        Timer = DOTween.To(
+            () => 0.0f,    // 何に
             x => {         // 何を
-                if (hpBarRed)
-                {hpBarRed.fillAmount = x;}
+
+                if (x < 1.0f) return;
+
+                // 赤ゲージ減少
+                redGaugeTween = DOTween.To(
+                    () => valueFrom,    // 何に
+                    g => {         // 何を
+                        if (hpBarRed)
+                        { hpBarRed.fillAmount = g; }
+                    },
+                    valueTo,        // 目標値
+                    time    // 書ける時間
+                );
+
             },
-            valueTo,        // 目標値
+            1.0f,        // 目標値
             time    // 書ける時間
         );
     }

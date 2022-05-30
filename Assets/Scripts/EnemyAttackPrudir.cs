@@ -29,15 +29,15 @@ public class EnemyAttackPrudir : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // カメラの外に出たら表示しない
-        if (CheckInScreen() == false)
-        {
-            var image = GetComponent<Image>();
-            image.enabled = false;
-            Debug.Log("Screen Out");
-
-            return;
-        }
+        //// カメラの外に出たら表示しない
+        //if (CheckInScreen() == false)
+        //{
+        //    var image = GetComponent<Image>();
+        //    image.enabled = false;
+        //    Debug.Log("Screen Out");
+        //
+        //    return;
+        //}
 
         // ディゾルブ(召喚が終わり切ったら表示する
         {
@@ -101,13 +101,15 @@ public class EnemyAttackPrudir : MonoBehaviour
         if (screenRect.Contains(viewportPos) == false) return false;
 
 
-        var vector = m_gameObject.transform.position - GameObject.FindGameObjectWithTag("Player").transform.position;
+        var vector = m_gameObject.transform.position -
+                     GameObject.FindGameObjectWithTag("Player").transform.position;
+
         var dot = Vector2.Dot(
             Camera.main.transform.forward.normalized,
             vector.normalized
         );
 
-        return dot > 0.4f;
+        return dot > 0.3f;
     }
 
     public void Invisible()
@@ -119,5 +121,10 @@ public class EnemyAttackPrudir : MonoBehaviour
             .gameObject
             .GetComponent<Image>()
             .enabled = false;
+
     }
+
+
+
+
 }

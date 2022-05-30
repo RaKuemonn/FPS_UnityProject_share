@@ -39,11 +39,7 @@ public class PlayerAutoControl : MonoBehaviour
 
         m_player.transform.Translate(new Vector3(0f,0f,move_speed * speed_rate * Time.deltaTime));
     }
-
-    void OnTriggerStay(Collider collider)
-    {
-        
-    }
+    
     
     private void VirtualCameraNoise()
     {
