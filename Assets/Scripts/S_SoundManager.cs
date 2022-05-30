@@ -34,6 +34,8 @@ public class S_SoundManager : MonoBehaviour
     void Update()
     {
         D_CheckNullAudioSource();
+
+ 
     }
 
 
@@ -42,6 +44,7 @@ public class S_SoundManager : MonoBehaviour
     {
         D_CheckNullAudioClip((int)index);
         SEAudioSource.PlayOneShot(SEClip[(int)index]);
+        Debug.Log(SEAudioSource.volume);
     }
 
     public void PlayBGM(BGM index)

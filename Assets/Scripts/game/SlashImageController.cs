@@ -22,10 +22,11 @@ public class SlashImageController : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    { 
+    {
         // âπÇçƒê∂
-        GetComponent<AudioSource>().PlayOneShot(clip);
-
+        //GetComponent<AudioSource>().PlayOneShot(clip);
+        //GameObject.Find("SoundManager").GetComponent<S_SoundManager>().PlaySE((int)S_SoundManager.SE.TEST_SLASH);
+        //Debug.Log(GameObject.Find("SoundManager").GetComponent<S_SoundManager>().SEAudioSource.volume);
 
         var color = GetComponent<Image>().color;
         image = GetComponent<Image>();
