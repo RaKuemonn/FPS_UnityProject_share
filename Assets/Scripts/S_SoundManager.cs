@@ -64,7 +64,7 @@ public class S_SoundManager : MonoBehaviour
         BGMAudioSource.loop = set;
     }
 
-    public void StopBGM(AudioClip clip)
+    public void StopBGM()
     {
         BGMAudioSource.Stop();
     }

@@ -17,6 +17,8 @@ public class TitleButtonController : MonoBehaviour
     {
         if (is_can_submit == false) return;
 
+        GameObject.Find("SoundManager")?.GetComponent<S_SoundManager>()?.StopBGM();
+
         SceneManager.LoadScene("scene_tutorial");
 
         var se = GameObject.Find("SE");
@@ -26,7 +28,8 @@ public class TitleButtonController : MonoBehaviour
         DontDestroyOnLoad(se);
         DontDestroyOnLoad(bgm);
         DontDestroyOnLoad(soundManager);
-        
+
+
     }
 
     public void ExitButton()
