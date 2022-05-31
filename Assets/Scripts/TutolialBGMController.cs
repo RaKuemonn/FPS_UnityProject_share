@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TitleBGMController : MonoBehaviour
+public class TutolialBGMController : MonoBehaviour
 {
     [SerializeField] private AudioClip clip;
 
@@ -10,6 +10,7 @@ public class TitleBGMController : MonoBehaviour
     void Start()
     {
         GameObject.Find("SoundManager")?.GetComponent<S_SoundManager>()?.PlayBGM(clip, true);
+
     }
 
     // Update is called once per frame
