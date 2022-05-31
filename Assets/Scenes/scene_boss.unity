@@ -498,6 +498,10 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: -0.41
       objectReference: {fileID: 0}
+    - target: {fileID: 4199067193314441515, guid: 86bd9ef0b2a96d348aaa82b73226105f, type: 3}
+      propertyPath: SceneName
+      value: scene_boss
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 86bd9ef0b2a96d348aaa82b73226105f, type: 3}
 --- !u!4 &201897450 stripped
@@ -2411,19 +2415,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4163034832185179698, guid: 86bd9ef0b2a96d348aaa82b73226105f, type: 3}
   m_PrefabInstance: {fileID: 201897449}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1045555242
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1045555241}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94438156e393d83479e1b26f7ec66c4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SceneName: scene_boss
 --- !u!1 &1124324885
 GameObject:
   m_ObjectHideFlags: 0
