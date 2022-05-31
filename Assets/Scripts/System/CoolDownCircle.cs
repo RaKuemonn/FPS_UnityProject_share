@@ -25,4 +25,9 @@ public class CoolDownCircle : MonoBehaviour
     {
         coolDownTimer = coolTime;
     }
+
+    public float GetCoolTime()
+    {
+        return coolTime;
+    }
 }

@@ -205,8 +205,8 @@ public class CursorController : MonoBehaviour
             {
                 // クールダウンの描画設定
                 is_can_slash = false;
-                CoolTimeCircle?.SetCoolDownTimer();
-                Invoke("SetIsCanSlash", 0.5f);
+                CoolTimeCircle.SetCoolDownTimer();
+                Invoke("SetIsCanSlash", CoolTimeCircle.GetCoolTime());
             }
 
         }
