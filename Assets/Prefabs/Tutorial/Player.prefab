@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4163034832185179701}
   - component: {fileID: 4163034832185179702}
   - component: {fileID: 3422549740006943727}
+  - component: {fileID: 4199067193314441515}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -69,6 +70,11 @@ MonoBehaviour:
   m_player: {fileID: 4163034832185179698}
   move_speed: 5
   speed_rate: 0
+  m_virtual_main_camera: {fileID: 0}
+  m_virtual_death_camera: {fileID: 0}
+  m_fov_state_run: 90
+  m_fov_state_stop: 60
+  hpController: {fileID: 0}
 --- !u!54 &4163034832185179702
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -99,6 +105,19 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4199067193314441515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4163034832185179698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94438156e393d83479e1b26f7ec66c4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SceneName: scene_game
 --- !u!1 &4163034833130575840
 GameObject:
   m_ObjectHideFlags: 0

@@ -1253,6 +1253,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kakashi
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c555cca99a3ebb34c9b60f599145217f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c555cca99a3ebb34c9b60f599145217f, type: 3}
 --- !u!1 &852508946

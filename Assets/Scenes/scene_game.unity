@@ -1126,24 +1126,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fdc29baae2bc6a643a41857487aebd9d, type: 3}
---- !u!1 &338524277 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4163034832185179698, guid: 86bd9ef0b2a96d348aaa82b73226105f, type: 3}
-  m_PrefabInstance: {fileID: 1216668225}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &338524278
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 338524277}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94438156e393d83479e1b26f7ec66c4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SceneName: scene_game
 --- !u!1 &350918105
 GameObject:
   m_ObjectHideFlags: 0
@@ -1624,7 +1606,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4163034832185179701, guid: 86bd9ef0b2a96d348aaa82b73226105f, type: 3}
   m_PrefabInstance: {fileID: 1216668225}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 338524277}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0fdfce3ab1a1f0e408e82081253a4d36, type: 3}
@@ -7461,9 +7443,17 @@ PrefabInstance:
       value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 1217440010157611172, guid: 31d2a61a15baf024ca3ed15dfdce6620, type: 3}
+      propertyPath: count_down_size
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 1217440010157611172, guid: 31d2a61a15baf024ca3ed15dfdce6620, type: 3}
       propertyPath: playerAutoControl
       value: 
       objectReference: {fileID: 520627228}
+    - target: {fileID: 1217440010157611172, guid: 31d2a61a15baf024ca3ed15dfdce6620, type: 3}
+      propertyPath: default_spawn_time
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1217440010157611172, guid: 31d2a61a15baf024ca3ed15dfdce6620, type: 3}
       propertyPath: RabbitThrowingPrefab
       value: 
