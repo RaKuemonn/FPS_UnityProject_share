@@ -1707,30 +1707,12 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!1 &673165442 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5030218871368432538, guid: 6c8c5929f4ac8b8479daf29786733107, type: 3}
-  m_PrefabInstance: {fileID: 581239831}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &673165443
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 673165442}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94438156e393d83479e1b26f7ec66c4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SceneName: scene_title
 --- !u!114 &673165446 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4919411275153964798, guid: 6c8c5929f4ac8b8479daf29786733107, type: 3}
   m_PrefabInstance: {fileID: 581239831}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 673165442}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 47f1f98c2961de243aa4664ce2b0f820, type: 3}
@@ -3158,6 +3140,7 @@ GameObject:
   - component: {fileID: 1496298537}
   - component: {fileID: 1496298538}
   - component: {fileID: 1496298539}
+  - component: {fileID: 1496298540}
   m_Layer: 0
   m_Name: ClearPerformanceController
   m_TagString: Untagged
@@ -3223,6 +3206,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ClearUIs: {fileID: 1865706036}
   boss: {fileID: 673165446}
+--- !u!114 &1496298540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1496298536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94438156e393d83479e1b26f7ec66c4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SceneName: scene_title
 --- !u!1001 &1501174627
 PrefabInstance:
   m_ObjectHideFlags: 0
