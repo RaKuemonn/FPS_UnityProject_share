@@ -1554,7 +1554,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4919411275153964798, guid: 6c8c5929f4ac8b8479daf29786733107, type: 3}
       propertyPath: hpMax
-      value: 40
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4919411275153964798, guid: 6c8c5929f4ac8b8479daf29786733107, type: 3}
       propertyPath: player
@@ -2621,7 +2621,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1166317414}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

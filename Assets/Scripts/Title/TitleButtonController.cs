@@ -9,11 +9,11 @@ public class TitleButtonController : MonoBehaviour
     public GameObject uiBlocker;
     public GameObject titleUi;
     public GameObject start;
-    private bool is_can_submit = true;
+    private bool is_can_submit = false;
 
     void Start()
     {
-        Invoke("ChangeCanSubmitBoolean", 0.2f);
+        Invoke("ChangeCanSubmitBoolean", 0.8f);
     }
 
     //ƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚½‚Ìˆ—
