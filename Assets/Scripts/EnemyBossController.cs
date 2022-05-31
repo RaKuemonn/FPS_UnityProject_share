@@ -4,6 +4,27 @@ using UnityEngine;
 
 public class EnemyBossController : MonoBehaviour
 {
+    public void OnCutted(Vector3 impulse_)
+    {
+        deathFlag = true;
+        state = State.Death;
+
+        // 衝撃を与える処理
+        var rigidbody = GetComponent<Rigidbody>();
+        // rigidbodyプロパティの変更
+        if (rigidbody)
+        {
+            // 重力に従う
+            rigidbody.useGravity = true;
+
+            // 拘束を無くす
+            rigidbody.constraints = RigidbodyConstraints.None;
+            // 弾き飛ばす
+            rigidbody.AddForce(impulse_, ForceMode.Impulse);
+        }
+
+    }
+
 
     [SerializeField] private GameObject DamageEffectPrefab;
 

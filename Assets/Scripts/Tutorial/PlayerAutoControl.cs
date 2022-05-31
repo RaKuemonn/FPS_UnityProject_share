@@ -10,12 +10,17 @@ public class PlayerAutoControl : MonoBehaviour
     [SerializeField, Range(0f, 20f)] private float move_speed;       // 移動速度 (固定値)
     [SerializeField, Range(0f, 1f)] public float speed_rate = 0f;    // 移動速度の倍率 (1.0f ~ 0.0f)
     [SerializeField] private CinemachineVirtualCamera m_virtual_main_camera;       // cinemachineのvirtualCameraの参照
+    [SerializeField] private CinemachineVirtualCamera m_virtual_death_camera;
     [SerializeField] private float m_fov_state_run = 90f;
     [SerializeField] private float m_fov_state_stop = 60f;
     
     [SerializeField] private PlayerHPController hpController;
 
     private float speed_rate_lerping;
+    
+    private bool death;
+    private float death_timer;
+    private const float death_time = 3.0f;
 
     void Start()
     {
@@ -25,10 +30,6 @@ public class PlayerAutoControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (speed_rate <= 0f)
-        {
-            int a = 0;
-        }
 
         speed_rate_lerping = Mathf.Lerp(speed_rate_lerping, speed_rate, Time.deltaTime * 0.5f);
 
@@ -36,6 +37,8 @@ public class PlayerAutoControl : MonoBehaviour
 
 
         VirtualCameraNoise();
+
+        DeathPerformance();
 
         m_player.transform.Translate(new Vector3(0f,0f,move_speed * speed_rate * Time.deltaTime));
     }
@@ -85,6 +88,32 @@ public class PlayerAutoControl : MonoBehaviour
     {
         hpController.OnDamaged(
             damage_,
-            delegate () { GetComponent<ChangeScene>().Change(); });
+            delegate() { death = true; });
+    }
+
+    private void DeathPerformance()
+    {
+        if (death == false) return;
+        if (m_virtual_death_camera == null) return;
+
+        // 使うカメラを変更する。
+        m_virtual_death_camera.Priority = 11;
+
+        // 速度をゼロにする
+        speed_rate = 0.0f;
+
+        death_timer += Time.deltaTime;
+
+        if (death_timer < death_time)
+        {
+            return;
+        }
+
+
+        // death_timerがdeath_timeの時間を超えていたら
+        // 遷移する
+        m_virtual_death_camera.Priority = 1;
+        GetComponent<ChangeScene>().Change();
+
     }
 }

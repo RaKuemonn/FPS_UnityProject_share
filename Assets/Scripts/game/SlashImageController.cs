@@ -265,6 +265,14 @@ public class SlashImageController : MonoBehaviour
                             boss.OnDamaged(damage);
                             break;
 
+
+                        case EnemyBossController.State.Death:
+                            CutBoss(boss, cutSurfaceMaterial,
+                                result_hit_ray,
+                                rays[0], rays[1]);
+
+                                break;
+
                         default:
                             // nothing
                             break;
@@ -423,4 +431,53 @@ public class SlashImageController : MonoBehaviour
         Cutted.Invoke(copy, normal);
     }
 
+    static void CutBoss(EnemyBossController boss, Material cutSurfaceMaterial, Ray result_hit_ray, Ray need_to_culculate_ray_1, Ray need_to_culculate_ray_2)
+    {
+
+        Vector3 normal;
+        {
+            const float distance = 5.0f;
+            var origin_position = result_hit_ray.origin;
+            var far_left = need_to_culculate_ray_1.GetPoint(distance);
+            var far_right = need_to_culculate_ray_2.GetPoint(distance);
+
+            var left = far_left - origin_position;
+            var right = far_right - origin_position;
+
+            normal = Vector3.Cross(left, right).normalized;
+        }
+
+        var result =
+            MeshCut.CutMesh(
+                boss.gameObject,                                          // 斬るオブジェクト
+                Camera.main.transform.position,   // 平面上の位置
+                normal,                                          // 平面の法線
+                true,
+                cutSurfaceMaterial
+            );
+
+        var original = result.original_anitiNormalside;
+        var copy = result.copy_normalside;
+
+
+
+        Action<GameObject, Vector3> Cutted = (GameObject object_, Vector3 normal_direction_) =>
+        {
+
+#if UNITY_EDITOR
+            if (object_ == null)
+            {
+                Debug.Log("nulllllllllllllllllllllllll");
+            }
+#endif
+            // 死亡処理
+            const float impulse_power = 5f;
+            var impulse = (result_hit_ray.direction + normal_direction_) * impulse_power;
+
+            object_?.GetComponent<EnemyBossController>().OnCutted(impulse);
+        };
+
+        Cutted.Invoke(original, -1.0f * normal);
+        Cutted.Invoke(copy, normal);
+    }
 }

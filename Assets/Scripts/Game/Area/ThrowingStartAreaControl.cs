@@ -48,7 +48,9 @@ public class ThrowingStartAreaControl : MonoBehaviour
 
 
         if(counter >= count_down_size) return;
+
         var rate = 1.0f - (counter / count_down_size + 3 /* rate‚ª0‚É‚È‚ç‚È‚¢‚æ‚¤‚Éoffset */ );
+
         if (timer < Mathf.Abs(rate * default_spawn_time)) return;
 
         timer = 0f;
