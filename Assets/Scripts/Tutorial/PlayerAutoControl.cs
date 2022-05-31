@@ -92,7 +92,7 @@ public class PlayerAutoControl : MonoBehaviour
             {
                 death = true;
                 m_virtual_death_camera.transform.rotation = m_virtual_main_camera.transform.rotation;
-                m_virtual_main_camera.transform.Rotate(m_virtual_death_camera.transform.right, 87.0f);
+                m_virtual_death_camera.transform.Rotate(m_virtual_death_camera.transform.right, 87.0f, Space.World);
             });
     }
 

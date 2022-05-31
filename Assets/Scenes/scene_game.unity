@@ -152,11 +152,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3869450474938662391, guid: 3a60eae6572cc1940b944d3f5976daa1, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7206722
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3869450474938662391, guid: 3a60eae6572cc1940b944d3f5976daa1, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.69327605
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3869450474938662391, guid: 3a60eae6572cc1940b944d3f5976daa1, type: 3}
       propertyPath: m_LocalRotation.y
@@ -168,7 +168,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3869450474938662391, guid: 3a60eae6572cc1940b944d3f5976daa1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 87.78
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3869450474938662391, guid: 3a60eae6572cc1940b944d3f5976daa1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -188,7 +188,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3869450476277577974, guid: 3a60eae6572cc1940b944d3f5976daa1, type: 3}
       propertyPath: m_Lens.FieldOfView
-      value: 90
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 3869450476277577974, guid: 3a60eae6572cc1940b944d3f5976daa1, type: 3}
       propertyPath: m_Lens.FarClipPlane
@@ -196,6 +196,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3869450475283114841, guid: 3a60eae6572cc1940b944d3f5976daa1, type: 3}
+    - {fileID: 3869450475283114838, guid: 3a60eae6572cc1940b944d3f5976daa1, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3a60eae6572cc1940b944d3f5976daa1, type: 3}
 --- !u!114 &43426140 stripped
 MonoBehaviour:
