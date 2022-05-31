@@ -28,7 +28,7 @@ RectTransform:
   m_GameObject: {fileID: 1893098188}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
   m_Children: []
   m_Father: {fileID: 7157484242586144626}
   m_RootOrder: 0
@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   circle: {fileID: 1893098190}
-  coolTime: 0.3
+  coolTime: 0.5
 --- !u!1 &7157484242586144625
 GameObject:
   m_ObjectHideFlags: 0
@@ -186,6 +186,7 @@ MonoBehaviour:
   max_damage: 1
   slash_scale: 1
   SlashPrefab: {fileID: 6596319650293718587, guid: d72ceffd00a011347ad9d7c07bf714a7, type: 3}
+  is_cool_time_system: 1
   CoolTimeCircle: {fileID: 1893098192}
 --- !u!114 &7157484242586144630
 MonoBehaviour:
