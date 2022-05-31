@@ -9,8 +9,8 @@ public class ThrowingStartAreaControl : MonoBehaviour
     [SerializeField] private PlayerAutoControl playerAutoControl;
     [SerializeField] private Vector3 end_position;
     [SerializeField] private GameObject parent;
-    [SerializeField] private float default_spawn_timer = 3.0f;
-    [SerializeField] private float count_down_size = 20f;
+    [SerializeField] private float default_spawn_time;
+    [SerializeField] private float count_down_size;
     private float timer;
     private float counter;
     private bool is_start;
@@ -48,8 +48,8 @@ public class ThrowingStartAreaControl : MonoBehaviour
 
 
         if(counter >= count_down_size) return;
-        var rate = 1.0f - (counter / count_down_size + 3 /* offset */ );
-        if (timer < rate * default_spawn_timer) return;
+        var rate = 1.0f - (counter / count_down_size + 3 /* rate‚ª0‚É‚È‚ç‚È‚¢‚æ‚¤‚Éoffset */ );
+        if (timer < Mathf.Abs(rate * default_spawn_time)) return;
 
         timer = 0f;
         counter++;
