@@ -20,7 +20,7 @@ public class ClearPerformanceController : MonoBehaviour
         if (boss.GetDeathFlag() == false) return;
         if (boss.GetEndDeathAnimation() == false) return;
 
-        Time.timeScale = 0.0f;
+        Time.timeScale = 0.01f;
         ClearUIs.SetActive(true); 
         
         // Aƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚Ä‚¢‚½‚ç

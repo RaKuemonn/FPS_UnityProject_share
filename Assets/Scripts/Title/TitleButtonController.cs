@@ -11,7 +11,11 @@ public class TitleButtonController : MonoBehaviour
     public GameObject start;
     private bool is_can_submit = true;
 
-    
+    void Start()
+    {
+        Invoke("ChangeCanSubmitBoolean", 0.2f);
+    }
+
     //ƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚½‚Ìˆ—
     public void StartButton()
     {
