@@ -60,7 +60,8 @@ public class S_SoundManager : MonoBehaviour
 
     public void PlayBGM(AudioClip clip, bool set)
     {
-        BGMAudioSource.PlayOneShot(clip);
+        BGMAudioSource.clip = clip;
+        BGMAudioSource.Play();
         BGMAudioSource.loop = set;
     }
 
