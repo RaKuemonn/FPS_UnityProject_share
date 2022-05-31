@@ -42,7 +42,10 @@ public class EnemyBossController : MonoBehaviour
     public bool GetDeathFlag() { return deathFlag; }
     [SerializeField] private float deathAnimationTime;
     private float deathAnimationTimer;
-
+    public bool GetEndDeathAnimation()
+    {
+        return (deathAnimationTimer < 0.0f);
+    }
 
     // 武器表示Flag
     public bool weaponReflect = true;
@@ -616,9 +619,9 @@ public class EnemyBossController : MonoBehaviour
     {
         deathAnimationTimer -= Time.deltaTime;
 
-        if (deathAnimationTimer > 0.0f) return;
-
-        GetComponent<ChangeScene>().Change();
+        //if (deathAnimationTimer > 0.0f) return;
+        //
+        //GetComponent<ChangeScene>().Change();
     }
 
     //  バトル開始前

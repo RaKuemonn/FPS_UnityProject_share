@@ -1502,6 +1502,10 @@ PrefabInstance:
       propertyPath: sickleJudgeImage
       value: 
       objectReference: {fileID: 1697254133}
+    - target: {fileID: 4919411275153964798, guid: 6c8c5929f4ac8b8479daf29786733107, type: 3}
+      propertyPath: deathAnimationTime
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5030218871368432538, guid: 6c8c5929f4ac8b8479daf29786733107, type: 3}
       propertyPath: m_Name
       value: sister
@@ -1703,30 +1707,12 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!1 &673165442 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5030218871368432538, guid: 6c8c5929f4ac8b8479daf29786733107, type: 3}
-  m_PrefabInstance: {fileID: 581239831}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &673165443
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 673165442}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94438156e393d83479e1b26f7ec66c4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SceneName: scene_title
 --- !u!114 &673165446 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4919411275153964798, guid: 6c8c5929f4ac8b8479daf29786733107, type: 3}
   m_PrefabInstance: {fileID: 581239831}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 673165442}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 47f1f98c2961de243aa4664ce2b0f820, type: 3}
@@ -3152,6 +3138,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1496298537}
+  - component: {fileID: 1496298538}
+  - component: {fileID: 1496298539}
+  - component: {fileID: 1496298540}
   m_Layer: 0
   m_Name: ClearPerformanceController
   m_TagString: Untagged
@@ -3173,6 +3162,63 @@ Transform:
   m_Father: {fileID: 887553956}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1496298538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1496298536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 58dbbfc794142ef4d92848c9ab1e8652, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &1496298539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1496298536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3edf9b6b8265ac4a9b00ae5cd15c29d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ClearUIs: {fileID: 1865706036}
+  boss: {fileID: 673165446}
+--- !u!114 &1496298540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1496298536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94438156e393d83479e1b26f7ec66c4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SceneName: scene_title
 --- !u!1001 &1501174627
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3858,7 +3904,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1865706037
 RectTransform:
   m_ObjectHideFlags: 0
