@@ -52,7 +52,7 @@ public class PlayerAutoControl : MonoBehaviour
 
         if(noiseComponent == null) return;
 
-        noiseComponent.m_FrequencyGain = Mathf.Lerp(1.0f, 2.0f, speed_rate_lerping); // ŒÅ’è’l
+        noiseComponent.m_FrequencyGain = Mathf.Lerp(1.0f, 2.0f, 1.0f - speed_rate_lerping); // ŒÅ’è’l
         
 
         noiseComponent
@@ -64,24 +64,7 @@ public class PlayerAutoControl : MonoBehaviour
         noiseComponent
             .m_NoiseProfile
             .OrientationNoise[0].X.Constant = true;
-
-        return;
-
-        // “®‚¢‚Ä‚¢‚é‚È‚ç
-        if (speed_rate > 0f)
-        {
-            noiseComponent.m_NoiseProfile.OrientationNoise[0].X.Frequency = Mathf.Lerp(0.22f, 0.25f, speed_rate_lerping);
-            noiseComponent.m_NoiseProfile.OrientationNoise[0].X.Amplitude = Mathf.Lerp(0f, 2.5f, speed_rate_lerping);
-            noiseComponent.m_NoiseProfile.OrientationNoise[0].X.Constant = true;
-            
-            return;
-        }
         
-
-        // —§‚¿Ž~‚Ü‚è
-        {
-            noiseComponent.m_NoiseProfile.OrientationNoise[0].X.Amplitude = 0f;
-        }
     }
 
     public void OnDamage(float damage_)
