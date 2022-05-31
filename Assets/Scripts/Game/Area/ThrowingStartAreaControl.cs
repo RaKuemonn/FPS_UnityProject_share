@@ -11,8 +11,7 @@ public class ThrowingStartAreaControl : MonoBehaviour
     [SerializeField] private GameObject parent;
 
     private float timer;
-    private float count_downer = 7f;
-
+    private float count_downer = 10f;
     private bool is_start;
 
 
@@ -40,23 +39,14 @@ public class ThrowingStartAreaControl : MonoBehaviour
 
     void Check()
     {
-
-        //var distance = Vector3.Distance(playerAutoControl.gameObject.transform.position, end_position);
-
+        
         if (playerAutoControl.gameObject.transform.position.z > end_position.z)
         {
             Destroy(gameObject);
         }
         
 
-        //var max_distance = Vector3.Distance(transform.position, end_position);
-
-        //var rate = (distance / max_distance);
-
-        //var value_ = timer;
-
         if(count_downer <= 0f) return;
-
         if (timer < count_downer) return;
 
         timer = 0f;

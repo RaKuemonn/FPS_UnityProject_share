@@ -14,6 +14,8 @@ public class CursorController : MonoBehaviour
     [SerializeField] private float slash_scale = 1.0f;
 
     [SerializeField] private GameObject SlashPrefab;
+    [SerializeField] private bool is_cool_time_system;
+    [SerializeField] private CoolDownCircle CoolTimeCircle;
 
 
     private RectTransform rect;
@@ -197,14 +199,31 @@ public class CursorController : MonoBehaviour
 
             // �e�q�֌W�̐ݒ�
             obj.transform.SetParent(transform.parent);
-        }
 
-        Invoke("SetIsCanSlash", 0.3f);
+
+            if (is_cool_time_system)
+            {
+                // クールダウンの描画設定
+                is_can_slash = false;
+                CoolTimeCircle?.SetCoolDownTimer();
+                Invoke("SetIsCanSlash", 0.5f);
+            }
+
+        }
     }
 
     private void SetIsCanSlash()
     {
         is_can_slash = true;
+
+        // この関数が呼ばれた時点の入力値をold_angleに保存する
+        var _input = moveR.ReadValue<Vector2>().normalized;
+        var radian = (_input.y > 0f) ?
+            Mathf.Acos(Vector2.Dot(_input, Vector2.right)) :
+            Mathf.Acos(Vector2.Dot(_input, Vector2.left)) + Mathf.PI;
+        var degree = radian * Mathf.Rad2Deg;
+        // 角度を保存
+        old_angle = degree;
     }
 
     public Ray CursolRay()
