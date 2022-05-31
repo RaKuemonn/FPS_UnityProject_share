@@ -3858,6 +3858,10 @@ PrefabInstance:
       propertyPath: m_virtual_death_camera
       value: 
       objectReference: {fileID: 43426140}
+    - target: {fileID: 4199067193314441515, guid: 86bd9ef0b2a96d348aaa82b73226105f, type: 3}
+      propertyPath: SceneName
+      value: scene_game
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 86bd9ef0b2a96d348aaa82b73226105f, type: 3}
 --- !u!4 &1216668226 stripped

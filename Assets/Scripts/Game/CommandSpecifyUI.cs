@@ -75,6 +75,8 @@ public class CommandSpecifyUI : MonoBehaviour
 
     bool CheckDoRendering()
     {
+        if (target == null) return false;
+
         if (ToPlayerDistance() > rendering_radius_to_target) return false;
         if (IsTherePlayerFront() == false) return false;
 
