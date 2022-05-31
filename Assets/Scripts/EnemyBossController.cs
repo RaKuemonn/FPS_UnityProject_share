@@ -404,7 +404,7 @@ public class EnemyBossController : MonoBehaviour
                 sickles[0].transform.position = transform.position + (directions.right * sickleRange);
                 sickles[0].transform.localEulerAngles = new Vector3(70, 90, -20);
                 var controller = sickles[0].GetComponent<SickleController>();
-                controller.Initilize(5.25f);
+                controller.Initilize(5.5f);
 
 
                 //var attack = sickleJudgeImage.GetComponent<CreatePointerController>();
