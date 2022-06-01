@@ -232,6 +232,9 @@ public class EnemyDragonController : BaseEnemy
 
             AttackEffect(DamageEffect.DamageEffectType.Dragon, transform.position);
 
+            GameObject.Find("SoundManager")?.GetComponent<S_SoundManager>()?.PlaySE(m_clip);
+
+
             return;
         }
 

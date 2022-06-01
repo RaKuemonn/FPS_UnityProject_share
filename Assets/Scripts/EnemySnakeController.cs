@@ -244,6 +244,9 @@ public class EnemySnakeController : BaseEnemy
 
             AttackEffect(DamageEffect.DamageEffectType.Rabbit, transform.position);
 
+            GameObject.Find("SoundManager")?.GetComponent<S_SoundManager>()?.PlaySE(m_clip);
+
+
             return;
         }
 

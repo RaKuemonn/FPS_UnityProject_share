@@ -32,6 +32,8 @@ public class SliderMover : MonoBehaviour
         minSliderValue = mySlider.minValue;
         sliderRange = maxSliderValue - minSliderValue;
         moveR = GetComponent<PlayerInput>().actions["MoveR"];
+        moveL = GetComponent<PlayerInput>().actions["MoveL"];
+
         //moveL = GetComponent<PlayerInput>().actions["MoveR"];
         mySlider.value = 0.5f;
         timer = interval;
@@ -50,24 +52,24 @@ public class SliderMover : MonoBehaviour
             float tempValue = sliderValue + sliderChange;
             if (tempValue <= maxSliderValue && tempValue >= minSliderValue)
             {
-                //if (moveR.ReadValue<Vector2>().x > 0.3f || moveR.ReadValue<Vector2>().x < -0.3f)
-                //{
-                //    GameObject.Find("SoundManager").GetComponent<S_SoundManager>().PlaySE((int)S_SoundManager.SE.TEST_SLASH);
-                //    Debug.Log("SE");
                     sliderValue = tempValue;
-                //}
-
             }
-            // else if (sliderValue > 0.99f && moveR.ReadValue<Vector2>().x > 0.3f)
-            // {
-            //     GameObject.Find("SoundManager").GetComponent<S_SoundManager>().PlaySE((int)S_SoundManager.SE.TEST_SLASH);
-            //     Debug.Log("MAX");
-            // }
-
             mySlider.value = sliderValue;
             GameObject.Find("SoundManager").GetComponent<S_SoundManager>().SEAudioSource.volume = mySlider.value;
-
         }
+        if (thisSlider == EventSystem.current.currentSelectedGameObject)
+        {
+            sliderChange = moveL.ReadValue<Vector2>().normalized.x * sliderRange / SLIDERSTEP;
+            float sliderValue = mySlider.value;
+            float tempValue = sliderValue + sliderChange;
+            if (tempValue <= maxSliderValue && tempValue >= minSliderValue)
+            {
+                sliderValue = tempValue;
+            }
+            mySlider.value = sliderValue;
+            GameObject.Find("SoundManager").GetComponent<S_SoundManager>().SEAudioSource.volume = mySlider.value;
+        }
+
 
         float length = mySlider.value - oldSlider;
         length = Mathf.Sqrt(length * length);

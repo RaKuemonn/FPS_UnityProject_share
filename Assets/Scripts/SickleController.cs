@@ -6,6 +6,8 @@ using DG.Tweening;
 
 public class SickleController : BaseEnemy
 {
+    bool sePlay = false;
+
     private float width = 1.0f;
     private Vector3 velocity = new Vector3(0f, 0f, 0f);
     private float updateTimer = 0.0f;
@@ -30,6 +32,8 @@ public class SickleController : BaseEnemy
     private GameObject boss;
 
     [SerializeField] public GameObject EffectCircle;
+
+    [SerializeField] private AudioClip[] clip;
 
     private float slashAngle;
     public float GetRadianSlashAngle() { return slashAngle * Mathf.Deg2Rad; }
@@ -67,7 +71,11 @@ public class SickleController : BaseEnemy
             return;
         }
 
-        //var 
+        if (!sePlay)
+        {
+            GameObject.Find("SoundManager").GetComponent<S_SoundManager>().PlaySE(clip[1]);
+            sePlay = true;
+        }
 
         var rotate = transform.eulerAngles;
         var roll = rotate.z + rotationSpeed * Time.deltaTime;
@@ -170,6 +178,8 @@ public class SickleController : BaseEnemy
         gameObject.GetComponent<DissolveTimer_ChangeTexture>()?.OnGenerate();
 
 
+        sePlay = false;
+
         //slashAngle = Random.Range(0.0f, 360.0f);
         //
         //look = true;
@@ -212,5 +222,7 @@ public class SickleController : BaseEnemy
         collider.gameObject
             .GetComponent<PlayerAutoControl>()
             .OnDamage(m_damage);
+
+        GameObject.Find("SoundManager").GetComponent<S_SoundManager>().PlaySE(clip[0]);
     }
 }

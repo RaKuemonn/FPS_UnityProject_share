@@ -15,6 +15,9 @@ public class BaseEnemy : MonoBehaviour
 
     [SerializeField] private GameObject DamageEffectPrefab;
 
+    [SerializeField] protected AudioClip m_clip;
+
+
     public float GetHP() { return m_hp; }
     public void SetHP(float hp) { m_hp = hp; }
 

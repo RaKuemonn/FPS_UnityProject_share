@@ -609,6 +609,7 @@ MonoBehaviour:
   m_hp: 3
   m_damage: 3
   DamageEffectPrefab: {fileID: 4449824010848829943, guid: 175eb8d7315f3ff4fa13fc363a12a7d1, type: 3}
+  m_clip: {fileID: 8300000, guid: fde7f14e8752078498f6cee802e35dd7, type: 3}
   m_moveSpeed: 1
   m_idleTimeMax: 5
 --- !u!143 &2724360265608625981

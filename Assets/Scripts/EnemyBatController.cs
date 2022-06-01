@@ -221,6 +221,9 @@ public class EnemyBatController : BaseEnemy
 
             AttackEffect(DamageEffect.DamageEffectType.Bat, transform.position);
 
+            GameObject.Find("SoundManager")?.GetComponent<S_SoundManager>()?.PlaySE(m_clip);
+
+
             return;
         }
 

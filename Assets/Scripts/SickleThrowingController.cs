@@ -30,7 +30,8 @@ public class SickleThrowingController : BaseEnemy
     private GameObject boss;
 
     [SerializeField] private GameObject EffectCircle;
-    
+
+    [SerializeField] private AudioClip[] clip;
 
     private float slashAngle;
     public float GetRadianSlashAngle() { return slashAngle * Mathf.Deg2Rad; }
@@ -92,6 +93,8 @@ public class SickleThrowingController : BaseEnemy
         collider.gameObject
             .GetComponent<PlayerAutoControl>()
             .OnDamage(m_damage);
+
+        GameObject.Find("SoundManager").GetComponent<S_SoundManager>().PlaySE(clip[0]);
     }
 
     private float RandomTarget()
@@ -132,5 +135,7 @@ public class SickleThrowingController : BaseEnemy
 
         var mesh = transform.GetChild(2).GetComponent<SkinnedMeshRenderer>();
         mesh.enabled = true;
+
+        GameObject.Find("SoundManager").GetComponent<S_SoundManager>().PlaySE(clip[1]);
     }
 }

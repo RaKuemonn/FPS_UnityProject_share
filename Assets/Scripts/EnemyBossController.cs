@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyBossController : MonoBehaviour
 {
+    [SerializeField] AudioClip clip;
+
     public void OnCutted(Vector3 impulse_)
     {
         deathFlag = true;
@@ -554,6 +556,9 @@ public class EnemyBossController : MonoBehaviour
                 .GetComponent<PlayerAutoControl>()
                 .OnDamage(m_damage);
             AttackEffect(DamageEffect.DamageEffectType.Sickle);
+
+            GameObject.Find("SoundManager")?.GetComponent<S_SoundManager>()?.PlaySE(clip);
+
         }
 
         attackEndTimer -= Time.deltaTime;
