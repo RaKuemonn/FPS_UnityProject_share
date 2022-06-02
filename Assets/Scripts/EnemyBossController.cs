@@ -118,7 +118,7 @@ public class EnemyBossController : MonoBehaviour
 
     // 突撃してきた後の動けない時間
     private float attackEndTimer = 0;
-    private float attackEndTimerMax = 5;
+    private float attackEndTimerMax = 1;
 
     // 元の位置に戻る
     private float totalTime = 2.0f;
@@ -541,7 +541,7 @@ public class EnemyBossController : MonoBehaviour
             return;
         }
         // 斬るアニメーションが半分まで進んだとき
-        if (downFlag && attackEndTimer > attackEndTimerMax / 2.0f)
+        if (downFlag && attackEndTimer < attackEndTimerMax * 0.7f)
         {
             ConditionDownState();
             return;

@@ -24,13 +24,13 @@ public class EnemyBatController : BaseEnemy
 
     public enum StateBat
     {
-        Wander,        // ƒvƒŒƒCƒ„[‚ª‚­‚é‚Ü‚Åœpœj
+        Wander,                    // ƒvƒŒƒCƒ„[‚ª‚­‚é‚Ü‚Åœpœj
         BattlePreparation, // í“¬ˆÊ’u‚ÉˆÚ“®
-        Idle,               // ‘Ò‹@
-        AttackStart, // UŒ‚ŠJn
-        Attack,          // UŒ‚’†
-        AttackEnd,   // UŒ‚I—¹
-        Death,           // €–S
+        Idle,                           // ‘Ò‹@
+        AttackStart,             // UŒ‚ŠJn
+        Attack,                      // UŒ‚’†
+        AttackEnd,               // UŒ‚I—¹
+        Death,                       // €–S
     };
     private StateBat state = StateBat.Idle;
     public StateBat GetState() { return state; }

@@ -1573,6 +1573,10 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4919411275153964798, guid: 6c8c5929f4ac8b8479daf29786733107, type: 3}
+      propertyPath: idleTimerMax
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4919411275153964798, guid: 6c8c5929f4ac8b8479daf29786733107, type: 3}
       propertyPath: bossHpController
       value: 
       objectReference: {fileID: 1367096851517546485}
